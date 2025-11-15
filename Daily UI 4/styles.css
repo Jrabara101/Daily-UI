@@ -1,0 +1,85 @@
+body {
+  background: linear-gradient(135deg, #32323a 0%, #14141f 100%);
+  font-family: 'Roboto', sans-serif;
+}
+
+.calculator-3d {
+  max-width: 390px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px 8px #20202c;
+  background: #333842;
+  border: 1px solid #43434e;
+}
+
+/* Glassmorphism effect for display */
+.display-glass {
+  background: rgba(40, 44, 52, 0.75);
+  box-shadow: 0 2px 8px #1a1833, 0 1px 0 #777 inset;
+  backdrop-filter: blur(4px);
+  padding: 8px;
+}
+
+.display-in {
+  font-size: 1.40rem;
+  background: transparent;
+  border: none;
+  color: #ccffd7;
+  font-weight: bold;
+  box-shadow: none;
+}
+
+/* Neumorphic/3D Button Styles */
+.calculator-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.neubtn {
+  border-radius: 14px;
+  box-shadow:
+    0 5px 16px #29292f, /* outer shadow */
+    0 1.5px 4px #fff2 inset, /* subtle highlight */
+    0 -1.5px 1px #0009 inset; /* pressed edge */
+  background: linear-gradient(135deg, #43434e 60%, #23232c 100%);
+  color: #f6e9de;
+  font-size: 1.15rem;
+  padding: 18px;
+  font-family: inherit;
+  border: 1.5px solid #16161c;
+  transition: transform 0.1s, box-shadow 0.2s;
+}
+
+.neubtn:active {
+  box-shadow:
+    0 2px 4px #222228,
+    0 2px 4px #fff0 inset,
+    0 -3px 8px #0009 inset;
+  transform: translateY(3px);
+  background: linear-gradient(135deg, #23232c 40%, #43434e 100%);
+}
+
+.neubtn.function, .neubtn.scientific {
+  background: linear-gradient(135deg, #535389 60%, #23232c 100%);
+  color: #cff2fc;
+  font-weight: bold;
+}
+
+.neubtn.op {
+  background: linear-gradient(135deg, #fcc36a 70%, #23232c 100%);
+  color: #3a2828;
+  font-weight: 700;
+}
+
+.neubtn.equals {
+  background: linear-gradient(135deg, #44f363 70%, #222c1c 100%);
+  color: #132312;
+  font-weight: 700;
+}
+
+/* Hover effect for buttons */
+.neubtn:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 10px 20px #29292f, 0 3px 8px #fff4 inset;
+  cursor: pointer;
+}
