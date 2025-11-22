@@ -1,0 +1,41 @@
+body {
+  background: linear-gradient(135deg, #e8eaf6 0%, #ece9f7 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-row {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+}
+
+.app-icon-container {
+  padding: 12px;
+  background: rgba(255,255,255,0.13);
+  border-radius: 44px;
+  box-shadow: 0 4px 20px #93a1b330;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: box-shadow .2s, transform .18s;
+}
+
+.app-icon {
+  width: 90px;
+  height: 90px;
+  border-radius: 26px;
+  box-shadow: 0 6px 24px rgba(80,80,160,0.14);
+  cursor: pointer;
+  transition: box-shadow .2s, transform .18s;
+}
+.app-icon-container:hover .app-icon {
+  box-shadow: 0 16px 52px #0003, 0 0px 32px #fff6 inset;
+  transform: scale(1.08) rotate(-2deg);
+  filter: drop-shadow(0 0 12px #37cfce99);
+}

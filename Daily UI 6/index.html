@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile Page – Daily UI 006</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+  <button class="dark-toggle" id="dark-toggle"><i class="fa-solid fa-moon"></i></button>
+  <div class="profile-container">
+    <div class="profile-card">
+      <!-- Avatar & Edit -->
+      <div class="profile-img-area">
+        <input type="file" id="avatar-upload" accept="image/*" style="display:none"/>
+        <img src="https://randomuser.me/api/portraits/men/22.jpg" id="profile-img" alt="Profile picture" class="profile-img">
+        <button class="profile-img-btn" onclick="document.getElementById('avatar-upload').click()">Change</button>
+      </div>
+      <div class="profile-info">
+        <h2 class="profile-name">John Doe</h2>
+        <p class="profile-bio" id="profile-bio">Web developer. Dreamer. Problem solver. Building digital experiences and modern tools one project at a time.</p>
+        <div class="profile-stats">
+          <div class="stat"><div class="stat-num">267</div><div class="stat-label">Posts</div></div>
+          <div class="stat"><div class="stat-num">4,120</div><div class="stat-label">Followers</div></div>
+          <div class="stat"><div class="stat-num">126</div><div class="stat-label">Following</div></div>
+        </div>
+        <div class="profile-badges">
+          <span class="badge"><i class="fa-solid fa-fire"></i> Streak: 14 Days</span>
+          <span class="badge"><i class="fa-solid fa-code"></i> Top Coder</span>
+          <span class="badge"><i class="fa-solid fa-trophy"></i> Level 7</span>
+        </div>
+        <div class="profile-social">
+          <a href="https://twitter.com/" target="_blank" class="social-btn twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://github.com/" target="_blank" class="social-btn github"><i class="fab fa-github"></i></a>
+          <a href="https://facebook.com/" target="_blank" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://linkedin.com/" target="_blank" class="social-btn linkedin"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <button class="profile-action" onclick="showEditForm()">Edit Profile</button>
+      </div>
+    </div>
+    <!-- Profile Timeline/Posts -->
+    <div class="posts-card">
+      <h3 class="posts-title">Timeline</h3>
+      <div class="posts-list" id="posts-list">
+        <!-- Sample posts -->
+        <div class="post">
+          <div class="post-header">
+            <img src="https://randomuser.me/api/portraits/men/22.jpg" class="post-avatar">
+            <span class="post-author">John Doe</span>
+            <span class="post-date">Today</span>
+          </div>
+          <div class="post-content">Just published my new project on GitHub! 🚀</div>
+        </div>
+        <div class="post">
+          <div class="post-header">
+            <img src="https://randomuser.me/api/portraits/men/22.jpg" class="post-avatar">
+            <span class="post-author">John Doe</span>
+            <span class="post-date">Yesterday</span>
+          </div>
+          <div class="post-content">Had an amazing day building UI components for my personal dashboard.</div>
+        </div>
+      </div>
+      <!-- New post input -->
+      <form id="new-post-form">
+        <input type="text" id="new-post-input" placeholder="What's on your mind?" autocomplete="off">
+        <button type="submit" class="post-submit"><i class="fa-solid fa-paper-plane"></i> Post</button>
+      </form>
+    </div>
+  </div>
+  <!-- Edit Profile Modal -->
+  <div class="edit-modal" id="edit-modal">
+    <form id="edit-profile-form" class="edit-profile-form">
+      <h3>Edit Profile</h3>
+      <label for="edit-name">Name</label>
+      <input type="text" id="edit-name" value="John Doe">
+      <label for="edit-bio">Bio</label>
+      <textarea id="edit-bio">Web developer. Dreamer. Problem solver. Building digital experiences and modern tools one project at a time.</textarea>
+      <button type="submit" class="save-btn">Save</button>
+      <button type="button" class="cancel-btn" onclick="hideEditForm()">Cancel</button>
+    </form>
+  </div>
+  <script src="profile.js"></script>
+</body>
+</html>
