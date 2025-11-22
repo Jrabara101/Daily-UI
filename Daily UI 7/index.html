@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Settings Page – Daily UI 007</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <div class="settings-container">
+    <h1>Settings</h1>
+    
+    <div class="settings-accessibility">
+      <label for="fontsize">Text Size:</label>
+      <select id="fontsize" onchange="changeFontSize(this.value)">
+        <option value="16">Small</option>
+        <option value="18" selected>Default</option>
+        <option value="22">Large</option>
+        <option value="26">Extra Large</option>
+      </select>
+      <button onclick="toggleDarkMode()" class="dark-btn"><i class="fa-solid fa-moon"></i> Dark Mode</button>
+    </div>
+
+    <!-- Web Application Section -->
+    <div class="settings-group">
+      <h2><i class="fa-solid fa-globe"></i> Web Application</h2>
+      <div class="settings-list">
+        <div class="setting-item"><i class="fa-solid fa-user"></i> Account Settings</div>
+        <div class="setting-item"><i class="fa-solid fa-sliders"></i> Preferences</div>
+        <div class="setting-item"><i class="fa-solid fa-bell"></i> Notification Controls</div>
+        <div class="setting-item"><i class="fa-solid fa-lock"></i> Privacy Options</div>
+      </div>
+    </div>
+
+    <!-- Mobile App Section -->
+    <div class="settings-group">
+      <h2><i class="fa-solid fa-mobile-screen"></i> Mobile App</h2>
+      <div class="settings-list">
+        <div class="setting-item"><i class="fa-solid fa-cog"></i> System Settings</div>
+        <div class="setting-item"><i class="fa-solid fa-palette"></i> App Customization</div>
+        <div class="setting-item"><i class="fa-solid fa-shield-halved"></i> Permissions</div>
+        <div class="setting-item"><i class="fa-solid fa-bell"></i> Notifications</div>
+      </div>
+    </div>
+
+    <!-- Desktop Software Section -->
+    <div class="settings-group">
+      <h2><i class="fa-solid fa-desktop"></i> Desktop Software</h2>
+      <div class="settings-list">
+        <div class="setting-item"><i class="fa-solid fa-sliders"></i> Application Preferences</div>
+        <div class="setting-item"><i class="fa-solid fa-gears"></i> System Configuration</div>
+        <div class="setting-item"><i class="fa-solid fa-brush"></i> Appearance</div>
+        <div class="setting-item"><i class="fa-solid fa-plug"></i> Integrations</div>
+      </div>
+    </div>
+
+    <!-- SaaS Dashboard Section -->
+    <div class="settings-group">
+      <h2><i class="fa-solid fa-cloud"></i> SaaS Dashboard</h2>
+      <div class="settings-list">
+        <div class="setting-item"><i class="fa-solid fa-user-circle"></i> Account Info</div>
+        <div class="setting-item"><i class="fa-solid fa-credit-card"></i> Billing</div>
+        <div class="setting-item"><i class="fa-solid fa-plug"></i> Integrations</div>
+        <div class="setting-item"><i class="fa-solid fa-file-import"></i> Data Import/Export</div>
+      </div>
+    </div>
+
+    <!-- Admin Panel Section -->
+    <div class="settings-group">
+      <h2><i class="fa-solid fa-user-shield"></i> Admin Panel</h2>
+      <div class="settings-list">
+        <div class="setting-item"><i class="fa-solid fa-users"></i> User Management</div>
+        <div class="setting-item"><i class="fa-solid fa-user-tag"></i> Roles & Permissions</div>
+        <div class="setting-item"><i class="fa-solid fa-server"></i> System Status</div>
+        <div class="setting-item"><i class="fa-solid fa-plug-circle-exclamation"></i> Plugin Control</div>
+      </div>
+    </div>
+  </div>
+  <script src="settings.js"></script>
+</body>
+</html>

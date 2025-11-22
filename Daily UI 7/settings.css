@@ -1,0 +1,102 @@
+body {
+  background: linear-gradient(135deg, #f8fafc, #e0e7ff);
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+  margin: 0; padding: 0;
+  font-size: 18px;
+  transition: background 0.3s, color 0.3s, font-size 0.18s;
+}
+body.dark {
+  background: linear-gradient(135deg, #141923, #242943);
+  color: #eaf4fc;
+}
+.settings-container {
+  max-width: 640px;
+  margin: 32px auto;
+  padding: 20px;
+  border-radius: 28px;
+  box-shadow: 0 5px 36px #7391b330;
+  background: #fff;
+  transition: background .28s, color .28s;
+}
+body.dark .settings-container { background: #202440; color: #f2f7ff;}
+.settings-container h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin-bottom: 32px;
+  color: #345ee6;
+}
+body.dark .settings-container h1 { color: #19e0f6;}
+.settings-accessibility {
+  margin-bottom: 24px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.settings-group {
+  margin-bottom: 38px;
+}
+.settings-group h2 {
+  font-size: 1.22rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #3b64c2;
+  display: flex; align-items: center; gap: 10px;
+}
+body.dark .settings-group h2 { color: #16ccff;}
+.settings-list {
+  background: #f7f9fa;
+  border-radius: 18px;
+  box-shadow: 0 1px 6px #2e4ba122;
+  padding: 18px 22px 8px 22px;
+  margin-bottom: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+body.dark .settings-list { background: #262a47;}
+.setting-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 12px;
+  background: #fafbfc;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background .16s, color .13s;
+}
+body.dark .setting-item { background: #181b27;}
+.setting-item:hover {
+  background: #e6edfd; color: #3879fa;
+}
+body.dark .setting-item:hover {
+  background: #252941; color: #19e0f6;
+}
+.dark-btn {
+  background: #282d4d;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 1px 6px #aecafe33;
+  transition: background .18s;
+}
+.dark-btn:hover { background: #111523; }
+label { font-size: 1rem; margin-right: 8px;}
+select {
+  padding: 5px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+@media (max-width: 700px) {
+  .settings-container { max-width: 99vw; padding: 7vw;}
+  .settings-list { grid-template-columns: 1fr; padding: 12px 4vw;}
+}
