@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Message System</title>
+    <link rel="stylesheet" href="flash-styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>✨ Flash Message System</h1>
+            <p class="subtitle">Instant notifications with clarity and style</p>
+        </header>
+
+        <!-- Position Control -->
+        <div class="demo-section">
+            <h2>🎯 Notification Position</h2>
+            <p>Choose where notifications appear on your screen:</p>
+            <div class="position-control">
+                <label>Position:</label>
+                <button class="btn btn-secondary" onclick="setPosition('top-right')">↗ Top Right</button>
+                <button class="btn btn-secondary" onclick="setPosition('top-left')">↖ Top Left</button>
+                <button class="btn btn-secondary" onclick="setPosition('top-center')">⬆ Top Center</button>
+                <button class="btn btn-secondary" onclick="setPosition('bottom-center')">⬇ Bottom Center</button>
+            </div>
+        </div>
+
+        <!-- Success Messages -->
+        <div class="demo-section">
+            <h2>✓ Success Messages</h2>
+            <p>Confirmations and positive feedback. Use green with clear icons.</p>
+            <div class="button-group">
+                <button class="btn btn-success" onclick="showSuccess('Simple')">Simple Success</button>
+                <button class="btn btn-success" onclick="showSuccess('Detailed')">With Description</button>
+                <button class="btn btn-success" onclick="showSuccess('Variant')">Compact Variant</button>
+                <button class="btn btn-success" onclick="showSuccess('Minimal')">Minimal Style</button>
+                <button class="btn btn-success" onclick="showSuccess('Action')">With Actions</button>
+            </div>
+            <div class="code-block">
+<code>FlashMessage.<span class="method">success</span>(<span class="string">'Order Confirmed'</span>, <span class="string">'Your order #12345 has been placed successfully.'</span>);</code>
+            </div>
+        </div>
+
+        <!-- Error Messages -->
+        <div class="demo-section">
+            <h2>✕ Error Messages</h2>
+            <p>Alert users to problems. Use red to immediately grab attention.</p>
+            <div class="button-group">
+                <button class="btn btn-error" onclick="showError('Simple')">Simple Error</button>
+                <button class="btn btn-error" onclick="showError('Detailed')">With Description</button>
+                <button class="btn btn-error" onclick="showError('Variant')">Compact Variant</button>
+                <button class="btn btn-error" onclick="showError('Minimal')">Minimal Style</button>
+                <button class="btn btn-error" onclick="showError('Action')">With Actions</button>
+            </div>
+            <div class="code-block">
+<code>FlashMessage.<span class="method">error</span>(<span class="string">'Payment Failed'</span>, <span class="string">'Card declined. Please check your payment details.'</span>);</code>
+            </div>
+        </div>
+
+        <!-- Warning Messages -->
+        <div class="demo-section">
+            <h2>⚠ Warning Messages</h2>
+            <p>Cautions and important notices. Use amber for non-critical alerts.</p>
+            <div class="button-group">
+                <button class="btn btn-warning" onclick="showWarning('Simple')">Simple Warning</button>
+                <button class="btn btn-warning" onclick="showWarning('Detailed')">With Description</button>
+                <button class="btn btn-warning" onclick="showWarning('Variant')">Compact Variant</button>
+                <button class="btn btn-warning" onclick="showWarning('Minimal')">Minimal Style</button>
+                <button class="btn btn-warning" onclick="showWarning('Action')">With Actions</button>
+            </div>
+            <div class="code-block">
+<code>FlashMessage.<span class="method">warning</span>(<span class="string">'Low Stock'</span>, <span class="string">'Only 2 items remaining in inventory.'</span>);</code>
+            </div>
+        </div>
+
+        <!-- Info Messages -->
+        <div class="demo-section">
+            <h2>ℹ Info Messages</h2>
+            <p>Informational and neutral notifications. Use blue for general updates.</p>
+            <div class="button-group">
+                <button class="btn btn-info" onclick="showInfo('Simple')">Simple Info</button>
+                <button class="btn btn-info" onclick="showInfo('Detailed')">With Description</button>
+                <button class="btn btn-info" onclick="showInfo('Variant')">Compact Variant</button>
+                <button class="btn btn-info" onclick="showInfo('Minimal')">Minimal Style</button>
+                <button class="btn btn-info" onclick="showInfo('Action')">With Actions</button>
+            </div>
+            <div class="code-block">
+<code>FlashMessage.<span class="method">info</span>(<span class="string">'Syncing Data'</span>, <span class="string">'Your account is being synced with the server.'</span>);</code>
+            </div>
+        </div>
+
+        <!-- Advanced Features -->
+        <div class="demo-section">
+            <h2>🚀 Advanced Features</h2>
+            <p>Explore powerful options for complex notification scenarios:</p>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="showWithProgress()">With Progress Bar</button>
+                <button class="btn btn-primary" onclick="showNoAutoClose()">No Auto-Close</button>
+                <button class="btn btn-primary" onclick="showMultiple()">Multiple Messages</button>
+                <button class="btn btn-primary" onclick="clearAll()">Clear All</button>
+                <button class="btn btn-primary" onclick="demoFormSubmit()">Form Submission</button>
+            </div>
+            <div class="code-block">
+<code><span class="keyword">const</span> msg = FlashMessage.<span class="method">success</span>(<span class="string">'Download Started'</span>, <span class="string">''</span>, {
+  duration: <span class="keyword">10000</span>,
+  variant: <span class="string">'compact'</span>,
+  showProgress: <span class="keyword">true</span>,
+  actions: [
+    { id: <span class="string">'undo'</span>, label: <span class="string">'Undo'</span>, callback: () => console.log('Undone!') }
+  ]
+});</code>
+            </div>
+        </div>
+
+        <!-- Features List -->
+        <div class="demo-section">
+            <h2>✨ Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>📍 4 Positions</h3>
+                    <p>Top-right, top-left, top-center, bottom-center</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎨 4 Types</h3>
+                    <p>Success, error, warning, and info variants</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎭 3 Styles</h3>
+                    <p>Default, compact, and minimal appearances</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⏱️ Auto-Close</h3>
+                    <p>Configurable duration with progress bar</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎬 Animations</h3>
+                    <p>Smooth slide-in and fade-out effects</p>
+                </div>
+                <div class="feature-card">
+                    <h3>♿ Accessible</h3>
+                    <p>WCAG compliant with reduced-motion support</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📱 Responsive</h3>
+                    <p>Mobile-friendly with adaptive layout</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ Actions</h3>
+                    <p>Inline buttons for quick actions</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="flash-message.js"></script>
+</body>
+</html>
