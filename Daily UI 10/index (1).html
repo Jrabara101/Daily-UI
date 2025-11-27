@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Share Button</title>
+    <style>
+        :root {
+            --color-bg-primary: #f5f5f5;
+            --color-surface: #ffffff;
+            --color-text-primary: #1a1a1a;
+            --color-text-secondary: #666666;
+            --color-primary: #3b82f6;
+            
+            --social-facebook: #1877f2;
+            --social-twitter: #1da1f2;
+            --social-instagram: #e4405f;
+            --social-pinterest: #e60023;
+            --social-linkedin: #0a66c2;
+            --social-whatsapp: #25d366;
+            --social-telegram: #0088cc;
+            --social-email: #ea4335;
+            
+            --radius-base: 8px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--color-bg-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .demo-section {
+            background: var(--color-surface);
+            border-radius: var(--radius-base);
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .demo-section h2 {
+            font-size: 18px;
+            color: var(--color-text-primary);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .demo-section p {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* Horizontal Share Buttons */
+        .share-buttons-horizontal {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Vertical Share Buttons */
+        .share-buttons-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Share Button Base */
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 16px;
+            border: none;
+            border-radius: var(--radius-base);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 250ms ease;
+            text-decoration: none;
+            color: #ffffff;
+            gap: 8px;
+            white-space: nowrap;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .share-btn:active {
+            transform: translateY(0);
+        }
+
+        .share-btn:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        /* Social Platform Colors */
+        .share-btn--facebook {
+            background: var(--social-facebook);
+        }
+
+        .share-btn--twitter {
+            background: var(--social-twitter);
+        }
+
+        .share-btn--instagram {
+            background: var(--social-instagram);
+        }
+
+        .share-btn--pinterest {
+            background: var(--social-pinterest);
+        }
+
+        .share-btn--linkedin {
+            background: var(--social-linkedin);
+        }
+
+        .share-btn--whatsapp {
+            background: var(--social-whatsapp);
+        }
+
+        .share-btn--telegram {
+            background: var(--social-telegram);
+        }
+
+        .share-btn--email {
+            background: var(--social-email);
+        }
+
+        /* Icon Only Variant */
+        .share-btn--icon-only {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border-radius: 50%;
+        }
+
+        .share-btn--icon-only span {
+            display: none;
+        }
+
+        /* Text Only Variant */
+        .share-btn--text-only {
+            background: transparent;
+            color: var(--color-text-primary);
+            border: 1px solid #ddd;
+            box-shadow: none;
+            font-size: 13px;
+        }
+
+        .share-btn--text-only:hover {
+            background: var(--color-bg-primary);
+            box-shadow: none;
+        }
+
+        /* Compact Share Button */
+        .share-button-compact {
+            position: relative;
+            display: inline-block;
+        }
+
+        .share-button-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--color-primary);
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 250ms ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .share-button-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .share-button-toggle:focus-visible {
+            outline: 2px solid #2563eb;
+            outline-offset: 2px;
+        }
+
+        .share-menu {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-surface);
+            border-radius: var(--radius-base);
+            box-shadow: var(--shadow-md);
+            padding: 12px;
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 200px;
+            z-index: 10;
+        }
+
+        .share-menu.active {
+            display: flex;
+        }
+
+        .share-menu::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--color-surface);
+        }
+
+        .share-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 6px;
+            color: var(--color-text-primary);
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 150ms ease;
+            text-align: left;
+        }
+
+        .share-menu-item:hover {
+            background: var(--color-bg-primary);
+        }
+
+        .share-menu-item svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 600px) {
+            .demo-section {
+                padding: 24px;
+            }
+
+            .share-buttons-horizontal {
+                gap: 10px;
+            }
+
+            .share-btn {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Full Width Buttons -->
+        <div class="demo-section">
+            <h2>📱 Horizontal Share Buttons</h2>
+            <p>Full-width buttons with platform names. Instantly recognizable with official brand colors and icons.</p>
+            <div class="share-buttons-horizontal">
+                <button class="share-btn share-btn--facebook" onclick="shareOn('facebook')">
+                    <span>ⓕ</span>
+                    <span>Facebook</span>
+                </button>
+                <button class="share-btn share-btn--twitter" onclick="shareOn('twitter')">
+                    <span>𝕏</span>
+                    <span>Twitter</span>
+                </button>
+                <button class="share-btn share-btn--linkedin" onclick="shareOn('linkedin')">
+                    <span>in</span>
+                    <span>LinkedIn</span>
+                </button>
+                <button class="share-btn share-btn--pinterest" onclick="shareOn('pinterest')">
+                    <span>📌</span>
+                    <span>Pinterest</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Icon Only Variant -->
+        <div class="demo-section">
+            <h2>🎨 Icon-Only Buttons</h2>
+            <p>Compact circular icons for minimal UI. Perfect for sidebars or floating elements.</p>
+            <div class="share-buttons-horizontal">
+                <button class="share-btn share-btn--icon-only share-btn--facebook" onclick="shareOn('facebook')" title="Share on Facebook">
+                    <span>ⓕ</span>
+                </button>
+                <button class="share-btn share-btn--icon-only share-btn--twitter" onclick="shareOn('twitter')" title="Share on Twitter">
+                    <span>𝕏</span>
+                </button>
+                <button class="share-btn share-btn--icon-only share-btn--whatsapp" onclick="shareOn('whatsapp')" title="Share on WhatsApp">
+                    <span>💬</span>
+                </button>
+                <button class="share-btn share-btn--icon-only share-btn--telegram" onclick="shareOn('telegram')" title="Share on Telegram">
+                    <span>✈️</span>
+                </button>
+                <button class="share-btn share-btn--icon-only share-btn--email" onclick="shareOn('email')" title="Share via Email">
+                    <span>✉️</span>
+                </button>
+                <button class="share-btn share-btn--icon-only share-btn--instagram" onclick="shareOn('instagram')" title="Share on Instagram">
+                    <span>📷</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Vertical Stack -->
+        <div class="demo-section">
+            <h2>📋 Vertical Share Stack</h2>
+            <p>Full-width stacked buttons for mobile or sidebar layouts. Great for post-article sharing.</p>
+            <div class="share-buttons-vertical">
+                <button class="share-btn share-btn--facebook" onclick="shareOn('facebook')">
+                    <span>ⓕ</span>
+                    <span>Share on Facebook</span>
+                </button>
+                <button class="share-btn share-btn--twitter" onclick="shareOn('twitter')">
+                    <span>𝕏</span>
+                    <span>Share on Twitter/X</span>
+                </button>
+                <button class="share-btn share-btn--linkedin" onclick="shareOn('linkedin')">
+                    <span>in</span>
+                    <span>Share on LinkedIn</span>
+                </button>
+                <button class="share-btn share-btn--whatsapp" onclick="shareOn('whatsapp')">
+                    <span>💬</span>
+                    <span>Share on WhatsApp</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Compact Toggle Menu -->
+        <div class="demo-section">
+            <h2>✨ Compact Toggle Menu</h2>
+            <p>Floating share button with expandable menu. Minimal footprint with quick access to all platforms.</p>
+            <div style="display: flex; justify-content: center; padding: 40px 0;">
+                <div class="share-button-compact">
+                    <button class="share-button-toggle" onclick="toggleShareMenu()" title="Share">
+                        <span>↗️</span>
+                    </button>
+                    <div class="share-menu" id="shareMenu">
+                        <button class="share-menu-item" onclick="shareOn('facebook')">
+                            <span>ⓕ</span> Facebook
+                        </button>
+                        <button class="share-menu-item" onclick="shareOn('twitter')">
+                            <span>𝕏</span> Twitter/X
+                        </button>
+                        <button class="share-menu-item" onclick="shareOn('linkedin')">
+                            <span>in</span> LinkedIn
+                        </button>
+                        <button class="share-menu-item" onclick="shareOn('whatsapp')">
+                            <span>💬</span> WhatsApp
+                        </button>
+                        <button class="share-menu-item" onclick="shareOn('email')">
+                            <span>✉️</span> Email
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Text Only Variant -->
+        <div class="demo-section">
+            <h2>📝 Minimal Text Buttons</h2>
+            <p>Subtle text-only buttons with borders. Ideal for blog articles or minimal interfaces.</p>
+            <div class="share-buttons-horizontal">
+                <button class="share-btn share-btn--text-only" onclick="shareOn('facebook')">Share</button>
+                <button class="share-btn share-btn--text-only" onclick="shareOn('twitter')">Tweet</button>
+                <button class="share-btn share-btn--text-only" onclick="shareOn('linkedin')">Connect</button>
+                <button class="share-btn share-btn--text-only" onclick="shareOn('email')">Email</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function shareOn(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title || 'Check this out');
+            
+            let shareUrl = '';
+            
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'pinterest':
+                    shareUrl = `https://pinterest.com/pin/create/button/?url=${url}&description=${title}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${title}%20${url}`;
+                    break;
+                case 'telegram':
+                    shareUrl = `https://t.me/share/url?url=${url}&text=${title}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${title}&body=${title}%20${url}`;
+                    break;
+                case 'instagram':
+                    alert('Instagram does not support direct URL sharing. Copy the link and share it manually.');
+                    return;
+            }
+            
+            if (platform === 'email') {
+                window.location.href = shareUrl;
+            } else {
+                window.open(shareUrl, 'share', 'width=600,height=400');
+            }
+            
+            closeShareMenu();
+        }
+
+        function toggleShareMenu() {
+            const menu = document.getElementById('shareMenu');
+            menu.classList.toggle('active');
+        }
+
+        function closeShareMenu() {
+            const menu = document.getElementById('shareMenu');
+            menu.classList.remove('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const compact = document.querySelector('.share-button-compact');
+            if (compact && !compact.contains(e.target)) {
+                closeShareMenu();
+            }
+        });
+
+        // Show notification (optional)
+        function showNotification(message) {
+            const notif = document.createElement('div');
+            notif.textContent = message;
+            notif.style.cssText = 'position: fixed; bottom: 20px; right: 20px; background: #10b981; color: white; padding: 12px 20px; border-radius: 8px; font-size: 14px; z-index: 1000;';
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 3000);
+        }
+    </script>
+</body>
+</html>
