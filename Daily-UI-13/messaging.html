@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Messaging Interface - ChatHub Pro</title>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="messaging-styles.css">
+    
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <!-- Three.js for 3D effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- 3D Canvas Container (Background animation) -->
+    <div id="three-canvas-container"></div>
+
+    <div class="messaging-app">
+        <!-- Sidebar: Conversation List -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="app-title">💬 ChatHub</h1>
+                <div class="header-actions">
+                    <button class="icon-btn" id="newChatBtn" title="New Chat">
+                        <span>➕</span>
+                    </button>
+                    <button class="icon-btn" id="settingsBtn" title="Settings">
+                        <span>⚙️</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search Box -->
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search conversations..." class="search-input">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <!-- Conversations List -->
+            <div class="conversations-list" id="conversationsList">
+                <!-- Conversation items will be populated by JS -->
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-container">
+            <!-- Chat Header -->
+            <header class="chat-header">
+                <div class="chat-header-info">
+                    <div class="user-avatar-large">
+                        <img id="chatUserAvatar" src="https://i.pravatar.cc/120?img=1" alt="User">
+                        <span class="online-indicator"></span>
+                    </div>
+                    <div class="header-text">
+                        <h2 id="chatUsername">Sarah Johnson</h2>
+                        <p id="chatStatus" class="user-status">Online • Last seen 2m ago</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn" title="Audio Call">📞</button>
+                    <button class="icon-btn" title="Video Call">📹</button>
+                    <button class="icon-btn" title="Info">ℹ️</button>
+                </div>
+            </header>
+
+            <!-- Messages Area -->
+            <div class="messages-container" id="messagesContainer">
+                <!-- Messages will be populated by JS -->
+            </div>
+
+            <!-- Message Input Area -->
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <button class="input-icon-btn" id="attachBtn" title="Attach File">📎</button>
+                    
+                    <div class="input-field-wrapper">
+                        <textarea 
+                            id="messageInput" 
+                            class="message-input" 
+                            placeholder="Type your message here..." 
+                            rows="1">
+                        </textarea>
+                        <div class="input-actions">
+                            <button class="input-icon-btn" id="emojiBtn" title="Emoji">😊</button>
+                        </div>
+                    </div>
+
+                    <button class="send-btn" id="sendBtn" title="Send Message">
+                        <span class="send-icon">➤</span>
+                    </button>
+                </div>
+
+                <!-- Typing Indicator -->
+                <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <p class="typing-text">Someone is typing...</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Panel: Info (Optional) -->
+        <aside class="info-panel" id="infoPanel" style="display: none;">
+            <div class="info-header">
+                <h3>Chat Info</h3>
+                <button class="close-btn" id="closeInfoBtn">✕</button>
+            </div>
+            <div class="info-content">
+                <div class="member-card">
+                    <img src="https://i.pravatar.cc/120?img=1" alt="User">
+                    <h4>Sarah Johnson</h4>
+                    <p>@sarah_j</p>
+                    <button class="btn btn-secondary">View Profile</button>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Emoji Picker Modal -->
+    <div class="modal" id="emojiModal" style="display: none;">
+        <div class="modal-content emoji-picker">
+            <h3>Select Emoji</h3>
+            <div class="emoji-grid" id="emojiGrid">
+                <!-- Emojis will be populated by JS -->
+            </div>
+            <button class="close-btn" onclick="document.getElementById('emojiModal').style.display='none'">✕</button>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal" style="display: none;">
+        <div class="modal-content settings-modal">
+            <h3>Settings</h3>
+            <div class="settings-group">
+                <label>
+                    <input type="checkbox" id="notificationToggle" checked>
+                    Enable Notifications
+                </label>
+                <label>
+                    <input type="checkbox" id="soundToggle" checked>
+                    Sound Effects
+                </label>
+                <label>
+                    <input type="checkbox" id="darkModeToggle">
+                    Dark Mode
+                </label>
+            </div>
+            <button class="close-btn" onclick="document.getElementById('settingsModal').style.display='none'">✕</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="toast-notification"></div>
+
+    <!-- External JavaScript -->
+    <script src="messaging-script.js"></script>
+</body>
+</html>
