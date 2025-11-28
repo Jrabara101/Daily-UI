@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Wireless Headphones - AudioMax Pro</title>
+    <link rel="stylesheet" href="product-styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">🎵 AudioMax</div>
+            <div class="breadcrumb">
+                <a href="#">Home</a> / <a href="#">Electronics</a> / <span>Headphones</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Product Container -->
+    <div class="product-container">
+        <div class="product-grid">
+            <!-- Left: Gallery -->
+            <div class="product-gallery">
+                <div class="main-image">
+                    <img id="mainImage" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80" alt="AudioMax Pro Headphones">
+                    <div class="zoom-badge">🔍 Hover to zoom</div>
+                </div>
+                <div class="thumbnail-gallery" id="thumbnailGallery">
+                    <img class="thumbnail active" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100&q=80" alt="Front view" data-full="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80">
+                    <img class="thumbnail" src="https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=100&q=80" alt="Side view" data-full="https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=600&q=80">
+                    <img class="thumbnail" src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=100&q=80" alt="Detail view" data-full="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&q=80">
+                    <img class="thumbnail" src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=100&q=80" alt="Packaging" data-full="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&q=80">
+                </div>
+            </div>
+
+            <!-- Right: Product Info -->
+            <div class="product-info">
+                <h1 class="product-title">AudioMax Pro Wireless Headphones</h1>
+                
+                <div class="rating-section">
+                    <div class="stars">
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star half">★</span>
+                    </div>
+                    <span class="rating-text">4.5 out of 5 (328 reviews)</span>
+                </div>
+
+                <div class="price-section">
+                    <span class="original-price">$199.99</span>
+                    <span class="current-price">$129.99</span>
+                    <span class="discount-badge">35% OFF</span>
+                </div>
+
+                <p class="description">
+                    Experience premium sound quality with AudioMax Pro Wireless Headphones. Engineered for audiophiles and casual listeners alike, these headphones deliver crystal-clear audio across all frequencies with active noise cancellation technology.
+                </p>
+
+                <!-- Color Selection -->
+                <div class="option-group">
+                    <label>Color:</label>
+                    <div class="color-options">
+                        <button class="color-btn active" style="background: #2c3e50;" data-color="Midnight Black" title="Midnight Black"></button>
+                        <button class="color-btn" style="background: #c0a080;" data-color="Rose Gold" title="Rose Gold"></button>
+                        <button class="color-btn" style="background: #34495e;" data-color="Space Gray" title="Space Gray"></button>
+                        <button class="color-btn" style="background: #3498db;" data-color="Ocean Blue" title="Ocean Blue"></button>
+                    </div>
+                    <span class="selected-color">Midnight Black</span>
+                </div>
+
+                <!-- Quantity -->
+                <div class="option-group">
+                    <label>Quantity:</label>
+                    <div class="quantity-selector">
+                        <button id="decreaseBtn" class="qty-btn">−</button>
+                        <input type="number" id="quantityInput" value="1" min="1">
+                        <button id="increaseBtn" class="qty-btn">+</button>
+                    </div>
+                </div>
+
+                <!-- Add to Cart & Wishlist -->
+                <div class="action-buttons">
+                    <button id="addToCartBtn" class="btn btn-primary">
+                        <span id="cartBtnText">Add to Cart</span>
+                        <span id="cartCheckmark" class="checkmark" style="display: none;">✓</span>
+                    </button>
+                    <button id="wishlistBtn" class="btn btn-secondary">♡ Wishlist</button>
+                </div>
+
+                <!-- Shipping & Return Info -->
+                <div class="info-boxes">
+                    <div class="info-box">
+                        <span class="info-icon">🚚</span>
+                        <div>
+                            <strong>Free Shipping</strong>
+                            <p>On all orders within the continental United States</p>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <span class="info-icon">↩️</span>
+                        <div>
+                            <strong>30-Day Returns</strong>
+                            <p>Risk-free returns within 30 days of purchase</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Details Tabs -->
+        <div class="tabs-container">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="specs">Specifications</button>
+                <button class="tab-btn" data-tab="shipping">Shipping & Returns</button>
+                <button class="tab-btn" data-tab="reviews">Reviews</button>
+            </div>
+
+            <!-- Tab Contents -->
+            <div id="specs" class="tab-content active">
+                <h3>Product Specifications</h3>
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">Driver Size</span>
+                        <span class="spec-value">40mm Dynamic Drivers</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Frequency Response</span>
+                        <span class="spec-value">20Hz - 20kHz</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Impedance</span>
+                        <span class="spec-value">32 Ohm</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Sensitivity</span>
+                        <span class="spec-value">110dB ± 2dB</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Bluetooth Version</span>
+                        <span class="spec-value">5.2</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Battery Capacity</span>
+                        <span class="spec-value">500mAh</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Battery Life</span>
+                        <span class="spec-value">Up to 40 hours</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Charging Time</span>
+                        <span class="spec-value">2 hours (USB-C)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">250 grams</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Warranty</span>
+                        <span class="spec-value">2 Years</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="shipping" class="tab-content">
+                <h3>Shipping & Return Policy</h3>
+                <div class="policy-content">
+                    <h4>Shipping Information</h4>
+                    <p>We offer free shipping on all orders within the continental United States. Your order will be delivered within 5-7 business days using a tracked courier service.</p>
+                    
+                    <h4>Return Policy</h4>
+                    <p>Enjoy a risk-free 30-day return policy. If you're not completely satisfied with your purchase, simply return it in its original condition for a full refund. No questions asked.</p>
+                </div>
+            </div>
+
+            <div id="reviews" class="tab-content">
+                <h3>Customer Reviews</h3>
+                <div class="review-item">
+                    <div class="review-header">
+                        <strong>Amazing Sound Quality!</strong>
+                        <span class="review-stars">★★★★★</span>
+                    </div>
+                    <p class="review-author">By Sarah M. - Verified Purchase</p>
+                    <p class="review-text">These headphones exceeded my expectations. The noise cancellation is incredible, and the battery life is exactly as advertised. Highly recommended!</p>
+                </div>
+
+                <div class="review-item">
+                    <div class="review-header">
+                        <strong>Great Value for Money</strong>
+                        <span class="review-stars">★★★★☆</span>
+                    </div>
+                    <p class="review-author">By John D. - Verified Purchase</p>
+                    <p class="review-text">For the price, these are fantastic. Comfortable to wear for long periods, and the build quality feels premium. My only minor complaint is the touch controls take a bit to get used to.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notificationToast" class="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="product-script.js"></script>
+</body>
+</html>
