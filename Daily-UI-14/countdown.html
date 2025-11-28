@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Countdown Timer</title>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="countdown-styles.css">
+</head>
+<body class="min-h-screen bg-dark-bg flex flex-col items-center justify-center p-4 font-sans text-white">
+
+    <!-- Header and Event Title -->
+    <header class="text-center mb-12">
+        <h1 class="text-4xl sm:text-6xl font-extrabold text-primary tracking-tight mb-2">
+            SUMMER SOLSTICE FESTIVAL
+        </h1>
+        <p class="text-xl sm:text-2xl text-secondary font-light">
+            T-MINUS UNTIL THE GATES OPEN!
+        </p>
+    </header>
+
+    <!-- Countdown Timer Container -->
+    <div id="countdown-container" class="w-full max-w-5xl flex justify-center space-x-2 sm:space-x-6 p-4">
+        <!-- Days Segment -->
+        <div class="time-segment flex flex-col items-center justify-center rounded-2xl w-1/4 aspect-square p-4">
+            <span id="days" class="number text-6xl sm:text-8xl font-black leading-none">00</span>
+            <span class="text-sm sm:text-xl font-medium mt-2 text-primary">DAYS</span>
+        </div>
+
+        <!-- Hours Segment -->
+        <div class="time-segment flex flex-col items-center justify-center rounded-2xl w-1/4 aspect-square p-4">
+            <span id="hours" class="number text-6xl sm:text-8xl font-black leading-none">00</span>
+            <span class="text-sm sm:text-xl font-medium mt-2 text-primary">HOURS</span>
+        </div>
+
+        <!-- Minutes Segment -->
+        <div class="time-segment flex flex-col items-center justify-center rounded-2xl w-1/4 aspect-square p-4">
+            <span id="minutes" class="number text-6xl sm:text-8xl font-black leading-none">00</span>
+            <span class="text-sm sm:text-xl font-medium mt-2 text-primary">MINUTES</span>
+        </div>
+
+        <!-- Seconds Segment (Gets the urgency animation) -->
+        <div id="seconds-segment" class="time-segment flex flex-col items-center justify-center rounded-2xl w-1/4 aspect-square p-4">
+            <span id="seconds" class="number text-6xl sm:text-8xl font-black leading-none">00</span>
+            <span class="text-sm sm:text-xl font-medium mt-2 text-primary">SECONDS</span>
+        </div>
+    </div>
+
+    <!-- Countdown Message -->
+    <p id="countdown-message" class="mt-8 text-2xl font-bold text-secondary text-center">
+        Get ready for the best weekend of the year!
+    </p>
+
+    <!-- Progress Bar -->
+    <div class="mt-12 w-full max-w-2xl">
+        <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+            <div id="progress-bar" class="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-1000" style="width: 100%"></div>
+        </div>
+        <p id="progress-text" class="text-center text-sm text-gray-400 mt-2">Countdown Progress</p>
+    </div>
+
+    <!-- Event Details (Hidden by default, shown when event is live) -->
+    <div id="event-details" class="mt-12 text-center hidden">
+        <h2 class="text-3xl font-bold text-primary mb-4">🎉 EVENT IS LIVE! 🎉</h2>
+        <p class="text-xl text-secondary mb-6">Join us for an unforgettable experience!</p>
+        <button class="px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-opacity-80 transition-all">
+            Get Tickets Now
+        </button>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="countdown-script.js"></script>
+</body>
+</html>
