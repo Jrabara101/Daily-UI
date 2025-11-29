@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On/Off Switch Component</title>
+    <link rel="stylesheet" href="switch-styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>⚡ On/Off Switch Component</h1>
+            <p class="subtitle">Accessible, responsive toggle switches with multiple variants</p>
+        </header>
+
+        <!-- Basic Switches -->
+        <div class="demo-section">
+            <h2>🎯 Basic Switches</h2>
+            <p>Simple on/off toggles with clear visual feedback. Perfect for enabling/disabling features.</p>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-title">Default Switch</div>
+                    <div class="switch-container">
+                        <div class="switch">
+                            <input type="checkbox" id="switch1" role="switch" aria-label="Default switch">
+                            <div class="switch-slider"></div>
+                        </div>
+                        <label for="switch1" class="switch-label">Feature Toggle</label>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-title">Pre-checked</div>
+                    <div class="switch-container">
+                        <div class="switch">
+                            <input type="checkbox" id="switch2" role="switch" aria-label="Pre-checked switch" checked>
+                            <div class="switch-slider"></div>
+                        </div>
+                        <label for="switch2" class="switch-label">Feature Enabled</label>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-title">Disabled State</div>
+                    <div class="switch-container">
+                        <div class="switch">
+                            <input type="checkbox" id="switch3" role="switch" aria-label="Disabled switch" disabled>
+                            <div class="switch-slider"></div>
+                        </div>
+                        <label for="switch3" class="switch-label">Feature Locked</label>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-title">Disabled (Checked)</div>
+                    <div class="switch-container">
+                        <div class="switch">
+                            <input type="checkbox" id="switch4" role="switch" aria-label="Disabled checked" checked disabled>
+                            <div class="switch-slider"></div>
+                        </div>
+                        <label for="switch4" class="switch-label">Feature Fixed</label>
+                    </div>
+                </div>
+            </div>
+            <div class="code-block">
+<code>&lt;div class="switch-container"&gt;
+  &lt;div class="switch"&gt;
+    &lt;input type="checkbox" id="switch1" role="switch" aria-label="Toggle switch"&gt;
+    &lt;div class="switch-slider"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;label for="switch1" class="switch-label"&gt;Toggle Label&lt;/label&gt;
+&lt;/div&gt;</code>
+            </div>
+        </div>
+
+        <!-- Size Variants -->
+        <div class="demo-section">
+            <h2>📏 Size Variants</h2>
+            <p>Choose from small, medium, or large switches to fit your design needs.</p>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-title">Small</div>
+                    <div class="switch-container">
+                        <div class="switch switch-sm">
+                            <input type="checkbox" id="switch-sm" role="switch" aria-label="Small switch">
+                            <div class="switch-slider"></div>
+                        </div>
+                        <label for="switch-sm" class="switch-label">Compact</label>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-title">Medium (Default)</div>
+                    <div class="switch-container">
+                        <div class="switch">
+                            <input type="checkbox" id="switch-md" role="switch" aria-label="Medium switch">
+                            <div class="switch-slider"></div>
+                        </div>
+                        <label for="switch-md" class="switch-label">Standard</label>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-title">Large</div>
+                    <div class="switch-container">
+                        <div class="switch switch-lg">
+                            <input type="checkbox" id="switch-lg" role="switch" aria-label="Large switch" checked>
+                            <div class="switch-slider"></div>
+                        </div>
+                        <label for="switch-lg" class="switch-label">Prominent</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color Variants -->
+        <div class="demo-section">
+            <h2>🎨 Color Variants</h2>
+            <p>Different color schemes for various contexts and purposes.</p>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-title">Primary (Green)</div>
+                    <div class="switch-container">
+                        <div class="switch">
+                            <input type="checkbox" id="switch-primary" role="switch" aria-label="Primary switch" checked>
+                            <div class="switch-slider"></div>
+                        </div>
+                        <label for="switch-primary" class="switch-label">Success State</label>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-title">Secondary (Blue)</div>
+                    <div class="switch-container">
+                        <div class="switch switch-secondary">
+                            <input type="checkbox" id="switch-secondary" role="switch" aria-label="Secondary switch" checked>
+                            <div class="switch-slider"></div>
+                        </div>
+                        <label for="switch-secondary" class="switch-label">Info State</label>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-title">Danger (Red)</div>
+                    <div class="switch-container">
+                        <div class="switch switch-danger">
+                            <input type="checkbox" id="switch-danger" role="switch" aria-label="Danger switch" checked>
+                            <div class="switch-slider"></div>
+                        </div>
+                        <label for="switch-danger" class="switch-label">Delete Mode</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Switches with Icons -->
+        <div class="demo-section">
+            <h2>✓✕ Switches with Icons</h2>
+            <p>Visual indicators showing on/off states with check and cross icons.</p>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-title">Icon OFF</div>
+                    <div class="switch-container">
+                        <div class="switch">
+                            <input type="checkbox" id="switch-icon1" role="switch" aria-label="Icon switch off">
+                            <div class="switch-slider"></div>
+                            <div class="switch-icons">
+                                <span class="icon-on">✓</span>
+                                <span class="icon-off">✕</span>
+                            </div>
+                        </div>
+                        <label for="switch-icon1" class="switch-label">Notifications</label>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-title">Icon ON</div>
+                    <div class="switch-container">
+                        <div class="switch">
+                            <input type="checkbox" id="switch-icon2" role="switch" aria-label="Icon switch on" checked>
+                            <div class="switch-slider"></div>
+                            <div class="switch-icons">
+                                <span class="icon-on">✓</span>
+                                <span class="icon-off">✕</span>
+                            </div>
+                        </div>
+                        <label for="switch-icon2" class="switch-label">Dark Mode</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Switches with Text Labels -->
+        <div class="demo-section">
+            <h2>ON/OFF Switches with Text</h2>
+            <p>Text-based indicators showing "ON" and "OFF" states directly on the switch.</p>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-title">Text OFF</div>
+                    <div class="switch-container">
+                        <div class="switch">
+                            <input type="checkbox" id="switch-text1" role="switch" aria-label="Text switch off">
+                            <div class="switch-slider"></div>
+                            <div class="switch-text-labels">
+                                <span class="text-on">ON</span>
+                                <span class="text-off">OFF</span>
+                            </div>
+                        </div>
+                        <label for="switch-text1" class="switch-label">Power</label>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-title">Text ON</div>
+                    <div class="switch-container">
+                        <div class="switch">
+                            <input type="checkbox" id="switch-text2" role="switch" aria-label="Text switch on" checked>
+                            <div class="switch-slider"></div>
+                            <div class="switch-text-labels">
+                                <span class="text-on">ON</span>
+                                <span class="text-off">OFF</span>
+                            </div>
+                        </div>
+                        <label for="switch-text2" class="switch-label">Sound</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Switches with Status -->
+        <div class="demo-section">
+            <h2>📊 Switches with Status Display</h2>
+            <p>Real-time status badges showing current switch state.</p>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-title">Status OFF</div>
+                    <div class="switch-container">
+                        <div class="switch">
+                            <input type="checkbox" id="switch-status1" role="switch" aria-label="Status switch">
+                            <div class="switch-slider"></div>
+                            <span class="switch-status">OFF</span>
+                        </div>
+                        <label for="switch-status1" class="switch-label">Auto-save</label>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-title">Status ON</div>
+                    <div class="switch-container">
+                        <div class="switch">
+                            <input type="checkbox" id="switch-status2" role="switch" aria-label="Status switch" checked>
+                            <div class="switch-slider"></div>
+                            <span class="switch-status">ON</span>
+                        </div>
+                        <label for="switch-status2" class="switch-label">WiFi</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Switches with Descriptions -->
+        <div class="demo-section">
+            <h2>📝 Switches with Descriptions</h2>
+            <p>Additional context provided via descriptive text below the switch.</p>
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+                <div class="switch-container" style="flex-direction: column; align-items: flex-start;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div class="switch">
+                            <input type="checkbox" id="switch-desc1" role="switch" aria-label="Email notifications" checked>
+                            <div class="switch-slider"></div>
+                        </div>
+                        <label for="switch-desc1" class="switch-label">Email Notifications</label>
+                    </div>
+                    <div class="switch-description">Receive email updates about your account activity and promotions.</div>
+                </div>
+
+                <div class="switch-container" style="flex-direction: column; align-items: flex-start;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div class="switch">
+                            <input type="checkbox" id="switch-desc2" role="switch" aria-label="Two factor auth">
+                            <div class="switch-slider"></div>
+                        </div>
+                        <label for="switch-desc2" class="switch-label">Two-Factor Authentication</label>
+                    </div>
+                    <div class="switch-description">Enhance security by requiring verification code on login.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Demo -->
+        <div class="demo-section">
+            <h2>🎮 Interactive Demo</h2>
+            <p>Test switch functionality and see real-time state changes.</p>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-title">Test Switch</div>
+                    <div class="switch-container">
+                        <div class="switch">
+                            <input type="checkbox" id="demo-switch" role="switch" aria-label="Demo switch" checked>
+                            <div class="switch-slider"></div>
+                        </div>
+                        <label for="demo-switch" class="switch-label">Test State</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="status-display" id="statusDisplay">
+                <div class="status-row">
+                    <span class="status-label">Current State:</span>
+                    <span class="status-value" id="stateValue">ON</span>
+                </div>
+                <div class="status-row">
+                    <span class="status-label">Toggle Count:</span>
+                    <span class="status-value" id="toggleCount">0</span>
+                </div>
+                <div class="status-row">
+                    <span class="status-label">Last Changed:</span>
+                    <span class="status-value" id="lastChanged">Just now</span>
+                </div>
+            </div>
+
+            <div class="control-buttons">
+                <button class="btn btn-primary btn-small" onclick="toggleDemoSwitch()">Toggle</button>
+                <button class="btn btn-primary btn-small" onclick="setDemoSwitchOn()">Turn ON</button>
+                <button class="btn btn-primary btn-small" onclick="setDemoSwitchOff()">Turn OFF</button>
+                <button class="btn btn-secondary btn-small" onclick="resetToggleCount()">Reset Count</button>
+            </div>
+        </div>
+
+        <!-- Accessibility Information -->
+        <div class="demo-section">
+            <h2>♿ Accessibility Features</h2>
+            <div class="accessibility-info">
+                <h4>✓ WCAG 2.1 Compliant</h4>
+                <p>Our switches are fully accessible and follow web content accessibility guidelines:</p>
+                <ul>
+                    <li><strong>ARIA Labels:</strong> Proper role="switch" and aria-label attributes</li>
+                    <li><strong>Keyboard Navigation:</strong> Full keyboard support with Space/Enter keys</li>
+                    <li><strong>Focus Management:</strong> Visible focus indicators for keyboard users</li>
+                    <li><strong>Color Independence:</strong> Not reliant solely on color to convey meaning</li>
+                    <li><strong>Screen Reader Support:</strong> Clear state indication for assistive technologies</li>
+                    <li><strong>Reduced Motion:</strong> Respects prefers-reduced-motion for animations</li>
+                    <li><strong>Disabled State:</strong> Proper visual and functional disabled state</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="demo-section">
+            <h2>✨ Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🎨 3 Color Schemes</h3>
+                    <p>Primary (green), secondary (blue), danger (red)</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📏 3 Sizes</h3>
+                    <p>Small, medium, and large variants</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎯 Easy Integration</h3>
+                    <p>Simple HTML structure with CSS/JS</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⌨️ Keyboard Accessible</h3>
+                    <p>Full keyboard support (Space/Enter)</p>
+                </div>
+                <div class="feature-card">
+                    <h3>♿ ARIA Support</h3>
+                    <p>Proper role and state attributes</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📱 Responsive</h3>
+                    <p>Works on all screen sizes</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔄 State Management</h3>
+                    <p>Methods to get/set state programmatically</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎬 Smooth Animations</h3>
+                    <p>CSS transitions with reduced-motion support</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Documentation -->
+        <div class="demo-section">
+            <h2>📚 API Documentation</h2>
+            <p>Use SwitchComponent methods to control switches programmatically:</p>
+            <div class="code-block">
+            </div>
+        </div>
+    </div>
+
+    <script src="switch-component.js"></script>
+    <script>
+        // Demo functionality
+        let toggleCount = 0;
+
+        const demoSwitch = document.getElementById('demo-switch');
+
+        demoSwitch.addEventListener('switchChange', (e) => {
+            updateDemoStatus();
+        });
+
+        function updateDemoStatus() {
+            const isOn = demoSwitch.checked;
+            document.getElementById('stateValue').textContent = isOn ? 'ON' : 'OFF';
+            document.getElementById('toggleCount').textContent = toggleCount;
+            
+            const now = new Date();
+            const time = now.toLocaleTimeString();
+            document.getElementById('lastChanged').textContent = time;
+
+            toggleCount++;
+        }
+
+        function toggleDemoSwitch() {
+            SwitchComponent.toggle('demo-switch');
+        }
+
+        function setDemoSwitchOn() {
+            SwitchComponent.toggle('demo-switch', true);
+        }
+
+        function setDemoSwitchOff() {
+            SwitchComponent.toggle('demo-switch', false);
+        }
+
+        function resetToggleCount() {
+            toggleCount = 0;
+            updateDemoStatus();
+        }
+
+        // Initialize with callback
+        SwitchComponent.init({
+            onToggle: (data) => {
+                console.log(`Switch "${data.name || data.id}" toggled to:`, data.checked);
+            }
+        });
+    </script>
+</body>
+</html>
