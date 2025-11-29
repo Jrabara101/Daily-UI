@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3D Neumorphic Pop-up</title>
+  <link rel="stylesheet" href="popup-styles.css" />
+</head>
+<body>
+
+  <!-- Main content -->
+  <div style="padding: 2rem; text-align:center;">
+    <h1>Welcome to Our Website</h1>
+    <p>Explore features and offers, and don’t miss our special popup notification!</p>
+    <button id="show-popup-btn" style="margin-top: 1rem; padding: 1rem 2rem; font-size: 1.1rem; cursor:pointer;">
+      Show Pop-up
+    </button>
+  </div>
+
+  <!-- Popup Overlay -->
+  <div id="popup-overlay" class="popup-overlay" tabindex="-1"></div>
+
+  <!-- Popup Container -->
+  <div id="popup-container" class="popup-container" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-describedby="popup-message" tabindex="0">
+    <button id="popup-close-btn" class="popup-close-btn" aria-label="Close Popup">&times;</button>
+    
+    <!-- The 3D canvas wrapper (positioned behind text) -->
+    <div class="popup-3d-wrapper popup-3d-canvas"></div>
+
+    <h2 class="popup-title" id="popup-title">Subscribe to Our Newsletter</h2>
+    <p class="popup-message" id="popup-message">
+      Get the latest updates and offers directly in your inbox.
+    </p>
+    <input type="email" aria-label="Email address" placeholder="Enter your email" style="width:100%; padding: 0.6rem 1rem; border-radius: 12px; border: 1.5px solid #ccc; font-size: 1rem; margin-bottom: 1rem; box-shadow: inset 6px 6px 10px #c1c7d0, inset -6px -6px 10px #fff;" />
+    <button id="popup-action-btn" class="popup-action-btn">Subscribe</button>
+  </div>
+
+  <script type="module" src="popup-script.js"></script>
+</body>
+</html>
