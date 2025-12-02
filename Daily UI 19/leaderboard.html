@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- External Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="leaderboard-container">
+        <div class="header">
+            <div class="title">
+                <i class="fas fa-trophy"></i>
+                <h1>Global Leaderboard</h1>
+            </div>
+            <div class="controls">
+                <select id="timeFilter">
+                    <option value="weekly">This Week</option>
+                    <option value="monthly">This Month</option>
+                    <option value="all">All Time</option>
+                </select>
+                <button id="refreshBtn"><i class="fas fa-sync-alt"></i></button>
+            </div>
+        </div>
+
+        <div class="leaderboard-tabs">
+            <button class="tab active" data-tab="top">Top 100</button>
+            <button class="tab" data-tab="friends">Friends</button>
+            <button class="tab" data-tab="me">My Rank</button>
+        </div>
+
+        <div class="leaderboard-content">
+            <!-- Top 100 Tab -->
+            <div class="tab-content active" id="top">
+                <div class="rankings">
+                    <!-- Top 3 Special Cards -->
+                    <div class="top-three">
+                        <div class="rank-card rank-1 bounce-in" data-rank="1">
+                            <div class="rank-badge gold">
+                                <i class="fas fa-crown"></i> 1
+                            </div>
+                            <div class="avatar">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&round" alt="Player 1">
+                            </div>
+                            <div class="player-info">
+                                <div class="name">Lightning McQueen</div>
+                                <div class="score primary">12,847 pts</div>
+                            </div>
+                            <div class="change positive">
+                                <i class="fas fa-arrow-up"></i> +120
+                            </div>
+                        </div>
+
+                        <div class="rank-card rank-2 bounce-in" data-rank="2">
+                            <div class="rank-badge silver">
+                                <i class="fas fa-medal"></i> 2
+                            </div>
+                            <div class="avatar">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&round" alt="Player 2">
+                            </div>
+                            <div class="player-info">
+                                <div class="name">Shadow Striker</div>
+                                <div class="score primary">12,563 pts</div>
+                            </div>
+                            <div class="change positive">
+                                <i class="fas fa-arrow-up"></i> +89
+                            </div>
+                        </div>
+
+                        <div class="rank-card rank-3 bounce-in" data-rank="3">
+                            <div class="rank-badge bronze">
+                                <i class="fas fa-award"></i> 3
+                            </div>
+                            <div class="avatar">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=80&h=80&fit=crop&round" alt="Player 3">
+                            </div>
+                            <div class="player-info">
+                                <div class="name">Neon Blaze</div>
+                                <div class="score primary">11,924 pts</div>
+                            </div>
+                            <div class="change neutral">
+                                <i class="fas fa-minus"></i> 0
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Regular Rankings -->
+                    <div class="regular-rankings">
+                        <div class="rank-item slide-in" data-rank="4">
+                            <span class="rank">#4</span>
+                            <div class="player">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=50&h=50&fit=crop&round" alt="Player 4">
+                                <div>
+                                    <div class="name">Pixel Master</div>
+                                    <div class="score">9,847 pts</div>
+                                </div>
+                            </div>
+                            <div class="change positive"><i class="fas fa-arrow-up"></i> 45</div>
+                        </div>
+                        <div class="rank-item slide-in" data-rank="5">
+                            <span class="rank">#5</span>
+                            <div class="player">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&round" alt="Player 5">
+                                <div>
+                                    <div class="name">Quantum Leap</div>
+                                    <div class="score">9,623 pts</div>
+                                </div>
+                            </div>
+                            <div class="change negative"><i class="fas fa-arrow-down"></i> 12</div>
+                        </div>
+                        <!-- More items will be generated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Friends Tab -->
+            <div class="tab-content" id="friends">
+                <div class="no-data">
+                    <i class="fas fa-users"></i>
+                    <p>No friends on leaderboard yet</p>
+                </div>
+            </div>
+
+            <!-- My Rank Tab -->
+            <div class="tab-content" id="me">
+                <div class="my-rank-card">
+                    <div class="current-rank">
+                        <i class="fas fa-chart-line"></i>
+                        <div>
+                            <div class="rank-label">Your Rank</div>
+                            <div class="rank-number">#47</div>
+                        </div>
+                    </div>
+                    <div class="progress-section">
+                        <div class="progress-info">
+                            <span>8,542 pts</span>
+                            <span>Next: #46 (9,123 pts)</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 72%"></div>
+                        </div>
+                    </div>
+                    <button class="challenge-btn">
+                        <i class="fas fa-fire"></i> Challenge Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
