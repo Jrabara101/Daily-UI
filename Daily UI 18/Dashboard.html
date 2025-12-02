@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard</title>
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 80px 1fr;
+            gap: 25px;
+            padding: 25px;
+            height: 100vh;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInDown 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInDown {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(45deg, #00d4ff, #7b68ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .week-selector {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: cardSlide 1s ease-out both;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 212, 255, 0.3);
+        }
+
+        @keyframes cardSlide {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .metric-card:nth-child(1) { animation-delay: 0.3s; }
+        .metric-card:nth-child(2) { animation-delay: 0.4s; }
+        .metric-card:nth-child(3) { animation-delay: 0.5s; }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .metric-title {
+            font-size: 1.1rem;
+            color: #b0b3d1;
+            font-weight: 500;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #00d4ff, #7b68ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 200px;
+            margin-top: 20px;
+        }
+
+        /* Progress Bars */
+        .progress-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .progress-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            opacity: 0;
+            animation: slideInLeft 1s ease-out forwards;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .progress-item:nth-child(1) { animation-delay: 0.6s; }
+        .progress-item:nth-child(2) { animation-delay: 0.8s; }
+        .progress-item:nth-child(3) { animation-delay: 1s; }
+
+        .progress-label {
+            font-weight: 600;
+            min-width: 120px;
+            color: #b0b3d1;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #0099cc);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #b0b3d1;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .metric-card:nth-of-type(2) .legend-item:nth-child(1) { animation-delay: 1.2s; }
+        .metric-card:nth-of-type(2) .legend-item:nth-child(2) { animation-delay: 1.3s; }
+        .metric-card:nth-of-type(2) .legend-item:nth-child(3) { animation-delay: 1.4s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Download button */
+        .download-btn {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1><i class="fas fa-chart-line"></i> Analytics Dashboard</h1>
+            <div class="week-selector">
+                <span>This Week</span>
+                <button class="download-btn" onclick="exportData()">
+                    <i class="fas fa-download"></i> Export
+                </button>
+            </div>
+        </div>
+
+        <!-- Threat Metric -->
+        <div class="metric-card">
+            <div class="metric-header">
+                <div class="metric-title">Total Threats</div>
+                <i class="fas fa-shield-alt" style="color: #ff6b6b; font-size: 1.5rem;"></i>
+            </div>
+            <div class="metric-value" data-target="245K">0</div>
+            <canvas id="threatChart" class="chart-container"></canvas>
+        </div>
+
+        <!-- Deployed Metric -->
+        <div class="metric-card">
+            <div class="metric-header">
+                <div class="metric-title">Model Deployments</div>
+                <i class="fas fa-rocket" style="color: #4ecdc4; font-size: 1.5rem;"></i>
+            </div>
+            <div class="metric-value" data-target="158K">0</div>
+            <div class="chart-container">
+                <canvas id="deploymentChart"></canvas>
+            </div>
+            <div class="legend">
+                <div class="legend-item"><div class="legend-color" style="background: #00d4ff;"></div>Air Deploy</div>
+                <div class="legend-item"><div class="legend-color" style="background: #7b68ee;"></div>New Models</div>
+                <div class="legend-item"><div class="legend-color" style="background: #ff6b6b;"></div>Total</div>
+            </div>
+        </div>
+
+        <!-- Failed Metric -->
+        <div class="metric-card">
+            <div class="metric-header">
+                <div class="metric-title">Model Integrity</div>
+                <i class="fas fa-chart-pie" style="color: #ffe66d; font-size: 1.5rem;"></i>
+            </div>
+            <div class="progress-container">
+                <div class="progress-item">
+                    <span class="progress-label">Critical</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-progress="78"></div>
+                    </div>
+                    <span id="critical-val">0%</span>
+                </div>
+                <div class="progress-item">
+                    <span class="progress-label">High</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-progress="89"></div>
+                    </div>
+                    <span id="high-val">0%</span>
+                </div>
+                <div class="progress-item">
+                    <span class="progress-label">Medium</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-progress="65"></div>
+                    </div>
+                    <span id="medium-val">0%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animate numbers
+        function animateNumbers() {
+            const elements = document.querySelectorAll('.metric-value');
+            elements.forEach(el => {
+                const target = parseFloat(el.getAttribute('data-target').replace('K', '000'));
+                let start = 0;
+                const increment = target / 100;
+                const timer = setInterval(() => {
+                    start += increment;
+                    if (start >= target) {
+                        start = target;
+                        clearInterval(timer);
+                    }
+                    el.textContent = (start / 1000).toFixed(0) + 'K';
+                }, 20);
+            });
+        }
+
+        // Animate progress bars
+        function animateProgressBars() {
+            const fills = document.querySelectorAll('.progress-fill');
+            fills.forEach((fill, index) => {
+                setTimeout(() => {
+                    const progress = fill.getAttribute('data-progress');
+                    fill.style.width = progress + '%';
+                    
+                    // Animate percentage text
+                    const label = fill.parentElement.nextElementSibling;
+                    if (label) {
+                        let current = 0;
+                        const timer = setInterval(() => {
+                            current += 1;
+                            if (current >= progress) {
+                                current = progress;
+                                clearInterval(timer);
+                            }
+                            label.textContent = current.toFixed(0) + '%';
+                        }, 25);
+                    }
+                }, index * 200);
+            });
+        }
+
+        // Chart.js Line Chart for Threats (Animated)
+        const threatCtx = document.getElementById('threatChart').getContext('2d');
+        const threatChart = new Chart(threatCtx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Threats',
+                    data: [120000, 180000, 200000, 190000, 220000, 230000, 245000],
+                    borderColor: '#00d4ff',
+                    backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#00d4ff',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 3,
+                    pointRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: {
+                    duration: 3000,
+                    easing: 'easeOutQuart'
+                },
+                interaction: { intersect: false },
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#b0b3d1' }
+                    },
+                    x: { grid: { display: false }, ticks: { color: '#b0b3d1' } }
+                }
+            }
+        });
+
+        // Chart.js Doughnut Chart for Deployments (Animated)
+        const deploymentCtx = document.getElementById('deploymentChart').getContext('2d');
+        const deploymentChart = new Chart(deploymentCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Air Deploy', 'New Models', 'Total'],
+                datasets: [{
+                    data: [7890, 2573, 2117],
+                    backgroundColor: ['#00d4ff', '#7b68ee', '#ff6b6b'],
+                    borderWidth: 0,
+                    offset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: {
+                    animateRotate: true,
+                    animateScale: true,
+                    duration: 2500,
+                    easing: 'easeOutBounce'
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Export function
+        function exportData() {
+            const dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent("Metric,Value\nThreats,245K\nDeployments,158K\nIntegrity,89%");
+            const link = document.createElement('a');
+            link.setAttribute('href', dataStr);
+            link.setAttribute('download', 'dashboard-data.csv');
+            link.click();
+        }
+
+        // Initialize animations on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                animateNumbers();
+                animateProgressBars();
+            }, 500);
+        });
+
+        // Continuous shimmer effect for progress bars
+        setInterval(() => {
+            document.querySelectorAll('.progress-fill').forEach(fill => {
+                fill.style.animationPlayState = 'running';
+            });
+        }, 1000);
+    </script>
+</body>
+</html>
