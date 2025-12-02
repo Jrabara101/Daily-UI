@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Email Receipt</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f2f5;
+    margin: 0; padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .receipt-container {
+    background: #fff;
+    width: 360px;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    padding: 20px 30px;
+    position: relative;
+  }
+  .brand-header {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #2c3e50;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+  .brand-subtitle {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+  }
+  .divider {
+    border-bottom: 1px dashed #bdc3c7;
+    margin: 20px 0;
+  }
+  .receipt-title {
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: #34495e;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 5px;
+    font-size: 0.95rem;
+  }
+  th {
+    font-weight: 600;
+    border-bottom: 1px solid #ecf0f1;
+    color: #34495e;
+  }
+  td.price {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .total-section {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding-top: 10px;
+    border-top: 2px solid #34495e;
+    margin-top: 15px;
+  }
+  .payment-info {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+  }
+  .barcode {
+    margin-top: 25px;
+    text-align: center;
+  }
+  .barcode img {
+    width: 100%;
+    max-width: 250px;
+  }
+  .thank-you {
+    text-align: center;
+    margin-top: 30px;
+    font-weight: 600;
+    color: #27ae60;
+  }
+</style>
+</head>
+<body>
+  <div class="receipt-container" style="box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.1);">
+    <div class="brand-header">SHOP NAME</div>
+    <div class="brand-subtitle">Address: Lorem Ipsum, 23-10 | Tel: 11223344</div>
+    <div class="divider"></div>
+    <div class="receipt-title">CASH RECEIPT</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th class="price">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Lorem</td><td class="price">1.1</td></tr>
+        <tr><td>Ipsum</td><td class="price">2.2</td></tr>
+        <tr><td>Dolor sit amet</td><td class="price">3.3</td></tr>
+        <tr><td>Consectetur</td><td class="price">4.4</td></tr>
+        <tr><td>Adipiscing elit</td><td class="price">5.5</td></tr>
+      </tbody>
+    </table>
+    <div class="total-section">
+      <div>Total</div>
+      <div>16.5</div>
+    </div>
+    <div class="payment-info">
+      <p>Cash: 20.00</p>
+      <p>Change: 3.5</p>
+      <p>Bank card: ---- -- 234</p>
+      <p>Approval Code: #123456</p>
+    </div>
+    <div class="divider"></div>
+    <div class="thank-you">THANK YOU!</div>
+    <div class="barcode">
+      <img src="https://barcode.tec-it.com/barcode.ashx?data=1234567890&code=Code128&multiplebarcodes=false&translate-esc=false&unit=Fit&dpi=96&imagetype=Gif&rotation=0&color=%23000000&bgcolor=%23ffffff&qunit=Mm&quiet=0" alt="barcode" />
+    </div>
+  </div>
+</body>
+</html>
