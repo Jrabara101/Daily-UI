@@ -1,0 +1,645 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f3f4f6;
+    transition: background-color 0.3s ease;
+    color: #1f2937;
+}
+
+body.dark-mode {
+    background: #111827;
+    color: #f3f4f6;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header */
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 24px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+    pointer-events: none;
+}
+
+.header-btn {
+    pointer-events: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .header-btn {
+    background: rgba(31, 41, 55, 0.8);
+    color: #e5e7eb;
+}
+
+.header-btn:hover {
+    background: white;
+    transform: scale(1.05);
+}
+
+body.dark-mode .header-btn:hover {
+    background: #1f2937;
+}
+
+/* Input Panel */
+.input-panel {
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    padding: 20px;
+    z-index: 40;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: slideDown 0.5s ease-out;
+}
+
+body.dark-mode .input-panel {
+    background: rgba(31, 41, 55, 0.95);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.location-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.location-item:last-child {
+    margin-bottom: 0;
+}
+
+.location-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid;
+    background: white;
+    margin-top: 4px;
+    position: relative;
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+body.dark-mode .location-dot {
+    background: #1f2937;
+}
+
+.location-dot.from {
+    border-color: #fb923c;
+    box-shadow: 0 0 12px rgba(251, 146, 60, 0.3);
+}
+
+.location-dot.to {
+    border-color: #ef4444;
+}
+
+.location-connector {
+    position: absolute;
+    left: 7px;
+    top: 16px;
+    width: 2px;
+    height: 24px;
+    border-left: 2px dashed #d1d5db;
+}
+
+body.dark-mode .location-connector {
+    border-color: #4b5563;
+}
+
+.location-info {
+    flex: 1;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+body.dark-mode .location-info {
+    border-color: #374151;
+}
+
+.location-label {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.location-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+body.dark-mode .location-value {
+    color: #f3f4f6;
+}
+
+.search-btn {
+    position: absolute;
+    bottom: -24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+.search-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 30px rgba(79, 70, 229, 0.4);
+}
+
+/* Map Area */
+.map-container {
+    flex: 1;
+    position: relative;
+    background: #e5e7eb;
+    margin-top: 80px;
+    transition: background-color 0.3s ease;
+}
+
+body.dark-mode .map-container {
+    background: #1e293b;
+}
+
+.map-grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0.1;
+    pointer-events: none;
+    background-image: radial-gradient(#000 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+body.dark-mode .map-grid {
+    background-image: radial-gradient(#fff 1px, transparent 1px);
+}
+
+.map-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Map Controls */
+.map-controls {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: auto;
+    z-index: 30;
+}
+
+.map-control-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #4b5563;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .map-control-btn {
+    background: #2d3748;
+    color: #cbd5e0;
+}
+
+.map-control-btn:hover {
+    background: #f9fafb;
+    transform: scale(1.05);
+}
+
+body.dark-mode .map-control-btn:hover {
+    background: #3d4758;
+}
+
+/* Bottom Sheet */
+.bottom-sheet {
+    background: white;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 20;
+    transition: background-color 0.3s ease;
+    animation: slideUp 0.5s ease-out 0.3s both;
+}
+
+body.dark-mode .bottom-sheet {
+    background: #111827;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.drag-handle {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 12px;
+    padding-bottom: 8px;
+}
+
+.drag-bar {
+    width: 48px;
+    height: 6px;
+    background: #d1d5db;
+    border-radius: 10px;
+}
+
+body.dark-mode .drag-bar {
+    background: #4b5563;
+}
+
+.sheet-content {
+    padding: 16px 24px 24px;
+}
+
+/* Driver Profile */
+.driver-profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.driver-avatar {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+body.dark-mode .driver-avatar {
+    border-color: #1f2937;
+}
+
+.online-indicator {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    background: #22c55e;
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+}
+
+body.dark-mode .online-indicator {
+    border-color: #1f2937;
+}
+
+.driver-info {
+    flex: 1;
+}
+
+.driver-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 4px;
+}
+
+body.dark-mode .driver-name {
+    color: white;
+}
+
+.driver-details {
+    font-size: 0.85rem;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+body.dark-mode .driver-details {
+    color: #9ca3af;
+}
+
+.rating-star {
+    color: #fbbf24;
+}
+
+.vehicle-badge {
+    background: #f3f4f6;
+    color: #4b5563;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-family: monospace;
+    font-weight: 600;
+}
+
+body.dark-mode .vehicle-badge {
+    background: #2d3748;
+    color: #cbd5e0;
+}
+
+.driver-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 18px;
+}
+
+.action-btn.secondary {
+    background: #f3f4f6;
+    color: #4b5563;
+}
+
+body.dark-mode .action-btn.secondary {
+    background: #2d3748;
+    color: #cbd5e0;
+}
+
+.action-btn.secondary:hover {
+    background: #e5e7eb;
+}
+
+body.dark-mode .action-btn.secondary:hover {
+    background: #3d4758;
+}
+
+.action-btn.primary {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: white;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.action-btn.primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+}
+
+/* Stats Card */
+.stats-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f9fafb;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .stats-card {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+.stat-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+body.dark-mode .stat-label {
+    color: #6b7280;
+}
+
+.stat-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+body.dark-mode .stat-value {
+    color: white;
+}
+
+.stat-subtext {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    font-weight: 500;
+}
+
+.stats-divider {
+    width: 1px;
+    height: 40px;
+    background: #d1d5db;
+}
+
+body.dark-mode .stats-divider {
+    background: #4b5563;
+}
+
+/* Report Button */
+.report-btn {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    background: white;
+    color: #4b5563;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+body.dark-mode .report-btn {
+    background: #1f2937;
+    border-color: #374151;
+    color: #cbd5e0;
+}
+
+.report-btn:hover {
+    background: #f3f4f6;
+}
+
+body.dark-mode .report-btn:hover {
+    background: #2d3748;
+}
+
+.report-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #9ca3af;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e5e7eb;
+    padding: 12px 24px;
+    background: white;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    gap: 16px;
+}
+
+body.dark-mode .bottom-nav {
+    background: #111827;
+    border-color: #1f2937;
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    font-size: 24px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.nav-item.active {
+    color: #4f46e5;
+}
+
+body.dark-mode .nav-item.active {
+    color: #818cf8;
+}
+
+.nav-item:hover {
+    color: #1f2937;
+}
+
+body.dark-mode .nav-item:hover {
+    color: #e5e7eb;
+}
+
+/* Marker Animation */
+@keyframes markerPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.marker-pulse {
+    animation: markerPulse 2s ease-in-out infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .input-panel {
+        top: 70px;
+    }
+
+    .map-container {
+        margin-top: 70px;
+    }
+}

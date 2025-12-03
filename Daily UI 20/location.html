@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <button class="header-btn" id="backBtn">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <button class="header-btn" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+
+        <!-- Input Panel -->
+        <div class="input-panel">
+            <div class="location-item">
+                <div class="location-dot from"></div>
+                <div class="location-connector" style="display: block;"></div>
+                <div class="location-info">
+                    <div class="location-label">From</div>
+                    <div class="location-value">Adam Street, 4103</div>
+                </div>
+            </div>
+            <div class="location-item">
+                <div class="location-dot to"></div>
+                <div class="location-info">
+                    <div class="location-label">Destination</div>
+                    <div class="location-value">Balfe Street, 4245</div>
+                </div>
+            </div>
+            <button class="search-btn" id="searchBtn">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <!-- Map Area -->
+        <div class="map-container">
+            <div class="map-grid"></div>
+            <svg class="map-svg" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid slice">
+                <!-- Background roads -->
+                <g stroke="#fff" stroke-width="25" stroke-linecap="round" fill="none" opacity="0.6">
+                    <path d="M -50 100 L 450 100"></path>
+                    <path d="M -50 250 L 450 250"></path>
+                    <path d="M -50 400 L 450 400"></path>
+                    <path d="M 120 -50 L 120 650"></path>
+                    <path d="M 250 -50 L 250 650"></path>
+                </g>
+
+                <!-- Active route shadow -->
+                <path d="M 50 150 L 120 150 L 120 250 L 250 230 L 250 100 L 350 100" 
+                      stroke="rgba(99, 102, 241, 0.3)" stroke-width="8" fill="none" 
+                      stroke-linecap="round" filter="blur(2px)"></path>
+
+                <!-- Active route -->
+                <path d="M 50 150 L 120 150 L 120 250 L 250 230 L 250 100 L 350 100" 
+                      stroke="#818cf8" stroke-width="5" fill="none" stroke-linecap="round" 
+                      stroke-dasharray="10 5" opacity="0.8"></path>
+
+                <!-- Start point -->
+                <circle cx="50" cy="150" r="6" fill="#fb923c" stroke="white" stroke-width="2"></circle>
+
+                <!-- End point -->
+                <g transform="translate(350, 80)">
+                    <path d="M 0 0 L -10 20 Q 0 32 10 20 Z" fill="#ef4444"></path>
+                    <circle cx="0" cy="32" r="3" fill="rgba(0,0,0,0.3)"></circle>
+                </g>
+
+                <!-- Moving marker -->
+                <g id="markerGroup" transform="translate(50, 150)" class="marker-pulse">
+                    <circle r="12" fill="rgba(79, 70, 229, 0.2)" opacity="0.5"></circle>
+                    <circle r="8" fill="#4f46e5" stroke="white" stroke-width="2"></circle>
+                    <!-- Tooltip -->
+                    <g transform="translate(-30, -45)" opacity="0">
+                        <rect width="60" height="24" rx="12" fill="#1f2937" opacity="0.9"></rect>
+                        <text x="30" y="16" text-anchor="middle" font-size="10" fill="white" font-weight="bold" id="etaText">
+                            12 min
+                        </text>
+                        <path d="M 25 24 L 30 29 L 35 24 Z" fill="#1f2937" opacity="0.9"></path>
+                    </g>
+                </g>
+            </svg>
+
+            <!-- Map Controls -->
+            <div class="map-controls">
+                <button class="map-control-btn" id="navigationBtn" title="Navigation">
+                    <i class="fas fa-compass"></i>
+                </button>
+                <button class="map-control-btn" id="zoomInBtn" title="Zoom In">+</button>
+                <button class="map-control-btn" id="zoomOutBtn" title="Zoom Out">−</button>
+            </div>
+        </div>
+
+        <!-- Bottom Sheet -->
+        <div class="bottom-sheet">
+            <div class="drag-handle">
+                <div class="drag-bar"></div>
+            </div>
+
+            <div class="sheet-content">
+                <!-- Driver Profile -->
+                <div class="driver-profile">
+                    <div style="position: relative;">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=256&q=80" 
+                             alt="Driver" class="driver-avatar">
+                        <div class="online-indicator"></div>
+                    </div>
+
+                    <div class="driver-info">
+                        <div class="driver-name">Alison Mcferry</div>
+                        <div class="driver-details">
+                            <span class="rating-star">⭐</span>
+                            <span>4.9</span>
+                            <span>•</span>
+                            <span>Toyota Camry</span>
+                            <span class="vehicle-badge">HSW 829</span>
+                        </div>
+                    </div>
+
+                    <div class="driver-actions">
+                        <button class="action-btn secondary" id="messageBtn" title="Message">
+                            <i class="fas fa-comment-dots"></i>
+                        </button>
+                        <button class="action-btn primary" id="callBtn" title="Call">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-card">
+                    <div class="stat-group">
+                        <span class="stat-label">Remaining</span>
+                        <div class="stat-value"><span id="etaMinutes">12</span> min <span class="stat-subtext" id="distanceText">(2.4 km)</span></div>
+                    </div>
+                    <div class="stats-divider"></div>
+                    <div class="stat-group">
+                        <span class="stat-label">Arrival</span>
+                        <div class="stat-value" id="arrivalTime">10:42 AM</div>
+                    </div>
+                </div>
+
+                <!-- Report Button -->
+                <button class="report-btn" id="reportBtn">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Trip Report</span>
+                </button>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <button class="nav-item" id="homeNav">
+                    <i class="fas fa-home"></i>
+                </button>
+                <button class="nav-item active" id="navNav">
+                    <i class="fas fa-location-dot"></i>
+                </button>
+                <button class="nav-item" id="bagNav">
+                    <i class="fas fa-shopping-bag"></i>
+                </button>
+                <button class="nav-item" id="userNav">
+                    <i class="fas fa-user"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
