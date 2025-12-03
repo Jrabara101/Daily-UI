@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Monitoring Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0f9ff 50%, #fef3c7 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: #1e293b;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .time-display {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .weather-mini {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .weather-icon {
+            font-size: 1.5rem;
+        }
+
+        .notifications {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #64748b;
+            transition: all 0.3s ease;
+        }
+
+        .notifications:hover {
+            color: #4f46e5;
+            transform: scale(1.1);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .profile:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            animation: cardEntrance 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes cardEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #94a3b8;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            color: #1e293b;
+            transform: scale(1.2);
+        }
+
+        /* Quick Status */
+        .quick-status {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .status-item {
+            text-align: center;
+        }
+
+        .status-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .status-label {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        /* Gauges & Meters */
+        .gauge-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 24px 0;
+        }
+
+        .circular-gauge {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: conic-gradient(from 180deg, #4f46e5 0%, #06b6d4 50%, #fbbf24 100%);
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.2);
+        }
+
+        .gauge-inner {
+            width: 130px;
+            height: 130px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: gaugePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes gaugePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .gauge-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e293b;
+        }
+
+        .gauge-unit {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        /* Bar Chart */
+        .chart-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 150px;
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .bar {
+            flex: 1;
+            background: linear-gradient(180deg, #4f46e5 0%, #7c3aed 100%);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            min-height: 10px;
+            cursor: pointer;
+        }
+
+        .bar:hover {
+            filter: brightness(1.1);
+            transform: scaleY(1.05);
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -24px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -24px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* Area Chart */
+        .area-chart {
+            position: relative;
+            height: 180px;
+            margin: 20px 0;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Progress Bar */
+        .progress-item {
+            margin-bottom: 16px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .progress-label {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.95rem;
+        }
+
+        .progress-value {
+            color: #64748b;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #f1f5f9;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            border-radius: 10px;
+            transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { filter: brightness(1); }
+            50% { filter: brightness(1.1); }
+            100% { filter: brightness(1); }
+        }
+
+        /* Device List */
+        .device-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .device-item:hover {
+            background: #f1f5f9;
+            transform: translateX(4px);
+        }
+
+        .device-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .device-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .device-details h4 {
+            font-size: 0.95rem;
+            color: #1e293b;
+            margin-bottom: 2px;
+        }
+
+        .device-details p {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .device-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        .status-dot.online {
+            background: #22c55e;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+        }
+
+        .status-dot.offline {
+            background: #ef4444;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #1e293b;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-toggle {
+            background: #f1f5f9;
+            color: #1e293b;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-toggle.active {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+        }
+
+        /* Large Card */
+        .card-large {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 1200px) {
+            .card-large {
+                grid-column: span 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .time-display {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Alert Banner */
+        .alert {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid #f59e0b;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-icon {
+            font-size: 1.5rem;
+        }
+
+        .alert-text {
+            color: #92400e;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h1>Home Monitor</h1>
+            </div>
+            
+            <div class="header-right">
+                <div class="time-display" id="timeDisplay">14:32</div>
+                <div class="weather-mini">
+                    <span class="weather-icon">🌤️</span>
+                    <span>72°F</span>
+                </div>
+                <div class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <div class="notification-badge">3</div>
+                </div>
+                <div class="profile">
+                    <div class="profile-avatar">J</div>
+                    <div style="font-size: 0.85rem; color: #1e293b;">
+                        <div style="font-weight: 600;">John Doe</div>
+                        <div style="color: #64748b;">Home</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert Banner -->
+        <div class="alert">
+            <span class="alert-icon">⚠️</span>
+            <span class="alert-text">Front door unlocked for 2 hours. Tap to secure.</span>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Temperature Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #ff6b6b, #ff8787);">
+                            <i class="fas fa-thermometer-half"></i>
+                        </div>
+                        Temperature
+                    </div>
+                    <button class="menu-btn"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+                <div class="gauge-container">
+                    <div class="circular-gauge" style="background: conic-gradient(from 180deg, #4f46e5 0%, #06b6d4 50%, #ff6b6b 100%);">
+                        <div class="gauge-inner">
+                            <div class="gauge-value">72°</div>
+                            <div class="gauge-unit">Optimal</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="quick-status">
+                    <div class="status-item">
+                        <div class="status-value">68°</div>
+                        <div class="status-label">Bedroom</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-value">75°</div>
+                        <div class="status-label">Living Room</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-value">70°</div>
+                        <div class="status-label">Kitchen</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Humidity Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #4ecdc4, #44a08d);">
+                            <i class="fas fa-droplets"></i>
+                        </div>
+                        Humidity
+                    </div>
+                    <button class="menu-btn"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+                <div class="gauge-container">
+                    <div class="circular-gauge" style="background: conic-gradient(from 180deg, #4ecdc4 0%, #44a08d 50%, #06b6d4 100%);">
+                        <div class="gauge-inner">
+                            <div class="gauge-value">55%</div>
+                            <div class="gauge-unit">Normal</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-label">Comfort Range</span>
+                        <span class="progress-value">55% of 60%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Energy Usage Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        Energy Usage
+                    </div>
+                    <button class="menu-btn"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+                <div class="chart-container" id="energyChart">
+                    <div class="bar" style="height: 40%;"><span class="bar-value">2.4</span><span class="bar-label">Mon</span></div>
+                    <div class="bar" style="height: 55%;"><span class="bar-value">3.2</span><span class="bar-label">Tue</span></div>
+                    <div class="bar" style="height: 65%;"><span class="bar-value">4.1</span><span class="bar-label">Wed</span></div>
+                    <div class="bar" style="height: 50%;"><span class="bar-value">3.0</span><span class="bar-label">Thu</span></div>
+                    <div class="bar" style="height: 70%;"><span class="bar-value">4.5</span><span class="bar-label">Fri</span></div>
+                    <div class="bar" style="height: 75%;"><span class="bar-value">4.8</span><span class="bar-label">Sat</span></div>
+                    <div class="bar" style="height: 45%;"><span class="bar-value">2.9</span><span class="bar-label">Sun</span></div>
+                </div>
+                <div style="text-align: center; color: #64748b; font-size: 0.9rem;">Weekly avg: 3.7 kWh</div>
+            </div>
+
+            <!-- Water Usage Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        Water Usage
+                    </div>
+                    <button class="menu-btn"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-label">Today's Usage</span>
+                        <span class="progress-value">45 gal / 100 gal</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-label">This Month</span>
+                        <span class="progress-value">892 gal / 2000 gal</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <div class="quick-status">
+                    <div class="status-item">
+                        <div class="status-value">0.5</div>
+                        <div class="status-label">Leak Alert</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-value">$28</div>
+                        <div class="status-label">Month Cost</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Status Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        Security
+                    </div>
+                    <button class="menu-btn"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+                <div class="device-item">
+                    <div class="device-info">
+                        <div class="device-icon" style="background: #f1f5f9;">🚪</div>
+                        <div class="device-details">
+                            <h4>Front Door</h4>
+                            <p>Unlocked</p>
+                        </div>
+                    </div>
+                    <div class="device-status">
+                        <div class="status-dot offline"></div>
+                    </div>
+                </div>
+                <div class="device-item">
+                    <div class="device-info">
+                        <div class="device-icon" style="background: #f1f5f9;">🚪</div>
+                        <div class="device-details">
+                            <h4>Back Door</h4>
+                            <p>Locked</p>
+                        </div>
+                    </div>
+                    <div class="device-status">
+                        <div class="status-dot online"></div>
+                    </div>
+                </div>
+                <div class="device-item">
+                    <div class="device-info">
+                        <div class="device-icon" style="background: #f1f5f9;">📹</div>
+                        <div class="device-details">
+                            <h4>Front Camera</h4>
+                            <p>Recording</p>
+                        </div>
+                    </div>
+                    <div class="device-status">
+                        <div class="status-dot online"></div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 12px;">
+                    <i class="fas fa-lock"></i> Lock All
+                </button>
+            </div>
+
+            <!-- Smart Devices Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #a78bfa, #c4b5fd);">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        Smart Devices
+                    </div>
+                    <button class="menu-btn"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+                <div class="device-item">
+                    <div class="device-info">
+                        <div class="device-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white;">💡</div>
+                        <div class="device-details">
+                            <h4>Living Room Lights</h4>
+                            <p>Brightness: 80%</p>
+                        </div>
+                    </div>
+                    <div class="btn-toggle active"><i class="fas fa-power-off"></i></div>
+                </div>
+                <div class="device-item">
+                    <div class="device-info">
+                        <div class="device-icon" style="background: #f1f5f9;">🌬️</div>
+                        <div class="device-details">
+                            <h4>AC Unit</h4>
+                            <p>Running at 72°F</p>
+                        </div>
+                    </div>
+                    <div class="btn-toggle active"><i class="fas fa-power-off"></i></div>
+                </div>
+                <div class="device-item">
+                    <div class="device-info">
+                        <div class="device-icon" style="background: #f1f5f9;">🍳</div>
+                        <div class="device-details">
+                            <h4>Kitchen Fan</h4>
+                            <p>Off</p>
+                        </div>
+                    </div>
+                    <div class="btn-toggle"><i class="fas fa-power-off"></i></div>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-secondary">View All</button>
+                    <button class="btn btn-primary">Add Device</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update time
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('timeDisplay').textContent = `${hours}:${minutes}`;
+        }
+
+        updateTime();
+        setInterval(updateTime, 60000);
+
+        // Animate progress bars on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.progress-fill').forEach(fill => {
+                    const width = fill.style.width;
+                    fill.style.width = '0%';
+                    setTimeout(() => {
+                        if (fill.parentElement.previousElementSibling.querySelector('.progress-value').textContent.includes('45')) {
+                            fill.style.width = '45%';
+                        } else if (fill.parentElement.previousElementSibling.querySelector('.progress-value').textContent.includes('892')) {
+                            fill.style.width = '44.6%';
+                        } else {
+                            fill.style.width = '91.8%';
+                        }
+                    }, 100);
+                });
+            }, 500);
+        });
+
+        // Toggle device buttons
+        document.querySelectorAll('.btn-toggle').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+
+        // Menu button ripple effect
+        document.querySelectorAll('.menu-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+
+        // Notification bell animation
+        const notificationBell = document.querySelector('.notifications');
+        setInterval(() => {
+            notificationBell.style.animation = 'none';
+            setTimeout(() => {
+                notificationBell.style.animation = 'bellRing 0.5s ease-in-out';
+            }, 10);
+        }, 5000);
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes bellRing {
+                0%, 100% { transform: rotate(0deg); }
+                25% { transform: rotate(-10deg); }
+                75% { transform: rotate(10deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
