@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CouchTV - Smart TV App</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-couch"></i> CouchTV
+            </div>
+            <ul class="nav-links">
+                <li class="active">Browse</li>
+                <li>Movies</li>
+                <li>TV Shows</li>
+            </ul>
+            <div class="nav-icons">
+                <i class="fas fa-search"></i>
+                <div class="user-avatar">
+                    <img src="https://i.pravatar.cc/150?img=11" alt="User">
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main>
+            <!-- Hero Section (Featured Content) -->
+            <section class="hero" style="background-image: linear-gradient(to right, #000 40%, transparent 80%), url('https://image.tmdb.org/t/p/original/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg');">
+                <div class="hero-content">
+                    <div class="show-logo">
+                        <!-- Using text as logo placeholder -->
+                        <h1>True Detective</h1>
+                    </div>
+                    
+                    <div class="meta-data">
+                        <span class="season">Season 1</span>
+                        <span class="rating">TV-MA</span>
+                        <span class="genre">Drama, Crime, Mystery</span>
+                        <span class="match">98% match</span>
+                    </div>
+
+                    <p class="description">
+                        A seasonal anthology series in which police investigations unearth the personal and professional secrets of those involved, both within and outside the law.
+                    </p>
+
+                    <div class="hero-buttons" id="group-hero">
+                        <button class="btn btn-primary focusable" data-group="hero" data-index="0">
+                            <i class="fas fa-play"></i> Watch
+                        </button>
+                        <button class="btn btn-secondary focusable" data-group="hero" data-index="1">
+                            <i class="fas fa-plus"></i> Add to My List
+                        </button>
+                    </div>
+
+                    <div class="episode-previews">
+                        <div class="preview-card">
+                            <img src="https://image.tmdb.org/t/p/w500/d8b7M883i2f4e3c3f8f6e8f4.jpg" alt="Ep1">
+                        </div>
+                        <div class="preview-card">
+                            <img src="https://image.tmdb.org/t/p/w500/z8b7M883i2f4e3c3f8f6e8f4.jpg" alt="Ep2"> <!-- Broken link fallback handled by CSS/color -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Carousel Section -->
+            <section class="category-row">
+                <h3 class="row-title">New Releases</h3>
+                
+                <div class="carousel-container" id="group-carousel">
+                    <div class="carousel-track">
+                        <div class="card focusable" data-group="carousel" data-index="0">
+                            <img src="http://www.cinereflex.com/wp-content/uploads/2018/07/OITNB1-1.jpg" 
+                                alt="Orange Is New Black" 
+                                onerror="this.src='https://placehold.co/300x170/333/fff?text=Orange+Is+New+Black'">
+                            <div class="card-title">Orange Is New Black</div>
+                        </div>
+                        
+                        <div class="card focusable" data-group="carousel" data-index="1">
+                            <img src="https://www.planetfun.co.nz/wp-content/uploads/2025/12/stranger-things-scaled.jpg" 
+                                alt="Stranger Things" 
+                                onerror="this.src='https://placehold.co/300x170/333/fff?text=Stranger+Things'">
+                            <div class="card-title">Stranger Things</div>
+                        </div>
+
+                        <div class="card focusable" data-group="carousel" data-index="2">
+                            <img src="https://superstarsbio.com/wp-content/uploads/2020/12/Chernobyl-2019.jpg" 
+                                alt="Chernobyl" 
+                                onerror="this.src='https://placehold.co/300x170/333/fff?text=Chernobyl'">
+                            <div class="card-title">Chernobyl</div>
+                        </div>
+
+                        <div class="card focusable" data-group="carousel" data-index="3">
+                            <img src="https://i2.wp.com/cinemedios.com/wp-content/uploads/2021/07/whatif.jpg?fit=1920%2C1080&ssl=1" 
+                                alt="What/If" 
+                                onerror="this.src='https://placehold.co/300x170/333/fff?text=What+If'">
+                            <div class="card-title">What/If</div>
+                        </div>
+
+                        <div class="card focusable" data-group="carousel" data-index="4">
+                            <img src="https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg" 
+                                alt="Breaking Bad" 
+                                onerror="this.src='https://placehold.co/300x170/333/fff?text=Breaking+Bad'">
+                            <div class="card-title">Breaking Bad</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Help Tooltip -->
+        <div class="controls-hint">
+            <i class="fas fa-arrows-alt"></i> Use Arrow Keys to Navigate & Enter to Select
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
