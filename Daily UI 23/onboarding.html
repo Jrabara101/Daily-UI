@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home Onboarding</title>
+    <style>
+        :root {
+            --primary-color: #E53935; /* Red from screenshots */
+            --text-color: #333333;
+            --bg-color: #ffffff;
+            --gray-light: #f4f4f4;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Mobile Container Simulation */
+        .mobile-container {
+            background-color: var(--bg-color);
+            width: 100%;
+            max-width: 375px; /* Standard mobile width */
+            height: 812px;    /* Standard mobile height */
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Status Bar Simulation (Optional) */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 25px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Slides Area */
+        .slider-wrapper {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide {
+            min-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            transition: transform var(--transition-speed) ease-in-out;
+        }
+
+        /* Image Placeholders */
+        .illustration {
+            width: 280px;
+            height: 280px;
+            background-color: #FFEBEA; /* Light pink bg from images */
+            border-radius: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: relative;
+        }
+        
+        /* Simulating the vector art with CSS shapes (Abstract) */
+        .illustration::after {
+            content: '';
+            width: 100px;
+            height: 100px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.2;
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+        }
+
+        .text-content h2 {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            line-height: 1.4;
+            margin-bottom: 10px;
+            font-weight: 600;
+            padding: 0 20px;
+        }
+
+        /* Pagination Dots */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 40px; /* Space above bottom controls */
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ffcccc;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background-color: var(--primary-color);
+            width: 20px; /* Elongated active dot */
+            border-radius: 10px;
+        }
+
+        .dot-number {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        /* Bottom Controls */
+        .controls {
+            padding: 20px 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100px;
+        }
+
+        .btn-text {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        /* The Get Started Button (Hidden by default) */
+        .btn-primary {
+            display: none; 
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(229, 57, 53, 0.4);
+            text-transform: uppercase;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-container">
+        
+        <div class="status-bar">
+            <span>9:41</span>
+            <span>📶 🔋</span>
+        </div>
+
+        <div class="slider-wrapper" id="slider">
+            
+            <div class="slide">
+                <div class="illustration">
+                    [Image: Mobile Management]
+                </div>
+                <div class="text-content">
+                    <h2>Manage your home by using your phone everywhere</h2>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="illustration">
+                    [Image: Wi-Fi Connect]
+                </div>
+                <div class="text-content">
+                    <h2>Link your home by plugging them and connect to Wi-Fi</h2>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="illustration">
+                    [Image: Instant Notify]
+                </div>
+                <div class="text-content">
+                    <h2>Instant notification of you about any incident</h2>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <div class="dot-number" id="step-number">01</div>
+            <div class="pagination">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <div class="controls" id="controls-area">
+            <button class="btn-text" id="skip-btn">Skip</button>
+            <button class="btn-text" id="next-btn">Next</button>
+            <button class="btn-primary" id="start-btn">Get Started</button>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const slider = document.getElementById('slider');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const stepNumber = document.getElementById('step-number');
+        const nextBtn = document.getElementById('next-btn');
+        const skipBtn = document.getElementById('skip-btn');
+        const startBtn = document.getElementById('start-btn');
+        
+        let currentSlide = 0;
+
+        // Function to update the UI
+        function updateUI(index) {
+            // 1. Slide Transition (Simple transform)
+            slides.forEach((slide, i) => {
+                slide.style.transform = `translateX(-${index * 100}%)`;
+            });
+
+            // 2. Update Dots
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index].classList.add('active');
+
+            // 3. Update Step Number
+            stepNumber.textContent = `0${index + 1}`;
+
+            // 4. Handle Button Logic
+            if (index === slides.length - 1) {
+                // Last Slide: Show "Get Started", Hide Skip/Next
+                nextBtn.style.display = 'none';
+                skipBtn.style.display = 'none';
+                startBtn.style.display = 'block';
+                startBtn.classList.add('fade-in');
+            } else {
+                // Normal Slides: Show Skip/Next
+                nextBtn.style.display = 'block';
+                skipBtn.style.display = 'block';
+                startBtn.style.display = 'none';
+            }
+        }
+
+        // Event Listeners
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateUI(currentSlide);
+            }
+        });
+
+        skipBtn.addEventListener('click', () => {
+            // Skip logic: Go straight to last slide
+            currentSlide = slides.length - 1;
+            updateUI(currentSlide);
+        });
+
+        startBtn.addEventListener('click', () => {
+            alert('Welcome to the App! Redirecting to Home...');
+            // window.location.href = '/dashboard';
+        });
+
+    </script>
+</body>
+</html>
