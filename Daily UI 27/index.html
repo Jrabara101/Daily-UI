@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily UI 27 - Profile Dropdown</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="dropdown-wrapper">
+            <!-- Profile Picture -->
+            <div class="profile-picture">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face" alt="Profile">
+            </div>
+
+            <!-- Dropdown Card -->
+            <div class="dropdown-card">
+                <!-- Header with Triangle -->
+                <div class="dropdown-header">
+                    <div class="triangle"></div>
+                    <h2>Profile</h2>
+                </div>
+
+                <!-- Menu Items -->
+                <div class="dropdown-menu">
+                    <a href="#" class="menu-item" data-badge="12" data-color="pink">
+                        <span class="menu-text">My Inbox</span>
+                        <span class="badge badge-pink">12</span>
+                    </a>
+                    <a href="#" class="menu-item" data-badge="24" data-color="purple">
+                        <span class="menu-text">My Calendar</span>
+                        <span class="badge badge-purple">24</span>
+                    </a>
+                    <a href="#" class="menu-item" data-badge="2" data-color="cyan">
+                        <span class="menu-text">My Tasks</span>
+                        <span class="badge badge-cyan">2</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
