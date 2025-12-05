@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily UI 26 - Subscribe Template</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="subscribe-card">
+            <!-- Pop-up Icon -->
+            <div class="popup-icon" id="popupIcon">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">1</span>
+            </div>
+
+            <!-- Header -->
+            <div class="header">
+                <h1>Stay Updated</h1>
+                <p>Get the latest news, updates, and exclusive offers delivered to your inbox</p>
+            </div>
+
+            <!-- Subscribe Form -->
+            <form class="subscribe-form" id="subscribeForm">
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <i class="fas fa-map-marker-alt input-icon"></i>
+                        <input type="text" id="zipcode" name="zipcode" placeholder="Zip Code (Optional)" pattern="[0-9]{5}">
+                    </div>
+                </div>
+
+                <!-- Preference Slider -->
+                <div class="preference-section">
+                    <label class="preference-label">
+                        <span>Newsletter Frequency</span>
+                        <span class="slider-value" id="sliderValue">Weekly</span>
+                    </label>
+                    <div class="slider-container">
+                        <input type="range" id="frequencySlider" class="slider" min="0" max="2" value="1" step="1">
+                        <div class="slider-labels">
+                            <span>Daily</span>
+                            <span>Weekly</span>
+                            <span>Monthly</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subscribe Button -->
+                <button type="submit" class="subscribe-btn" id="subscribeBtn">
+                    <span class="btn-text">Subscribe Now</span>
+                    <i class="fas fa-arrow-right btn-icon"></i>
+                </button>
+            </form>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <p>Thank you for subscribing!</p>
+            </div>
+
+            <!-- Social Icons -->
+            <div class="social-icons">
+                <a href="#" class="social-icon" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-icon" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
