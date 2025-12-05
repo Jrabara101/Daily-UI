@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily UI 28 - Contact Us</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Blurred Background -->
+    <div class="background-image">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop" alt="Office Background">
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="contact-modal" id="contactModal">
+            <!-- Close Button -->
+            <button class="close-btn" id="closeBtn" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h1>CONTACTS</h1>
+                <p>Sign up for our newsletter to receive updates and exclusive offers.</p>
+            </div>
+
+            <!-- Contact Form -->
+            <form class="contact-form" id="contactForm">
+                <!-- Name Field -->
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" id="name" name="name" placeholder="NAME" required>
+                    </div>
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="email" name="email" placeholder="E-MAIL ADDRESS" required>
+                    </div>
+                </div>
+
+                <!-- Message Field -->
+                <div class="form-group">
+                    <div class="input-wrapper textarea-wrapper">
+                        <i class="fas fa-comment input-icon"></i>
+                        <textarea id="message" name="message" placeholder="MESSAGE" rows="5" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <p>Thank you! Your message has been sent.</p>
+            </div>
+
+            <!-- Contact Icons -->
+            <div class="contact-icons">
+                <a href="tel:+1234567890" class="contact-icon" title="Call Us">
+                    <i class="fas fa-phone"></i>
+                    <span class="icon-tooltip">Call Us</span>
+                </a>
+                <a href="mailto:info@example.com" class="contact-icon" title="Email Us">
+                    <i class="fas fa-envelope"></i>
+                    <span class="icon-tooltip">Email Us</span>
+                </a>
+                <a href="#" class="contact-icon" title="Location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="icon-tooltip">Location</span>
+                </a>
+                <a href="#" class="contact-icon" title="Social Media">
+                    <i class="fab fa-facebook-f"></i>
+                    <span class="icon-tooltip">Facebook</span>
+                </a>
+                <a href="#" class="contact-icon" title="Social Media">
+                    <i class="fab fa-twitter"></i>
+                    <span class="icon-tooltip">Twitter</span>
+                </a>
+                <a href="#" class="contact-icon" title="Social Media">
+                    <i class="fab fa-linkedin-in"></i>
+                    <span class="icon-tooltip">LinkedIn</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Open Modal Button (for demo) -->
+    <button class="open-modal-btn" id="openModalBtn">
+        <i class="fas fa-envelope"></i>
+        <span>Contact Us</span>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
