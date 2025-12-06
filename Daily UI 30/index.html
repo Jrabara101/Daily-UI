@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Table</title>
+    <style>
+        /* --- General Reset & Layout --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fa; /* Light blue-grey background */
+            color: #555;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        h1.main-title {
+            font-weight: 300;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #444;
+        }
+
+        /* --- Pricing Container --- */
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            flex-wrap: wrap; /* Allows stacking on mobile */
+        }
+
+        /* --- Card Styling --- */
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 40px 30px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+
+        /* Highlighted 'Agency' Card */
+        .card.agency {
+            border: 2px solid #dbeafe; /* Light blue border */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        /* The small 'i' icon in top right */
+        .info-icon {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #8898aa;
+            font-style: italic;
+            font-family: serif;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* --- Typography --- */
+        .card h2 {
+            font-weight: 300;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .description {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #8898aa;
+            margin-bottom: 30px;
+            min-height: 80px; /* Aligns buttons even if text length differs */
+        }
+
+        /* --- Pricing Section --- */
+        .price-area {
+            margin-bottom: 30px;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 300;
+            color: #333;
+        }
+
+        .currency {
+            font-size: 1.5rem;
+            vertical-align: top;
+            margin-right: 2px;
+        }
+
+        .price-text-green {
+            color: #76c356; /* Match the 'Free' text color */
+        }
+
+        .billing-text {
+            font-size: 0.75rem;
+            color: #aaa;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        /* --- Button --- */
+        .btn {
+            background-color: #76c356;
+            color: white;
+            border: none;
+            padding: 15px 0;
+            width: 100%;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #64ad46;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .pricing-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .card {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="main-title">Choose Your License</h1>
+
+    <div class="pricing-container">
+        
+        <div class="card" id="card-personal">
+            <div>
+                <h2>Personal</h2>
+                <p class="description">
+                    Just started using awesome Module. Great way to boost the hard designing or prototyping process.
+                </p>
+                <div class="price-area">
+                    <span class="price price-text-green">Free</span>
+                    <p class="billing-text">Per month billed annually<br>or $250 from month to month</p>
+                </div>
+            </div>
+            <button class="btn" onclick="selectPlan('Personal')">Get it</button>
+        </div>
+
+        <div class="card agency" id="card-agency">
+            <span class="info-icon" title="More info">i</span>
+            <div>
+                <h2>Agency</h2>
+                <p class="description">
+                    Also a perfect tool for creative studios and freelancers.
+                </p>
+                <div class="price-area">
+                    <span class="currency">€</span><span class="price">123</span>
+                    <p class="billing-text">Per month billed annually<br>or €250 from month to month</p>
+                </div>
+            </div>
+            <button class="btn" onclick="selectPlan('Agency')">Buy now</button>
+        </div>
+
+        <div class="card" id="card-unlimited">
+            <div>
+                <h2>Unlimited</h2>
+                <p class="description">
+                    Living in today's metropolitan world of cellular phones, mobile computers.
+                </p>
+                <div class="price-area">
+                    <span class="currency">€</span><span class="price">232</span>
+                    <p class="billing-text">Per month billed annually<br>or €250 from month to month</p>
+                </div>
+            </div>
+            <button class="btn" onclick="selectPlan('Unlimited')">Buy now</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Function to handle button clicks
+        function selectPlan(planName) {
+            // In a real app, this would redirect to a checkout page
+            console.log(`User selected: ${planName}`);
+            alert(`Great choice! You've selected the ${planName} plan.`);
+            
+            // Optional: Highlight the selected card visually using JS
+            // Reset all cards first
+            document.querySelectorAll('.card').forEach(c => c.style.borderColor = 'transparent');
+            document.querySelector('.card.agency').style.borderColor = '#dbeafe'; // Reset default agency border
+
+            // Highlight specific clicked card
+            const selectedCard = document.getElementById(`card-${planName.toLowerCase()}`);
+            if(selectedCard) {
+                selectedCard.style.borderColor = '#76c356'; // Green border on selection
+            }
+        }
+    </script>
+</body>
+</html>
