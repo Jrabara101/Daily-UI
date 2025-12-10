@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crowdfund Campaign - Bluetooth Speaker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        /* Custom Animation for background blobs */
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        /* Speaker Grille Pattern */
+        .speaker-grille {
+            background-image: radial-gradient(#333 1.5px, transparent 1.5px);
+            background-size: 12px 12px;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-[#FCE35F] text-gray-900 font-sans selection:bg-black selection:text-[#FCE35F] overflow-x-hidden relative">
+
+    <!-- Background Decorative Blobs -->
+    <div class="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-yellow-400/30 rounded-full blur-3xl mix-blend-multiply opacity-70 animate-pulse-slow"></div>
+        <div class="absolute bottom-[10%] right-[20%] w-[400px] h-[400px] bg-orange-300/20 rounded-full blur-3xl mix-blend-multiply"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="relative z-50 flex items-center justify-between px-6 py-6 max-w-7xl mx-auto">
+        <div class="flex items-center gap-2 cursor-pointer group">
+            <!-- Grid Logo Icon -->
+            <div class="grid grid-cols-3 gap-[2px]">
+                <div class="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-110 transition-transform"></div>
+                <div class="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-110 transition-transform"></div>
+                <div class="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-110 transition-transform"></div>
+                <div class="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-110 transition-transform"></div>
+                <div class="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-110 transition-transform"></div>
+                <div class="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-110 transition-transform"></div>
+                <div class="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-110 transition-transform"></div>
+                <div class="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-110 transition-transform"></div>
+                <div class="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-110 transition-transform"></div>
+            </div>
+            <span class="text-2xl font-black tracking-tighter">Crowdfund.</span>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-6">
+            <button class="flex items-center gap-2 hover:opacity-70 transition-opacity">
+                <div class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden border border-black/10">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kate" alt="Kate B." class="w-full h-full object-cover" />
+                </div>
+                <span class="font-medium text-sm">Kate B.</span>
+                <i class="ph ph-caret-down text-sm"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="menu-btn" class="md:hidden p-2">
+            <i class="ph ph-list text-2xl" id="menu-icon"></i>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-[#FCE35F] z-40 border-b border-black/10 p-4 flex flex-col gap-4 shadow-xl">
+        <a href="#" class="font-bold text-lg">My Projects</a>
+        <a href="#" class="font-bold text-lg">Profile</a>
+        <a href="#" class="font-bold text-lg">Settings</a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="relative z-10 max-w-7xl mx-auto px-6 pt-8 md:pt-16 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Column: Text & Details -->
+        <div class="lg:col-span-5 flex flex-col gap-8 md:gap-12">
+            
+            <div class="space-y-4">
+                <span class="font-bold tracking-widest text-xs md:text-sm uppercase opacity-80">B.Play</span>
+                <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9]">
+                    Bluetooth<br />Speaker
+                </h1>
+            </div>
+
+            <!-- Goal Progress Pill -->
+            <div class="inline-flex flex-wrap items-center gap-2 border border-black rounded-full px-6 py-3 w-fit bg-transparent hover:bg-black/5 transition-colors cursor-default">
+                <span class="font-bold text-lg md:text-xl">€71,398</span>
+                <span class="text-sm md:text-base opacity-70">pledged of €22,461 goal</span>
+            </div>
+
+            <!-- Features List -->
+            <div class="flex flex-col gap-8 mt-4 md:mt-8">
+                
+                <div class="flex gap-4 group">
+                    <div class="mt-1">
+                        <i class="ph ph-stack text-3xl md:text-4xl group-hover:rotate-12 transition-transform duration-300"></i>
+                    </div>
+                    <div class="max-w-xs">
+                        <h3 class="font-bold text-sm md:text-base tracking-wider uppercase mb-2">Assembled in Denmark</h3>
+                        <p class="text-sm md:text-base opacity-70 leading-relaxed">
+                            Screens of Routes are fully customizable, which made them perfect for your commercial projects.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 group">
+                    <div class="mt-1">
+                        <i class="ph ph-wrench text-3xl md:text-4xl group-hover:-rotate-12 transition-transform duration-300"></i>
+                    </div>
+                    <div class="max-w-xs">
+                        <h3 class="font-bold text-sm md:text-base tracking-wider uppercase mb-2">Build for Professionals</h3>
+                        <p class="text-sm md:text-base opacity-70 leading-relaxed">
+                            Strong minimalistic design of the screens may be a useful tool for educational purposes.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Right Column: Product Image/Graphic -->
+        <div class="lg:col-span-7 relative h-[400px] md:h-[600px] w-full flex items-center justify-center lg:justify-end">
+            
+            <!-- CSS-Only Speaker Representation -->
+            <div class="relative w-[85%] md:w-[80%] h-full max-h-[500px] transform transition-transform duration-500 hover:scale-[1.02]">
+                
+                <!-- Speaker Handle -->
+                <div class="absolute top-1/2 -left-4 w-full h-16 bg-[#1a1a1a] -rotate-12 z-20 rounded-full shadow-2xl flex items-center px-4">
+                    <div class="w-12 h-12 bg-[#2a2a2a] rounded-full ml-auto shadow-inner border border-white/5"></div>
+                </div>
+
+                <!-- Main Body -->
+                <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-[#2a2a2a] to-[#111] rounded-3xl shadow-2xl overflow-hidden border-t border-white/10 z-10">
+                    
+                    <!-- Top Surface -->
+                    <div class="absolute top-0 w-full h-12 bg-white/5 skew-y-[-2deg] origin-top-right backdrop-blur-sm"></div>
+
+                    <!-- Speaker Grille Texture -->
+                    <div class="absolute inset-0 mt-12 px-6 pb-6">
+                        <div class="w-full h-full rounded-2xl bg-[#000] speaker-grille"></div>
+                    </div>
+
+                    <!-- Shine/Reflection -->
+                    <div class="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-white/5 to-transparent pointer-events-none"></div>
+                </div>
+
+                <!-- Back Elements for depth -->
+                <div class="absolute -right-4 top-4 w-full h-full bg-black/20 rounded-3xl -z-10 blur-xl"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-20 border-t border-black/5 max-w-7xl mx-auto px-6 py-8 md:py-10">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+            
+            <div class="text-xs md:text-sm font-medium opacity-60 order-2 md:order-1">
+                © 2019 Crowdfund. All Rights Reserved
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-8 md:gap-16 order-1 md:order-2 w-full md:w-auto">
+                <div class="flex gap-8 text-xs md:text-sm font-bold tracking-widest uppercase">
+                    <a href="#" class="hover:opacity-60 transition-opacity">Contact</a>
+                    <a href="#" class="hover:opacity-60 transition-opacity">Help</a>
+                    <a href="#" class="hover:opacity-60 transition-opacity whitespace-nowrap">Terms of use</a>
+                    <a href="#" class="hover:opacity-60 transition-opacity whitespace-nowrap">Privacy Policy</a>
+                </div>
+
+                <div class="flex gap-6 items-center">
+                    <a href="#" class="hover:scale-110 transition-transform"><i class="ph ph-twitter-logo text-xl"></i></a>
+                    <a href="#" class="hover:scale-110 transition-transform"><i class="ph ph-facebook-logo text-xl"></i></a>
+                    <a href="#" class="hover:scale-110 transition-transform"><i class="ph ph-youtube-logo text-xl"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle Logic
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        let isMenuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.remove('ph-list');
+                menuIcon.classList.add('ph-x');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('ph-x');
+                menuIcon.classList.add('ph-list');
+            }
+        });
+    </script>
+</body>
+</html>
