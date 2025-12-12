@@ -1,0 +1,394 @@
+/* Pixel Art Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: #1a1a1a;
+    overflow: hidden;
+    color: #fff;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+/* Pixel Art Canvas */
+canvas {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+/* Navigation UI Overlay */
+.nav-overlay {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 320px;
+    background: rgba(40, 40, 40, 0.95);
+    border: 3px solid #666;
+    border-radius: 8px;
+    padding: 15px;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.nav-overlay.active {
+    display: block;
+}
+
+.nav-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.close-btn {
+    background: #ff4444;
+    border: 2px solid #cc0000;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    image-rendering: pixelated;
+}
+
+.close-btn:hover {
+    background: #ff6666;
+}
+
+.nav-content {
+    margin-bottom: 15px;
+}
+
+.nav-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.time-display, .distance-display, .arrival-display {
+    text-align: center;
+}
+
+.time-display #time {
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+}
+
+.distance-display #distance,
+.arrival-display #arrival {
+    font-size: 14px;
+    color: #aaa;
+}
+
+.nav-instruction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(100, 100, 200, 0.2);
+    border-radius: 4px;
+    border-left: 4px solid #6c5ce7;
+}
+
+#instruction-text {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#speed-display {
+    font-size: 28px;
+    font-weight: bold;
+    color: #6c5ce7;
+}
+
+.nav-map {
+    width: 100%;
+    height: 200px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#mini-map {
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+}
+
+/* Car Selector */
+.car-selector {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(20, 20, 20, 0.98);
+    border: 4px solid #6c5ce7;
+    border-radius: 12px;
+    padding: 30px;
+    z-index: 200;
+    max-width: 600px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
+    display: none;
+}
+
+.car-selector h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #6c5ce7;
+}
+
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.car-option {
+    cursor: pointer;
+    border: 3px solid #444;
+    border-radius: 8px;
+    padding: 10px;
+    background: rgba(40, 40, 40, 0.8);
+    transition: all 0.2s;
+    image-rendering: pixelated;
+}
+
+.car-option:hover {
+    border-color: #6c5ce7;
+    transform: scale(1.1);
+    background: rgba(108, 92, 231, 0.2);
+}
+
+.car-option.selected {
+    border-color: #6c5ce7;
+    background: rgba(108, 92, 231, 0.4);
+    box-shadow: 0 0 20px rgba(108, 92, 231, 0.6);
+}
+
+.car-option img {
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+    display: block;
+}
+
+/* Character Selector */
+.character-selector {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(20, 20, 20, 0.98);
+    border: 4px solid #6c5ce7;
+    border-radius: 12px;
+    padding: 30px;
+    z-index: 201;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
+    display: none;
+}
+
+.character-selector h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #6c5ce7;
+}
+
+.character-options {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.character-option {
+    cursor: pointer;
+    border: 3px solid #444;
+    border-radius: 8px;
+    padding: 15px;
+    background: rgba(40, 40, 40, 0.8);
+    transition: all 0.2s;
+    image-rendering: pixelated;
+}
+
+.character-option:hover {
+    border-color: #6c5ce7;
+    transform: scale(1.1);
+}
+
+.character-option.selected {
+    border-color: #6c5ce7;
+    background: rgba(108, 92, 231, 0.4);
+}
+
+.character-option img {
+    width: 120px;
+    height: auto;
+    image-rendering: pixelated;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.character-option span {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Destination Panel */
+.destination-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(20, 20, 20, 0.98);
+    border: 4px solid #6c5ce7;
+    border-radius: 12px;
+    padding: 30px;
+    z-index: 202;
+    text-align: center;
+    min-width: 300px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
+    display: none;
+}
+
+.destination-panel h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #6c5ce7;
+}
+
+#destination-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    background: rgba(40, 40, 40, 0.8);
+    border: 2px solid #444;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    font-family: 'Courier New', monospace;
+}
+
+#destination-input:focus {
+    outline: none;
+    border-color: #6c5ce7;
+}
+
+.nav-btn {
+    padding: 12px 30px;
+    background: #6c5ce7;
+    border: 2px solid #5a4cd4;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    transition: all 0.2s;
+}
+
+.nav-btn:hover {
+    background: #7d6ef0;
+    transform: scale(1.05);
+}
+
+/* Arrival Scene */
+.arrival-scene {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 300;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.arrival-scene.hidden {
+    display: none;
+}
+
+.house-container {
+    image-rendering: pixelated;
+}
+
+.house-container img {
+    width: 400px;
+    height: auto;
+    image-rendering: pixelated;
+}
+
+.character-arrival {
+    image-rendering: pixelated;
+}
+
+.character-arrival img {
+    width: 150px;
+    height: auto;
+    image-rendering: pixelated;
+}
+
+.arrival-message {
+    text-align: center;
+}
+
+.arrival-message h2 {
+    font-size: 36px;
+    color: #6c5ce7;
+    margin-bottom: 10px;
+}
+
+.arrival-message p {
+    font-size: 24px;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+/* Controls Info */
+.controls-info {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    z-index: 50;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Pixel Art Filter */
+.pixel-art {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+

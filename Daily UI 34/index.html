@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Car Drive - Daily UI 34</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation UI Overlay -->
+    <div id="nav-ui" class="nav-overlay">
+        <div class="nav-header">
+            <button id="close-nav" class="close-btn">×</button>
+        </div>
+        <div class="nav-content">
+            <div class="nav-info">
+                <div class="time-display">
+                    <span id="time">3 hr 47 min</span>
+                </div>
+                <div class="distance-display">
+                    <span id="distance">305 km</span>
+                </div>
+                <div class="arrival-display">
+                    <span id="arrival">16:24</span>
+                </div>
+            </div>
+            <div class="nav-instruction">
+                <div id="instruction-text">Go straight</div>
+                <div id="speed-display">78 kmh</div>
+            </div>
+        </div>
+        <div class="nav-map">
+            <canvas id="mini-map"></canvas>
+        </div>
+    </div>
+
+    <!-- Car Selection UI -->
+    <div id="car-selector" class="car-selector">
+        <h3>Select Your Car</h3>
+        <div class="car-grid">
+            <div class="car-option" data-car="1">
+                <img src="1.png" alt="Car 1">
+            </div>
+            <div class="car-option" data-car="2">
+                <img src="2.png" alt="Car 2">
+            </div>
+            <div class="car-option" data-car="3">
+                <img src="3.png" alt="Car 3">
+            </div>
+            <div class="car-option" data-car="4">
+                <img src="4.png" alt="Car 4">
+            </div>
+            <div class="car-option" data-car="5">
+                <img src="5.png" alt="Car 5">
+            </div>
+            <div class="car-option" data-car="6">
+                <img src="6.png" alt="Car 6">
+            </div>
+            <div class="car-option" data-car="7">
+                <img src="7.png" alt="Car 7">
+            </div>
+            <div class="car-option" data-car="8">
+                <img src="8.png" alt="Car 8">
+            </div>
+        </div>
+    </div>
+
+    <!-- Character Selection -->
+    <div id="character-selector" class="character-selector">
+        <h3>Select Your Character</h3>
+        <div class="character-options">
+            <div class="character-option" data-gender="boy">
+                <img src="boy.png" alt="Boy">
+                <span>Boy</span>
+            </div>
+            <div class="character-option" data-gender="girl">
+                <img src="girl.png" alt="Girl">
+                <span>Girl</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Destination Input -->
+    <div id="destination-panel" class="destination-panel">
+        <h3>Set Destination</h3>
+        <input type="text" id="destination-input" placeholder="Enter destination (e.g., Home)" value="Home">
+        <button id="start-navigation" class="nav-btn">Start Navigation</button>
+    </div>
+
+    <!-- Arrival Scene -->
+    <div id="arrival-scene" class="arrival-scene hidden">
+        <div class="house-container">
+            <img id="house-image" src="9.png" alt="House">
+        </div>
+        <div class="character-arrival">
+            <img id="arrival-character" src="boy.png" alt="Character">
+        </div>
+        <div class="arrival-message">
+            <h2>You've Arrived!</h2>
+            <p id="arrival-location">Home</p>
+            <button id="continue-driving" class="nav-btn">Continue Driving</button>
+        </div>
+    </div>
+
+    <!-- Main Game Canvas -->
+    <div id="game-container"></div>
+
+    <!-- Controls Info -->
+    <div class="controls-info">
+        <p>WASD or Arrow Keys to drive | Click to interact</p>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
+
