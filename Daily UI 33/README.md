@@ -55,3 +55,4 @@ Daily UI 33/
 - Lucide React (icons)
 - Google Fonts (Oswald)
 
+
