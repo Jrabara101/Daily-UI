@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+  }
+  .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+  .font-sans {
+    font-family: 'Lato', sans-serif;
+  }
+}
+
