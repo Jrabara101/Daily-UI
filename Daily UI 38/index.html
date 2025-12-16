@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed layout-compact" dir="ltr" data-theme="theme-default">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Fullcalendar - Apps | Frest - Bootstrap Admin Template</title>
+    <meta name="description" content="" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css" rel="stylesheet" />
+
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+
+    <!-- Custom Styles -->
+    <style>
+      :root {
+        --primary-color: #5A8DEE;
+        --primary-hover: #699AF9;
+        --danger-color: #FF5B5C;
+        --warning-color: #FF9F43;
+        --success-color: #28C76F;
+        --info-color: #00CFE8;
+        --text-primary: #5E5873;
+        --text-secondary: #B4B7BD;
+        --bg-white: #FFFFFF;
+        --bg-light: #F8F8F8;
+        --border-color: #EBE9F1;
+        --shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'IBM Plex Sans', 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: var(--bg-light);
+        color: var(--text-primary);
+        line-height: 1.6;
+      }
+
+      /* Navbar Styles */
+      .layout-navbar {
+        background: var(--bg-white);
+        box-shadow: var(--shadow);
+        padding: 0.75rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        color: var(--text-primary);
+        font-weight: 600;
+        font-size: 1.25rem;
+      }
+
+      .navbar-nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-left: auto;
+      }
+
+      .nav-link {
+        color: var(--text-primary);
+        text-decoration: none;
+        padding: 0.5rem;
+        border-radius: 0.375rem;
+        transition: all 0.2s;
+      }
+
+      .nav-link:hover {
+        background-color: var(--bg-light);
+        color: var(--primary-color);
+      }
+
+      .badge-notifications {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        font-size: 0.7rem;
+        padding: 0.15rem 0.4rem;
+      }
+
+      .avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .avatar-online::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        width: 10px;
+        height: 10px;
+        background: var(--success-color);
+        border: 2px solid white;
+        border-radius: 50%;
+      }
+
+      /* Menu Styles */
+      .layout-menu-horizontal {
+        background: var(--bg-white);
+        border-bottom: 1px solid var(--border-color);
+        padding: 0;
+      }
+
+      .menu-inner {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+      }
+
+      .menu-item {
+        position: relative;
+      }
+
+      .menu-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem 1.25rem;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: all 0.2s;
+        border-bottom: 2px solid transparent;
+      }
+
+      .menu-item.active .menu-link {
+        color: var(--primary-color);
+        border-bottom-color: var(--primary-color);
+      }
+
+      .menu-link:hover {
+        color: var(--primary-color);
+      }
+
+      /* Calendar Wrapper */
+      .app-calendar-wrapper {
+        background: var(--bg-white);
+        border-radius: 0.5rem;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .app-calendar-sidebar {
+        width: 280px;
+        background: var(--bg-white);
+        border-right: 1px solid var(--border-color);
+        padding: 0;
+      }
+
+      .app-calendar-content {
+        flex: 1;
+        padding: 1.5rem;
+      }
+
+      /* Add Event Button */
+      .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+        padding: 0.625rem 1.25rem;
+        border-radius: 0.375rem;
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+
+      .btn-primary:hover {
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(90, 141, 238, 0.3);
+      }
+
+      /* Mini Calendar */
+      .inline-calendar {
+        margin: 1rem 0;
+      }
+
+      .flatpickr-calendar {
+        box-shadow: var(--shadow);
+        border-radius: 0.5rem;
+      }
+
+      /* Filter Section */
+      .text-small {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        color: var(--text-secondary);
+      }
+
+      .form-check {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .form-check-input {
+        width: 1.125rem;
+        height: 1.125rem;
+        cursor: pointer;
+        border: 2px solid var(--border-color);
+        border-radius: 0.25rem;
+      }
+
+      .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+
+      .form-check-input[data-value="personal"]:checked {
+        background-color: var(--danger-color);
+        border-color: var(--danger-color);
+      }
+
+      .form-check-input[data-value="family"]:checked {
+        background-color: var(--warning-color);
+        border-color: var(--warning-color);
+      }
+
+      .form-check-input[data-value="holiday"]:checked {
+        background-color: var(--success-color);
+        border-color: var(--success-color);
+      }
+
+      .form-check-input[data-value="etc"]:checked {
+        background-color: var(--info-color);
+        border-color: var(--info-color);
+      }
+
+      .form-check-label {
+        cursor: pointer;
+        color: var(--text-primary);
+        font-size: 0.875rem;
+      }
+
+      /* FullCalendar Styles */
+      .fc {
+        font-family: 'IBM Plex Sans', sans-serif;
+      }
+
+      .fc-header-toolbar {
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background: var(--bg-light);
+        border-radius: 0.5rem;
+      }
+
+      .fc-toolbar-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .fc-button {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+
+      .fc-button:hover {
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+      }
+
+      .fc-button-active {
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+      }
+
+      .fc-daygrid-day {
+        border-color: var(--border-color);
+      }
+
+      .fc-daygrid-day-number {
+        color: var(--text-primary);
+        padding: 0.5rem;
+      }
+
+      .fc-day-today {
+        background-color: rgba(90, 141, 238, 0.05) !important;
+      }
+
+      .fc-day-today .fc-daygrid-day-number {
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+
+      /* Event Styles */
+      .fc-event {
+        border: none;
+        padding: 0.25rem 0.5rem;
+        margin: 0.125rem 0;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .fc-event-primary {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .fc-event-danger {
+        background-color: var(--danger-color);
+        color: white;
+      }
+
+      .fc-event-warning {
+        background-color: var(--warning-color);
+        color: white;
+      }
+
+      .fc-event-success {
+        background-color: var(--success-color);
+        color: white;
+      }
+
+      .fc-event-info {
+        background-color: var(--info-color);
+        color: white;
+      }
+
+      .fc-event-title {
+        font-weight: 500;
+      }
+
+      /* Offcanvas Styles */
+      .offcanvas {
+        width: 400px;
+      }
+
+      .offcanvas-header {
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .offcanvas-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .offcanvas-body {
+        padding: 1.5rem;
+      }
+
+      .form-label {
+        font-weight: 500;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+      }
+
+      .form-control,
+      .form-select {
+        border: 1px solid var(--border-color);
+        border-radius: 0.375rem;
+        padding: 0.625rem 0.875rem;
+        color: var(--text-primary);
+        transition: all 0.2s;
+      }
+
+      .form-control:focus,
+      .form-select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(90, 141, 238, 0.1);
+        outline: none;
+      }
+
+      /* Switch Toggle */
+      .switch {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: pointer;
+      }
+
+      .switch-input {
+        display: none;
+      }
+
+      .switch-toggle-slider {
+        width: 3rem;
+        height: 1.5rem;
+        background-color: var(--border-color);
+        border-radius: 1rem;
+        position: relative;
+        transition: background-color 0.3s;
+      }
+
+      .switch-input:checked + .switch-toggle-slider {
+        background-color: var(--primary-color);
+      }
+
+      .switch-toggle-slider::after {
+        content: '';
+        position: absolute;
+        width: 1.25rem;
+        height: 1.25rem;
+        background: white;
+        border-radius: 50%;
+        top: 0.125rem;
+        left: 0.125rem;
+        transition: transform 0.3s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .switch-input:checked + .switch-toggle-slider::after {
+        transform: translateX(1.5rem);
+      }
+
+      .switch-label {
+        color: var(--text-primary);
+        font-size: 0.875rem;
+      }
+
+      /* Buttons */
+      .btn-label-secondary {
+        background-color: transparent;
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        padding: 0.625rem 1.25rem;
+        border-radius: 0.375rem;
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+
+      .btn-label-secondary:hover {
+        background-color: var(--bg-light);
+        border-color: var(--text-secondary);
+      }
+
+      .btn-label-danger {
+        background-color: var(--danger-color);
+        border-color: var(--danger-color);
+        color: white;
+        padding: 0.625rem 1.25rem;
+        border-radius: 0.375rem;
+        font-weight: 500;
+      }
+
+      .btn-label-danger:hover {
+        background-color: #e04445;
+        border-color: #e04445;
+      }
+
+      /* Footer */
+      .content-footer {
+        background: var(--bg-white);
+        border-top: 1px solid var(--border-color);
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+      }
+
+      .footer-link {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .footer-link:hover {
+        color: var(--primary-color);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .app-calendar-sidebar {
+          width: 100%;
+          border-right: none;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .offcanvas {
+          width: 100%;
+        }
+      }
+
+      /* Settings Button */
+      .settings-btn {
+        position: fixed;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3rem;
+        height: 3rem;
+        background: var(--primary-color);
+        border: none;
+        border-radius: 50%;
+        color: white;
+        font-size: 1.25rem;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+        z-index: 100;
+        transition: all 0.2s;
+      }
+
+      .settings-btn:hover {
+        background: var(--primary-hover);
+        transform: translateY(-50%) scale(1.1);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
+      <div class="layout-container">
+        <!-- Navbar -->
+        <nav class="layout-navbar navbar navbar-expand-xl align-items-center" id="layout-navbar">
+          <div class="container-xxl d-flex align-items-center justify-content-between w-100">
+            <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
+              <a href="index.html" class="app-brand-link gap-2">
+                <span class="app-brand-logo demo">
+                  <svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+                        <stop stop-color="#5A8DEE" offset="0%"></stop>
+                        <stop stop-color="#699AF9" offset="100%"></stop>
+                      </linearGradient>
+                      <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-2">
+                        <stop stop-color="#FDAC41" offset="0%"></stop>
+                        <stop stop-color="#E38100" offset="100%"></stop>
+                      </linearGradient>
+                    </defs>
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <path d="M13.8863636,4.72727273 C18.9447899,4.72727273 23.0454545,8.82793741 23.0454545,13.8863636 C23.0454545,18.9447899 18.9447899,23.0454545 13.8863636,23.0454545 C8.82793741,23.0454545 4.72727273,18.9447899 4.72727273,13.8863636 C4.72727273,13.5423509 4.74623858,13.2027679 4.78318172,12.8686032 L8.54810407,12.8689442 C8.48567157,13.19852 8.45300462,13.5386269 8.45300462,13.8863636 C8.45300462,16.887125 10.8856023,19.3197227 13.8863636,19.3197227 C16.887125,19.3197227 19.3197227,16.887125 19.3197227,13.8863636 C19.3197227,10.8856023 16.887125,8.45300462 13.8863636,8.45300462 C13.5386269,8.45300462 13.19852,8.48567157 12.8689442,8.54810407 L12.8686032,4.78318172 C13.2027679,4.74623858 13.5423509,4.72727273 13.8863636,4.72727273 Z" fill="#4880EA"></path>
+                      <path d="M13.5909091,1.77272727 C20.4442608,1.77272727 26,7.19618701 26,13.8863636 C26,20.5765403 20.4442608,26 13.5909091,26 C6.73755742,26 1.18181818,20.5765403 1.18181818,13.8863636 C1.18181818,13.540626 1.19665566,13.1982714 1.22574292,12.8598734 L6.30410592,12.859962 C6.25499466,13.1951893 6.22958398,13.5378796 6.22958398,13.8863636 C6.22958398,17.8551125 9.52536149,21.0724191 13.5909091,21.0724191 C17.6564567,21.0724191 20.9522342,17.8551125 20.9522342,13.8863636 C20.9522342,9.91761479 17.6564567,6.70030817 13.5909091,6.70030817 C13.2336969,6.70030817 12.8824272,6.72514561 12.5388136,6.77314791 L12.5392575,1.81561642 C12.8859498,1.78721495 13.2366963,1.77272727 13.5909091,1.77272727 Z" fill="url(#linearGradient-1)"></path>
+                      <rect fill="url(#linearGradient-2)" x="0" y="0" width="7.68181818" height="7.68181818"></rect>
+                    </g>
+                  </svg>
+                </span>
+                <span class="app-brand-text demo menu-text fw-bold">Frest</span>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center">
+              <ul class="navbar-nav flex-row align-items-center ms-auto list-unstyled mb-0 d-flex gap-2">
+                <li class="nav-item">
+                  <a class="nav-link" href="javascript:void(0);">
+                    <i class="bx bx-globe bx-sm"></i>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="javascript:void(0);">
+                    <i class="bx bx-search-alt bx-sm"></i>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="javascript:void(0);">
+                    <i class="bx bx-sun bx-sm"></i>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="javascript:void(0);">
+                    <i class="bx bx-grid-alt bx-sm"></i>
+                  </a>
+                </li>
+                <li class="nav-item position-relative">
+                  <a class="nav-link" href="javascript:void(0);">
+                    <i class="bx bx-bell bx-sm"></i>
+                    <span class="badge bg-danger rounded-pill badge-notifications">5</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="javascript:void(0);">
+                    <div class="avatar avatar-online">
+                      <img src="https://ui-avatars.com/api/?name=John+Doe&background=5A8DEE&color=fff" alt="User" />
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Menu -->
+        <aside class="layout-menu-horizontal menu-horizontal menu">
+          <div class="container-xxl d-flex h-100">
+            <ul class="menu-inner">
+              <li class="menu-item">
+                <a href="javascript:void(0)" class="menu-link">
+                  <i class="bx bx-home-circle"></i>
+                  <div>Dashboards</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="javascript:void(0)" class="menu-link">
+                  <i class="bx bx-layout"></i>
+                  <div>Layouts</div>
+                </a>
+              </li>
+              <li class="menu-item active">
+                <a href="javascript:void(0)" class="menu-link">
+                  <i class="bx bx-customize"></i>
+                  <div>Apps</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="javascript:void(0)" class="menu-link">
+                  <i class="bx bx-collection"></i>
+                  <div>Pages</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="javascript:void(0)" class="menu-link">
+                  <i class="bx bx-code-block"></i>
+                  <div>Components</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="javascript:void(0)" class="menu-link">
+                  <i class="bx bx-book-content"></i>
+                  <div>Forms</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="javascript:void(0)" class="menu-link">
+                  <i class="bx bx-grid-alt"></i>
+                  <div>Tables</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="javascript:void(0)" class="menu-link">
+                  <i class="bx bx-bar-chart-square"></i>
+                  <div>Charts & Maps</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="javascript:void(0)" class="menu-link">
+                  <i class="bx bx-shape-circle"></i>
+                  <div>Misc</div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </aside>
+
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <div class="card app-calendar-wrapper">
+            <div class="row g-0">
+              <!-- Calendar Sidebar -->
+              <div class="col app-calendar-sidebar" id="app-calendar-sidebar">
+                <div class="border-bottom p-4 my-sm-0 mb-3">
+                  <div class="d-grid">
+                    <button class="btn btn-primary btn-toggle-sidebar" data-bs-toggle="offcanvas" data-bs-target="#addEventSidebar">
+                      <i class="bx bx-plus me-1"></i>
+                      <span class="align-middle">Add Event</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="p-4">
+                  <!-- Mini Calendar -->
+                  <div class="ms-n2">
+                    <div class="inline-calendar"></div>
+                  </div>
+
+                  <hr class="my-4" />
+
+                  <!-- Filter -->
+                  <div class="mb-4">
+                    <small class="text-small text-muted text-uppercase align-middle">Filter</small>
+                  </div>
+
+                  <div class="form-check mb-2">
+                    <input class="form-check-input select-all" type="checkbox" id="selectAll" data-value="all" checked />
+                    <label class="form-check-label" for="selectAll">View All</label>
+                  </div>
+
+                  <div class="app-calendar-events-filter">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input input-filter" type="checkbox" id="select-personal" data-value="personal" checked />
+                      <label class="form-check-label" for="select-personal">Personal</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input class="form-check-input input-filter" type="checkbox" id="select-business" data-value="business" checked />
+                      <label class="form-check-label" for="select-business">Business</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input class="form-check-input input-filter" type="checkbox" id="select-family" data-value="family" checked />
+                      <label class="form-check-label" for="select-family">Family</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input class="form-check-input input-filter" type="checkbox" id="select-holiday" data-value="holiday" checked />
+                      <label class="form-check-label" for="select-holiday">Holiday</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input input-filter" type="checkbox" id="select-etc" data-value="etc" checked />
+                      <label class="form-check-label" for="select-etc">ETC</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Calendar Content -->
+              <div class="col app-calendar-content">
+                <div class="card shadow-none border-0">
+                  <div class="card-body pb-0">
+                    <div id="calendar"></div>
+                  </div>
+                </div>
+
+                <!-- Add Event Offcanvas -->
+                <div class="offcanvas offcanvas-end event-sidebar" tabindex="-1" id="addEventSidebar" aria-labelledby="addEventSidebarLabel">
+                  <div class="offcanvas-header border-bottom">
+                    <h6 class="offcanvas-title" id="addEventSidebarLabel">Add Event</h6>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  </div>
+                  <div class="offcanvas-body">
+                    <form class="event-form pt-0" id="eventForm">
+                      <div class="mb-3">
+                        <label class="form-label" for="eventTitle">Title</label>
+                        <input type="text" class="form-control" id="eventTitle" name="eventTitle" placeholder="Event Title" required />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label" for="eventLabel">Label</label>
+                        <select class="form-select" id="eventLabel" name="eventLabel">
+                          <option value="business" selected>Business</option>
+                          <option value="personal">Personal</option>
+                          <option value="family">Family</option>
+                          <option value="holiday">Holiday</option>
+                          <option value="etc">ETC</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label" for="eventStartDate">Start Date</label>
+                        <input type="text" class="form-control" id="eventStartDate" name="eventStartDate" placeholder="Start Date" required />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label" for="eventEndDate">End Date</label>
+                        <input type="text" class="form-control" id="eventEndDate" name="eventEndDate" placeholder="End Date" required />
+                      </div>
+                      <div class="mb-3">
+                        <label class="switch">
+                          <input type="checkbox" class="switch-input allDay-switch" id="allDay" />
+                          <span class="switch-toggle-slider">
+                            <span class="switch-on"></span>
+                            <span class="switch-off"></span>
+                          </span>
+                          <span class="switch-label">All Day</span>
+                        </label>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label" for="eventLocation">Location</label>
+                        <input type="text" class="form-control" id="eventLocation" name="eventLocation" placeholder="Enter Location" />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label" for="eventDescription">Description</label>
+                        <textarea class="form-control" name="eventDescription" id="eventDescription" rows="3"></textarea>
+                      </div>
+                      <div class="mb-3 d-flex justify-content-sm-between justify-content-start my-4">
+                        <div>
+                          <button type="submit" class="btn btn-primary btn-add-event me-sm-3 me-1">Add</button>
+                          <button type="button" class="btn btn-label-secondary btn-cancel me-sm-0 me-1" data-bs-dismiss="offcanvas">Cancel</button>
+                        </div>
+                        <div><button type="button" class="btn btn-label-danger btn-delete-event d-none">Delete</button></div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="content-footer footer">
+          <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+            <div class="mb-2 mb-md-0">
+              © <script>document.write(new Date().getFullYear());</script>, made with ❤️ by
+              <a href="https://pixinvent.com" target="_blank" class="footer-link fw-medium">Pixinvent</a>
+            </div>
+            <div class="d-none d-lg-inline-block">
+              <a href="https://themeforest.net/licenses/standard" class="footer-link me-4" target="_blank">License</a>
+              <a href="https://1.envato.market/pixinvent_portfolio" target="_blank" class="footer-link me-4">More Themes</a>
+              <a href="https://demos.pixinvent.com/frest-html-admin-template/documentation/" target="_blank" class="footer-link me-4">Documentation</a>
+              <a href="https://pixinvent.ticksy.com/" target="_blank" class="footer-link d-none d-sm-inline-block">Support</a>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <!-- Settings Button -->
+    <button class="settings-btn" title="Settings">
+      <i class="bx bx-cog"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+
+    <script>
+      // Event Storage
+      let events = JSON.parse(localStorage.getItem('calendarEvents')) || [];
+      let currentEditingEvent = null;
+
+      // Color mapping for event types
+      const eventColors = {
+        business: { class: 'fc-event-primary', color: '#5A8DEE' },
+        personal: { class: 'fc-event-danger', color: '#FF5B5C' },
+        family: { class: 'fc-event-warning', color: '#FF9F43' },
+        holiday: { class: 'fc-event-success', color: '#28C76F' },
+        etc: { class: 'fc-event-info', color: '#00CFE8' }
+      };
+
+      // Initialize Mini Calendar
+      flatpickr('.inline-calendar', {
+        inline: true,
+        onChange: function(selectedDates, dateStr, instance) {
+          calendar.gotoDate(selectedDates[0]);
+        }
+      });
+
+      // Initialize Date Pickers
+      flatpickr('#eventStartDate', {
+        enableTime: true,
+        dateFormat: 'Y-m-d H:i',
+        defaultDate: new Date()
+      });
+
+      flatpickr('#eventEndDate', {
+        enableTime: true,
+        dateFormat: 'Y-m-d H:i',
+        defaultDate: new Date()
+      });
+
+      // Initialize FullCalendar
+      const calendarEl = document.getElementById('calendar');
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        },
+        events: events.map(event => ({
+          id: event.id,
+          title: event.title,
+          start: event.start,
+          end: event.end,
+          allDay: event.allDay,
+          backgroundColor: eventColors[event.label].color,
+          borderColor: eventColors[event.label].color,
+          extendedProps: {
+            label: event.label,
+            location: event.location,
+            description: event.description
+          }
+        })),
+        eventClick: function(info) {
+          currentEditingEvent = info.event;
+          loadEventToForm(info.event);
+          const offcanvas = new bootstrap.Offcanvas(document.getElementById('addEventSidebar'));
+          offcanvas.show();
+          document.getElementById('addEventSidebarLabel').textContent = 'Edit Event';
+          document.querySelector('.btn-add-event').textContent = 'Update';
+          document.querySelector('.btn-delete-event').classList.remove('d-none');
+        },
+        dateClick: function(info) {
+          currentEditingEvent = null;
+          resetForm();
+          document.getElementById('eventStartDate').value = moment(info.dateStr).format('YYYY-MM-DD HH:mm');
+          document.getElementById('eventEndDate').value = moment(info.dateStr).add(1, 'hour').format('YYYY-MM-DD HH:mm');
+          const offcanvas = new bootstrap.Offcanvas(document.getElementById('addEventSidebar'));
+          offcanvas.show();
+          document.getElementById('addEventSidebarLabel').textContent = 'Add Event';
+          document.querySelector('.btn-add-event').textContent = 'Add';
+          document.querySelector('.btn-delete-event').classList.add('d-none');
+        },
+        eventDisplay: 'block',
+        height: 'auto'
+      });
+
+      calendar.render();
+
+      // Load event to form
+      function loadEventToForm(event) {
+        const extendedProps = event.extendedProps;
+        document.getElementById('eventTitle').value = event.title;
+        document.getElementById('eventLabel').value = extendedProps.label || 'business';
+        document.getElementById('eventStartDate').value = moment(event.start).format('YYYY-MM-DD HH:mm');
+        document.getElementById('eventEndDate').value = event.end ? moment(event.end).format('YYYY-MM-DD HH:mm') : '';
+        document.getElementById('allDay').checked = event.allDay;
+        document.getElementById('eventLocation').value = extendedProps.location || '';
+        document.getElementById('eventDescription').value = extendedProps.description || '';
+      }
+
+      // Reset form
+      function resetForm() {
+        document.getElementById('eventForm').reset();
+        document.getElementById('eventLabel').value = 'business';
+        document.getElementById('allDay').checked = false;
+      }
+
+      // Save events to localStorage
+      function saveEvents() {
+        localStorage.setItem('calendarEvents', JSON.stringify(events));
+        calendar.removeAllEvents();
+        calendar.addEventSource(events.map(event => ({
+          id: event.id,
+          title: event.title,
+          start: event.start,
+          end: event.end,
+          allDay: event.allDay,
+          backgroundColor: eventColors[event.label].color,
+          borderColor: eventColors[event.label].color,
+          extendedProps: {
+            label: event.label,
+            location: event.location,
+            description: event.description
+          }
+        })));
+      }
+
+      // Event Form Submit
+      document.getElementById('eventForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const title = document.getElementById('eventTitle').value;
+        const label = document.getElementById('eventLabel').value;
+        const start = document.getElementById('eventStartDate').value;
+        const end = document.getElementById('eventEndDate').value;
+        const allDay = document.getElementById('allDay').checked;
+        const location = document.getElementById('eventLocation').value;
+        const description = document.getElementById('eventDescription').value;
+
+        const eventData = {
+          id: currentEditingEvent ? currentEditingEvent.id : Date.now().toString(),
+          title: title,
+          label: label,
+          start: start,
+          end: end,
+          allDay: allDay,
+          location: location,
+          description: description
+        };
+
+        if (currentEditingEvent) {
+          // Update existing event
+          const index = events.findIndex(e => e.id === currentEditingEvent.id);
+          if (index !== -1) {
+            events[index] = eventData;
+          }
+        } else {
+          // Add new event
+          events.push(eventData);
+        }
+
+        saveEvents();
+        bootstrap.Offcanvas.getInstance(document.getElementById('addEventSidebar')).hide();
+        resetForm();
+        currentEditingEvent = null;
+      });
+
+      // Delete Event
+      document.querySelector('.btn-delete-event').addEventListener('click', function() {
+        if (currentEditingEvent && confirm('Are you sure you want to delete this event?')) {
+          events = events.filter(e => e.id !== currentEditingEvent.id);
+          saveEvents();
+          bootstrap.Offcanvas.getInstance(document.getElementById('addEventSidebar')).hide();
+          resetForm();
+          currentEditingEvent = null;
+        }
+      });
+
+      // Filter Events
+      const filterCheckboxes = document.querySelectorAll('.input-filter, .select-all');
+      filterCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          const selectedFilters = Array.from(document.querySelectorAll('.input-filter:checked')).map(cb => cb.dataset.value);
+          const viewAll = document.getElementById('selectAll').checked;
+
+          if (viewAll) {
+            calendar.removeAllEvents();
+            calendar.addEventSource(events.map(event => ({
+              id: event.id,
+              title: event.title,
+              start: event.start,
+              end: event.end,
+              allDay: event.allDay,
+              backgroundColor: eventColors[event.label].color,
+              borderColor: eventColors[event.label].color,
+              extendedProps: {
+                label: event.label,
+                location: event.location,
+                description: event.description
+              }
+            })));
+          } else {
+            const filteredEvents = events.filter(event => selectedFilters.includes(event.label));
+            calendar.removeAllEvents();
+            calendar.addEventSource(filteredEvents.map(event => ({
+              id: event.id,
+              title: event.title,
+              start: event.start,
+              end: event.end,
+              allDay: event.allDay,
+              backgroundColor: eventColors[event.label].color,
+              borderColor: eventColors[event.label].color,
+              extendedProps: {
+                label: event.label,
+                location: event.location,
+                description: event.description
+              }
+            })));
+          }
+        });
+      });
+
+      // Select All functionality
+      document.getElementById('selectAll').addEventListener('change', function() {
+        const isChecked = this.checked;
+        document.querySelectorAll('.input-filter').forEach(checkbox => {
+          checkbox.checked = isChecked;
+        });
+        // Trigger filter update
+        document.querySelector('.input-filter').dispatchEvent(new Event('change'));
+      });
+
+      // All Day Toggle
+      document.getElementById('allDay').addEventListener('change', function() {
+        if (this.checked) {
+          flatpickr('#eventStartDate', {
+            enableTime: false,
+            dateFormat: 'Y-m-d',
+            defaultDate: document.getElementById('eventStartDate').value
+          });
+          flatpickr('#eventEndDate', {
+            enableTime: false,
+            dateFormat: 'Y-m-d',
+            defaultDate: document.getElementById('eventEndDate').value
+          });
+        } else {
+          flatpickr('#eventStartDate', {
+            enableTime: true,
+            dateFormat: 'Y-m-d H:i',
+            defaultDate: document.getElementById('eventStartDate').value
+          });
+          flatpickr('#eventEndDate', {
+            enableTime: true,
+            dateFormat: 'Y-m-d H:i',
+            defaultDate: document.getElementById('eventEndDate').value
+          });
+        }
+      });
+
+      // Close offcanvas and reset form
+      document.getElementById('addEventSidebar').addEventListener('hidden.bs.offcanvas', function() {
+        resetForm();
+        currentEditingEvent = null;
+        document.getElementById('addEventSidebarLabel').textContent = 'Add Event';
+        document.querySelector('.btn-add-event').textContent = 'Add';
+        document.querySelector('.btn-delete-event').classList.add('d-none');
+      });
+    </script>
+  </body>
+</html>
