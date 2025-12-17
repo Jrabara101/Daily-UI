@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Visual Recipe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f8f5f2;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        .editable {
+            border: 1px dashed transparent;
+            transition: all 0.3s;
+            cursor: text;
+        }
+        .editable:hover, .editable:focus {
+            border-color: #cbd5e1;
+            background-color: rgba(255, 255, 255, 0.5);
+            outline: none;
+        }
+        .check-item input:checked + span {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+        .recipe-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .recipe-card:hover {
+            transform: translateY(-4px);
+        }
+        /* Print styles */
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: white; }
+            .editable { border: none !important; }
+            .recipe-card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Navbar / Controls -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur shadow-sm no-print">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2 text-amber-600">
+                <i class="fa-solid fa-utensils"></i>
+                <span class="font-bold text-lg">RecipeBuilder</span>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Print / Save PDF
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        
+        <!-- Header Section -->
+        <header class="text-center mb-10">
+            <div class="inline-block relative group">
+                <h1 contenteditable="true" class="editable text-5xl md:text-6xl font-bold text-slate-900 mb-4 px-2 rounded">
+                    Sandwich Recipe Collection
+                </h1>
+                <p class="text-xs text-slate-400 absolute -right-20 top-0 opacity-0 group-hover:opacity-100 transition no-print"><i class="fa-solid fa-pen"></i> Edit Me</p>
+            </div>
+            <p contenteditable="true" class="editable text-xl text-slate-600 italic max-w-2xl mx-auto px-2 rounded">
+                Discover delicious sandwich recipes perfect for any meal. Click here to edit this description!
+            </p>
+        </header>
+
+        <!-- Recipe Cards Grid -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold mb-8 flex items-center gap-3 text-amber-700 border-b pb-4">
+                <i class="fa-solid fa-book"></i> Recipes
+            </h2>
+
+            <div id="recipes-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Recipe cards will be generated dynamically from JavaScript -->
+            </div>
+        </div>
+
+        <footer class="mt-20 pt-10 border-t border-slate-200 text-center text-slate-400 text-sm no-print">
+            <p>Created with Gemini</p>
+        </footer>
+
+    </main>
+
+    <script>
+        // Recipe cards data
+        const recipes = [
+            {
+                image: '1.png',
+                title: 'HAMBURGER',
+                description: 'Classic beef burgers, 15 min cook time',
+                calories: 650,
+                protein: '31g',
+                fat: '27g',
+                carbs: '42g',
+                ingredients: [
+                    '1 pound ground lean beef',
+                    '1/2 cup minced onion',
+                    '1/4 cup fine dried bread crumbs',
+                    '1/2 teaspoon salt',
+                    '1/4 teaspoon pepper',
+                    '1 hamburger bun',
+                    '1/4 cup mayonnaise',
+                    '1/4 cup ketchup',
+                    '1 iceberg lettuce leaves',
+                    '1 firm-ripe tomato'
+                ]
+            },
+            {
+                image: '2.png',
+                title: 'CHEESEBURGER',
+                description: 'Classic beef burgers, 15 min cook time',
+                calories: 650,
+                protein: '31g',
+                fat: '27g',
+                carbs: '42g',
+                ingredients: [
+                    '1 pound ground lean beef',
+                    '1/2 cup minced onion',
+                    '1/4 cup fine dried bread crumbs',
+                    '1/2 teaspoon salt',
+                    '4 hamburger buns',
+                    '4 slices cheddar cheese',
+                    '1/4 cup mayonnaise',
+                    '1/4 cup ketchup',
+                    '4 iceberg lettuce leaves',
+                    '4 firm-ripe tomato slices'
+                ]
+            },
+            {
+                image: '3.png',
+                title: 'GRILLED BURGER SANDWICH',
+                description: 'Grilled beef patty, toasted bread, melted cheese. 20 min cook time',
+                calories: 710,
+                protein: '35g',
+                fat: '32g',
+                carbs: '48g',
+                ingredients: [
+                    '1 pound ground beef',
+                    '1/2 cup minced onion',
+                    '1/2 teaspoon salt',
+                    '1/4 teaspoon pepper',
+                    '4 slices sourdough bread',
+                    '4 slices cheddar cheese',
+                    '1/4 cup mayonnaise',
+                    '4 lettuce leaves',
+                    '4 tomato slices'
+                ]
+            },
+            {
+                image: '4.png',
+                title: 'CRISPY CHICKEN SANDWICH',
+                description: 'Breaded chicken fillet, 20 min cook time',
+                calories: 580,
+                protein: '28g',
+                fat: '24g',
+                carbs: '55g',
+                ingredients: [
+                    '1 pound boneless skinless chicken breasts',
+                    '1 cup all-purpose flour',
+                    '2 eggs, beaten',
+                    '1 cup panko bread crumbs',
+                    'Oil for frying',
+                    '4 brioche buns',
+                    '4 lettuce leaves',
+                    '1/4 cup mayonnaise',
+                    '1 tsp paprika',
+                    '1/2 tsp garlic powder'
+                ]
+            },
+            {
+                image: '5.png',
+                title: 'FISH FILLET SANDWICH',
+                description: 'Crispy breaded fish, toasted bun, tartar sauce. 25 min cook time',
+                calories: 550,
+                protein: '28g',
+                fat: '22g',
+                carbs: '52g',
+                ingredients: [
+                    '4 fish fillets',
+                    '1 cup all-purpose flour',
+                    '2 eggs, beaten',
+                    '1 cup breadcrumbs',
+                    'Oil for frying',
+                    '4 brioche buns',
+                    '1/2 cup tartar sauce',
+                    '4 lettuce leaves',
+                    '4 tomato slices',
+                    'Salt, pepper, paprika'
+                ]
+            },
+            {
+                image: '6.png',
+                title: 'EGG AND BACON SANDWICH',
+                description: 'Crispy bacon, fried egg, toasted bread, cheddar. 15 min cook time',
+                calories: 620,
+                protein: '30g',
+                fat: '38g',
+                carbs: '35g',
+                ingredients: [
+                    '4 slices bacon',
+                    '4 eggs',
+                    '4 slices sourdough bread',
+                    '4 slices cheddar cheese',
+                    'Butter for toasting',
+                    'Arugula leaves',
+                    'Salt and pepper'
+                ]
+            },
+            {
+                image: '7.png',
+                title: 'HOTDOG SANDWICH',
+                description: 'Grilled beef frank, soft bun, classic toppings. 15 min cook time',
+                calories: 320,
+                protein: '12g',
+                fat: '18g',
+                carbs: '28g',
+                ingredients: [
+                    '4 beef franks',
+                    '4 hotdog buns',
+                    'Mustard',
+                    'Ketchup',
+                    'Relish',
+                    'Diced onions'
+                ]
+            }
+        ];
+
+        // Generate recipe cards
+        function generateRecipes() {
+            const container = document.getElementById('recipes-container');
+            container.innerHTML = recipes.map(recipe => `
+                <div class="recipe-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div class="relative">
+                        <img src="${recipe.image}" 
+                             alt="${recipe.title}" 
+                             class="w-full h-64 object-cover" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="hidden items-center justify-center bg-slate-100 text-slate-400 h-64">
+                            <p class="text-sm">Image ${recipe.image} not found</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-sm text-slate-500 mb-2">${recipe.description}</p>
+                        <h3 contenteditable="true" class="editable text-2xl font-bold text-orange-600 mb-4 outline-none rounded px-1">
+                            ${recipe.title}
+                        </h3>
+                        
+                        <div class="grid grid-cols-4 gap-2 mb-4 pb-4 border-b border-slate-200">
+                            <div class="text-center">
+                                <p class="text-xs text-slate-500 mb-1">CALORIES</p>
+                                <p class="text-lg font-bold text-slate-700">${recipe.calories}</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-xs text-slate-500 mb-1">PROTEIN</p>
+                                <p class="text-lg font-bold text-slate-700">${recipe.protein}</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-xs text-slate-500 mb-1">FAT</p>
+                                <p class="text-lg font-bold text-slate-700">${recipe.fat}</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-xs text-slate-500 mb-1">CARBS</p>
+                                <p class="text-lg font-bold text-slate-700">${recipe.carbs}</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h4 class="text-sm font-bold text-slate-600 mb-2 uppercase tracking-wide">Ingredients</h4>
+                            <ul class="space-y-1 text-sm text-slate-600">
+                                ${recipe.ingredients.map(ing => `
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-amber-600 mt-1">•</span>
+                                        <span contenteditable="true" class="editable flex-1 outline-none rounded px-1">${ing}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Handle contenteditable enter key behavior
+        function setupContentEditable() {
+            document.querySelectorAll('[contenteditable]').forEach(elem => {
+                elem.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        if (elem.tagName === 'H1' || elem.tagName === 'H2' || elem.tagName === 'H3') {
+                            e.preventDefault();
+                            elem.blur();
+                        }
+                    }
+                });
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            generateRecipes();
+            setupContentEditable();
+        });
+    </script>
+</body>
+</html>
