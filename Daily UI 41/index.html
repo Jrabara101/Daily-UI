@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        .gradient-progress {
+            background: conic-gradient(
+                from 0deg,
+                #14b8a6 0%,
+                #10b981 30%,
+                #eab308 60%,
+                #f97316 90%,
+                #14b8a6 100%
+            );
+        }
+        
+        .activity-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 200px;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-white">
+    
+    <!-- Main Container -->
+    <div class="max-w-md mx-auto bg-slate-900 min-h-screen">
+        
+        <!-- Header -->
+        <header class="bg-slate-800/50 backdrop-blur-sm px-6 py-4 border-b border-slate-700">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold">Workout Tracker</h1>
+                    <p class="text-sm text-slate-400">Today, July 1, 2024</p>
+                </div>
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center">
+                    <i class="fa-solid fa-user text-white text-lg"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Activity Summary Section -->
+        <section class="px-6 py-6">
+            <div class="bg-slate-800/50 rounded-3xl p-8 mb-6">
+                <!-- Circular Progress -->
+                <div class="relative w-64 h-64 mx-auto mb-6">
+                    <svg class="transform -rotate-90 w-64 h-64">
+                        <circle cx="128" cy="128" r="110" stroke="#1e293b" stroke-width="20" fill="none"/>
+                        <circle 
+                            cx="128" 
+                            cy="128" 
+                            r="110" 
+                            stroke="url(#gradient)" 
+                            stroke-width="20" 
+                            fill="none"
+                            stroke-dasharray="691"
+                            stroke-dashoffset="276"
+                            stroke-linecap="round"
+                            class="transition-all duration-1000"
+                        />
+                        <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#14b8a6;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#10b981;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#eab308;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <i class="fa-solid fa-running text-4xl text-cyan-400 mb-2"></i>
+                        <p class="text-cyan-400 text-lg font-semibold">Walk 8 min</p>
+                        <p class="text-slate-400 text-sm mt-1">42 min to goal</p>
+                    </div>
+                </div>
+                
+                <!-- Progress Indicators -->
+                <div class="flex justify-center gap-2 mb-6">
+                    <div class="w-2 h-2 rounded-full bg-cyan-500"></div>
+                    <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
+                    <div class="w-2 h-2 rounded-full bg-orange-500"></div>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="space-y-3 mb-6">
+                <h2 class="text-lg font-semibold mb-4 text-slate-300">Recent Activities</h2>
+                
+                <div class="activity-card bg-slate-800/50 rounded-2xl p-4 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+                        <i class="fa-solid fa-bicycle text-blue-400 text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-semibold">17 min Biking</p>
+                        <p class="text-sm text-slate-400">Yemlur • 8:10 AM</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-slate-500"></i>
+                </div>
+
+                <div class="activity-card bg-slate-800/50 rounded-2xl p-4 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
+                        <i class="fa-solid fa-person-walking text-green-400 text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-semibold">5 min Walking</p>
+                        <p class="text-sm text-slate-400">Domlur • 7:55 AM</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-slate-500"></i>
+                </div>
+
+                <div class="activity-card bg-slate-800/50 rounded-2xl p-4 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+                        <i class="fa-solid fa-chart-line text-purple-400 text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-semibold">See graph details</p>
+                        <p class="text-sm text-slate-400">View detailed analytics</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-slate-500"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Steps & Historical Data Section -->
+        <section class="px-6 py-6 bg-slate-800/30">
+            <div class="bg-slate-800/50 rounded-3xl p-6 mb-6">
+                <div class="text-center mb-6">
+                    <i class="fa-solid fa-running text-4xl text-cyan-400 mb-4"></i>
+                    <p class="text-5xl font-bold mb-2">3,698</p>
+                    <p class="text-lg text-slate-300 mb-1">Steps Yesterday</p>
+                    <p class="text-yellow-400 text-sm">Friday, 01 July 2024</p>
+                </div>
+
+                <!-- Chart -->
+                <div class="chart-container mb-6">
+                    <canvas id="activityChart"></canvas>
+                </div>
+
+                <div class="bg-slate-700/50 rounded-2xl p-4 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center">
+                        <i class="fa-solid fa-running text-cyan-400 text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-semibold">Walk 8 min</p>
+                        <p class="text-sm text-slate-400">Place in Ulsoor</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workout Stats Grid -->
+        <section class="px-6 py-6">
+            <h2 class="text-lg font-semibold mb-4 text-slate-300">Today's Stats</h2>
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div class="bg-gradient-to-br from-cyan-500/20 to-teal-500/20 rounded-2xl p-5 border border-cyan-500/30">
+                    <i class="fa-solid fa-fire text-cyan-400 text-2xl mb-2"></i>
+                    <p class="text-3xl font-bold mb-1">1,240</p>
+                    <p class="text-sm text-slate-400">Calories</p>
+                </div>
+                <div class="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-2xl p-5 border border-green-500/30">
+                    <i class="fa-solid fa-heart-pulse text-green-400 text-2xl mb-2"></i>
+                    <p class="text-3xl font-bold mb-1">142</p>
+                    <p class="text-sm text-slate-400">BPM Avg</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-5 border border-purple-500/30">
+                    <i class="fa-solid fa-dumbbell text-purple-400 text-2xl mb-2"></i>
+                    <p class="text-3xl font-bold mb-1">45</p>
+                    <p class="text-sm text-slate-400">Minutes</p>
+                </div>
+                <div class="bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-2xl p-5 border border-orange-500/30">
+                    <i class="fa-solid fa-trophy text-orange-400 text-2xl mb-2"></i>
+                    <p class="text-3xl font-bold mb-1">8</p>
+                    <p class="text-sm text-slate-400">Workouts</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="px-6 py-6 pb-20">
+            <h2 class="text-lg font-semibold mb-4 text-slate-300">Quick Start</h2>
+            <div class="grid grid-cols-3 gap-3">
+                <button class="bg-gradient-to-br from-cyan-500 to-teal-500 rounded-2xl p-6 flex flex-col items-center gap-2 hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-running text-2xl"></i>
+                    <span class="text-sm font-medium">Run</span>
+                </button>
+                <button class="bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl p-6 flex flex-col items-center gap-2 hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-bicycle text-2xl"></i>
+                    <span class="text-sm font-medium">Cycle</span>
+                </button>
+                <button class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl p-6 flex flex-col items-center gap-2 hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-dumbbell text-2xl"></i>
+                    <span class="text-sm font-medium">Gym</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-slate-800/90 backdrop-blur-sm border-t border-slate-700 px-6 py-4">
+            <div class="flex justify-around items-center">
+                <button class="flex flex-col items-center gap-1 text-cyan-400">
+                    <i class="fa-solid fa-home text-xl"></i>
+                    <span class="text-xs">Home</span>
+                </button>
+                <button class="flex flex-col items-center gap-1 text-slate-400 hover:text-cyan-400 transition-colors">
+                    <i class="fa-solid fa-chart-line text-xl"></i>
+                    <span class="text-xs">Stats</span>
+                </button>
+                <button class="flex flex-col items-center gap-1 text-slate-400 hover:text-cyan-400 transition-colors">
+                    <i class="fa-solid fa-plus-circle text-2xl"></i>
+                </button>
+                <button class="flex flex-col items-center gap-1 text-slate-400 hover:text-cyan-400 transition-colors">
+                    <i class="fa-solid fa-calendar text-xl"></i>
+                    <span class="text-xs">Calendar</span>
+                </button>
+                <button class="flex flex-col items-center gap-1 text-slate-400 hover:text-cyan-400 transition-colors">
+                    <i class="fa-solid fa-user text-xl"></i>
+                    <span class="text-xs">Profile</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        // Initialize Activity Chart
+        const ctx = document.getElementById('activityChart').getContext('2d');
+        
+        const gradient = ctx.createLinearGradient(0, 0, 0, 200);
+        gradient.addColorStop(0, 'rgba(20, 184, 166, 0.8)');
+        gradient.addColorStop(0.5, 'rgba(16, 185, 129, 0.6)');
+        gradient.addColorStop(1, 'rgba(234, 179, 8, 0.4)');
+
+        const activityChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Activity',
+                    data: [3200, 2800, 3500, 4200, 3800, 3698],
+                    borderColor: gradient,
+                    backgroundColor: gradient,
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#14b8a6',
+                    pointBorderWidth: 2,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                        titleColor: '#ffffff',
+                        bodyColor: '#e2e8f0',
+                        borderColor: '#14b8a6',
+                        borderWidth: 1,
+                        padding: 12,
+                        displayColors: false,
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#94a3b8',
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: 'rgba(148, 163, 184, 0.1)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#94a3b8',
+                            font: {
+                                size: 10
+                            },
+                            maxTicksLimit: 5
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            }
+        });
+
+        // Add highlight point on chart
+        const chartData = activityChart.data.datasets[0].data;
+        const highlightIndex = 3; // May
+        
+        // Add a highlighted point
+        activityChart.data.datasets[0].pointRadius = chartData.map((_, index) => 
+            index === highlightIndex ? 6 : 0
+        );
+        activityChart.data.datasets[0].pointBackgroundColor = chartData.map((_, index) => 
+            index === highlightIndex ? '#ffffff' : 'transparent'
+        );
+        activityChart.data.datasets[0].pointBorderColor = chartData.map((_, index) => 
+            index === highlightIndex ? '#64748b' : 'transparent'
+        );
+        activityChart.data.datasets[0].pointBorderWidth = chartData.map((_, index) => 
+            index === highlightIndex ? 3 : 0
+        );
+        activityChart.update();
+
+        // Add interactive hover effects
+        document.querySelectorAll('.activity-card, button').forEach(element => {
+            element.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Animate progress circle on load
+        window.addEventListener('load', () => {
+            const progressCircle = document.querySelector('circle[stroke="url(#gradient)"]');
+            if (progressCircle) {
+                progressCircle.style.transition = 'stroke-dashoffset 2s ease-out';
+            }
+        });
+    </script>
+</body>
+</html>
