@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List - macOS</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="macos-container">
+        <!-- macOS Window -->
+        <div class="macos-window">
+            <!-- Title Bar -->
+            <div class="title-bar">
+                <div class="traffic-lights">
+                    <div class="traffic-light close"></div>
+                    <div class="traffic-light minimize"></div>
+                    <div class="traffic-light maximize"></div>
+                </div>
+                <div class="title-bar-title">Todo List</div>
+            </div>
+
+            <!-- Window Content -->
+            <div class="window-content">
+                <!-- Header -->
+                <div class="header">
+                    <h1 class="app-title">My Tasks</h1>
+                    <div class="stats">
+                        <span class="stat-item">
+                            <span id="total-count">0</span> total
+                        </span>
+                        <span class="stat-item">
+                            <span id="active-count">0</span> active
+                        </span>
+                        <span class="stat-item">
+                            <span id="completed-count">0</span> completed
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Add Todo Form -->
+                <div class="add-todo-container">
+                    <form id="todo-form" class="add-todo-form">
+                        <input 
+                            type="text" 
+                            id="todo-input" 
+                            class="todo-input" 
+                            placeholder="Add a new task..."
+                            autocomplete="off"
+                        >
+                        <button type="submit" class="add-button">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Filter Tabs -->
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">All</button>
+                    <button class="filter-tab" data-filter="active">Active</button>
+                    <button class="filter-tab" data-filter="completed">Completed</button>
+                </div>
+
+                <!-- Todo List -->
+                <div class="todo-list-container">
+                    <ul id="todo-list" class="todo-list">
+                        <!-- Todos will be dynamically added here -->
+                    </ul>
+                    <div id="empty-state" class="empty-state">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M32 8L36 24H48L40 32L44 48L32 40L20 48L24 32L16 24H28L32 8Z" fill="#D1D5DB" opacity="0.5"/>
+                        </svg>
+                        <p class="empty-state-text">No tasks yet. Add one above!</p>
+                    </div>
+                </div>
+
+                <!-- Footer Actions -->
+                <div class="footer-actions">
+                    <button id="clear-completed" class="footer-button">
+                        Clear Completed
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
