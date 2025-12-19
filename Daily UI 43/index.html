@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="menu-container">
+        <!-- Header -->
+        <header class="menu-header">
+            <div class="header-content">
+                <h1 class="restaurant-name">Bella Vista</h1>
+                <p class="restaurant-tagline">Fine Dining Experience</p>
+                <div class="header-divider"></div>
+                <p class="restaurant-description">Savor the finest flavors crafted with passion and tradition</p>
+            </div>
+        </header>
+
+        <!-- Navigation/Categories -->
+        <nav class="menu-nav">
+            <button class="nav-btn active" data-category="all">All</button>
+            <button class="nav-btn" data-category="appetizers">Appetizers</button>
+            <button class="nav-btn" data-category="mains">Main Courses</button>
+            <button class="nav-btn" data-category="desserts">Desserts</button>
+            <button class="nav-btn" data-category="beverages">Beverages</button>
+        </nav>
+
+        <!-- Menu Content -->
+        <main class="menu-content">
+            <!-- Appetizers Section -->
+            <section class="menu-section" data-category="appetizers">
+                <h2 class="section-title">Appetizers</h2>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/Bruschetta Trio.jpg" alt="Bruschetta Trio">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Bruschetta Trio</h3>
+                                <span class="menu-item-price">$12</span>
+                            </div>
+                            <p class="menu-item-description">Fresh tomatoes, basil, and mozzarella on toasted artisan bread with balsamic glaze</p>
+                            <div class="menu-item-tags">
+                                <span class="tag vegetarian">Vegetarian</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/Crispy Calamari.jpg" alt="Crispy Calamari">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Crispy Calamari</h3>
+                                <span class="menu-item-price">$16</span>
+                            </div>
+                            <p class="menu-item-description">Golden fried squid rings served with marinara sauce and lemon aioli</p>
+                            <div class="menu-item-tags">
+                                <span class="tag seafood">Seafood</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/Caprese Salad.jpg" alt="Caprese Salad">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Caprese Salad</h3>
+                                <span class="menu-item-price">$14</span>
+                            </div>
+                            <p class="menu-item-description">Fresh mozzarella, ripe tomatoes, and basil drizzled with extra virgin olive oil</p>
+                            <div class="menu-item-tags">
+                                <span class="tag vegetarian">Vegetarian</span>
+                                <span class="tag gluten-free">Gluten Free</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/Stuffed Mushrooms.jpg" alt="Stuffed Mushrooms">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Stuffed Mushrooms</h3>
+                                <span class="menu-item-price">$13</span>
+                            </div>
+                            <p class="menu-item-description">Portobello mushrooms filled with herbed cream cheese and parmesan, baked to perfection</p>
+                            <div class="menu-item-tags">
+                                <span class="tag vegetarian">Vegetarian</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Courses Section -->
+            <section class="menu-section" data-category="mains">
+                <h2 class="section-title">Main Courses</h2>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/Grilled Salmon.jpg" alt="Grilled Salmon">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Grilled Salmon</h3>
+                                <span class="menu-item-price">$28</span>
+                            </div>
+                            <p class="menu-item-description">Atlantic salmon with lemon butter sauce, roasted vegetables, and quinoa pilaf</p>
+                            <div class="menu-item-tags">
+                                <span class="tag seafood">Seafood</span>
+                                <span class="tag gluten-free">Gluten Free</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/Ribeye Steak.jpg" alt="Ribeye Steak">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Ribeye Steak</h3>
+                                <span class="menu-item-price">$35</span>
+                            </div>
+                            <p class="menu-item-description">12oz prime ribeye, cooked to perfection, served with garlic mashed potatoes and seasonal vegetables</p>
+                            <div class="menu-item-tags">
+                                <span class="tag popular">Chef's Choice</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/Chicken Parmesan.jpg" alt="Chicken Parmesan">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Chicken Parmesan</h3>
+                                <span class="menu-item-price">$24</span>
+                            </div>
+                            <p class="menu-item-description">Breaded chicken breast topped with marinara sauce and melted mozzarella, served over pasta</p>
+                            <div class="menu-item-tags">
+                                <span class="tag popular">Popular</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/Vegetarian Risotto.jpg" alt="Vegetarian Risotto">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Vegetarian Risotto</h3>
+                                <span class="menu-item-price">$22</span>
+                            </div>
+                            <p class="menu-item-description">Creamy arborio rice with seasonal vegetables, parmesan, and white wine</p>
+                            <div class="menu-item-tags">
+                                <span class="tag vegetarian">Vegetarian</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/Lobster Pasta.jpg" alt="Lobster Pasta">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Lobster Pasta</h3>
+                                <span class="menu-item-price">$38</span>
+                            </div>
+                            <p class="menu-item-description">Fresh lobster tail with linguine in a creamy white wine sauce</p>
+                            <div class="menu-item-tags">
+                                <span class="tag seafood">Seafood</span>
+                                <span class="tag popular">Chef's Choice</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/BBQ Pulled Pork.jpg" alt="BBQ Pulled Pork">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">BBQ Pulled Pork</h3>
+                                <span class="menu-item-price">$26</span>
+                            </div>
+                            <p class="menu-item-description">Slow-cooked pork shoulder with house-made BBQ sauce, coleslaw, and cornbread</p>
+                            <div class="menu-item-tags">
+                                <span class="tag popular">Popular</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desserts Section -->
+            <section class="menu-section" data-category="desserts">
+                <h2 class="section-title">Desserts</h2>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/Chocolate Lava Cake.jpg" alt="Chocolate Lava Cake">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Chocolate Lava Cake</h3>
+                                <span class="menu-item-price">$10</span>
+                            </div>
+                            <p class="menu-item-description">Warm chocolate cake with a molten center, served with vanilla ice cream</p>
+                            <div class="menu-item-tags">
+                                <span class="tag popular">Popular</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/Tiramisu.jpg" alt="Tiramisu">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Tiramisu</h3>
+                                <span class="menu-item-price">$9</span>
+                            </div>
+                            <p class="menu-item-description">Classic Italian dessert with espresso-soaked ladyfingers and mascarpone cream</p>
+                            <div class="menu-item-tags">
+                                <span class="tag vegetarian">Vegetarian</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/New York Cheesecake.jpg" alt="New York Cheesecake">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">New York Cheesecake</h3>
+                                <span class="menu-item-price">$9</span>
+                            </div>
+                            <p class="menu-item-description">Creamy cheesecake with graham cracker crust and berry compote</p>
+                            <div class="menu-item-tags">
+                                <span class="tag vegetarian">Vegetarian</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/Crème Brûlée.jpg" alt="Crème Brûlée">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Crème Brûlée</h3>
+                                <span class="menu-item-price">$8</span>
+                            </div>
+                            <p class="menu-item-description">Vanilla custard with caramelized sugar top, served with fresh berries</p>
+                            <div class="menu-item-tags">
+                                <span class="tag vegetarian">Vegetarian</span>
+                                <span class="tag gluten-free">Gluten Free</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Beverages Section -->
+            <section class="menu-section" data-category="beverages">
+                <h2 class="section-title">Beverages</h2>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/lemonade.jpg" alt="Fresh Lemonade">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Fresh Lemonade</h3>
+                                <span class="menu-item-price">$5</span>
+                            </div>
+                            <p class="menu-item-description">House-made lemonade with fresh lemons and a hint of mint</p>
+                            <div class="menu-item-tags">
+                                <span class="tag vegetarian">Non-Alcoholic</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/craft beer.jpg" alt="Craft Beer Selection">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Craft Beer Selection</h3>
+                                <span class="menu-item-price">$7</span>
+                            </div>
+                            <p class="menu-item-description">Rotating selection of local craft beers, ask your server for today's options</p>
+                            <div class="menu-item-tags">
+                                <span class="tag popular">Popular</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/wine selection.jpg" alt="Wine Selection">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Wine Selection</h3>
+                                <span class="menu-item-price">$12</span>
+                            </div>
+                            <p class="menu-item-description">Curated selection of red and white wines, available by glass or bottle</p>
+                            <div class="menu-item-tags">
+                                <span class="tag popular">Popular</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-image">
+                            <img src="images/espresso and coffee.jpg" alt="Espresso & Coffee">
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-name">Espresso & Coffee</h3>
+                                <span class="menu-item-price">$4</span>
+                            </div>
+                            <p class="menu-item-description">Premium coffee and espresso drinks, made with locally roasted beans</p>
+                            <div class="menu-item-tags">
+                                <span class="tag vegetarian">Non-Alcoholic</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="menu-footer">
+            <p>Open Daily: 11:00 AM - 10:00 PM</p>
+            <p>Reservations: (555) 123-4567 | info@bellavista.com</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
