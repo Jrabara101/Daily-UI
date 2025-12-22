@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Invoice - Professional Invoice Template</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="invoice-container">
+        <!-- Invoice Header -->
+        <header class="invoice-header">
+            <div class="company-info">
+                <div class="logo-placeholder">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="60" height="60" rx="8" fill="#1a1a1a"/>
+                        <path d="M15 30L25 20L30 25L35 15L45 30M45 30L40 30M45 30L40 40H20L15 30" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="company-details">
+                    <h1 class="company-name">ELITE SERVICES</h1>
+                    <p class="company-tagline">Premium Business Solutions</p>
+                </div>
+            </div>
+            <div class="invoice-title-section">
+                <h2 class="invoice-title">INVOICE</h2>
+                <div class="invoice-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Invoice #</span>
+                        <span class="meta-value">INV-2024-0046</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Date Issued</span>
+                        <span class="meta-value">February 18, 2024</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Due Date</span>
+                        <span class="meta-value">March 4, 2024</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Payment Terms</span>
+                        <span class="meta-value">Net 15</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Bill To / Ship To Section -->
+        <section class="address-section">
+            <div class="address-grid">
+                <div class="address-block bill-to">
+                    <h3 class="address-title">Bill To</h3>
+                    <div class="address-content">
+                        <p class="client-name">Acme Corporation</p>
+                        <p class="address-line">123 Business Avenue</p>
+                        <p class="address-line">Suite 450</p>
+                        <p class="address-line">New York, NY 10001</p>
+                        <p class="address-line">United States</p>
+                        <div class="contact-info">
+                            <p><strong>Contact:</strong> John Smith</p>
+                            <p><strong>Email:</strong> john.smith@acme.com</p>
+                            <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="address-block ship-to">
+                    <h3 class="address-title">Ship To</h3>
+                    <div class="address-content">
+                        <p class="client-name">Acme Corporation</p>
+                        <p class="address-line">123 Business Avenue</p>
+                        <p class="address-line">Suite 450</p>
+                        <p class="address-line">New York, NY 10001</p>
+                        <p class="address-line">United States</p>
+                        <div class="contact-info">
+                            <p><strong>Attn:</strong> Accounts Payable</p>
+                            <p><strong>PO Number:</strong> PO-2024-8921</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Table -->
+        <section class="services-section">
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th class="col-service">Service Description</th>
+                        <th class="col-quantity">Quantity</th>
+                        <th class="col-rate">Unit Price</th>
+                        <th class="col-tax">Tax</th>
+                        <th class="col-total">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="service-details">
+                            <div class="service-name">Premium Consulting Services</div>
+                            <div class="service-description">Strategic business consultation and planning sessions including market analysis, competitive research, and growth strategy development.</div>
+                        </td>
+                        <td class="quantity">8</td>
+                        <td class="rate">$450.00</td>
+                        <td class="tax">8.5%</td>
+                        <td class="total">$3,906.00</td>
+                    </tr>
+                    <tr>
+                        <td class="service-details">
+                            <div class="service-name">Technical Implementation</div>
+                            <div class="service-description">Custom software implementation, system integration, and technical setup for enterprise-level solutions.</div>
+                        </td>
+                        <td class="quantity">16</td>
+                        <td class="rate">$275.00</td>
+                        <td class="tax">8.5%</td>
+                        <td class="total">$4,884.00</td>
+                    </tr>
+                    <tr>
+                        <td class="service-details">
+                            <div class="service-name">Project Management</div>
+                            <div class="service-description">Comprehensive project oversight, timeline management, and milestone tracking for Q1 deliverables.</div>
+                        </td>
+                        <td class="quantity">12</td>
+                        <td class="rate">$320.00</td>
+                        <td class="tax">8.5%</td>
+                        <td class="total">$4,166.40</td>
+                    </tr>
+                    <tr>
+                        <td class="service-details">
+                            <div class="service-name">Quality Assurance & Testing</div>
+                            <div class="service-description">Full QA cycle including test case development, automated testing, and comprehensive bug reporting.</div>
+                        </td>
+                        <td class="quantity">20</td>
+                        <td class="rate">$180.00</td>
+                        <td class="tax">8.5%</td>
+                        <td class="total">$3,906.00</td>
+                    </tr>
+                    <tr>
+                        <td class="service-details">
+                            <div class="service-name">Training & Documentation</div>
+                            <div class="service-description">Staff training sessions, user documentation creation, and knowledge transfer workshops.</div>
+                        </td>
+                        <td class="quantity">6</td>
+                        <td class="rate">$295.00</td>
+                        <td class="tax">8.5%</td>
+                        <td class="total">$1,924.50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Totals Section -->
+        <section class="totals-section">
+            <div class="totals-wrapper">
+                <div class="totals-table">
+                    <div class="total-row subtotal">
+                        <span class="total-label">Subtotal</span>
+                        <span class="total-value">$18,786.90</span>
+                    </div>
+                    <div class="total-row discount">
+                        <span class="total-label">Discount (5%)</span>
+                        <span class="total-value">-$939.35</span>
+                    </div>
+                    <div class="total-row tax-total">
+                        <span class="total-label">Tax (8.5%)</span>
+                        <span class="total-value">$1,497.04</span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span class="total-label">Total Due</span>
+                        <span class="total-value">$19,344.59</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Section -->
+        <section class="payment-section">
+            <div class="payment-methods">
+                <h3 class="payment-title">Payment Methods</h3>
+                <div class="payment-options">
+                    <div class="payment-option">
+                        <strong>Bank Transfer:</strong> ACH / Wire Transfer
+                        <p>Account: ****1234 | Routing: ****5678 | Bank: First National</p>
+                    </div>
+                    <div class="payment-option">
+                        <strong>Credit Card:</strong> Visa, Mastercard, Amex
+                        <p>Pay securely online at: invoice.eliteservices.com/pay/INV-2024-0046</p>
+                    </div>
+                    <div class="payment-option">
+                        <strong>Check:</strong> Please mail to address below
+                        <p>Include invoice number on check memo</p>
+                    </div>
+                </div>
+            </div>
+            <div class="payment-cta">
+                <button class="pay-now-btn">PAY NOW</button>
+            </div>
+        </section>
+
+        <!-- Additional Notes -->
+        <section class="notes-section">
+            <h3 class="notes-title">Additional Notes</h3>
+            <p class="notes-content">
+                Thank you for your business. This invoice includes all services rendered during the billing period. 
+                Please remit payment within 15 days of invoice date. Late payments may incur a 1.5% monthly service charge. 
+                For any questions or concerns regarding this invoice, please contact our billing department.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer class="invoice-footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h4 class="footer-title">Payment Terms</h4>
+                    <p>Payment is due within 15 days of invoice date. Late fees of 1.5% per month will be applied to overdue accounts. 
+                    All payments should reference the invoice number above.</p>
+                </div>
+                <div class="footer-right">
+                    <h4 class="footer-title">Thank You</h4>
+                    <p>We appreciate your business and look forward to continuing our partnership. 
+                    If you have any questions about this invoice, please don't hesitate to reach out.</p>
+                </div>
+            </div>
+            <div class="footer-contact">
+                <div class="contact-block">
+                    <p><strong>Elite Services</strong></p>
+                    <p>456 Professional Drive, Suite 200</p>
+                    <p>San Francisco, CA 94102</p>
+                    <p>United States</p>
+                </div>
+                <div class="contact-block">
+                    <p><strong>Contact Information</strong></p>
+                    <p>Email: billing@eliteservices.com</p>
+                    <p>Phone: +1 (555) 987-6543</p>
+                    <p>Website: www.eliteservices.com</p>
+                </div>
+                <div class="contact-block">
+                    <p><strong>Tax Information</strong></p>
+                    <p>Tax ID: 12-3456789</p>
+                    <p>Business Registration: CA-2020-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>This is an electronically generated invoice and does not require a signature.</p>
+                <p class="invoice-id">Invoice ID: INV-2024-0046 | Generated: February 18, 2024 at 10:30 AM PST</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+
