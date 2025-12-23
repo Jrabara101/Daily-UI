@@ -1,0 +1,160 @@
+.toast {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  max-width: 420px;
+  padding: 0;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 12px;
+  cursor: default;
+  border-left: 4px solid;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.toast:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Variant styles */
+.toast.success {
+  border-left-color: #10b981;
+  background: #ffffff;
+}
+
+.toast.error {
+  border-left-color: #ef4444;
+  background: #ffffff;
+}
+
+.toast.warning {
+  border-left-color: #f59e0b;
+  background: #ffffff;
+}
+
+.toast.info {
+  border-left-color: #3b82f6;
+  background: #ffffff;
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 12px;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.success .icon {
+  color: #10b981;
+}
+
+.error .icon {
+  color: #ef4444;
+}
+
+.warning .icon {
+  color: #f59e0b;
+}
+
+.info .icon {
+  color: #3b82f6;
+}
+
+.message {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #1f2937;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  margin-left: auto;
+}
+
+.closeButton:hover {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.closeButton:active {
+  background-color: #e5e7eb;
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.progressBarContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, currentColor, currentColor);
+  transition: width 0.1s linear;
+}
+
+.success .progressBar {
+  background-color: #10b981;
+}
+
+.error .progressBar {
+  background-color: #ef4444;
+}
+
+.warning .progressBar {
+  background-color: #f59e0b;
+}
+
+.info .progressBar {
+  background-color: #3b82f6;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .toast {
+    min-width: calc(100vw - 32px);
+    max-width: calc(100vw - 32px);
+  }
+}
+
