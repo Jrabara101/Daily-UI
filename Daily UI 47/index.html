@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Feed - Daily UI #47</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header" role="banner">
+        <div class="header-content">
+            <div class="header-top">
+                <h1 class="header-title">Activity Feed</h1>
+                <div class="header-actions">
+                    <span class="unread-badge" id="unreadBadge" aria-live="polite">0 unread</span>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                    <button class="hamburger" id="hamburger" aria-label="Toggle filters" aria-expanded="false">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <input 
+                type="search" 
+                class="search-bar" 
+                id="searchBar" 
+                placeholder="Search activities..." 
+                aria-label="Search activities"
+            >
+            <nav class="filters" id="filters" role="tablist" aria-label="Activity filters">
+                <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true" aria-controls="feed">All</button>
+                <button class="filter-btn" data-filter="mentions" role="tab" aria-selected="false" aria-controls="feed">Mentions</button>
+                <button class="filter-btn" data-filter="notifications" role="tab" aria-selected="false" aria-controls="feed">Notifications</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <ul class="feed" id="feed" role="feed" aria-live="polite" aria-label="Activity feed"></ul>
+        <div class="loading-more" id="loadingMore" style="display: none;">Loading more activities...</div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

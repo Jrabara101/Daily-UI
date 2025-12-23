@@ -65,3 +65,4 @@ const InfoCard = ({ name, bio, image }) => {
 
 export default InfoCard;
 
+
