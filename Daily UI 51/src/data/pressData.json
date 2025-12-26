@@ -1,0 +1,207 @@
+{
+  "company": {
+    "name": "TechCorp",
+    "tagline": "Innovating Tomorrow, Today"
+  },
+  "mediaKit": {
+    "downloadUrl": "/media-kit.zip",
+    "lastUpdated": "2025-01-15",
+    "size": "45.2 MB",
+    "includes": ["Logos", "Brand Guidelines", "Product Screenshots", "Executive Photos"]
+  },
+  "pressReleases": [
+    {
+      "id": "pr-2025-001",
+      "title": "TechCorp Announces Revolutionary AI Platform Launch",
+      "date": "2025-01-20",
+      "category": "Product Launch",
+      "excerpt": "TechCorp unveils its next-generation AI platform designed to transform enterprise operations with unprecedented efficiency and intelligence.",
+      "content": "TechCorp, a leading technology company, today announced the launch of its revolutionary AI platform that promises to transform how enterprises operate. The platform combines advanced machine learning algorithms with intuitive user interfaces to deliver unprecedented business intelligence.",
+      "tags": ["AI", "Enterprise", "Innovation"],
+      "downloadUrl": "/press-releases/pr-2025-001.pdf"
+    },
+    {
+      "id": "pr-2025-002",
+      "title": "TechCorp Partners with Global Non-Profit for Digital Literacy Initiative",
+      "date": "2025-01-15",
+      "category": "Philanthropy",
+      "excerpt": "TechCorp commits $10 million to global digital literacy programs, aiming to bridge the technology gap in underserved communities.",
+      "content": "In a landmark partnership, TechCorp has joined forces with Global Education Foundation to launch a comprehensive digital literacy initiative. The program will provide technology training and resources to over 100,000 individuals in underserved communities worldwide.",
+      "tags": ["Philanthropy", "Education", "Partnership"],
+      "downloadUrl": "/press-releases/pr-2025-002.pdf"
+    },
+    {
+      "id": "pr-2024-045",
+      "title": "Q4 2024 Financial Results Exceed Expectations",
+      "date": "2024-12-10",
+      "category": "Corporate",
+      "excerpt": "TechCorp reports record-breaking Q4 2024 earnings, with revenue growth of 35% year-over-year.",
+      "content": "TechCorp today announced its financial results for the fourth quarter of 2024, reporting record revenue of $2.5 billion, representing a 35% increase compared to the same period last year. The company's strong performance was driven by robust demand across all product lines.",
+      "tags": ["Financial", "Earnings", "Growth"],
+      "downloadUrl": "/press-releases/pr-2024-045.pdf"
+    },
+    {
+      "id": "pr-2024-044",
+      "title": "New Data Center Opens in Singapore",
+      "date": "2024-11-28",
+      "category": "Corporate",
+      "excerpt": "TechCorp expands global infrastructure with state-of-the-art data center in Singapore, strengthening Asia-Pacific presence.",
+      "content": "TechCorp today announced the opening of its newest data center in Singapore, marking a significant expansion of its global infrastructure. The facility, which represents a $200 million investment, will provide enhanced cloud services to customers across the Asia-Pacific region.",
+      "tags": ["Infrastructure", "Expansion", "Asia-Pacific"],
+      "downloadUrl": "/press-releases/pr-2024-044.pdf"
+    },
+    {
+      "id": "pr-2024-043",
+      "title": "TechCorp Wins Innovation Award at Global Tech Summit",
+      "date": "2024-11-15",
+      "category": "Awards",
+      "excerpt": "TechCorp recognized for outstanding innovation in enterprise software solutions at the 2024 Global Tech Summit.",
+      "content": "TechCorp has been honored with the prestigious Innovation Award at the 2024 Global Tech Summit, recognizing the company's groundbreaking contributions to enterprise software solutions. The award highlights TechCorp's commitment to pushing the boundaries of technological innovation.",
+      "tags": ["Awards", "Innovation", "Recognition"],
+      "downloadUrl": "/press-releases/pr-2024-043.pdf"
+    },
+    {
+      "id": "pr-2024-042",
+      "title": "Major Security Update Released Across All Platforms",
+      "date": "2024-10-30",
+      "category": "Product Launch",
+      "excerpt": "TechCorp releases comprehensive security update addressing critical vulnerabilities and enhancing platform protection.",
+      "content": "TechCorp has released a major security update across all its platforms, implementing advanced encryption protocols and enhanced threat detection capabilities. This update addresses several critical vulnerabilities and significantly strengthens the overall security posture of TechCorp's products.",
+      "tags": ["Security", "Update", "Platform"],
+      "downloadUrl": "/press-releases/pr-2024-042.pdf"
+    }
+  ],
+  "brandAssets": [
+    {
+      "id": "logo-light",
+      "name": "Company Logo (Light)",
+      "type": "logo",
+      "description": "Primary logo for light backgrounds",
+      "formats": ["SVG", "PNG", "PDF"],
+      "thumbnail": "/assets/logos/logo-light-thumb.jpg",
+      "downloads": {
+        "svg": "/assets/logos/logo-light.svg",
+        "png": "/assets/logos/logo-light.png",
+        "pdf": "/assets/logos/logo-light.pdf"
+      }
+    },
+    {
+      "id": "logo-dark",
+      "name": "Company Logo (Dark)",
+      "type": "logo",
+      "description": "Primary logo for dark backgrounds",
+      "formats": ["SVG", "PNG", "PDF"],
+      "thumbnail": "/assets/logos/logo-dark-thumb.jpg",
+      "downloads": {
+        "svg": "/assets/logos/logo-dark.svg",
+        "png": "/assets/logos/logo-dark.png",
+        "pdf": "/assets/logos/logo-dark.pdf"
+      }
+    },
+    {
+      "id": "product-screenshot-1",
+      "name": "Dashboard Interface",
+      "type": "screenshot",
+      "description": "Main dashboard view showcasing user interface",
+      "formats": ["JPG", "PNG"],
+      "thumbnail": "/assets/screenshots/dashboard-thumb.jpg",
+      "downloads": {
+        "jpg": "/assets/screenshots/dashboard.jpg",
+        "png": "/assets/screenshots/dashboard.png"
+      }
+    },
+    {
+      "id": "product-screenshot-2",
+      "name": "Mobile App Interface",
+      "type": "screenshot",
+      "description": "Mobile application interface design",
+      "formats": ["JPG", "PNG"],
+      "thumbnail": "/assets/screenshots/mobile-thumb.jpg",
+      "downloads": {
+        "jpg": "/assets/screenshots/mobile.jpg",
+        "png": "/assets/screenshots/mobile.png"
+      }
+    },
+    {
+      "id": "executive-ceo",
+      "name": "Sarah Chen - CEO",
+      "type": "headshot",
+      "description": "Executive headshot for media use",
+      "formats": ["JPG", "PNG"],
+      "thumbnail": "/assets/executives/ceo-thumb.jpg",
+      "downloads": {
+        "jpg": "/assets/executives/ceo.jpg",
+        "png": "/assets/executives/ceo.png"
+      }
+    },
+    {
+      "id": "executive-cto",
+      "name": "Michael Rodriguez - CTO",
+      "type": "headshot",
+      "description": "Executive headshot for media use",
+      "formats": ["JPG", "PNG"],
+      "thumbnail": "/assets/executives/cto-thumb.jpg",
+      "downloads": {
+        "jpg": "/assets/executives/cto.jpg",
+        "png": "/assets/executives/cto.png"
+      }
+    },
+    {
+      "id": "executive-cfo",
+      "name": "Emily Watson - CFO",
+      "type": "headshot",
+      "description": "Executive headshot for media use",
+      "formats": ["JPG", "PNG"],
+      "thumbnail": "/assets/executives/cfo-thumb.jpg",
+      "downloads": {
+        "jpg": "/assets/executives/cfo.jpg",
+        "png": "/assets/executives/cfo.png"
+      }
+    }
+  ],
+  "leadership": [
+    {
+      "id": "sarah-chen",
+      "name": "Sarah Chen",
+      "title": "Chief Executive Officer",
+      "bio": "Sarah Chen brings over 20 years of executive leadership experience in the technology sector. Prior to joining TechCorp, she served as VP of Product at a Fortune 500 company, where she led the development of innovative enterprise solutions that transformed how businesses operate.",
+      "email": "sarah.chen@techcorp.com",
+      "linkedin": "linkedin.com/in/sarahchen",
+      "photo": "/assets/executives/ceo.jpg"
+    },
+    {
+      "id": "michael-rodriguez",
+      "name": "Michael Rodriguez",
+      "title": "Chief Technology Officer",
+      "bio": "Michael Rodriguez is a visionary technologist with a proven track record of building scalable, secure, and innovative platforms. He holds a Ph.D. in Computer Science from MIT and has authored over 50 research papers on distributed systems and AI.",
+      "email": "michael.rodriguez@techcorp.com",
+      "linkedin": "linkedin.com/in/michaelrodriguez",
+      "photo": "/assets/executives/cto.jpg"
+    },
+    {
+      "id": "emily-watson",
+      "name": "Emily Watson",
+      "title": "Chief Financial Officer",
+      "bio": "Emily Watson is a seasoned financial executive with extensive experience in scaling high-growth technology companies. She has successfully led multiple funding rounds and strategic acquisitions, driving TechCorp's financial strategy and growth initiatives.",
+      "email": "emily.watson@techcorp.com",
+      "linkedin": "linkedin.com/in/emilywatson",
+      "photo": "/assets/executives/cfo.jpg"
+    },
+    {
+      "id": "david-kim",
+      "name": "David Kim",
+      "title": "Chief Marketing Officer",
+      "bio": "David Kim is a marketing innovator who has built world-class brands and marketing organizations. With expertise in digital transformation and brand strategy, he has been instrumental in establishing TechCorp as a recognized leader in enterprise technology.",
+      "email": "david.kim@techcorp.com",
+      "linkedin": "linkedin.com/in/davidkim",
+      "photo": "/assets/executives/cmo.jpg"
+    }
+  ],
+  "contact": {
+    "mediaEmail": "press@techcorp.com",
+    "responseTime": "We respond within 24 hours",
+    "phone": "+1 (555) 123-4567",
+    "address": "123 Innovation Drive, San Francisco, CA 94105"
+  }
+}
+

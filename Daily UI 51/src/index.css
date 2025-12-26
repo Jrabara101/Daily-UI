@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900 antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Print styles */
+  @media print {
+    @page {
+      margin: 1in;
+      size: letter;
+    }
+    
+    * {
+      @apply text-black bg-white;
+    }
+    
+    body {
+      @apply text-black bg-white;
+      font-size: 12pt;
+      line-height: 1.5;
+    }
+    
+    .no-print,
+    header,
+    footer,
+    button,
+    nav {
+      display: none !important;
+    }
+    
+    .print-break {
+      page-break-after: always;
+    }
+    
+    a[href]:after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: #666;
+    }
+    
+    a[href^="mailto:"]:after {
+      content: "";
+    }
+    
+    img {
+      max-width: 100% !important;
+      page-break-inside: avoid;
+      height: auto;
+    }
+    
+    article {
+      page-break-inside: avoid;
+      margin-bottom: 1em;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      page-break-after: avoid;
+      page-break-inside: avoid;
+    }
+    
+    section {
+      page-break-before: auto;
+    }
+    
+    /* Ensure press releases print well */
+    [itemtype="https://schema.org/NewsArticle"] {
+      border: 1px solid #ddd;
+      padding: 1em;
+      margin-bottom: 1em;
+      page-break-inside: avoid;
+    }
+  }
+}
+
+@layer utilities {
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2;
+  }
+  
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
