@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings & Activity Feed - Daily UI #50</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="header-content">
+            <div class="header-left">
+                <h1 class="logo">JobHub</h1>
+            </div>
+            <div class="header-center">
+                <div class="search-container">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+                    </svg>
+                    <input 
+                        type="search" 
+                        class="global-search" 
+                        id="globalSearch" 
+                        placeholder="Search jobs, companies, skills..."
+                        aria-label="Global search"
+                    >
+                </div>
+                <div class="location-input-container">
+                    <svg class="location-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                    </svg>
+                    <input 
+                        type="text" 
+                        class="location-input" 
+                        id="locationInput" 
+                        placeholder="Location"
+                        aria-label="Job location"
+                    >
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="icon-btn notifications-btn" id="notificationsBtn" aria-label="Notifications" aria-expanded="false">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+                    </svg>
+                    <span class="notification-badge" id="notificationBadge" aria-live="polite">0</span>
+                </button>
+                <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <svg class="theme-icon sun" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/>
+                    </svg>
+                    <svg class="theme-icon moon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                    </svg>
+                </button>
+                <div class="profile-menu-container">
+                    <button class="profile-btn" id="profileBtn" aria-label="Profile menu" aria-expanded="false">
+                        <div class="profile-avatar">JD</div>
+                    </button>
+                    <div class="profile-dropdown" id="profileDropdown" role="menu">
+                        <a href="#profile" class="dropdown-item" role="menuitem">Profile</a>
+                        <a href="#settings" class="dropdown-item" role="menuitem">Settings</a>
+                        <a href="#applications" class="dropdown-item" role="menuitem">Applications</a>
+                        <hr class="dropdown-divider">
+                        <a href="#logout" class="dropdown-item" role="menuitem">Sign out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Tab Switcher -->
+    <nav class="mobile-tabs" role="tablist" aria-label="Main navigation">
+        <button class="mobile-tab active" data-view="jobs" role="tab" aria-selected="true" aria-controls="jobs-section">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+            </svg>
+            <span>Jobs</span>
+        </button>
+        <button class="mobile-tab" data-view="activity" role="tab" aria-selected="false" aria-controls="activity-section">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+            </svg>
+            <span>Activity</span>
+        </button>
+        <button class="mobile-tab" data-view="applications" role="tab" aria-selected="false" aria-controls="applications-section">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+            </svg>
+            <span>Applications</span>
+        </button>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="main-container" id="mainContainer">
+        <!-- Jobs Section -->
+        <section class="jobs-section active" id="jobs-section" role="region" aria-labelledby="jobs-heading">
+            <div class="jobs-header">
+                <h2 class="section-heading" id="jobs-heading">Job Catalog</h2>
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="grid" aria-label="Grid view">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M3 4a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 13a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1v-3zM12 4a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1V4zM12 13a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-3z"/>
+                        </svg>
+                    </button>
+                    <button class="view-btn" data-view="list" aria-label="List view">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Job Filters -->
+            <div class="filters-container">
+                <div class="filters-top">
+                    <input 
+                        type="search" 
+                        class="job-search" 
+                        id="jobSearch" 
+                        placeholder="Search keywords..."
+                        aria-label="Search jobs"
+                    >
+                    <div class="filter-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="remoteToggle" aria-label="Remote only">
+                            <span class="checkmark"></span>
+                            <span>Remote</span>
+                        </label>
+                    </div>
+                    <select class="sort-select" id="sortSelect" aria-label="Sort jobs">
+                        <option value="relevance">Relevance</option>
+                        <option value="newest">Newest</option>
+                        <option value="salary">Salary</option>
+                    </select>
+                    <button class="btn-secondary filters-btn" id="filtersBtn" aria-label="Advanced filters">
+                        <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M5 4a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zM5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zM5 16a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"/>
+                        </svg>
+                        Filters
+                    </button>
+                    <button class="btn-secondary compare-btn" id="compareBtn" aria-label="Compare jobs">
+                        Compare (<span id="compareCount">0</span>)
+                    </button>
+                </div>
+
+                <!-- Advanced Filters Drawer -->
+                <div class="filters-drawer" id="filtersDrawer" role="dialog" aria-labelledby="filters-heading" aria-hidden="true">
+                    <div class="drawer-header">
+                        <h3 id="filters-heading">Advanced Filters</h3>
+                        <button class="drawer-close" id="drawerClose" aria-label="Close filters">×</button>
+                    </div>
+                    <div class="drawer-content">
+                        <div class="filter-section">
+                            <label class="filter-label">Salary Range</label>
+                            <div class="salary-range">
+                                <input type="range" class="range-input" id="salaryMin" min="0" max="200" value="0" aria-label="Minimum salary">
+                                <input type="range" class="range-input" id="salaryMax" min="0" max="200" value="200" aria-label="Maximum salary">
+                                <div class="range-values">
+                                    <span>$<span id="salaryMinValue">0</span>k</span>
+                                    <span>$<span id="salaryMaxValue">200</span>k</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-section">
+                            <label class="filter-label">Job Type</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jobType" value="fulltime" checked>
+                                    <span class="checkmark"></span>
+                                    <span>Full-time</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jobType" value="parttime">
+                                    <span class="checkmark"></span>
+                                    <span>Part-time</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jobType" value="contract">
+                                    <span class="checkmark"></span>
+                                    <span>Contract</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="filter-section">
+                            <label class="filter-label">Experience Level</label>
+                            <select class="filter-select" id="experienceLevel" multiple size="4" aria-label="Experience level">
+                                <option value="entry">Entry Level</option>
+                                <option value="mid">Mid Level</option>
+                                <option value="senior">Senior</option>
+                                <option value="executive">Executive</option>
+                            </select>
+                        </div>
+                        <div class="filter-section">
+                            <label class="filter-label">Tech Tags</label>
+                            <div class="tags-input-container">
+                                <input type="text" class="tags-input" id="techTags" placeholder="Type and press Enter...">
+                                <div class="selected-tags" id="selectedTags"></div>
+                            </div>
+                        </div>
+                        <div class="filter-section">
+                            <label class="filter-label">Company Size</label>
+                            <select class="filter-select" id="companySize" aria-label="Company size">
+                                <option value="">All sizes</option>
+                                <option value="startup">Startup (1-50)</option>
+                                <option value="small">Small (51-200)</option>
+                                <option value="medium">Medium (201-1000)</option>
+                                <option value="large">Large (1000+)</option>
+                            </select>
+                        </div>
+                        <div class="filter-section">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="easyApply">
+                                <span class="checkmark"></span>
+                                <span>Easy Apply Only</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="drawer-footer">
+                        <button class="btn-secondary" id="clearFilters">Clear All</button>
+                        <button class="btn-primary" id="applyFilters">Apply Filters</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jobs Results -->
+            <div class="jobs-content">
+                <div class="jobs-list grid-view" id="jobsList" role="list" aria-live="polite"></div>
+                <div class="skeleton-loader" id="jobsSkeleton" aria-hidden="true"></div>
+                <div class="empty-state" id="jobsEmpty" style="display: none;">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <h3>No jobs found</h3>
+                    <p>Try adjusting your filters or search terms</p>
+                    <button class="btn-primary" id="clearSearchBtn">Clear Search</button>
+                </div>
+            </div>
+
+            <!-- Job Detail Side Panel -->
+            <aside class="job-detail-panel" id="jobDetailPanel" role="complementary" aria-labelledby="job-detail-heading" aria-hidden="true">
+                <div class="panel-header">
+                    <h3 id="job-detail-heading">Job Details</h3>
+                    <button class="panel-close" id="panelClose" aria-label="Close panel">×</button>
+                </div>
+                <div class="panel-content" id="panelContent"></div>
+            </aside>
+        </section>
+
+        <!-- Activity Section -->
+        <section class="activity-section" id="activity-section" role="region" aria-labelledby="activity-heading">
+            <div class="activity-header">
+                <h2 class="section-heading" id="activity-heading">Activity Feed</h2>
+                <div class="activity-actions">
+                    <button class="btn-secondary" id="markAllRead">Mark all read</button>
+                    <button class="btn-secondary" id="bulkActionsBtn">Bulk actions</button>
+                </div>
+            </div>
+
+            <!-- Activity Filters -->
+            <div class="activity-filters">
+                <button class="activity-filter-btn active" data-filter="all">All</button>
+                <button class="activity-filter-btn" data-filter="applications">Applications</button>
+                <button class="activity-filter-btn" data-filter="matches">Matches</button>
+                <button class="activity-filter-btn" data-filter="alerts">Alerts</button>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="unreadOnly">
+                    <span class="checkmark"></span>
+                    <span>Unread only</span>
+                </label>
+            </div>
+
+            <!-- Activity Feed -->
+            <div class="activity-feed" id="activityFeed" role="feed" aria-live="polite" aria-label="Activity feed"></div>
+            <div class="skeleton-loader" id="activitySkeleton" aria-hidden="true"></div>
+            <div class="empty-state" id="activityEmpty" style="display: none;">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                </svg>
+                <h3>No activity yet</h3>
+                <p>Your activity feed will appear here</p>
+            </div>
+        </section>
+
+        <!-- Applications Section (Kanban) -->
+        <section class="applications-section" id="applications-section" role="region" aria-labelledby="applications-heading">
+            <h2 class="section-heading" id="applications-heading">Application Pipeline</h2>
+            <div class="kanban-board" id="kanbanBoard" role="group" aria-label="Application pipeline">
+                <div class="kanban-column" data-stage="draft">
+                    <h3 class="kanban-title">Draft <span class="kanban-count">0</span></h3>
+                    <div class="kanban-list" role="list"></div>
+                </div>
+                <div class="kanban-column" data-stage="applied">
+                    <h3 class="kanban-title">Applied <span class="kanban-count">0</span></h3>
+                    <div class="kanban-list" role="list"></div>
+                </div>
+                <div class="kanban-column" data-stage="interview">
+                    <h3 class="kanban-title">Interview <span class="kanban-count">0</span></h3>
+                    <div class="kanban-list" role="list"></div>
+                </div>
+                <div class="kanban-column" data-stage="offer">
+                    <h3 class="kanban-title">Offer <span class="kanban-count">0</span></h3>
+                    <div class="kanban-list" role="list"></div>
+                </div>
+                <div class="kanban-column" data-stage="rejected">
+                    <h3 class="kanban-title">Rejected <span class="kanban-count">0</span></h3>
+                    <div class="kanban-list" role="list"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Compare Jobs Modal -->
+    <div class="modal-overlay" id="compareModal" role="dialog" aria-labelledby="compare-heading" aria-hidden="true">
+        <div class="modal-content compare-modal">
+            <div class="modal-header">
+                <h3 id="compare-heading">Compare Jobs</h3>
+                <button class="modal-close" id="compareModalClose" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body" id="compareContent"></div>
+        </div>
+    </div>
+
+    <!-- Confirmation Dialog -->
+    <div class="modal-overlay" id="confirmDialog" role="dialog" aria-labelledby="confirm-heading" aria-hidden="true">
+        <div class="modal-content confirm-modal">
+            <h3 id="confirm-heading">Confirm Action</h3>
+            <p id="confirmMessage"></p>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="confirmCancel">Cancel</button>
+                <button class="btn-primary" id="confirmOk">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer" role="status" aria-live="polite"></div>
+
+    <!-- Error Banner -->
+    <div class="error-banner" id="errorBanner" role="alert" aria-live="assertive" style="display: none;">
+        <span id="errorMessage"></span>
+        <button class="error-close" id="errorClose" aria-label="Close error">×</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
