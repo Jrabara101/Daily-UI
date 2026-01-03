@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Auto-Layout Resume Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary-font: 'Inter', sans-serif;
+            --accent-color: #2563eb;
+            --bg-color: #ffffff;
+            --text-color: #1e293b;
+            --secondary-text: #64748b;
+            --border-color: #e2e8f0;
+            --page-width: 210mm;
+            --page-height: 297mm;
+        }
+
+        body {
+            font-family: var(--primary-font);
+            background-color: #f1f5f9;
+            color: var(--text-color);
+        }
+
+        /* Resume Preview Styling */
+        .resume-page {
+            width: var(--page-width);
+            min-height: var(--page-height);
+            padding: 20mm;
+            margin: 0 auto 20px auto;
+            background: var(--bg-color);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        /* Design Moods */
+        .mood-minimalist {
+            --primary-font: 'Georgia', serif;
+            --accent-color: #000000;
+            --text-color: #1a1a1a;
+        }
+
+        .mood-executive {
+            --primary-font: 'Inter', sans-serif;
+            --accent-color: #1e40af;
+            --text-color: #0f172a;
+        }
+
+        .mood-creative {
+            --primary-font: 'Montserrat', sans-serif;
+            --accent-color: #ec4899;
+            --text-color: #2d3748;
+        }
+
+        .resume-content {
+            color: var(--text-color);
+        }
+
+        .resume-header h1 {
+            font-size: 28pt;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin-bottom: 4pt;
+        }
+
+        .resume-section-title {
+            font-size: 12pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            margin: 16pt 0 8pt 0;
+            padding-bottom: 2pt;
+        }
+
+        .job-title {
+            font-weight: 700;
+            font-size: 11pt;
+        }
+
+        .job-meta {
+            color: var(--secondary-text);
+            font-size: 10pt;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .job-desc {
+            font-size: 10pt;
+            margin-top: 4pt;
+            line-height: 1.5;
+        }
+
+        /* Print Overlay */
+        .print-mode .resume-page {
+            box-shadow: none;
+            margin: 0;
+        }
+
+        /* Drag and Drop Visuals */
+        .draggable-item {
+            cursor: grab;
+            transition: transform 0.2s;
+        }
+
+        .draggable-item:active {
+            cursor: grabbing;
+        }
+
+        .drag-over {
+            border: 2px dashed var(--accent-color);
+            opacity: 0.5;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+            }
+
+            .resume-page {
+                margin: 0;
+                border: none;
+            }
+        }
+
+        /* Sidebar Custom Scrollbar */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="h-screen flex overflow-hidden">
+
+    <!-- SIDE PANEL: CONTENT & LOGIC -->
+    <aside class="w-1/3 bg-white border-r border-gray-200 flex flex-col h-full no-print">
+        <div class="p-6 border-b border-gray-100 bg-slate-50">
+            <h2 class="text-xl font-bold text-slate-800">Resume Engine</h2>
+            <p class="text-sm text-slate-500">Auto-layout enabled</p>
+
+            <div class="mt-4 flex gap-2">
+                <button onclick="changeMood('executive')"
+                    class="px-3 py-1 text-xs font-semibold rounded-full border border-blue-600 bg-blue-50 text-blue-600 hover:bg-blue-100">Executive</button>
+                <button onclick="changeMood('minimalist')"
+                    class="px-3 py-1 text-xs font-semibold rounded-full border border-gray-600 bg-gray-50 text-gray-600 hover:bg-gray-100">Minimalist</button>
+                <button onclick="changeMood('creative')"
+                    class="px-3 py-1 text-xs font-semibold rounded-full border border-pink-600 bg-pink-50 text-pink-600 hover:bg-pink-100">Creative</button>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-6 custom-scroll space-y-8" id="editor-form">
+            <!-- Personal Info -->
+            <section>
+                <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Identity</h3>
+                <div class="space-y-3">
+                    <input type="text" data-key="name" placeholder="Full Name"
+                        class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                        value="Alexander Sterling">
+                    <input type="text" data-key="title" placeholder="Professional Title"
+                        class="w-full p-2 border rounded" value="Senior Product Architect">
+                    <input type="text" data-key="contact" placeholder="Email / Phone / Location"
+                        class="w-full p-2 border rounded"
+                        value="alex.sterling@tech.com | +1 555-0123 | San Francisco, CA">
+                </div>
+            </section>
+
+            <!-- Experience List -->
+            <section id="experience-editor">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider">Experience</h3>
+                    <button onclick="addItem('experience')" class="text-blue-600 text-xs font-bold">+ ADD</button>
+                </div>
+                <div id="experience-items" class="space-y-4">
+                    <!-- Dynamic Items -->
+                </div>
+            </section>
+
+            <!-- Education List -->
+            <section id="education-editor">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider">Education</h3>
+                    <button onclick="addItem('education')" class="text-blue-600 text-xs font-bold">+ ADD</button>
+                </div>
+                <div id="education-items" class="space-y-4">
+                    <!-- Dynamic Items -->
+                </div>
+            </section>
+        </div>
+
+        <div class="p-6 border-t border-gray-200 bg-white flex gap-3">
+            <button onclick="exportPDF()"
+                class="flex-1 bg-slate-900 text-white py-3 rounded-lg font-bold hover:bg-slate-800 transition shadow-lg">Download
+                PDF</button>
+            <button onclick="window.print()"
+                class="px-4 py-3 border border-slate-300 rounded-lg hover:bg-slate-50">Print</button>
+        </div>
+    </aside>
+
+    <!-- PREVIEW PANEL -->
+    <main class="flex-1 overflow-y-auto p-12 bg-slate-100 custom-scroll" id="preview-container">
+        <div id="resume-canvas" class="flex flex-col gap-8">
+            <!-- Pages are injected here by Layout Engine -->
+        </div>
+    </main>
+
+    <script>
+        // --- DATA LAYER ---
+        const resumeData = {
+            name: "Alexander Sterling",
+            title: "Senior Product Architect",
+            contact: "alex.sterling@tech.com | +1 555-0123 | San Francisco, CA",
+            experience: [
+                { company: "Global Tech Inc.", role: "Lead Systems Architect", period: "2020 - Present", desc: "Spearheaded the migration of legacy architecture to a microservices-based cloud platform. Managed a team of 15 engineers and reduced deployment latency by 45%. Implemented automated CI/CD pipelines and established security protocols across all product lines." },
+                { company: "Innovate AI", role: "Senior Developer", period: "2017 - 2020", desc: "Developed core machine learning algorithms for natural language processing. Integrated real-time data streaming solutions using Kafka and Spark. Mentored junior developers and conducted code reviews." }
+            ],
+            education: [
+                { school: "Stanford University", degree: "M.S. in Computer Science", period: "2015 - 2017", desc: "Specialization in Distributed Systems and Artificial Intelligence." }
+            ],
+            order: ['experience', 'education']
+        };
+
+        // --- THEME LAYER ---
+        let currentMood = 'executive';
+
+        // --- LAYOUT ENGINE ---
+        const PAGE_HEIGHT_PT = 841; // A4 height in pts (approx 297mm)
+        const PAGE_MARGIN_PT = 100; // Total vertical margin in pts
+
+        function updatePreview() {
+            const canvas = document.getElementById('resume-canvas');
+            canvas.innerHTML = ''; // Reset
+
+            // Create initial page
+            let currentPage = createNewPage();
+            canvas.appendChild(currentPage);
+            const contentArea = currentPage.querySelector('.resume-content');
+
+            // 1. Render Header
+            const headerHtml = `
+                <div class="resume-header mb-8">
+                    <h1>${resumeData.name}</h1>
+                    <p class="text-slate-500 font-medium">${resumeData.title}</p>
+                    <p class="text-xs text-slate-400 mt-1">${resumeData.contact}</p>
+                </div>
+            `;
+            contentArea.insertAdjacentHTML('beforeend', headerHtml);
+
+            // 2. Render Sections based on order
+            resumeData.order.forEach(sectionKey => {
+                const sectionTitle = sectionKey === 'experience' ? 'Professional Experience' : 'Education';
+                const items = resumeData[sectionKey];
+
+                const sectionHeader = `<div class="resume-section-title">${sectionTitle}</div>`;
+                contentArea.insertAdjacentHTML('beforeend', sectionHeader);
+
+                items.forEach((item, index) => {
+                    const itemHtml = `
+                        <div class="mb-6 resume-item" data-section="${sectionKey}" data-index="${index}">
+                            <div class="job-meta">
+                                <span class="job-title">${item.company || item.school}</span>
+                                <span class="font-bold text-xs">${item.period}</span>
+                            </div>
+                            <div class="italic text-sm text-slate-600 mb-1">${item.role || item.degree}</div>
+                            <div class="job-desc">${item.desc}</div>
+                        </div>
+                    `;
+
+                    contentArea.insertAdjacentHTML('beforeend', itemHtml);
+
+                    // PAGINATION LOGIC: Check for overflow
+                    if (contentArea.scrollHeight > (PAGE_HEIGHT_PT - PAGE_MARGIN_PT)) {
+                        // Overflow! Move this item to a new page
+                        const lastItem = contentArea.lastElementChild;
+                        lastItem.remove(); // Remove from current page
+
+                        currentPage = createNewPage();
+                        canvas.appendChild(currentPage);
+                        const newContentArea = currentPage.querySelector('.resume-content');
+
+                        // Add header (minimalist) to page 2 if needed
+                        newContentArea.insertAdjacentHTML('beforeend', `<div class="text-xs text-slate-300 mb-4 border-b pb-1">${resumeData.name} - Continued</div>`);
+                        newContentArea.appendChild(lastItem);
+                    }
+                });
+            });
+        }
+
+        function createNewPage() {
+            const page = document.createElement('div');
+            page.className = `resume-page mood-${currentMood} animate-in fade-in duration-500`;
+            page.innerHTML = `<div class="resume-content"></div>`;
+            return page;
+        }
+
+        // --- UI LOGIC & EVENTS ---
+        function changeMood(mood) {
+            currentMood = mood;
+            updatePreview();
+        }
+
+        function addItem(type) {
+            const newItem = type === 'experience'
+                ? { company: "New Company", role: "Role", period: "2023 - Present", desc: "Description here" }
+                : { school: "New School", degree: "Degree", period: "Year", desc: "" };
+
+            resumeData[type].push(newItem);
+            renderEditor();
+            updatePreview();
+        }
+
+        function deleteItem(type, index) {
+            resumeData[type].splice(index, 1);
+            renderEditor();
+            updatePreview();
+        }
+
+        function renderEditor() {
+            const expItems = document.getElementById('experience-items');
+            const eduItems = document.getElementById('education-items');
+
+            expItems.innerHTML = '';
+            eduItems.innerHTML = '';
+
+            // Render Experience inputs
+            resumeData.experience.forEach((item, i) => {
+                expItems.innerHTML += createItemEditor('experience', i, item);
+            });
+
+            // Render Education inputs
+            resumeData.education.forEach((item, i) => {
+                eduItems.innerHTML += createItemEditor('education', i, item);
+            });
+        }
+
+        function createItemEditor(type, index, item) {
+            const title = item.company || item.school;
+            return `
+                <div class="p-4 bg-white border border-slate-200 rounded-lg shadow-sm relative group">
+                    <button onclick="deleteItem('${type}', ${index})" class="absolute -top-2 -right-2 bg-red-500 text-white w-5 h-5 rounded-full text-[10px] hidden group-hover:block">X</button>
+                    <input type="text" oninput="updateData('${type}', ${index}, 'company', this.value)" placeholder="Name" class="w-full font-bold mb-2 border-none p-0 focus:ring-0" value="${title}">
+                    <input type="text" oninput="updateData('${type}', ${index}, 'role', this.value)" placeholder="Subtitle" class="w-full text-sm text-slate-500 mb-2 border-none p-0 focus:ring-0" value="${item.role || item.degree}">
+                    <textarea oninput="updateData('${type}', ${index}, 'desc', this.value)" class="w-full text-xs text-slate-600 border-none p-0 focus:ring-0 custom-scroll h-16 resize-none" placeholder="Description">${item.desc}</textarea>
+                </div>
+            `;
+        }
+
+        function updateData(type, index, field, value) {
+            // Handle subtitles specifically
+            if (field === 'role' && type === 'education') {
+                resumeData[type][index].degree = value;
+            } else if (field === 'company' && type === 'education') {
+                resumeData[type][index].school = value;
+            } else {
+                resumeData[type][index][field] = value;
+            }
+            updatePreview();
+        }
+
+        // --- EXPORT LOGIC ---
+        async function exportPDF() {
+            const { jsPDF } = window.jspdf;
+            const element = document.getElementById('resume-canvas');
+
+            // Temporary UI clean up for snapshot
+            const btn = event.target;
+            btn.innerText = "Generating...";
+
+            try {
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff'
+                });
+
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const imgProps = pdf.getImageProperties(imgData);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save(`${resumeData.name.replace(' ', '_')}_Resume.pdf`);
+            } catch (err) {
+                console.error("PDF Export failed", err);
+            } finally {
+                btn.innerText = "Download PDF";
+            }
+        }
+
+        // --- INIT ---
+        document.querySelectorAll('input[data-key]').forEach(input => {
+            input.addEventListener('input', (e) => {
+                resumeData[e.target.dataset.key] = e.target.value;
+                updatePreview();
+            });
+        });
+
+        window.onload = () => {
+            renderEditor();
+            updatePreview();
+        };
+
+    </script>
+</body>
+
+</html>
