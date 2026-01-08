@@ -8,15 +8,3 @@ export default defineConfig({
     tailwindcss(),
   ],
 })
-
-
-
-
-
-
-
-
-
-
-
-
