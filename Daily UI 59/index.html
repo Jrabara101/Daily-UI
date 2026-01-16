@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily UI 59 - Generative Glassmorphic Environment</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Background Canvas Layers -->
+  <canvas id="canvas-layer-1" class="canvas-layer" data-layer="1"></canvas>
+  <canvas id="canvas-layer-2" class="canvas-layer" data-layer="2"></canvas>
+  <canvas id="canvas-layer-3" class="canvas-layer" data-layer="3"></canvas>
+
+  <!-- Main Content -->
+  <main class="content-container">
+    <!-- Theme Toggle -->
+    <div class="theme-toggle-container">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="theme-icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="theme-icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Glassmorphic Cards -->
+    <section class="cards-section">
+      <div class="glass-card" data-card="1">
+        <h2>Layer Depth</h2>
+        <p>Experience the 3-layer parallax effect as you scroll through the content. Each layer moves at different speeds, creating an illusion of depth.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="glass-card" data-card="2">
+        <h2>Interactive Grid</h2>
+        <p>The background pattern reacts to your mouse movement. Watch how the grid subtly bends and glows near your cursor, creating a focal point.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="glass-card" data-card="3">
+        <h2>Theme Interpolation</h2>
+        <p>Smooth transitions between light and dark modes powered by CSS variables and optimized animations. Colors morph gracefully over 1.5 seconds.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="glass-card" data-card="4">
+        <h2>Procedural Generation</h2>
+        <p>Every session generates a unique pattern based on a seed value. The pattern remains consistent throughout your visit but differs each time.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="glass-card" data-card="5">
+        <h2>Performance Optimized</h2>
+        <p>Rendered on Canvas at 60fps with GPU acceleration. The background runs smoothly without impacting main thread performance.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="glass-card" data-card="6">
+        <h2>Accessibility First</h2>
+        <p>Respects prefers-reduced-motion settings. When enabled, animations pause and display a beautiful static high-fidelity composition.</p>
+        <div class="card-accent"></div>
+      </div>
+    </section>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-bar"></div>
+      <span class="scroll-text">Scroll to experience parallax depth</span>
+    </div>
+  </main>
+
+  <!-- Mouse Focal Point Indicator (for debugging, can be removed) -->
+  <div id="mouse-indicator" class="mouse-indicator"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
