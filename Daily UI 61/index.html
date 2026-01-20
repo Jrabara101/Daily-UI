@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Ares — The High-Fidelity WOD Engine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container" id="appContainer">
+        <!-- Header/Status Bar -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-title">ARES</h1>
+                <div class="day-indicator" id="dayIndicator">
+                    <span class="day-name" id="dayName">Monday</span>
+                    <span class="day-focus" id="dayFocus">Push / Chest</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Card Stack Container -->
+        <main class="card-stack-container" id="cardStackContainer">
+            <!-- Cards will be dynamically inserted here -->
+        </main>
+
+        <!-- Admin Drawer Toggle Button (hidden, accessible via long-press) -->
+        <button class="admin-toggle" id="adminToggle" aria-label="Open admin drawer" style="display: none;">
+            ⚙️
+        </button>
+
+        <!-- Admin Drawer -->
+        <aside class="admin-drawer" id="adminDrawer">
+            <div class="admin-drawer-header">
+                <h2>Workout Editor</h2>
+                <button class="admin-close" id="adminClose" aria-label="Close admin drawer">×</button>
+            </div>
+            <div class="admin-drawer-content">
+                <div class="admin-section">
+                    <label for="currentDay">Current Day:</label>
+                    <select id="currentDay" class="admin-input">
+                        <option value="1">Monday</option>
+                        <option value="3">Wednesday</option>
+                        <option value="5">Friday</option>
+                        <option value="0">Sunday</option>
+                        <option value="2">Tuesday</option>
+                        <option value="4">Thursday</option>
+                        <option value="6">Saturday</option>
+                    </select>
+                </div>
+                <div class="admin-section">
+                    <label for="workoutFocus">Workout Focus:</label>
+                    <input type="text" id="workoutFocus" class="admin-input" placeholder="e.g., Push / Chest">
+                </div>
+                <div class="admin-section">
+                    <label>Exercises (JSON):</label>
+                    <textarea id="workoutExercises" class="admin-input admin-textarea" rows="10" placeholder='[{"name":"Exercise Name","image":"workout pictures/1.jpg","sets":3,"reps":"8-10"}]'></textarea>
+                </div>
+                <div class="admin-actions">
+                    <button class="admin-btn admin-btn-primary" id="adminSave">Save Workout</button>
+                    <button class="admin-btn admin-btn-secondary" id="adminReset">Reset to Default</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

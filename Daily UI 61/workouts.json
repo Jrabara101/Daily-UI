@@ -1,0 +1,182 @@
+{
+  "1": {
+    "focus": "Push / Chest",
+    "exercises": [
+      {
+        "name": "Bench Press",
+        "image": "workout pictures/1.jpg",
+        "sets": 3,
+        "reps": "8-10"
+      },
+      {
+        "name": "Overhead Press",
+        "image": "workout pictures/2.jpg",
+        "sets": 3,
+        "reps": "8-10"
+      },
+      {
+        "name": "Incline Dumbbell Press",
+        "image": "workout pictures/3.jpg",
+        "sets": 3,
+        "reps": "10-12"
+      },
+      {
+        "name": "Dips",
+        "image": "workout pictures/4.jpg",
+        "sets": 3,
+        "reps": "12-15"
+      },
+      {
+        "name": "Tricep Extension",
+        "image": "workout pictures/5.jpg",
+        "sets": 3,
+        "reps": "10-12"
+      }
+    ]
+  },
+  "3": {
+    "focus": "Pull / Back",
+    "exercises": [
+      {
+        "name": "Deadlift",
+        "image": "workout pictures/6.jpg",
+        "sets": 4,
+        "reps": "5-6"
+      },
+      {
+        "name": "Pull-ups",
+        "image": "workout pictures/7.jpg",
+        "sets": 3,
+        "reps": "8-12"
+      },
+      {
+        "name": "Barbell Row",
+        "image": "workout pictures/8.jpg",
+        "sets": 3,
+        "reps": "8-10"
+      },
+      {
+        "name": "Lat Pulldown",
+        "image": "workout pictures/9.jpg",
+        "sets": 3,
+        "reps": "10-12"
+      },
+      {
+        "name": "Bicep Curls",
+        "image": "workout pictures/10.jpg",
+        "sets": 3,
+        "reps": "12-15"
+      }
+    ]
+  },
+  "5": {
+    "focus": "Legs / Core",
+    "exercises": [
+      {
+        "name": "Squats",
+        "image": "workout pictures/11.jpg",
+        "sets": 4,
+        "reps": "8-10"
+      },
+      {
+        "name": "Romanian Deadlift",
+        "image": "workout pictures/12.jpg",
+        "sets": 3,
+        "reps": "10-12"
+      },
+      {
+        "name": "Leg Press",
+        "image": "workout pictures/13.jpg",
+        "sets": 3,
+        "reps": "12-15"
+      },
+      {
+        "name": "Leg Curls",
+        "image": "workout pictures/14.jpg",
+        "sets": 3,
+        "reps": "12-15"
+      },
+      {
+        "name": "Plank",
+        "image": "workout pictures/15.jpg",
+        "sets": 3,
+        "reps": "60s"
+      }
+    ]
+  },
+  "0": {
+    "focus": "Full Body / Cardio",
+    "exercises": [
+      {
+        "name": "Burpees",
+        "image": "workout pictures/16.jpg",
+        "sets": 3,
+        "reps": "10-15"
+      },
+      {
+        "name": "Mountain Climbers",
+        "image": "workout pictures/17.jpg",
+        "sets": 3,
+        "reps": "20-30"
+      },
+      {
+        "name": "Jump Squats",
+        "image": "workout pictures/18.jpg",
+        "sets": 3,
+        "reps": "15-20"
+      }
+    ]
+  },
+  "2": {
+    "focus": "Upper Body / Shoulders",
+    "exercises": [
+      {
+        "name": "Lateral Raises",
+        "image": "workout pictures/19.jpg",
+        "sets": 3,
+        "reps": "12-15"
+      },
+      {
+        "name": "Front Raises",
+        "image": "workout pictures/20.jpg",
+        "sets": 3,
+        "reps": "12-15"
+      }
+    ]
+  },
+  "4": {
+    "focus": "Arms / Isolation",
+    "exercises": [
+      {
+        "name": "Hammer Curls",
+        "image": "workout pictures/21.jpg",
+        "sets": 3,
+        "reps": "12-15"
+      },
+      {
+        "name": "Tricep Kickbacks",
+        "image": "workout pictures/22.jpg",
+        "sets": 3,
+        "reps": "12-15"
+      }
+    ]
+  },
+  "6": {
+    "focus": "Core / Stability",
+    "exercises": [
+      {
+        "name": "Russian Twists",
+        "image": "workout pictures/23.jpg",
+        "sets": 3,
+        "reps": "20-30"
+      },
+      {
+        "name": "Leg Raises",
+        "image": "workout pictures/24.jpg",
+        "sets": 3,
+        "reps": "15-20"
+      }
+    ]
+  }
+}
+

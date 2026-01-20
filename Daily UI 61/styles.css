@@ -1,0 +1,528 @@
+/* CSS Variables for Samsung Galaxy S9+ */
+:root {
+    --s9-width: 360px;
+    --s9-height: 740px;
+    --amoled-black: #000000;
+    --card-border-radius: 24px;
+    --safe-area-padding: 16px;
+    --card-stack-offset: 8px;
+    --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--amoled-black);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    touch-action: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* App Container - Centered Mockup */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+}
+
+.app-container {
+    width: var(--s9-width);
+    height: var(--s9-height);
+    background: var(--amoled-black);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.8), 
+                0 0 100px rgba(0, 0, 0, 0.4),
+                inset 0 0 60px rgba(255, 255, 255, 0.02);
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    /* Safe area for punch hole and edges */
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* Header */
+.app-header {
+    padding: var(--safe-area-padding);
+    padding-top: calc(var(--safe-area-padding) + env(safe-area-inset-top, 0px));
+    background: var(--amoled-black);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 100;
+    position: relative;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-title {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.day-indicator {
+    text-align: right;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.day-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.day-focus {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Card Stack Container */
+.card-stack-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    padding: var(--safe-area-padding);
+    padding-bottom: calc(var(--safe-area-padding) + env(safe-area-inset-bottom, 0px));
+}
+
+/* Workout Card */
+.workout-card {
+    position: absolute;
+    width: calc(100% - (var(--safe-area-padding) * 2));
+    height: calc(100% - (var(--safe-area-padding) * 2));
+    background: #ffffff;
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+    cursor: grab;
+    will-change: transform, opacity;
+    transition: transform 0.3s var(--transition-smooth), opacity 0.3s var(--transition-smooth);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(0, 0, 0, 0.05);
+    touch-action: none;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-origin: center center;
+}
+
+.workout-card:active {
+    cursor: grabbing;
+}
+
+.workout-card.dragging {
+    transition: none;
+    z-index: 1000;
+}
+
+.workout-card.image-loaded {
+    animation: cardEntry 0.5s var(--transition-bounce);
+}
+
+/* Card Depth Effects */
+.workout-card[data-depth="0"] {
+    z-index: 10;
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.workout-card[data-depth="1"] {
+    z-index: 9;
+    transform: scale(0.95) translateY(calc(var(--card-stack-offset) * 1));
+    opacity: 0.9;
+}
+
+.workout-card[data-depth="2"] {
+    z-index: 8;
+    transform: scale(0.9) translateY(calc(var(--card-stack-offset) * 2));
+    opacity: 0.8;
+}
+
+.workout-card[data-depth="3"] {
+    z-index: 7;
+    transform: scale(0.85) translateY(calc(var(--card-stack-offset) * 3));
+    opacity: 0.7;
+}
+
+.workout-card[data-depth="4"] {
+    z-index: 6;
+    transform: scale(0.8) translateY(calc(var(--card-stack-offset) * 4));
+    opacity: 0.6;
+}
+
+/* Card Image */
+.card-image {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Card Content */
+.card-content {
+    padding: 24px;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #ffffff;
+}
+
+.card-exercise-name {
+    font-size: 32px;
+    font-weight: 800;
+    color: #000000;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.card-exercise-details {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+.card-sets-reps {
+    display: flex;
+    gap: 24px;
+    margin-top: auto;
+}
+
+.card-stat {
+    flex: 1;
+}
+
+.card-stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(0, 0, 0, 0.4);
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.card-stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+}
+
+/* Swipe Direction Indicators */
+.swipe-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    z-index: 2000;
+}
+
+.swipe-indicator.show {
+    opacity: 0.3;
+}
+
+.swipe-indicator.up { top: 20%; }
+.swipe-indicator.down { top: 80%; }
+.swipe-indicator.left { left: 20%; }
+.swipe-indicator.right { left: 80%; }
+
+/* Card Exit Animations */
+.workout-card.swiping-out-up {
+    animation: swipeOutUp 0.4s var(--transition-smooth) forwards;
+}
+
+.workout-card.swiping-out-down {
+    animation: swipeOutDown 0.4s var(--transition-smooth) forwards;
+}
+
+.workout-card.swiping-out-left {
+    animation: swipeOutLeft 0.4s var(--transition-smooth) forwards;
+}
+
+.workout-card.swiping-out-right {
+    animation: swipeOutRight 0.4s var(--transition-smooth) forwards;
+}
+
+/* Keyframe Animations */
+@keyframes cardEntry {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes swipeOutUp {
+    to {
+        transform: translateY(-200%) rotate(-10deg);
+        opacity: 0;
+    }
+}
+
+@keyframes swipeOutDown {
+    to {
+        transform: translateY(200%) rotate(10deg);
+        opacity: 0;
+    }
+}
+
+@keyframes swipeOutLeft {
+    to {
+        transform: translateX(-200%) rotate(-10deg);
+        opacity: 0;
+    }
+}
+
+@keyframes swipeOutRight {
+    to {
+        transform: translateX(200%) rotate(10deg);
+        opacity: 0;
+    }
+}
+
+/* Admin Drawer */
+.admin-drawer {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 85%;
+    max-width: 400px;
+    height: 100%;
+    background: #1a1a1a;
+    z-index: 10000;
+    transition: right 0.3s var(--transition-smooth);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.admin-drawer.open {
+    right: 0;
+}
+
+.admin-drawer-header {
+    padding: 24px;
+    background: #0a0a0a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-drawer-header h2 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.admin-close {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.admin-close:hover {
+    opacity: 1;
+}
+
+.admin-drawer-content {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.admin-section {
+    margin-bottom: 24px;
+}
+
+.admin-section label {
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.admin-input {
+    width: 100%;
+    padding: 12px;
+    background: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.admin-input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.admin-textarea {
+    resize: vertical;
+    min-height: 200px;
+    font-family: 'Courier New', monospace;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.admin-btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.admin-btn:active {
+    transform: scale(0.98);
+}
+
+.admin-btn-primary {
+    background: #ffffff;
+    color: #000000;
+}
+
+.admin-btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.admin-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--amoled-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Prevent text selection and context menus */
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Prevent overscroll */
+.app-container,
+.card-stack-container {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbars */
+.admin-drawer-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.admin-drawer-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.admin-drawer-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+}
+
