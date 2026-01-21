@@ -1,0 +1,423 @@
+:root {
+    /* Color Palette - Based on Task Management Dashboard */
+    --primary-blue: #007bff;
+    --primary-blue-dark: #0056b3;
+    --primary-blue-light: #4da3ff;
+    --bg-soft: #f4f7f6;
+    --bg-white: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #6c757d;
+    --text-light: #adb5bd;
+    --shadow-soft: rgba(0, 0, 0, 0.08);
+    --shadow-medium: rgba(0, 0, 0, 0.12);
+    --shadow-strong: rgba(0, 123, 255, 0.25);
+    --success-green: #28a745;
+    --gradient-blue: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-light: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    
+    /* Animation */
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --transition-slow: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg-soft);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.dashboard-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.coupon-section {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    perspective: 1000px;
+}
+
+/* Physical Ticket Aesthetic with Cut-out Notches */
+.coupon-card {
+    background: var(--bg-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    position: relative;
+    cursor: pointer;
+    transition: transform var(--transition-base);
+    
+    /* Neumorphic & Glassmorphic Blend */
+    box-shadow: 
+        0 10px 30px var(--shadow-soft),
+        0 5px 15px var(--shadow-medium),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+    
+    /* Subtle gradient overlay */
+    background-image: 
+        linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%),
+        var(--bg-white);
+    
+    /* Physical ticket cut-out notches using clip-path */
+    clip-path: polygon(
+        0 0,
+        calc(100% - 0px) 0,
+        100% 0,
+        100% calc(50% - 15px),
+        100% calc(50% - 10px),
+        calc(100% + 5px) 50%,
+        100% calc(50% + 10px),
+        100% calc(50% + 15px),
+        100% 100%,
+        calc(100% - 0px) 100%,
+        0 100%,
+        0 calc(50% + 15px),
+        0 calc(50% + 10px),
+        -5px 50%,
+        0 calc(50% - 10px),
+        0 calc(50% - 15px)
+    );
+    
+    /* Overflow for the notch effect */
+    overflow: visible;
+    
+    /* 3D Kinetic Hover Effect */
+    transform-style: preserve-3d;
+}
+
+.coupon-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--radius-lg);
+    background: radial-gradient(circle at 0% 50%, transparent 10px, var(--bg-white) 11px),
+                radial-gradient(circle at 100% 50%, transparent 10px, var(--bg-white) 11px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Hover Effects - 3D Tilt */
+.coupon-card:hover {
+    transform: rotateY(2deg) rotateX(-1deg) translateY(-5px) scale(1.02);
+    box-shadow: 
+        0 15px 40px var(--shadow-medium),
+        0 8px 20px var(--shadow-strong),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.coupon-card:active {
+    transform: rotateY(1deg) rotateX(-0.5deg) translateY(-2px) scale(1.01);
+    transition: transform var(--transition-fast);
+}
+
+/* Disabled/Expired State */
+.coupon-card.expired,
+.coupon-card.claimed {
+    opacity: 0.7;
+    cursor: not-allowed;
+    filter: grayscale(50%);
+    pointer-events: none;
+}
+
+.coupon-card.claimed::after {
+    content: '✓ Claimed';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--success-green);
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.9rem;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+/* Main Content */
+.coupon-main {
+    margin-bottom: var(--spacing-md);
+}
+
+.coupon-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.2;
+}
+
+.coupon-highlight {
+    display: block;
+    color: var(--primary-blue);
+    margin-top: 0.25rem;
+}
+
+.coupon-instruction {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-top: var(--spacing-xs);
+}
+
+/* Animated Dashed Line (Perforation) */
+.coupon-dashed-line {
+    height: 1px;
+    border-top: 2px dashed var(--text-light);
+    margin: var(--spacing-md) 0;
+    position: relative;
+    opacity: 0.6;
+    transition: all var(--transition-base);
+}
+
+.coupon-card:hover .coupon-dashed-line {
+    opacity: 1;
+    box-shadow: 0 0 8px var(--primary-blue-light);
+    border-color: var(--primary-blue-light);
+    animation: dashGlow 2s ease-in-out infinite;
+}
+
+@keyframes dashGlow {
+    0%, 100% {
+        opacity: 0.8;
+        box-shadow: 0 0 8px var(--primary-blue-light);
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 15px var(--primary-blue);
+    }
+}
+
+/* Coupon Code Section */
+.coupon-code-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-md);
+}
+
+.coupon-code {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text-primary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--bg-soft);
+    border-radius: var(--radius-sm);
+    font-family: 'Courier New', monospace;
+    transition: all var(--transition-base);
+    user-select: none;
+}
+
+.coupon-card:hover .coupon-code {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: scale(1.05);
+}
+
+.copy-indicator {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 500;
+    transition: all var(--transition-base);
+}
+
+.coupon-card:hover .copy-indicator {
+    color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+.copy-indicator.copied {
+    color: var(--success-green);
+    font-weight: 600;
+    animation: copyPulse 0.5s ease;
+}
+
+@keyframes copyPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Timer */
+.coupon-timer {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--bg-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    font-size: 0.9rem;
+}
+
+.timer-label {
+    color: var(--text-secondary);
+}
+
+.timer-value {
+    font-weight: 600;
+    color: var(--primary-blue);
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+}
+
+.coupon-card.expired .timer-value {
+    color: var(--text-light);
+}
+
+/* Status Message */
+.coupon-status {
+    margin-top: var(--spacing-sm);
+    text-align: center;
+    font-size: 0.85rem;
+    min-height: 20px;
+}
+
+.coupon-status.success {
+    color: var(--success-green);
+    font-weight: 600;
+    animation: statusFadeIn 0.3s ease;
+}
+
+@keyframes statusFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Confetti Container */
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--primary-blue);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+@keyframes confettiBurst {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--end-x, 200px), var(--end-y, 400px)) rotate(720deg) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .coupon-card {
+        padding: var(--spacing-md) var(--spacing-lg);
+        max-width: 100%;
+    }
+    
+    .coupon-title {
+        font-size: 1.5rem;
+    }
+    
+    .coupon-code {
+        font-size: 1.25rem;
+    }
+    
+    .coupon-card {
+        clip-path: polygon(
+            0 0,
+            100% 0,
+            100% 100%,
+            0 100%,
+            0 calc(50% + 15px),
+            0 calc(50% + 10px),
+            -5px 50%,
+            0 calc(50% - 10px),
+            0 calc(50% - 15px)
+        );
+    }
+}
+
+/* Focus Styles for Accessibility */
+.coupon-card:focus {
+    outline: 3px solid var(--primary-blue);
+    outline-offset: 4px;
+}
+
+.coupon-card:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+

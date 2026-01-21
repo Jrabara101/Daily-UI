@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily UI 62 - Dynamic Coupon System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <main class="dashboard-main">
+            <div class="coupon-section" role="region" aria-label="Special Offer">
+                <div class="coupon-card" 
+                     role="button" 
+                     aria-label="Copy discount code friends-of-pop to get 20 percent off for 12 months"
+                     tabindex="0"
+                     id="couponCard">
+                    
+                    <div class="coupon-main">
+                        <h2 class="coupon-title" aria-label="Get 20% off for 12 months">
+                            Get 20% off for
+                            <span class="coupon-highlight">12 months!</span>
+                        </h2>
+                        <p class="coupon-instruction" aria-label="Use coupon code">Use coupon code:</p>
+                    </div>
+                    
+                    <div class="coupon-dashed-line" aria-hidden="true"></div>
+                    
+                    <div class="coupon-code-wrapper">
+                        <span id="couponCode" class="coupon-code" aria-label="Coupon code friends-of-pop">friends-of-pop</span>
+                        <div class="copy-indicator" id="copyIndicator" aria-live="polite">Click to copy</div>
+                    </div>
+                    
+                    <div class="coupon-timer" id="couponTimer" role="timer" aria-live="polite">
+                        <span class="timer-label">Expires in:</span>
+                        <span class="timer-value" id="timerValue">23:59:45</span>
+                    </div>
+                    
+                    <div class="coupon-status" id="couponStatus" aria-live="polite"></div>
+                </div>
+                
+                <div id="confettiContainer" class="confetti-container" aria-hidden="true"></div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
