@@ -34,3 +34,4 @@ npm run build
 - Canvas API for color extraction
 - Vite for development
 
+

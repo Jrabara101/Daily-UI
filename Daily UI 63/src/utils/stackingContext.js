@@ -79,3 +79,4 @@ export function validateZIndex(zIndex, layer) {
     return zIndex >= layerData.min && zIndex <= layerData.max;
 }
 
+
