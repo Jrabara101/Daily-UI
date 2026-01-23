@@ -1,0 +1,510 @@
+/* ============================================
+   PersonaGate - Advanced Onboarding Styles
+   GPU-Accelerated, Glassmorphic, 3D Transforms
+   ============================================ */
+
+:root {
+    /* Color Palette */
+    --primary-blue: #2563eb;
+    --primary-blue-dark: #1e40af;
+    --primary-blue-light: #3b82f6;
+    --accent-green: #10b981;
+    --accent-green-dark: #059669;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-light: #94a3b8;
+    --bg-gradient-start: #0f172a;
+    --bg-gradient-end: #1e293b;
+    --card-bg: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    --glass-overlay: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    
+    /* Transitions */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    --spring-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Background Pattern */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.onboarding-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Step Indicator */
+.step-indicator {
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-sm);
+}
+
+.step-number {
+    color: var(--primary-blue-light);
+    font-size: 0.875rem;
+    font-weight: 500;
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+}
+
+/* Content Card */
+.content-card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-2xl);
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.onboarding-header {
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+.main-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    letter-spacing: -0.02em;
+}
+
+.instruction-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Persona Grid - Responsive with CSS Grid */
+.persona-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+}
+
+/* Persona Card Base Styles */
+.persona-card {
+    position: relative;
+    background: var(--card-bg);
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: var(--spacing-lg);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    will-change: transform, opacity, filter;
+    transform-style: preserve-3d;
+    overflow: hidden;
+    
+    /* GPU Acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Hover State - 3D Lift Effect */
+.persona-card:hover:not(.is-active) {
+    transform: translateY(-8px) translateZ(20px) scale(1.02);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary-blue-light);
+}
+
+/* Active/Selected State */
+.persona-card.is-active {
+    border-color: var(--accent-green);
+    border-width: 3px;
+    transform: translateY(-4px) translateZ(30px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(16, 185, 129, 0.2);
+    background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+}
+
+/* Dimmed State for Non-Selected Cards */
+.persona-grid.has-selection .persona-card:not(.is-active) {
+    opacity: 0.5;
+    filter: blur(2px);
+    transform: scale(0.95);
+    pointer-events: none;
+}
+
+/* Card Icon Container */
+.persona-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary-blue-light) 0%, var(--primary-blue) 100%);
+    transition: all var(--transition-base);
+    will-change: transform;
+}
+
+.persona-card.is-active .persona-icon {
+    background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-dark) 100%);
+    transform: scale(1.1) rotate(5deg);
+}
+
+.persona-icon svg {
+    width: 32px;
+    height: 32px;
+    stroke: white;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Card Title */
+.persona-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+    transition: color var(--transition-base);
+}
+
+.persona-card.is-active .persona-title {
+    color: var(--accent-green-dark);
+}
+
+/* Contextual Reveal - Benefits List */
+.persona-benefits {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height var(--transition-slow), opacity var(--transition-base), margin var(--transition-base);
+    margin-top: 0;
+}
+
+.persona-card.is-active .persona-benefits {
+    max-height: 300px;
+    opacity: 1;
+    margin-top: var(--spacing-md);
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+}
+
+.benefit-item {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    padding: var(--spacing-xs) 0;
+    padding-left: var(--spacing-md);
+    position: relative;
+    line-height: 1.5;
+}
+
+.benefit-item::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+    font-weight: bold;
+}
+
+/* Select Role Button (Inside Active Card) */
+.select-role-btn {
+    display: none;
+    width: 100%;
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--accent-green);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    will-change: transform;
+}
+
+.persona-card.is-active .select-role-btn {
+    display: flex;
+    animation: popIn var(--spring-ease) 0.4s;
+}
+
+.select-role-btn:hover {
+    background: var(--accent-green-dark);
+    transform: scale(1.05);
+}
+
+.select-role-btn:active {
+    transform: scale(0.98);
+}
+
+/* Click Ripple Effect */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(16, 185, 129, 0.4);
+    transform: scale(0);
+    animation: ripple-animation 0.6s ease-out;
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Selection Pulse Effect */
+@keyframes selectionPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
+}
+
+.persona-card.is-active {
+    animation: selectionPulse 0.6s ease-out;
+}
+
+/* Focus States for Accessibility */
+.persona-card:focus-visible {
+    outline: 3px solid var(--primary-blue);
+    outline-offset: 4px;
+    border-color: var(--primary-blue);
+}
+
+.persona-card.is-active:focus-visible {
+    outline-color: var(--accent-green);
+}
+
+/* Glassmorphic Overlay (for non-selected cards when one is selected) */
+.persona-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    pointer-events: none;
+    border-radius: 16px;
+}
+
+.persona-grid.has-selection .persona-card:not(.is-active)::after {
+    opacity: 1;
+}
+
+/* Floating Action Button (FAB) */
+.fab-continue {
+    position: fixed;
+    bottom: var(--spacing-lg);
+    right: var(--spacing-lg);
+    background: var(--accent-green);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--shadow-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    z-index: 1000;
+    transition: all var(--transition-base);
+    will-change: transform, opacity;
+    transform: translateY(100px) scale(0.8);
+    opacity: 0;
+}
+
+.fab-continue.show {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    animation: fabPopIn var(--spring-ease) 0.5s;
+}
+
+@keyframes fabPopIn {
+    0% {
+        transform: translateY(100px) scale(0.8);
+        opacity: 0;
+    }
+    60% {
+        transform: translateY(-10px) scale(1.05);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.fab-continue:hover {
+    background: var(--accent-green-dark);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.4);
+}
+
+.fab-continue:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.fab-continue:focus-visible {
+    outline: 3px solid var(--accent-green);
+    outline-offset: 4px;
+}
+
+.fab-text {
+    font-size: 1rem;
+}
+
+.fab-arrow {
+    transition: transform var(--transition-base);
+}
+
+.fab-continue:hover .fab-arrow {
+    transform: translateX(4px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content-card {
+        padding: var(--spacing-lg);
+        border-radius: 16px;
+    }
+    
+    .main-title {
+        font-size: 1.5rem;
+    }
+    
+    .instruction-text {
+        font-size: 0.875rem;
+    }
+    
+    .persona-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .persona-card {
+        padding: var(--spacing-md);
+    }
+    
+    .fab-continue {
+        bottom: var(--spacing-md);
+        right: var(--spacing-md);
+        left: var(--spacing-md);
+        width: auto;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: var(--spacing-sm);
+    }
+    
+    .content-card {
+        padding: var(--spacing-md);
+    }
+    
+    .main-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* Pop In Animation */
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Screen Reader Only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
