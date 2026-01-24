@@ -207,7 +207,7 @@ function renderPersonaGrid() {
 function selectUserType(type, element) {
     // 1. Update Data State
     personaStore.selectedType = type;
-    userTypeInput.value = type;
+    userTypeInput.value = type || ''; // Use empty string instead of null to prevent "null" string
     
     // 2. Update URL
     updateURL(type);

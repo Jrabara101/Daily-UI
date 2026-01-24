@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina News — The Intelligent Editorial Feed</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Lumina News Widget -->
+        <aside class="lumina-news-widget" id="lumina-widget">
+            <!-- Glassmorphic Header -->
+            <header class="widget-header">
+                <div class="header-content">
+                    <h2 class="widget-title">
+                        <span class="title-icon">📰</span>
+                        Lumina News
+                    </h2>
+                    <div class="header-actions">
+                        <button class="action-btn" id="refresh-btn" aria-label="Refresh news">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 2V6M8 10V14M2 8H6M10 8H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Breaking News Ticker -->
+            <div class="breaking-news-container" id="breaking-news">
+                <div class="breaking-label">BREAKING</div>
+                <div class="ticker-wrapper">
+                    <div class="ticker-content" id="ticker-content">
+                        <!-- Ticker items will be injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- News Feed -->
+            <div class="news-feed" id="news-feed" role="feed" aria-label="News feed">
+                <!-- News cards will be dynamically generated -->
+            </div>
+
+            <!-- Loading Indicator -->
+            <div class="loading-indicator" id="loading-indicator">
+                <div class="spinner"></div>
+                <span>Loading news...</span>
+            </div>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
