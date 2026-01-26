@@ -113,3 +113,4 @@ export async function exportMultipleSizes(svgElement, sizes, format = 'png') {
 
 
 
+
