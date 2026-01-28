@@ -1,0 +1,25 @@
+{
+  "name": "omnisight-analytics",
+  "version": "1.0.0",
+  "description": "OmniSight — High-Fidelity Analytics Engine",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "d3": "^7.8.5",
+    "gsap": "^3.12.5",
+    "@floating-ui/dom": "^1.6.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.33",
+    "vite": "^5.0.0"
+  }
+}
+

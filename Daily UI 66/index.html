@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniSight — High-Fidelity Analytics Engine</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Tailwind CSS CDN fallback
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'chart-pink': '#EC4899',
+                        'chart-blue': '#3B82F6',
+                        'chart-yellow': '#EAB308',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="dashboard-container p-6 max-w-7xl mx-auto">
+        <!-- Header -->
+        <header class="mb-6 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-gray-900">OmniSight Analytics</h1>
+            <button id="export-btn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                Export Dashboard
+            </button>
+        </header>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-cols-12 gap-6">
+            <!-- Top Section: Orders Line Chart -->
+            <div class="col-span-12 lg:col-span-8 bg-white rounded-xl shadow-sm p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-semibold text-gray-900" id="orders-count">4,078 orders</h2>
+                    <div class="flex gap-2" role="tablist" aria-label="Time period filters">
+                        <button class="time-filter px-4 py-2 rounded-lg text-sm font-medium transition-colors" 
+                                data-period="today" 
+                                aria-selected="false"
+                                role="tab">Today</button>
+                        <button class="time-filter px-4 py-2 rounded-lg text-sm font-medium transition-colors" 
+                                data-period="weekly" 
+                                aria-selected="false"
+                                role="tab">Weekly</button>
+                        <button class="time-filter px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-600 text-white" 
+                                data-period="monthly" 
+                                aria-selected="true"
+                                role="tab">Monthly</button>
+                        <button class="time-filter px-4 py-2 rounded-lg text-sm font-medium transition-colors" 
+                                data-period="yearly" 
+                                aria-selected="false"
+                                role="tab">Yearly</button>
+                    </div>
+                </div>
+                <div id="orders-chart" class="w-full h-80 relative">
+                    <!-- Chart will be rendered here -->
+                    <div class="skeleton-chart skeleton absolute inset-0 rounded-lg"></div>
+                </div>
+            </div>
+
+            <!-- Sidebar: Efficiency Gauges and Completed Tasks -->
+            <div class="col-span-12 lg:col-span-4 space-y-6">
+                <!-- Efficiency Gauges -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Efficiency</h3>
+                    <div id="efficiency-gauges" class="flex flex-col gap-6">
+                        <!-- Gauges will be rendered here -->
+                        <div class="skeleton-gauge skeleton h-32 rounded-lg"></div>
+                        <div class="skeleton-gauge skeleton h-32 rounded-lg"></div>
+                    </div>
+                </div>
+
+                <!-- Completed Tasks -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Completed Tasks</h3>
+                    <div id="completed-tasks" class="space-y-4">
+                        <!-- Task bars will be rendered here -->
+                        <div class="skeleton-task skeleton h-16 rounded-lg"></div>
+                        <div class="skeleton-task skeleton h-16 rounded-lg"></div>
+                        <div class="skeleton-task skeleton h-16 rounded-lg"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Left: KPI Cards -->
+            <div class="col-span-12 lg:col-span-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
+                <!-- Store Product Card -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium text-gray-600">Store product</span>
+                    </div>
+                    <div class="text-4xl font-bold text-gray-900" id="store-product-count">3,271</div>
+                </div>
+
+                <!-- Total Sales Card -->
+                <div class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-sm p-6 text-white">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium text-white/90">Total sales</span>
+                    </div>
+                    <div class="text-4xl font-bold" id="total-sales-count">37,278</div>
+                </div>
+            </div>
+
+            <!-- Bottom Right: Activity Heatmap -->
+            <div class="col-span-12 lg:col-span-8 bg-white rounded-xl shadow-sm p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex gap-2" role="group" aria-label="Activity threshold filters">
+                        <button class="threshold-filter px-3 py-1 rounded text-sm font-medium transition-colors" 
+                                data-threshold="50"
+                                aria-pressed="false">50></button>
+                        <button class="threshold-filter px-3 py-1 rounded text-sm font-medium transition-colors" 
+                                data-threshold="100"
+                                aria-pressed="false">100></button>
+                        <button class="threshold-filter px-3 py-1 rounded text-sm font-medium transition-colors" 
+                                data-threshold="200"
+                                aria-pressed="false">200></button>
+                    </div>
+                    <select id="heatmap-period" class="px-3 py-1 border border-gray-300 rounded-lg text-sm" aria-label="Heatmap time period">
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
+                <div id="activity-heatmap" class="w-full">
+                    <!-- Heatmap will be rendered here -->
+                    <div class="skeleton-heatmap skeleton h-64 rounded-lg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Tooltip Portal -->
+    <div id="tooltip-portal" class="fixed pointer-events-none z-50 opacity-0 transition-opacity duration-200"></div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 flex flex-col items-center gap-4">
+            <div class="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+            <span class="text-gray-700">Exporting dashboard...</span>
+        </div>
+    </div>
+
+    <script type="module" src="./script.js"></script>
+</body>
+</html>
+
