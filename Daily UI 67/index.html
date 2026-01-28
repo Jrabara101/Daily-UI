@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeStay — Enterprise Hospitality Engine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav">
+            <a class="logo" href="#top">LuxeStay</a>
+            <div class="nav-links">
+                <a href="#availability">Availability</a>
+                <a href="#rooms">Rooms</a>
+                <a href="#results">Search</a>
+                <a href="#pricing">Pricing</a>
+            </div>
+            <div class="nav-extras">
+                <a href="../Daily UI 64/index.html">Daily UI 64</a>
+                <a href="../Daily UI 65/index.html">Daily UI 65</a>
+                <a href="../Daily UI 66/index.html">Daily UI 66</a>
+                <button class="btn ghost" id="openSearch">New Search</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="top">
+        <div class="hero-gallery" id="heroGallery">
+            <article class="hero-slide">
+                <img
+                    class="blur-up"
+                    loading="lazy"
+                    src="https://images.unsplash.com/photo-1501117716987-c8e1ecb2101a?auto=format&fit=crop&w=40&q=10"
+                    data-src="https://images.unsplash.com/photo-1501117716987-c8e1ecb2101a?auto=format&fit=crop&w=1600&q=80"
+                    alt="LuxeStay Ocean Suite">
+                <div class="hero-caption">
+                    <p class="eyebrow">Ocean Suite</p>
+                    <h1>LuxeStay — Enterprise Hospitality Engine</h1>
+                    <p>Dynamic pricing, realtime availability, and immersive stays at scale.</p>
+                </div>
+            </article>
+            <article class="hero-slide">
+                <img
+                    class="blur-up"
+                    loading="lazy"
+                    src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=40&q=10"
+                    data-src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1600&q=80"
+                    alt="Courtyard villa">
+            </article>
+            <article class="hero-slide">
+                <img
+                    class="blur-up"
+                    loading="lazy"
+                    src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=40&q=10"
+                    data-src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80"
+                    alt="Skyline penthouse">
+            </article>
+        </div>
+        <div class="hero-meta" id="heroMeta">
+            <div>
+                <p class="meta-label">Tonight from</p>
+                <p class="meta-price">$320</p>
+                <p class="meta-sub">Includes Friday premium and VIP lounge access</p>
+            </div>
+            <div class="meta-amenities">
+                <span class="pill">Spa</span>
+                <span class="pill">Airport transfer</span>
+                <span class="pill">Chef on call</span>
+            </div>
+            <button class="btn primary">Reserve Suite</button>
+        </div>
+    </section>
+
+    <div class="booking-bar" id="bookingBar">
+        <div class="bar-content">
+            <div>
+                <p class="bar-title">LuxeStay Ocean Suite</p>
+                <p class="bar-sub">Check-in <span id="barCheckIn">Select</span> · Check-out <span id="barCheckOut">Select</span></p>
+            </div>
+            <div class="bar-price">
+                <span id="barTotal">$0</span>
+                <button class="btn primary">Book Now</button>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section class="search-panel" id="search">
+            <div class="search-card">
+                <div>
+                    <p class="eyebrow">Smart Search</p>
+                    <h2>Find a stay that matches your pace</h2>
+                </div>
+                <form id="searchForm">
+                    <label>
+                        Destination
+                        <input id="location" type="text" placeholder="Kyoto, Japan">
+                    </label>
+                    <label>
+                        Guests
+                        <input id="guests" type="number" min="1" max="6" value="2">
+                    </label>
+                    <label>
+                        Check-in
+                        <input id="checkInInput" type="text" placeholder="Select date" readonly>
+                    </label>
+                    <label>
+                        Check-out
+                        <input id="checkOutInput" type="text" placeholder="Select date" readonly>
+                    </label>
+                    <button class="btn primary" type="button" id="scrollToAvailability">View availability</button>
+                </form>
+                <p class="hint" id="formHint">Search criteria is saved automatically.</p>
+            </div>
+        </section>
+
+        <section class="availability" id="availability">
+            <div class="section-header">
+                <div>
+                    <p class="eyebrow">Availability Matrix</p>
+                    <h2>Dynamic rates with minimum-stay logic</h2>
+                    <p class="subtle">Select dates to unlock pricing and early-bird discounts.</p>
+                </div>
+                <div class="min-stay" id="minStayBadge">Minimum stay: 2 nights</div>
+            </div>
+
+            <div class="calendar-wrapper">
+                <div class="calendar-header">
+                    <button class="btn ghost" id="prevMonth">←</button>
+                    <div>
+                        <p id="calendarMonth">October 2026</p>
+                        <span class="subtle" id="calendarHint">Choose your arrival date first.</span>
+                    </div>
+                    <button class="btn ghost" id="nextMonth">→</button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+                <div class="calendar-legend">
+                    <span class="legend-item"><span class="legend-dot available"></span>Available</span>
+                    <span class="legend-item"><span class="legend-dot selected"></span>Selected</span>
+                    <span class="legend-item"><span class="legend-dot blocked"></span>Unavailable</span>
+                </div>
+            </div>
+
+            <div class="price-summary" id="pricing">
+                <div class="breakdown-card" id="priceBreakdown">
+                    <h3>Price breakdown</h3>
+                    <div class="breakdown-row"><span>Nights</span><span id="nightCount">0</span></div>
+                    <div class="breakdown-row"><span>Subtotal</span><span id="subtotalAmount">$0.00</span></div>
+                    <div class="breakdown-row"><span>Early bird</span><span id="discountAmount">-$0.00</span></div>
+                    <div class="breakdown-row"><span>Taxes & fees</span><span id="taxAmount">$0.00</span></div>
+                    <div class="breakdown-total"><span>Total</span><span id="totalAmount">$0.00</span></div>
+                </div>
+                <div class="breakdown-card">
+                    <h3>Booking insights</h3>
+                    <ul class="insights">
+                        <li>Weekend premium applied on Fri/Sat nights.</li>
+                        <li>Early bird discount for stays booked 21+ days ahead.</li>
+                        <li>Taxes are calculated at 12% and shown transparently.</li>
+                    </ul>
+                    <button class="btn primary">Confirm stay</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="room-detail" id="rooms">
+            <div class="section-header">
+                <div>
+                    <p class="eyebrow">Room Intelligence</p>
+                    <h2>Stay details designed for conversion</h2>
+                </div>
+            </div>
+            <div class="room-content">
+                <article class="room-description" id="roomDescription">
+                    <h3>Ocean Suite</h3>
+                    <p>
+                        Experience panoramic views, dynamic lighting scenes, and in-room automation.
+                        Room metadata transforms into a sticky booking surface as you scroll.
+                    </p>
+                    <div class="amenity-grid">
+                        <div>
+                            <p class="meta-label">Signature amenities</p>
+                            <ul>
+                                <li>Private chef & curated tasting menu</li>
+                                <li>Immersive spa rituals</li>
+                                <li>Connected concierge tablet</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="meta-label">Service guarantees</p>
+                            <ul>
+                                <li>Real-time availability updates</li>
+                                <li>Instant chat with staff</li>
+                                <li>Flexible reservation policy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+                <aside class="booking-card" id="bookingCard">
+                    <h3>Book the Ocean Suite</h3>
+                    <p class="subtle">Your dates and preferences stay synced.</p>
+                    <div class="booking-row">
+                        <span>Check-in</span>
+                        <strong id="sideCheckIn">Select</strong>
+                    </div>
+                    <div class="booking-row">
+                        <span>Check-out</span>
+                        <strong id="sideCheckOut">Select</strong>
+                    </div>
+                    <div class="booking-row">
+                        <span>Total</span>
+                        <strong id="sideTotal">$0</strong>
+                    </div>
+                    <button class="btn primary full">Book now</button>
+                </aside>
+            </div>
+        </section>
+
+        <section class="results" id="results">
+            <div class="section-header">
+                <div>
+                    <p class="eyebrow">Segmented Search Results</p>
+                    <h2>Master-detail listing with live map sync</h2>
+                </div>
+                <div class="result-count">
+                    <span id="resultCount">0</span> stays match your filters
+                </div>
+            </div>
+            <div class="results-grid">
+                <aside class="filters">
+                    <h3>Smart filters</h3>
+                    <p class="subtle">Tap to refine. Counts update instantly.</p>
+                    <div class="filter-group" id="amenityFilters">
+                        <button class="pill" data-amenity="spa">Spa</button>
+                        <button class="pill" data-amenity="pool">Pool</button>
+                        <button class="pill" data-amenity="pet">Pet-friendly</button>
+                        <button class="pill" data-amenity="workspace">Workspace</button>
+                        <button class="pill" data-amenity="chef">Chef</button>
+                        <button class="pill" data-amenity="city">City view</button>
+                    </div>
+                </aside>
+
+                <div class="result-layout">
+                    <div class="result-list" id="resultList"></div>
+                    <div class="map-panel">
+                        <div class="map-toolbar">
+                            <button class="btn ghost" data-pan="north">N</button>
+                            <button class="btn ghost" data-pan="west">W</button>
+                            <button class="btn ghost" data-pan="east">E</button>
+                            <button class="btn ghost" data-pan="south">S</button>
+                        </div>
+                        <div class="map-canvas" id="mapCanvas">
+                            <div class="map-center" id="mapCenter"></div>
+                        </div>
+                        <div class="map-meta">
+                            <span>Map center</span>
+                            <strong id="mapCoords">0, 0</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <p>LuxeStay © 2026 · Built for high-performance hospitality.</p>
+        </div>
+        <div class="footer-links">
+            <a href="#top">Back to top</a>
+            <a href="#availability">Availability</a>
+            <a href="#results">Search results</a>
+        </div>
+    </footer>
+
+    <div class="mobile-book">
+        <button class="btn primary full">Book Now</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
