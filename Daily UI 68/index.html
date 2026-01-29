@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AeroStack — High-Velocity Flight Procurement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">
+            <svg viewBox="0 0 28 28" aria-hidden="true">
+              <path
+                d="M4 18c7.6-1.2 11-4.3 17.5-11.5l2.5 2.5C17.6 16 14.2 19 6.5 21L4 18Z"
+                fill="currentColor"
+              />
+              <path
+                d="M10 9.5 12.2 7l9.8 1.4-1.7 1.7L10 9.5Z"
+                fill="currentColor"
+                opacity="0.6"
+              />
+            </svg>
+          </div>
+          <div>
+            <h1>AeroStack</h1>
+            <p>High-Velocity Flight Procurement System</p>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button class="ghost-btn">Support</button>
+          <button class="primary-btn">Checkout</button>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="search-panel">
+          <div class="search-card">
+            <div class="search-header">
+              <div>
+                <h2>Contextual Command Search</h2>
+                <p>Type like “Manila to Tokyo next Friday” or tap the pills.</p>
+              </div>
+              <div class="status-pill">
+                <span class="dot"></span>
+                <span>Live index</span>
+              </div>
+            </div>
+
+            <label class="search-input" for="queryInput">
+              <span class="icon">
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path
+                    d="M8.5 2.5a6 6 0 1 1 0 12a6 6 0 0 1 0-12Zm0 2a4 4 0 1 0 0 8a4 4 0 0 0 0-8Zm6.3 8.9 2.7 2.7-1.4 1.4-2.7-2.7 1.4-1.4Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+              <input
+                id="queryInput"
+                type="text"
+                placeholder="Manila to Tokyo next Friday"
+                autocomplete="off"
+              />
+              <button class="primary-btn" id="runSearch">Search</button>
+            </label>
+
+            <div class="pill-row" aria-live="polite">
+              <button class="pill" data-field="origin">Origin: <span>Manila</span></button>
+              <button class="pill" data-field="destination">Destination: <span>Tokyo</span></button>
+              <button class="pill" data-field="date">Date: <span>Next Friday</span></button>
+              <button class="pill ghost" data-field="roundtrip">Trip: <span>Round-trip</span></button>
+            </div>
+
+            <div class="structured-output" id="structuredOutput" aria-live="polite"></div>
+          </div>
+
+          <div class="price-matrix">
+            <div class="matrix-header">
+              <h3>7-Day Price Matrix</h3>
+              <div class="matrix-legend">
+                <span>Lower fare</span>
+                <span class="bar"></span>
+                <span>Higher fare</span>
+              </div>
+            </div>
+            <div class="matrix-grid" id="matrixGrid"></div>
+          </div>
+        </section>
+
+        <section class="results-panel">
+          <aside class="filters" aria-label="Search Filters">
+            <div class="filter-block">
+              <h4>Fare Range</h4>
+              <div class="range-readout">
+                <span id="minFareLabel">USD 120</span>
+                <span id="maxFareLabel">USD 1320</span>
+              </div>
+              <input id="minFare" type="range" min="120" max="1800" value="120" />
+              <input id="maxFare" type="range" min="120" max="1800" value="1320" />
+            </div>
+
+            <div class="filter-block">
+              <h4>Stops</h4>
+              <input id="stopsRange" type="range" min="0" max="2" value="1" />
+              <div class="range-readout">
+                <span>Up to</span>
+                <strong id="stopsLabel">1 stop</strong>
+              </div>
+            </div>
+
+            <div class="filter-block">
+              <h4>Airlines</h4>
+              <label class="check">
+                <input type="checkbox" value="AeroNova" checked />
+                <span>AeroNova</span>
+              </label>
+              <label class="check">
+                <input type="checkbox" value="SkyUnion" checked />
+                <span>SkyUnion</span>
+              </label>
+              <label class="check">
+                <input type="checkbox" value="CloudNine" checked />
+                <span>CloudNine</span>
+              </label>
+              <label class="check">
+                <input type="checkbox" value="VelocityJet" checked />
+                <span>VelocityJet</span>
+              </label>
+            </div>
+
+            <div class="filter-block ghost-block">
+              <h4>Request State</h4>
+              <p id="requestState">Ready.</p>
+            </div>
+          </aside>
+
+          <section class="results">
+            <div class="results-header">
+              <div>
+                <h3>Search Results</h3>
+                <p id="resultsMeta">Showing instant matches.</p>
+              </div>
+              <div class="toggle-row">
+                <button class="ghost-btn" id="resetFilters">Reset filters</button>
+                <button class="ghost-btn" id="shareLink">Copy share link</button>
+              </div>
+            </div>
+
+            <div class="virtual-list" id="resultsList" aria-live="polite">
+              <div class="virtual-spacer" id="virtualSpacer"></div>
+              <div class="virtual-items" id="virtualItems"></div>
+            </div>
+          </section>
+        </section>
+      </main>
+
+      <footer class="floating-footer">
+        <div>
+          <p>Total fare</p>
+          <h4 id="totalFare">$ 0</h4>
+        </div>
+        <button class="primary-btn" id="proceedBtn">Proceed to checkout</button>
+      </footer>
+    </div>
+
+    <template id="cardTemplate">
+      <article class="flight-card">
+        <div class="flight-top">
+          <div>
+            <h4 class="flight-route"></h4>
+            <p class="flight-meta"></p>
+          </div>
+          <div class="fare">
+            <span class="price"></span>
+            <button class="ghost-btn compare-btn">Compare</button>
+          </div>
+        </div>
+        <div class="flight-body">
+          <div class="times">
+            <div>
+              <strong class="depart-time"></strong>
+              <span class="depart-code"></span>
+            </div>
+            <div class="duration">
+              <span class="duration-text"></span>
+              <span class="timezone-text"></span>
+            </div>
+            <div>
+              <strong class="arrive-time"></strong>
+              <span class="arrive-code"></span>
+            </div>
+          </div>
+          <div class="timeline" aria-hidden="true"></div>
+        </div>
+        <div class="flight-actions">
+          <button class="primary-btn select-btn">Select flight</button>
+          <button class="ghost-btn details-btn">Details</button>
+        </div>
+      </article>
+    </template>
+
+    <template id="skeletonTemplate">
+      <article class="flight-card skeleton">
+        <div class="shimmer-line wide"></div>
+        <div class="shimmer-line"></div>
+        <div class="shimmer-line short"></div>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
