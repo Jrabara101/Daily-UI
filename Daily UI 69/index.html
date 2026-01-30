@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulse — The High-Fidelity Trend Discovery Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+        <defs>
+            <linearGradient id="sparkline-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:var(--accent-green);stop-opacity:1" />
+                <stop offset="100%" style="stop-color:var(--accent-blue);stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="sparkline-grad-down" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#555;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#222;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </svg>
+    <header class="app-header">
+        <div class="logo-container">
+            <div class="logo-pulse"></div>
+            <h1>Pulse</h1>
+        </div>
+        <div class="ticker-wrapper">
+            <div class="ticker">
+                <div class="ticker-item">BREAKING: AI Model GPT-5 Rumors Surge • </div>
+                <div class="ticker-item">TECH: Quantum Computing Breakthrough • </div>
+                <div class="ticker-item">HEALTH: New Longevity Study Published • </div>
+                <div class="ticker-item">FINANCE: Global Markets React to Rate Cuts • </div>
+                <div class="ticker-item">SPORTS: Underdog Wins Championship • </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="ticker-item">BREAKING: AI Model GPT-5 Rumors Surge • </div>
+                <div class="ticker-item">TECH: Quantum Computing Breakthrough • </div>
+                <div class="ticker-item">HEALTH: New Longevity Study Published • </div>
+                <div class="ticker-item">FINANCE: Global Markets React to Rate Cuts • </div>
+                <div class="ticker-item">SPORTS: Underdog Wins Championship • </div>
+            </div>
+        </div>
+        <div class="performance-stats" id="performance-stats">
+            TTI: <span id="tti-value">--</span>ms
+        </div>
+    </header>
+
+    <nav class="category-nav">
+        <button class="nav-item active" data-category="All">All</button>
+        <button class="nav-item" data-category="Technology">Technology</button>
+        <button class="nav-item" data-category="Finance">Finance</button>
+        <button class="nav-item" data-category="Fitness">Fitness</button>
+        <button class="nav-item" data-category="News">News</button>
+        <button class="nav-item" data-category="Entertainment">Entertainment</button>
+    </nav>
+
+    <main class="discovery-container">
+        <section class="featured-grid" id="featured-grid">
+            <!-- Skeleton items will be here or JS will populate -->
+        </section>
+
+        <section class="trending-feed">
+            <h2>Momentum Feed</h2>
+            <div class="feed-container" id="feed-container">
+                <!-- Feed items will be injected here -->
+            </div>
+        </section>
+    </main>
+
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="shimmer-container">
+            <div class="shimmer-box featured-large"></div>
+            <div class="shimmer-box featured-small"></div>
+            <div class="shimmer-box featured-small"></div>
+            <div class="shimmer-box featured-small"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
