@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Stratos — The Tiered Enterprise Subscription Engine. Choose the plan that fits your scale.">
+    <title>Stratos | Pricing Plans</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Sticky Header (Blurred) -->
+    <header class="sticky-header" id="sticky-header" aria-hidden="true">
+        <div class="container sticky-container">
+            <span class="logo-text">Stratos</span>
+            <div class="sticky-actions">
+                <button class="btn btn-sm" data-plan="basic">Basic</button>
+                <button class="btn btn-sm btn-primary" data-plan="pro">Pro</button>
+                <button class="btn btn-sm" data-plan="enterprise">Enterprise</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Background Elements -->
+        <div class="ambient-glow glow-1"></div>
+        <div class="ambient-glow glow-2"></div>
+
+        <div class="container">
+            <!-- Header Section -->
+            <div class="header-section">
+                <h1 class="title-display">Choose your <span class="text-gradient">Stratos</span> tier.</h1>
+                <p class="subtitle">Scale your creator economy stack with tools designed for high-growth teams.</p>
+
+                <!-- Bi-directional Toggle -->
+                <div class="toggle-container">
+                    <span class="toggle-label" id="monthly-label">Monthly</span>
+                    <div class="toggle-switch" role="switch" aria-checked="false" tabindex="0" id="billing-toggle">
+                        <div class="toggle-knob"></div>
+                    </div>
+                    <span class="toggle-label active" id="yearly-label">Yearly <span class="badge-save">Save
+                            20%</span></span>
+                </div>
+            </div>
+
+            <!-- Pricing Cards Grid -->
+            <div class="pricing-grid">
+                <!-- Basic Plan -->
+                <div class="plan-card" id="card-basic">
+                    <div class="card-header">
+                        <h3>Basic</h3>
+                        <p class="card-desc">For solo creators just starting out.</p>
+                    </div>
+                    <div class="price-container">
+                        <span class="symbol">$</span>
+                        <span class="amount" id="basic-price">0</span>
+                        <span class="period">/mo</span>
+                    </div>
+                    <div class="savings-container" id="basic-savings"></div>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✓</span> 1 Workspace</li>
+                        <li><span class="check-icon">✓</span> Basic Analytics</li>
+                        <li><span class="check-icon">✓</span> 5GB Storage</li>
+                    </ul>
+                    <button class="btn btn-block btn-outline" onclick="selectPlan('basic', this)">Select Basic</button>
+                </div>
+
+                <!-- Pro Plan (Center Stage) -->
+                <div class="plan-card featured" id="card-pro">
+                    <div class="popular-tag">Most Popular</div>
+                    <div class="card-header">
+                        <h3>Pro</h3>
+                        <p class="card-desc">For growing teams and scaling ops.</p>
+                    </div>
+                    <div class="price-container">
+                        <span class="symbol">$</span>
+                        <span class="amount" id="pro-price">29</span>
+                        <span class="period">/mo</span>
+                    </div>
+                    <div class="savings-text" id="pro-savings"></div>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✓</span> <strong>Unlimited</strong> Workspaces</li>
+                        <li><span class="check-icon">✓</span> Advanced Analytics</li>
+                        <li><span class="check-icon">✓</span> 100GB Storage</li>
+                        <li><span class="check-icon">✓</span> Priority Support</li>
+                    </ul>
+                    <button class="btn btn-block btn-primary" onclick="selectPlan('pro', this)">Select Pro</button>
+                    <div class="glow-effect"></div>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="plan-card" id="card-enterprise">
+                    <div class="card-header">
+                        <h3>Enterprise</h3>
+                        <p class="card-desc">For large organizations requiring control.</p>
+                    </div>
+                    <div class="price-container">
+                        <span class="symbol">$</span>
+                        <span class="amount" id="enterprise-price">99</span>
+                        <span class="period">/mo</span>
+                    </div>
+                    <div class="savings-text" id="enterprise-savings"></div>
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✓</span> SSO & Audit Logs</li>
+                        <li><span class="check-icon">✓</span> Dedicated Success Manager</li>
+                        <li><span class="check-icon">✓</span> Unlimited Storage</li>
+                        <li><span class="check-icon">✓</span> Custom Integrations</li>
+                    </ul>
+                    <button class="btn btn-block btn-outline" onclick="selectPlan('enterprise', this)">Select
+                        Enterprise</button>
+                </div>
+            </div>
+
+            <!-- Comparison Table -->
+            <div class="comparison-section">
+                <h2 class="section-title">Feature Comparison</h2>
+                <div class="comparison-table">
+                    <!-- Header -->
+                    <div class="table-row table-header">
+                        <div class="col-feature">Pixels</div>
+                        <div class="col-plan">Basic</div>
+                        <div class="col-plan">Pro</div>
+                        <div class="col-plan">Enterprise</div>
+                    </div>
+                    <!-- Rows -->
+                    <div class="table-row">
+                        <div class="col-feature">
+                            Real-time Collaboration
+                            <div class="tooltip-container" tabindex="0">
+                                <span class="info-icon">i</span>
+                                <div class="glass-tooltip">Live cursor tracking and multi-user editing support.</div>
+                            </div>
+                        </div>
+                        <div class="col-plan"><span class="check">✓</span></div>
+                        <div class="col-plan"><span class="check">✓</span></div>
+                        <div class="col-plan"><span class="check">✓</span></div>
+                    </div>
+                    <div class="table-row">
+                        <div class="col-feature">API Access</div>
+                        <div class="col-plan"><span class="cross">×</span></div>
+                        <div class="col-plan"><span class="check">✓</span></div>
+                        <div class="col-plan"><span class="check">✓</span></div>
+                    </div>
+                    <div class="table-row">
+                        <div class="col-feature">
+                            SSO (SAML)
+                            <div class="tooltip-container" tabindex="0">
+                                <span class="info-icon">i</span>
+                                <div class="glass-tooltip">Secure Single Sign-On integration for corporate environments.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-plan"><span class="cross">×</span></div>
+                        <div class="col-plan"><span class="cross">×</span></div>
+                        <div class="col-plan"><span class="check">✓</span></div>
+                    </div>
+                    <div class="table-row">
+                        <div class="col-feature">Custom Branding</div>
+                        <div class="col-plan"><span class="cross">×</span></div>
+                        <div class="col-plan">Add-on</div>
+                        <div class="col-plan"><span class="check">✓</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Full Screen Checkout Overlay -->
+    <div class="checkout-overlay" id="checkout-overlay" aria-hidden="true">
+        <div class="checkout-container" id="checkout-card">
+            <button class="close-btn" onclick="closeCheckout()">×</button>
+            <div class="checkout-content">
+                <h2 id="checkout-title">Pro Plan</h2>
+                <div class="checkout-price">
+                    <span id="checkout-amount">$29</span> <span class="period" id="checkout-period">/monthly</span>
+                </div>
+                <div class="divider"></div>
+                <form class="checkout-form">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="you@company.com" required>
+                    <label>Card Details</label>
+                    <div class="card-input-mock">
+                        <input type="text" placeholder="0000 0000 0000 0000">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Complete Purchase</button>
+                    <p class="secure-text">🔒 256-bit SSL Secure Payment</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skeleton Loader (Hidden after load) -->
+    <div class="skeleton-overlay" id="skeleton-loader">
+        <div class="skeleton-container container">
+            <div class="skeleton-header"></div>
+            <div class="skeleton-grid">
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card featured"></div>
+                <div class="skeleton-card"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
