@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lumina Deck — The Kinematic Visual Suite." />
+    <title>Lumina Deck | Kinematic Slider</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="aura-backdrop" aria-hidden="true"></div>
+
+    <main class="page">
+        <section class="device-frame">
+            <header class="deck-header">
+                <div class="deck-eyebrow">Lumina Deck</div>
+                <h1 class="deck-title">The Kinematic Visual Suite</h1>
+                <p class="deck-subtitle">Momentum-driven, parallax-infused visuals for the Dandadan archive.</p>
+            </header>
+
+            <div class="lumina-deck" role="region" aria-roledescription="carousel"
+                aria-label="Lumina Deck image slider" tabindex="0">
+                <div class="slider-viewport">
+                    <div class="slider-track">
+                        <article class="slide" data-title="Aira — Midnight Pose">
+                            <div class="slide-media">
+                                <img src="images/aira3.jpg"
+                                    alt="Anime portrait of Aira framed by neon glow." />
+                            </div>
+                            <div class="slide-caption">Aira · Midnight Pose</div>
+                        </article>
+                        <article class="slide" data-title="Okarun — Focus Frame">
+                            <div class="slide-media">
+                                <img src="images/okarun.jpg"
+                                    alt="Anime portrait of Okarun framed by a red hand gesture." />
+                            </div>
+                            <div class="slide-caption">Okarun · Focus Frame</div>
+                        </article>
+                        <article class="slide" data-title="Takakura — Lens Shift">
+                            <div class="slide-media">
+                                <img src="images/takakura.jpg"
+                                    alt="Anime portrait with amber lenses and warm lighting." />
+                            </div>
+                            <div class="slide-caption">Takakura · Lens Shift</div>
+                        </article>
+                        <article class="slide" data-title="Ayase — Ignition">
+                            <div class="slide-media">
+                                <img src="images/ayase1.jpg"
+                                    alt="Anime portrait of Ayase lighting a flame." />
+                            </div>
+                            <div class="slide-caption">Ayase · Ignition</div>
+                        </article>
+                        <article class="slide" data-title="Momo — Neon Scream">
+                            <div class="slide-media">
+                                <img src="images/momo1.jpg"
+                                    alt="Anime portrait of Momo in a neon purple palette." />
+                            </div>
+                            <div class="slide-caption">Momo · Neon Scream</div>
+                        </article>
+                        <article class="slide" data-title="Aira — Emerald Glance">
+                            <div class="slide-media">
+                                <img src="images/aira.jpg"
+                                    alt="Anime portrait of Aira with green tint and glasses." />
+                            </div>
+                            <div class="slide-caption">Aira · Emerald Glance</div>
+                        </article>
+                        <article class="slide" data-title="Aira — Playful Wink">
+                            <div class="slide-media">
+                                <img src="images/aira2.jpg"
+                                    alt="Anime portrait of Aira winking with a warm glow." />
+                            </div>
+                            <div class="slide-caption">Aira · Playful Wink</div>
+                        </article>
+                        <article class="slide" data-title="Ayase — Electric Bloom">
+                            <div class="slide-media">
+                                <img src="images/ayase.jpg"
+                                    alt="Anime portrait of Ayase in an electric neon palette." />
+                            </div>
+                            <div class="slide-caption">Ayase · Electric Bloom</div>
+                        </article>
+                        <article class="slide" data-title="Momo — Midnight Pop">
+                            <div class="slide-media">
+                                <img src="images/momo.jpg"
+                                    alt="Anime portrait of Momo with bubblegum glow." />
+                            </div>
+                            <div class="slide-caption">Momo · Midnight Pop</div>
+                        </article>
+                        <article class="slide" data-title="Okarun — Frame Break">
+                            <div class="slide-media">
+                                <img src="images/okarun1.jpg"
+                                    alt="Anime portrait of Okarun with geometric frame gesture." />
+                            </div>
+                            <div class="slide-caption">Okarun · Frame Break</div>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="progress-bar" role="tablist" aria-label="Slide progress"></div>
+            </div>
+        </section>
+    </main>
+
+    <div class="skeleton-overlay" id="skeleton-loader" aria-hidden="true">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-lines">
+            <div class="skeleton-line wide"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

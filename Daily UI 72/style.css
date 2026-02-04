@@ -1,0 +1,260 @@
+:root {
+    --device-width: 360px;
+    --device-height: 740px;
+    --aura-start: #2d1b50;
+    --aura-end: #10121f;
+    --text-primary: #f7f3ff;
+    --text-secondary: #b5aec8;
+    --accent: #9f7bff;
+    --shadow-strong: 0 24px 60px rgba(10, 10, 20, 0.45);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Outfit", sans-serif;
+    background: #07070c;
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+.aura-backdrop {
+    position: fixed;
+    inset: -20%;
+    background: radial-gradient(circle at top, var(--aura-start), transparent 55%),
+        linear-gradient(135deg, var(--aura-start), var(--aura-end));
+    filter: blur(40px);
+    opacity: 0.9;
+    transition: background 600ms ease, filter 600ms ease;
+    z-index: -1;
+    will-change: background, filter;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.device-frame {
+    width: var(--device-width);
+    height: var(--device-height);
+    background: rgba(10, 12, 22, 0.78);
+    border-radius: 32px;
+    box-shadow: var(--shadow-strong);
+    padding: 28px 0 22px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+    transform: scale(var(--scale, 1));
+    transform-origin: center;
+}
+
+@media (max-width: 380px), (max-height: 760px) {
+    .device-frame {
+        --scale: min(1, min(100vw / 360, 100vh / 740));
+    }
+}
+
+.deck-header {
+    display: grid;
+    gap: 6px;
+    padding: 0 18px;
+}
+
+.deck-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.deck-title {
+    font-size: 22px;
+    margin: 0;
+}
+
+.deck-subtitle {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.lumina-deck {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 14px;
+    height: 100%;
+    padding: 0 0 8px;
+}
+
+.slider-viewport {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 24px;
+    background: rgba(10, 10, 16, 0.6);
+    position: relative;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    perspective: 1000px;
+}
+
+.slider-track {
+    display: flex;
+    height: 100%;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+}
+
+.slide {
+    min-width: var(--device-width);
+    height: 100%;
+    padding: 16px;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 10px;
+    position: relative;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.slide::after {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(6, 8, 20, 0.45);
+    pointer-events: none;
+}
+
+.slide-media {
+    border-radius: 20px;
+    overflow: hidden;
+    height: auto;
+    min-height: 0;
+    position: relative;
+    background: #10121f;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.slide-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: translate3d(0, 0, 0) scale(1.08);
+    will-change: transform;
+}
+
+.slide-caption {
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: var(--text-secondary);
+}
+
+.progress-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28px, 1fr));
+    gap: 8px;
+    align-items: center;
+    padding: 0 18px;
+}
+
+.progress-segment {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+}
+
+.segment-fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--accent), #5ae4ff);
+    transform: translateX(-100%);
+    will-change: transform;
+}
+
+.progress-segment.active .segment-fill {
+    animation: segmentFill var(--fill-duration, 5s) linear forwards;
+}
+
+@keyframes segmentFill {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+
+.skeleton-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 6, 10, 0.9);
+    display: grid;
+    place-items: center;
+    gap: 18px;
+    opacity: 1;
+    transition: opacity 400ms ease;
+    z-index: 2;
+}
+
+.skeleton-overlay.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.skeleton-card {
+    width: var(--device-width);
+    height: calc(var(--device-height) * 0.62);
+    border-radius: 24px;
+    background: linear-gradient(100deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+.skeleton-lines {
+    width: 280px;
+    display: grid;
+    gap: 10px;
+}
+
+.skeleton-line {
+    height: 10px;
+    border-radius: 999px;
+    background: linear-gradient(100deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+.skeleton-line.wide {
+    height: 14px;
+    width: 80%;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
