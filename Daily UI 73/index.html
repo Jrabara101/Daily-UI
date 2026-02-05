@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether — WebXR Spatial Analytics</title>
+    <!-- A-Frame Core -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <!-- Environment Component for the "Void" aesthetic -->
+    <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
+    <style>
+        body { margin: 0; background: #000; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+        
+        /* Overlay for Hybrid Mode */
+        #ui-overlay {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            color: #00f2ff;
+            pointer-events: none;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+
+        .status-badge {
+            background: rgba(0, 20, 40, 0.8);
+            border: 1px solid #00f2ff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+        }
+
+        #vr-button-fallback {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #00f2ff;
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="ui-overlay">
+        <h1 style="margin: 0; font-weight: 200; letter-spacing: 5px;">AETHER</h1>
+        <div class="status-badge" id="mode-status">Desktop Mode — 3D Active</div>
+        <div style="margin-top: 10px; font-size: 11px; opacity: 0.7;">
+            SYSTEM STATUS: OPTIMAL<br>
+            REFRESH RATE: <span id="fps-counter">90</span>Hz<br>
+            SPATIAL ANALYTICS v4.0.1
+        </div>
+    </div>
+
+    <a-scene 
+        renderer="antialias: true; colorManagement: true; logarithmicDepthBuffer: true;"
+        cursor="rayOrigin: mouse"
+        raycaster="objects: .interactable"
+        background="color: #000"
+        loading-screen="backgroundColor: #000; dotsColor: #00f2ff"
+    >
+        
+        <!-- Assets -->
+        <a-assets>
+            <audio id="click-sound" src="https://cdn.aframe.io/360-video-example/audio/click.mp3"></audio>
+            <audio id="hover-sound" src="https://actions.google.com/sounds/v1/science_fiction/glitch_low_energy.ogg"></audio>
+            
+            <!-- Materials -->
+            <a-mixin id="neonBlue" material="color: #00f2ff; emissive: #00f2ff; emissiveIntensity: 0.5; transparent: true; opacity: 0.9"></a-mixin>
+            <a-mixin id="neonPurple" material="color: #bc00ff; emissive: #bc00ff; emissiveIntensity: 0.5; transparent: true; opacity: 0.9"></a-mixin>
+            <a-mixin id="cardBg" material="color: #050505; metalness: 0.8; roughness: 0.2; opacity: 0.8; transparent: true"></a-mixin>
+            
+            <!-- Text Mixin -->
+            <a-mixin id="label" text="align: center; color: #00f2ff; width: 2; font: https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-mixin>
+        </a-assets>
+
+        <!-- Environment: The Void -->
+        <a-entity environment="preset: starry; ground: none; fog: 0.9; dressingAmount: 0; lighting: none;"></a-entity>
+        <a-light type="ambient" color="#222"></a-light>
+        <a-light type="point" position="0 5 0" intensity="0.5" color="#00f2ff"></a-light>
+
+        <!-- Rig: Camera & Controllers -->
+        <a-entity id="rig" position="0 1.6 0">
+            <a-camera id="camera" look-controls wasd-controls="acceleration: 20">
+                <!-- Gaze Reticle -->
+                <a-entity 
+                    id="reticle"
+                    cursor="fuse: true; fuseTimeout: 800"
+                    position="0 0 -1"
+                    geometry="primitive: ring; radiusInner: 0.015; radiusOuter: 0.025"
+                    material="color: #00f2ff; shader: flat; opacity: 0.5"
+                    raycaster="objects: .interactable"
+                    animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+                    animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 800; from: 1 1 1; to: 0.1 0.1 0.1"
+                    animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
+                >
+                </a-entity>
+            </a-camera>
+
+            <!-- VR Controllers with Laser Raycasters -->
+            <a-entity laser-controls="hand: left" raycaster="objects: .interactable; far: 10; interval: 50"></a-entity>
+            <a-entity laser-controls="hand: right" raycaster="objects: .interactable; far: 10; interval: 50" haptics="events: triggerdown; dur: 10; force: 0.5"></a-entity>
+        </a-entity>
+
+        <!-- SPATIAL DASHBOARD ARC (Ergonomic Curved Interface) -->
+        <a-entity id="dashboard-arc" position="0 1.5 -3.5">
+            <!-- Central Efficiency Gauge -->
+            <a-entity 
+                class="interactable"
+                gaze-pop
+                id="main-gauge"
+                geometry="primitive: torus; radius: 0.6; radiusTubular: 0.02; arc: 270"
+                rotation="0 0 135"
+                material="color: #00f2ff; emissive: #00f2ff"
+                position="0 0.5 0"
+                sound="src: #hover-sound; on: mouseenter; poolSize: 5"
+            >
+                <a-entity text="value: 84%; align: center; width: 4; color: #fff" rotation="0 0 -135"></a-entity>
+                <a-entity text="value: OVERALL SYSTEM EFFICIENCY; align: center; width: 1.5; color: #00f2ff" position="0 -0.4 0" rotation="0 0 -135"></a-entity>
+                
+                <!-- Hover Card (Hidden by Default) -->
+                <a-plane class="hover-card" visible="false" width="1.2" height="0.6" position="0 1 0.2" rotation="0 0 -135" material="color: #000; opacity: 0.9">
+                    <a-entity text="value: CRITICAL METRICS\nLatency: 12ms\nThroughput: 4.2GB/s; align: left; width: 1.8; xOffset: 0.1" position="0 0 0.01"></a-entity>
+                </a-plane>
+            </a-entity>
+
+            <!-- Curved Task Grid (Left Side) -->
+            <a-entity id="task-grid" position="-2.5 0 0.5" rotation="0 35 0">
+                <a-entity text="value: TASK QUEUE; width: 4; color: #bc00ff; align: left" position="0 1 0"></a-entity>
+                
+                <!-- Task Cards -->
+                <a-entity class="interactable task-card" draggable position="0 0.5 0">
+                    <a-plane mixin="cardBg" width="1.5" height="0.4">
+                        <a-entity text="value: Re-index Spatial DB; align: left; width: 2.5; xOffset: 0.1" position="0 0 0.01"></a-entity>
+                        <a-plane width="0.05" height="0.4" position="-0.725 0 0.02" color="#00f2ff"></a-plane>
+                    </a-plane>
+                </a-entity>
+
+                <a-entity class="interactable task-card" draggable position="0 0 0">
+                    <a-plane mixin="cardBg" width="1.5" height="0.4">
+                        <a-entity text="value: Neural Mesh Training; align: left; width: 2.5; xOffset: 0.1" position="0 0 0.01"></a-entity>
+                        <a-plane width="0.05" height="0.4" position="-0.725 0 0.02" color="#bc00ff"></a-plane>
+                    </a-plane>
+                </a-entity>
+
+                <a-entity class="interactable task-card" draggable position="0 -0.5 0">
+                    <a-plane mixin="cardBg" width="1.5" height="0.4">
+                        <a-entity text="value: Latency Optimization; align: left; width: 2.5; xOffset: 0.1" position="0 0 0.01"></a-entity>
+                        <a-plane width="0.05" height="0.4" position="-0.725 0 0.02" color="#00f2ff"></a-plane>
+                    </a-plane>
+                </a-entity>
+            </a-entity>
+
+            <!-- 3D CITYSCAPE BARS (Right Side) -->
+            <a-entity id="cityscape" position="2.5 -0.5 0.5" rotation="0 -35 0">
+                <a-entity text="value: DATA VELOCITY; width: 4; color: #00f2ff; align: left" position="0 1.5 0"></a-entity>
+                <!-- Generated Bars -->
+            </a-entity>
+        </a-entity>
+
+        <!-- Floor Reflective Plane -->
+        <a-circle rotation="-90 0 0" radius="10" material="shader: standard; color: #050505; metalness: 0.9; roughness: 0.1; opacity: 0.4" position="0 0 0"></a-circle>
+
+    </a-scene>
+
+    <script>
+        /**
+         * CUSTOM COMPONENT: Cityscape Data Generation
+         */
+        AFRAME.registerComponent('cityscape-generator', {
+            init: function() {
+                const colors = ['#00f2ff', '#0072ff', '#bc00ff', '#5000ff'];
+                const spacing = 0.4;
+                const rows = 3;
+                const cols = 3;
+
+                for(let r = 0; r < rows; r++) {
+                    for(let c = 0; c < cols; c++) {
+                        const h = 0.2 + Math.random() * 1.5;
+                        const bar = document.createElement('a-box');
+                        bar.setAttribute('class', 'interactable');
+                        bar.setAttribute('width', 0.25);
+                        bar.setAttribute('depth', 0.25);
+                        bar.setAttribute('height', h);
+                        bar.setAttribute('position', `${c * spacing} ${h/2} ${r * spacing}`);
+                        bar.setAttribute('material', {
+                            color: colors[Math.floor(Math.random() * colors.length)],
+                            emissive: '#00f2ff',
+                            emissiveIntensity: 0.2,
+                            opacity: 0.8,
+                            transparent: true
+                        });
+                        
+                        // Interaction for 3D Cityscape
+                        bar.setAttribute('gaze-pop', '');
+                        
+                        this.el.appendChild(bar);
+                    }
+                }
+            }
+        });
+
+        /**
+         * CUSTOM COMPONENT: Gaze-Based Micro-interaction (3D Pop)
+         */
+        AFRAME.registerComponent('gaze-pop', {
+            init: function() {
+                const el = this.el;
+                const originalScale = el.getAttribute('scale') || {x: 1, y: 1, z: 1};
+                
+                el.addEventListener('mouseenter', () => {
+                    el.setAttribute('animation__pop', {
+                        property: 'scale',
+                        to: `${originalScale.x * 1.15} ${originalScale.y * 1.15} ${originalScale.z * 1.15}`,
+                        dur: 200,
+                        easing: 'easeOutQuad'
+                    });
+                    
+                    // Show Tooltip logic
+                    const card = el.querySelector('.hover-card');
+                    if (card) card.setAttribute('visible', true);
+                });
+
+                el.addEventListener('mouseleave', () => {
+                    el.setAttribute('animation__pop', {
+                        property: 'scale',
+                        to: `${originalScale.x} ${originalScale.y} ${originalScale.z}`,
+                        dur: 200,
+                        easing: 'easeInQuad'
+                    });
+
+                    const card = el.querySelector('.hover-card');
+                    if (card) card.setAttribute('visible', false);
+                });
+            }
+        });
+
+        /**
+         * CUSTOM COMPONENT: Hand-Tracking/Controller Drag Simulation
+         * Simplifies WebXR Gamepad API interaction for spatial moving
+         */
+        AFRAME.registerComponent('draggable', {
+            init: function() {
+                this.isDragging = false;
+                this.originalPos = this.el.getAttribute('position');
+                
+                this.el.addEventListener('mousedown', (evt) => {
+                    this.isDragging = true;
+                    this.el.setAttribute('material', 'emissiveIntensity', 1);
+                });
+
+                window.addEventListener('mouseup', () => {
+                    if(this.isDragging) {
+                        this.isDragging = false;
+                        this.el.setAttribute('material', 'emissiveIntensity', 0.2);
+                        // Spatial Audio on Drop
+                        this.el.components.sound?.playSound();
+                    }
+                });
+            },
+            tick: function() {
+                if(this.isDragging) {
+                    // Logic to follow raycaster intersection point or controller movement
+                    // In a simple demo, we just pulsate color to show "grabbed" state
+                }
+            }
+        });
+
+        // Initialize Cityscape
+        document.querySelector('#cityscape').setAttribute('cityscape-generator', '');
+
+        // Handle Hybrid Mode Logic
+        window.addEventListener('enter-vr', () => {
+            document.getElementById('mode-status').textContent = "XR Mode — Spatial Active";
+            document.getElementById('reticle').setAttribute('visible', 'false'); // Hide gaze reticle if controllers active
+        });
+
+        window.addEventListener('exit-vr', () => {
+            document.getElementById('mode-status').textContent = "Desktop Mode — 3D Active";
+            document.getElementById('reticle').setAttribute('visible', 'true');
+        });
+
+        // Simple FPS Counter for Dashboard UI
+        let frames = 0;
+        let lastTime = performance.now();
+        function updateFPS() {
+            frames++;
+            const time = performance.now();
+            if (time >= lastTime + 1000) {
+                document.getElementById('fps-counter').innerText = Math.round((frames * 1000) / (time - lastTime));
+                frames = 0;
+                lastTime = time;
+            }
+            requestAnimationFrame(updateFPS);
+        }
+        updateFPS();
+
+    </script>
+</body>
+</html>
