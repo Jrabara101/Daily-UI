@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Project Forge - Download</title>
+    <meta name="description" content="The ultimate multi-platform deployment portal. Download Project Forge today.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Background Elements -->
+        <div class="bg-gradient"></div>
+        <div class="bg-particles" id="particles"></div>
+
+        <!-- Header / Release Notes Trigger -->
+        <header class="app-header">
+            <div class="logo">Forge</div>
+            <button class="menu-btn" aria-label="Open Release Notes" id="notes-trigger">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="hero">
+                <div class="hero-visual">
+                    <div class="icon-container">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" class="app-icon">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                </div>
+                <h1 class="app-title">Project Forge</h1>
+                <p class="app-version">v2.4.0 • Stable Build</p>
+                <div class="trust-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    <span>Verified by Forge Security</span>
+                </div>
+            </div>
+
+            <!-- Download Section -->
+            <div class="download-section">
+                <button class="primary-cta" id="download-btn" aria-busy="false">
+                    <span class="btn-text">Initialize Download</span>
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                        <span class="progress-text">0%</span>
+                    </div>
+                    <div class="success-state">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Open App</span>
+                    </div>
+                </button>
+                <p class="platform-hint" id="platform-hint">Detecting system...</p>
+            </div>
+
+            <!-- Video Trailer -->
+            <section class="media-section">
+                <h2 class="section-title">Experience the Power</h2>
+                <div class="video-container">
+                    <div class="video-placeholder" id="video-placeholder">
+                        <!-- Simulated Video Element -->
+                        <div class="play-icon">▶</div>
+                        <span>Trailer Loading...</span>
+                    </div>
+                    <!-- In a real app, a <video> tag would be here. Using a placeholder for demo to save bandwidth/complexity without assets. -->
+                    <video id="feature-video" class="feature-video" loop muted playsinline
+                        poster="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzYwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PC9zdmc+">
+                        <source src="" type="video/mp4"> <!-- Source would be added dynamically or is empty for demo -->
+                    </video>
+                </div>
+            </section>
+        </main>
+
+        <!-- Release Notes Drawer (Glassmorphic) -->
+        <div class="drawer-backdrop" id="drawer-backdrop"></div>
+        <aside class="release-notes-drawer" id="release-notes">
+            <div class="drawer-handle"></div>
+            <div class="drawer-header">
+                <h2>Release Notes</h2>
+                <button class="close-drawer" id="close-drawer">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="drawer-content">
+                <div class="version-item">
+                    <h3>v2.4.0 (Latest)</h3>
+                    <p class="date">Released Today</p>
+                    <ul>
+                        <li>Dynamic Progress Engine implementation.</li>
+                        <li>High-performance rendering optimization.</li>
+                        <li>Enhanced security protocols.</li>
+                    </ul>
+                </div>
+                <div class="version-item">
+                    <h3>v2.3.5</h3>
+                    <p class="date">Oct 24, 2025</p>
+                    <ul>
+                        <li>Fixed layout shifts on Galaxy S9+.</li>
+                        <li>Improved platform detection accuracy.</li>
+                    </ul>
+                </div>
+                <div class="version-item">
+                    <h3>v2.0.0</h3>
+                    <p class="date">Sep 15, 2025</p>
+                    <ul>
+                        <li>Major UI Overhaul.</li>
+                        <li>Introduced Glassmorphism.</li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
