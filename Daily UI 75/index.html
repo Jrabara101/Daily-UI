@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Prime — The Pre-Order Anticipation Engine</title>
+    <meta name="description"
+        content="A limited-edition, high-fidelity experience engineered for the elite. Reserve your spot in the next generation of hardware.">
+    <!-- Google Fonts: Inter & Outfit for that premium tech feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Persistent "Early Bird" Badge (Hidden by default) -->
+    <div id="supporter-badge" class="supporter-badge hidden" aria-hidden="true">
+        <span class="badge-icon">✨</span>
+        <span class="badge-text">Welcome Back, Early Bird</span>
+    </div>
+
+    <nav class="main-nav">
+        <div class="logo">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+            <span class="logo-text">AURA PRIME</span>
+        </div>
+        <div class="nav-links">
+            <a href="#specs">Specifications</a>
+            <a href="#story">The Story</a>
+            <a href="#support">Support</a>
+        </div>
+        <div class="nav-status">
+            <div class="status-indicator"></div>
+            <span class="status-text">System Online</span>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero / Countdown Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="phase-indicator">
+                    <span class="pulsing-dot"></span>
+                    <span class="phase-text">ANTICIPATION PHASE LIVE</span>
+                </div>
+                <h1 class="hero-title">
+                    THE FUTURE OF <br>
+                    <span class="gradient-text">PRECISION.</span>
+                </h1>
+                <p class="hero-description">
+                    A limited-edition, high-fidelity experience engineered for the elite. Reserve your spot in the next
+                    generation of hardware.
+                </p>
+
+                <div class="countdown-container" aria-live="polite">
+                    <div class="countdown-unit">
+                        <span class="time-value" id="days">00</span>
+                        <span class="time-label">DAYS</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="time-value" id="hours">00</span>
+                        <span class="time-label">HOURS</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="time-value" id="minutes">00</span>
+                        <span class="time-label">MIN</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="time-value final-seconds" id="seconds">00</span>
+                        <span class="time-label">SEC</span>
+                    </div>
+                </div>
+
+                <div class="server-sync-status">
+                    <svg class="sync-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                        <path d="M3 3v5h5" />
+                        <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+                        <path d="M16 21h5v-5" />
+                    </svg>
+                    <span>PRECISION SERVER SYNCED (UTC)</span>
+                </div>
+
+                <!-- Live Inventory Status -->
+                <div class="inventory-status-card">
+                    <div class="inventory-header">
+                        <span class="batch-info">Stock Availability</span>
+                        <span class="stock-percentage">92% <span class="sub-text">REMAINING</span></span>
+                    </div>
+                    <div class="stock-progress-track">
+                        <div class="stock-progress-fill" style="--progress: 92%"></div>
+                    </div>
+                    <div class="inventory-footer">
+                        <span class="units-count">4,600 / 5,000 UNITS</span>
+                        <span class="demand-level">HIGH DEMAND</span>
+                    </div>
+                </div>
+
+                <!-- Pre-Order CTA Container -->
+                <div class="cta-container">
+                    <button id="pre-order-btn" class="pre-order-btn disabled" disabled>
+                        <span class="btn-content">
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <span class="btn-text">PRE-ORDER OPENS SOON</span>
+                        </span>
+                        <span class="btn-background"></span>
+                    </button>
+                    <p class="limit-disclaimer">ONLY 5,000 SERIALIZED UNITS AVAILABLE WORLDWIDE.</p>
+                </div>
+            </div>
+
+            <!-- 3D Product Visualization Area -->
+            <div class="product-stage">
+                <div class="product-container">
+                    <div class="product-model">
+                        <!-- Simulated 3D Product using CSS Transforms -->
+                        <div class="model-face front">
+                            <div class="face-content">
+                                <span class="face-label">SERIES</span>
+                                <span class="face-id">AP-01-V2</span>
+                            </div>
+                        </div>
+                        <div class="model-face back"></div>
+                        <div class="model-face right"></div>
+                        <div class="model-face left"></div>
+                        <div class="model-face top"></div>
+                        <div class="model-face bottom"></div>
+
+                        <!-- Inner glow/core -->
+                        <div class="core-glow"></div>
+                    </div>
+                    <div class="product-shadow"></div>
+                </div>
+
+                <!-- Rotating labels that track with scroll/mouse -->
+                <div class="feature-marker marker-1" data-label="Forged Titanium">
+                    <div class="marker-line"></div>
+                    <div class="marker-text">
+                        <span class="marker-title">CHASSIS</span>
+                        <span class="marker-value">Forged Titanium</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features / Specs Section (Lazy Loaded) -->
+        <section id="specs" class="specs-section">
+            <div class="spec-grid">
+                <div class="spec-card">
+                    <span class="spec-label">LATENCY</span>
+                    <span class="spec-value">0.4ms Response</span>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-label">PRECISION</span>
+                    <span class="spec-value">32,000 DPI</span>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-label">BATTERY</span>
+                    <span class="spec-value">140 Hours</span>
+                </div>
+                <div class="spec-card">
+                    <span class="spec-label">CONNECTIVITY</span>
+                    <span class="spec-value">Triple-Link 2.4G</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Glassmorphic Checkout Overlay (Hidden initially) -->
+    <div id="checkout-overlay" class="checkout-overlay hidden">
+        <div class="checkout-modal">
+            <button id="close-checkout" class="close-btn" aria-label="Close Checkout">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <div class="checkout-header">
+                <h2>Secure Pre-Order</h2>
+                <div class="checkout-timer">RESERVING STOCK: <span id="reservation-timer">05:00</span></div>
+            </div>
+
+            <div class="plan-selection">
+                <div class="plan-card selected" data-price="299">
+                    <div class="plan-header">
+                        <span class="plan-name">Standard Edition</span>
+                        <span class="plan-price">$299</span>
+                    </div>
+                    <p class="plan-desc">Core hardware + standard peripherals.</p>
+                </div>
+                <div class="plan-card" data-price="449">
+                    <div class="plan-header">
+                        <span class="plan-name">Collector's Edition</span>
+                        <span class="plan-price">$449</span>
+                    </div>
+                    <p class="plan-desc">Serialized unit + display case & exclusive skin.</p>
+                </div>
+            </div>
+
+            <div class="checkout-summary">
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="checkout-subtotal">$299.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span>CALCULATED AT NEXT STEP</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="checkout-total">$299.00</span>
+                </div>
+            </div>
+
+            <button class="checkout-submit-btn">
+                PROCEED TO PAYMENT
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20">
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>
