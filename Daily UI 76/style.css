@@ -1,0 +1,286 @@
+:root {
+    --bg-dark: #0f1115;
+    /* Slava Kornilov deep gray/black */
+    --bg-card: #181b21;
+    --bg-sidebar: #131519;
+    --primary-color: #6366f1;
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+
+    --skeleton-base: #1e2229;
+    --skeleton-highlight: #282c34;
+
+    --easing-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.app-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: var(--bg-sidebar);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    border-right: 1px solid #ffffff0d;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex-grow: 1;
+}
+
+/* Main Content */
+.main-content {
+    padding: 2rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Header */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* Stats Row */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    padding: 1.5rem;
+    min-height: 150px;
+    border: 1px solid #ffffff05;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Kanban */
+.kanban-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    flex-grow: 1;
+}
+
+.column {
+    background-color: #13151980;
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* --- Skeleton Logic (The "Ghost" Dashboard) --- */
+.skeleton {
+    background-color: var(--skeleton-base);
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    /* Optional: Maintain block shape if duplicate of text */
+    min-height: 1em;
+}
+
+.skeleton.circle {
+    border-radius: 50%;
+}
+
+.skeleton.circle.large {
+    width: 80px;
+    height: 80px;
+}
+
+.skeleton.circle.small {
+    width: 32px;
+    height: 32px;
+}
+
+
+
+/* 
+ * GPU Accelerated Shimmer 
+ * Using translate3d/translateX on pseudo-element
+ */
+.skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--skeleton-highlight) 50%,
+            transparent 100%);
+    animation: shimmer 1.5s infinite;
+    /* Force GPU */
+    will-change: transform;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Adaptive Connection: Low Bandwidth Aura */
+.low-bandwidth .skeleton::after {
+    animation: none;
+    background: none;
+}
+
+.low-bandwidth .skeleton {
+    /* Solid pulse instead of shimmer for performance/bandwidth saving */
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+/* --- Content Reveal & Staggering --- */
+
+/* Initial hidden state for real content logic (if we were swapping) */
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Classes to remove skeleton styles when loaded */
+.content-ready .skeleton {
+    background-color: transparent;
+    /* Or remove class entirely via JS */
+    min-height: auto;
+}
+
+.content-ready .skeleton::after {
+    display: none;
+}
+
+/* Staggered Entry Animation */
+.staggered-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s var(--easing-smooth), transform 0.6s var(--easing-smooth);
+}
+
+.is-loaded .staggered-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-1 {
+    transition-delay: 0.1s;
+}
+
+.delay-2 {
+    transition-delay: 0.2s;
+}
+
+/* Micro-loader Button Morph */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+    height: 44px;
+    /* Fixed height for morph */
+}
+
+.btn-primary.loading {
+    width: 44px;
+    /* Shrink to circle */
+    min-width: 44px;
+    border-radius: 50%;
+    padding: 0;
+    color: transparent;
+    /* Hide text */
+}
+
+.btn-text {
+    transition: opacity 0.2s;
+}
+
+.btn-primary.loading .btn-text {
+    opacity: 0;
+    display: none;
+}
+
+.loader-ring {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ffffff4d;
+    border-top: 2px solid #ffffff;
+    border-radius: 50%;
+    display: none;
+    animation: spin 0.8s linear infinite;
+}
+
+.btn-primary.loading .loader-ring {
+    display: block;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
