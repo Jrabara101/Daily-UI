@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gratis — The High-Fidelity Retention Engine</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <canvas id="confetti-canvas"></canvas>
+
+    <main class="success-container">
+        <div class="glass-card">
+            <!-- Morphing Success Icon -->
+            <div class="success-icon-wrapper">
+                <svg class="success-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="circle-bg" cx="50" cy="50" r="45" />
+                    <path class="checkmark" d="M30 50 L45 65 L70 35" fill="none" stroke="white" stroke-width="6"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+
+            <!-- Dynamic Message -->
+            <h1 id="thank-you-heading" aria-live="assertive" class="stagger-entry">Payment Successful!</h1>
+            <p id="dynamic-message" class="stagger-entry">Your order has been processed securely.</p>
+
+            <!-- Order Details -->
+            <div class="order-summary stagger-entry">
+                <div class="summary-row">
+                    <span>Order ID</span>
+                    <span id="order-id">#ORD-8921</span>
+                </div>
+                <div class="summary-row">
+                    <span>Total</span>
+                    <span class="highlight">$299.00</span>
+                </div>
+            </div>
+
+            <!-- Asynchronous Receipt Action -->
+            <button id="download-receipt" class="btn-primary stagger-entry">
+                <span class="btn-text">Download Receipt</span>
+                <span class="btn-loader"></span>
+            </button>
+
+            <!-- Next Action Pills (Retention Pulse) -->
+            <div class="next-step-pills">
+                <button class="pill" onclick="window.location.reload()">
+                    <span class="icon">🏠</span> Join Community
+                </button>
+                <button class="pill">
+                    <span class="icon">👤</span> View Profile
+                </button>
+                <button class="pill">
+                    <span class="icon">🚀</span> Share Progress
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
