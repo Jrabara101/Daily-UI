@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odyssey — The Intelligent Travel Timeline</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar / Timeline Section -->
+        <aside class="timeline-section glass-panel">
+            <header class="itinerary-header">
+                <div class="header-top">
+                    <h1>Kyoto Autumn Escape</h1>
+                    <div class="weather-widget">
+                        <i class="fa-solid fa-cloud-sun"></i>
+                        <span>24°C</span>
+                    </div>
+                </div>
+                <div class="trip-meta">
+                    <span class="date"><i class="fa-regular fa-calendar"></i> Oct 12 - Oct 20, 2025</span>
+                    <span class="location"><i class="fa-solid fa-location-dot"></i> Kyoto, Japan</span>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-pill">
+                        <span class="label">Budget</span>
+                        <span class="value">$2,450</span>
+                    </div>
+                    <div class="stat-pill">
+                        <span class="label">Travelers</span>
+                        <span class="value">2</span>
+                    </div>
+                    <div class="stat-pill">
+                        <span class="label">Days Left</span>
+                        <span class="value">3d</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="timeline-wrapper">
+                <div class="timeline-line"></div>
+                <div id="events-container" class="events-container">
+                    <!-- Events will be injected here via JS -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Map Section -->
+        <main class="map-section">
+            <div id="map"></div>
+            <div class="map-overlay-gradient"></div>
+        </main>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,393 @@
+:root {
+    --bg-color: #fcefe3;
+    /* Soft cream/beige based on the reference image */
+    --primary-color: #D35400;
+    /* Burnt Orange */
+    --accent-color: #F39C12;
+    /* Golden/Yellow */
+    --text-dark: #2c3e50;
+    --text-muted: #7f8c8d;
+    --glass-bg: rgba(255, 255, 255, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    --font-main: 'Outfit', sans-serif;
+
+    --type-travel: #d35400;
+    --type-dining: #f39c12;
+    --type-activity: #2980b9;
+    --type-hotel: #8e44ad;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- Timeline Section (Left) --- */
+.timeline-section {
+    width: 450px;
+    min-width: 400px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-right: 1px solid var(--glass-border);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.05);
+}
+
+.itinerary-header {
+    padding: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.header-top h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.2;
+}
+
+.weather-widget {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent-color);
+}
+
+.trip-meta {
+    display: flex;
+    gap: 1rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.trip-meta i {
+    margin-right: 0.4rem;
+}
+
+.stats-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.stat-pill {
+    background: #fff8f0;
+    /* Light warm tint */
+    border: 1px solid rgba(211, 84, 0, 0.1);
+    padding: 0.8rem 1.2rem;
+    border-radius: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-pill .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--primary-color);
+    margin-bottom: 0.2rem;
+}
+
+.stat-pill .value {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+}
+
+/* --- Timeline Scroller --- */
+.timeline-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    position: relative;
+    padding: 2rem;
+    /* Hide scrollbar but keep functionality */
+    scrollbar-width: none;
+}
+
+.timeline-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 4rem;
+    /* Adjust based on time column width */
+    top: 2rem;
+    bottom: 0;
+    /* Extends dynamically */
+    width: 2px;
+    background: linear-gradient(to bottom, var(--primary-color), var(--type-activity), var(--type-dining));
+    z-index: 0;
+    opacity: 0.3;
+}
+
+.events-container {
+    padding-bottom: 100px;
+    /* Space for scrolling */
+}
+
+/* --- Event Cards --- */
+.event-row {
+    display: flex;
+    position: relative;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.time-col {
+    width: 4rem;
+    text-align: right;
+    padding-right: 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    padding-top: 1.5rem;
+    /* Align with card content */
+    position: relative;
+    z-index: 1;
+}
+
+.card-col {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+/* Timeline Node Dot */
+.event-node {
+    position: absolute;
+    left: -1.5rem;
+    /* Center on the line (which is at left 0 relative to card-col effectively? No wait. */
+    /* The line is absolute to wrapper. We need a dot relative to the row */
+    /* Let's place the dot inside time-col or card-col but positioned absolutely */
+    left: 3.55rem;
+    /* approximate center of line */
+    top: 1.8rem;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border: 3px solid var(--primary-color);
+    /* Dynamic color via JS */
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+.event-card {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+    cursor: grab;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.event-card.active-card {
+    border-left: 4px solid var(--primary-color);
+    background: white;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    color: white;
+    background: var(--text-muted);
+    /* Fallback */
+}
+
+.tag.flight {
+    background: var(--type-travel);
+}
+
+.tag.dining {
+    background: var(--type-dining);
+}
+
+.tag.activity {
+    background: var(--type-activity);
+}
+
+.card-duration {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.event-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    color: var(--text-dark);
+}
+
+.event-details {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.event-details span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* Conflict Pattern */
+.conflict-pattern {
+    background-image: repeating-linear-gradient(45deg,
+            rgba(231, 76, 60, 0.1),
+            rgba(231, 76, 60, 0.1) 10px,
+            rgba(231, 76, 60, 0.2) 10px,
+            rgba(231, 76, 60, 0.2) 20px);
+    border: 1px solid #e74c3c !important;
+}
+
+/* Transit Gap */
+.transit-gap {
+    margin-left: 4rem;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    position: relative;
+}
+
+.transit-line {
+    flex: 1;
+    height: 1px;
+    background-image: linear-gradient(to right, #bdc3c7 50%, rgba(255, 255, 255, 0) 0%);
+    background-position: bottom;
+    background-size: 10px 1px;
+    background-repeat: repeat-x;
+}
+
+.transit-icon {
+    background: #fff;
+    border: 1px solid #bdc3c7;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    z-index: 2;
+}
+
+
+/* --- Map Section (Right) --- */
+.map-section {
+    flex: 1;
+    position: relative;
+    background: #e0e0e0;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+.map-overlay-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.4), transparent);
+    pointer-events: none;
+    z-index: 400;
+    /* Above map tiles */
+}
+
+/* Mobile Styling */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column-reverse;
+        /* Map on top, timeline below, or sticky map */
+    }
+
+    .map-section {
+        height: 35vh;
+        position: sticky;
+        top: 0;
+        z-index: 90;
+    }
+
+    .timeline-section {
+        width: 100%;
+        height: 65vh;
+        border-right: none;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+        margin-top: -20px;
+        /* Slight overlap */
+    }
+}
