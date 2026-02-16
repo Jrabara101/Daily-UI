@@ -1,0 +1,394 @@
+:root {
+    --bg-app: #0f0f12;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --bg-card-hover: rgba(255, 255, 255, 0.08);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    --accent-color: #6366f1;
+    --accent-hover: #4f46e5;
+    --success-color: #10b981;
+    --glass-blur: blur(12px);
+    --font-family: 'Inter', sans-serif;
+    --transition-speed: 0.2s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    line-height: 1.5;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Utils */
+.hidden {
+    display: none !important;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* App Container */
+.app-container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+    background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.avatar-container {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 2;
+}
+
+.mood-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: rotate 4s linear infinite;
+    z-index: 1;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.user-status {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+}
+
+.status-text {
+    font-weight: 600;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    background-color: var(--success-color);
+    border-radius: 50%;
+    display: inline-block;
+    margin-top: 4px;
+    box-shadow: 0 0 8px var(--success-color);
+}
+
+/* Composer */
+.composer-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    backdrop-filter: var(--glass-blur);
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.composer-container.flying {
+    position: fixed; /* Detach from flow */
+    transform: translateY(100px) scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.composer-header {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.rich-input-wrapper {
+    position: relative;
+    min-height: 80px;
+    margin-bottom: 1.5rem;
+}
+
+.rich-input {
+    width: 100%;
+    min-height: 80px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    position: relative;
+    z-index: 2;
+}
+
+.rich-input:empty::before {
+   /* Using JS based placeholder for better control, but CSS fallback here */
+   content: attr(placeholder);
+   color: var(--text-secondary);
+   opacity: 0.6;
+   pointer-events: none;
+   display: block; /* Important for empty contenteditable */
+}
+
+/* Hide CSS placeholder if JS one is active, or vice versa if preferred */
+.rich-input:not(:empty) + .placeholder-text {
+    display: none;
+}
+
+.placeholder-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    pointer-events: none;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    z-index: 1;
+}
+
+/* Composer Actions */
+.composer-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+.left-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.icon-btn:hover {
+    color: var(--text-primary);
+    background: var(--bg-card-hover);
+}
+
+.post-btn {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 8px 24px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.post-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.post-btn:active {
+    transform: translateY(0);
+}
+
+/* Generated Post Styles */
+.feed-post {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    animation: slideIn 0.5s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.feed-post.optimistic {
+    opacity: 0.6;
+    border-style: dashed;
+}
+
+.feed-post.optimistic::after {
+    content: 'Sending...';
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.post-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+/* Floating Menu */
+.floating-menu {
+    position: absolute;
+    background: rgba(30, 30, 35, 0.95);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    width: 280px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    z-index: 100;
+    overflow: hidden;
+    padding: 0.5rem 0;
+    animation: menuFadeIn 0.15s ease-out;
+}
+
+@keyframes menuFadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.menu-header {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.menu-item:hover, .menu-item.selected {
+    background: var(--accent-color);
+    color: white;
+}
+
+.menu-item:hover .desc, .menu-item.selected .desc {
+    color: rgba(255,255,255,0.8);
+}
+
+.menu-item .icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.menu-item .content {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item .title {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.menu-item .desc {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Mention Styles */
+.mention-chip {
+    background: rgba(99, 102, 241, 0.2);
+    color: #a5b4fc;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+/* Masonry Grid */
+.media-grid {
+    display: grid;
+    gap: 8px;
+    margin-top: 1rem;
+}
+/* Simple masonry simulation with flex or grid */
+.media-grid:not(:empty) {
+   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+
+.media-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 1; /* Square for simplicity initially */
+    background: #2a2a2a;
+    cursor: grab;
+}
+
+.media-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.media-item:active {
+    cursor: grabbing;
+}
