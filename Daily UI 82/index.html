@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis — Intelligent Project Creation Wizard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">✦</span>
+                <span class="logo-text">GENESIS</span>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link">PORTFOLIO</a>
+                <a href="#" class="nav-link">VENTURES</a>
+                <a href="#" class="nav-link">STRATEGY</a>
+            </nav>
+            <div class="header-actions">
+                <button class="settings-btn">SETTINGS</button>
+                <div class="user-avatar">L</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Left Section: Form Title -->
+        <section class="form-header-section">
+            <div class="phase-label">PHASE I: CONCEPTUALIZATION</div>
+            <h1 class="form-title">Define Your<br>Enterprise<br>Blueprint</h1>
+            <p class="form-subtitle">Establish the foundational parameters for your next strategic endeavor. Precision at this stage ensures operational excellence.</p>
+        </section>
+
+        <!-- Right Section: Form Card -->
+        <section class="form-section">
+            <div class="form-card">
+                <form id="genesis-form" class="genesis-form" novalidate>
+                    <!-- Venture Nomenclature -->
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                id="project-name" 
+                                name="projectName"
+                                class="form-input"
+                                required
+                                autocomplete="off"
+                                data-validate="unique"
+                            >
+                            <label for="project-name" class="floating-label">
+                                <span class="label-text">VENTURE NOMENCLATURE</span>
+                                <span class="validation-icon"></span>
+                            </label>
+                            <div class="input-glow"></div>
+                        </div>
+                        <div class="error-tooltip" role="alert"></div>
+                    </div>
+
+                    <!-- Strategic Category -->
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <div class="custom-select" id="project-type-select" tabindex="0" role="combobox" aria-expanded="false" aria-haspopup="listbox">
+                                <input type="hidden" id="project-type" name="projectType" required>
+                                <div class="select-trigger">
+                                    <span class="select-value">Select category...</span>
+                                    <span class="select-arrow">▼</span>
+                                </div>
+                                <label class="floating-label">
+                                    <span class="label-text">STRATEGIC CATEGORY</span>
+                                </label>
+                                <ul class="select-dropdown" role="listbox">
+                                    <li class="select-option" data-value="saas" role="option">SaaS Development</li>
+                                    <li class="select-option" data-value="marketing" role="option">Marketing</li>
+                                    <li class="select-option" data-value="enterprise" role="option">Enterprise Solutions</li>
+                                    <li class="select-option" data-value="research" role="option">Research & Development</li>
+                                </ul>
+                            </div>
+                            <div class="input-glow"></div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Fields Container (Progressive Disclosure) -->
+                    <div id="dynamic-fields" class="dynamic-fields"></div>
+
+                    <!-- Capital Allocation -->
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                id="budget" 
+                                name="budget"
+                                class="form-input"
+                                required
+                                autocomplete="off"
+                                data-mask="currency"
+                            >
+                            <label for="budget" class="floating-label">
+                                <span class="label-text">CAPITAL ALLOCATION</span>
+                            </label>
+                            <div class="input-glow"></div>
+                        </div>
+                    </div>
+
+                    <!-- Email Address -->
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email"
+                                class="form-input"
+                                required
+                                autocomplete="email"
+                                data-validate="email"
+                            >
+                            <label for="email" class="floating-label">
+                                <span class="label-text">PRIMARY CONTACT</span>
+                                <span class="validation-icon"></span>
+                            </label>
+                            <div class="input-glow"></div>
+                        </div>
+                        <div class="error-tooltip" role="alert"></div>
+                    </div>
+
+                    <!-- Security Credentials -->
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password"
+                                class="form-input"
+                                required
+                                autocomplete="new-password"
+                                data-validate="password"
+                            >
+                            <label for="password" class="floating-label">
+                                <span class="label-text">SECURITY CREDENTIALS</span>
+                            </label>
+                            <div class="input-glow"></div>
+                        </div>
+                        <div class="error-tooltip" role="alert"></div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary">SAVE FOR REVIEW</button>
+                        <button type="submit" class="btn btn-primary" id="submit-btn">
+                            <span class="btn-text">CONTINUE INITIALIZATION</span>
+                            <span class="btn-arrow">→</span>
+                            <span class="btn-spinner"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Architectural Note Card -->
+            <div class="info-card">
+                <div class="info-card-header">ARCHITECTURAL NOTE</div>
+                <blockquote class="info-quote">
+                    "The most profound projects are those defined by their constraints as much as their ambitions."
+                </blockquote>
+                
+                <div class="specs-section">
+                    <div class="specs-header">SPECIFICATIONS</div>
+                    <div class="spec-item">
+                        <span class="spec-label">NODE ID</span>
+                        <span class="spec-value">GEN-992-ALPHA</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">SECURITY TIER</span>
+                        <span class="spec-value">LEVEL 4 ENCRYPTION</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">SERVER REGION</span>
+                        <span class="spec-value">EU-CENTRAL</span>
+                    </div>
+                </div>
+
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                    <div class="progress-label">SYSTEM INTEGRITY 100%</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-text">© 2024 GENESIS REVIEW BOARD</span>
+                <button class="footer-btn">
+                    <span class="globe-icon">🌐</span>
+                    GLOBAL ENGLISH
+                </button>
+            </div>
+            <div class="footer-right">
+                <div class="autosave-indicator">
+                    <span class="autosave-icon">☁</span>
+                    <span class="autosave-text">AUTOSAVE ACTIVE</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Unsaved Changes Modal -->
+    <div id="unsaved-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <h2 id="modal-title" class="modal-title">Unsaved Changes Detected</h2>
+            <p class="modal-text">You have unsaved changes. Are you sure you want to leave?</p>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="modal-cancel">Stay</button>
+                <button class="btn btn-danger" id="modal-confirm">Discard Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

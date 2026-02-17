@@ -1,0 +1,890 @@
+:root {
+    /* Color Palette - Matching Dashboard Theme */
+    --color-bg-primary: #FAFAFA;
+    --color-bg-secondary: #FFFFFF;
+    --color-text-primary: #0A0A0A;
+    --color-text-secondary: #6B6B6B;
+    --color-text-tertiary: #A0A0A0;
+    --color-accent-blue: #4A90E2;
+    --color-accent-blue-light: #6BA4E8;
+    --color-accent-blue-dark: #3A7BC8;
+    --color-success: #4CAF50;
+    --color-error: #E53935;
+    --color-warning: #FFA726;
+    
+    /* Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.18);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    
+    /* Typography */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-size-xs: 0.6875rem;
+    --font-size-sm: 0.8125rem;
+    --font-size-base: 0.9375rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 2.5rem;
+    --font-size-2xl: 3.5rem;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    
+    /* Transitions */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 9999px;
+}
+
+/* ==================== RESET & BASE ==================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+/* ==================== HEADER ==================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-bg-secondary);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    z-index: 1000;
+    padding: 1.25rem 3rem;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+}
+
+.logo-icon {
+    font-size: 1.25rem;
+    color: var(--color-accent-blue);
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    transition: color var(--transition-base);
+}
+
+.nav-link:hover {
+    color: var(--color-text-primary);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.settings-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: color var(--transition-base);
+    font-family: var(--font-primary);
+}
+
+.settings-btn:hover {
+    color: var(--color-text-primary);
+}
+
+.user-avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-full);
+    background: var(--color-text-secondary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+}
+
+/* ==================== MAIN LAYOUT ==================== */
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 8rem 3rem 4rem;
+    min-height: calc(100vh - 5rem);
+}
+
+/* ==================== FORM HEADER SECTION ==================== */
+.form-header-section {
+    padding-top: 2rem;
+}
+
+.phase-label {
+    color: var(--color-warning);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    margin-bottom: 2rem;
+}
+
+.form-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--color-text-primary);
+}
+
+.form-subtitle {
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    max-width: 500px;
+}
+
+/* ==================== FORM SECTION ==================== */
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.form-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+}
+
+/* ==================== FORM GROUPS ==================== */
+.genesis-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.form-group {
+    position: relative;
+}
+
+/* ==================== INPUT WRAPPER & GLOW EFFECT ==================== */
+.input-wrapper {
+    position: relative;
+    isolation: isolate;
+}
+
+.input-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--color-accent-blue), var(--color-accent-blue-light));
+    opacity: 0;
+    filter: blur(8px);
+    transition: opacity var(--transition-base);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.input-wrapper:focus-within .input-glow {
+    opacity: 0.4;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.6; }
+}
+
+/* ==================== FLOATING LABEL ANIMATION ==================== */
+.form-input {
+    width: 100%;
+    padding: 1.25rem 1rem 0.75rem;
+    font-size: var(--font-size-base);
+    font-family: var(--font-primary);
+    color: var(--color-text-primary);
+    background: var(--color-bg-secondary);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: var(--radius-md);
+    outline: none;
+    transition: all var(--transition-base);
+}
+
+.form-input:focus {
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.floating-label {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    pointer-events: none;
+    transition: all var(--transition-spring);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transform-origin: left center;
+}
+
+.label-text {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+/* Floating State - When input has focus or value */
+.form-input:focus ~ .floating-label,
+.form-input:not(:placeholder-shown) ~ .floating-label {
+    top: 0.625rem;
+    transform: translateY(0) scale(1);
+    font-size: var(--font-size-xs);
+    color: var(--color-accent-blue);
+}
+
+.form-input:not(:focus):not(:placeholder-shown) ~ .floating-label {
+    color: var(--color-text-tertiary);
+}
+
+/* Valid State - Green checkmark */
+.form-input:valid:not(:placeholder-shown) ~ .floating-label .label-text {
+    color: var(--color-success);
+}
+
+.validation-icon {
+    display: none;
+    font-size: 0.875rem;
+}
+
+.form-input:valid:not(:placeholder-shown) ~ .floating-label .validation-icon::before {
+    content: '✓';
+    display: inline-block;
+    color: var(--color-success);
+    animation: checkmark-pop 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes checkmark-pop {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Invalid State */
+.form-input:invalid:not(:placeholder-shown):not(:focus) {
+    border-color: var(--color-error);
+}
+
+.form-input:invalid:not(:placeholder-shown):not(:focus) ~ .floating-label .label-text {
+    color: var(--color-error);
+}
+
+/* ==================== AUTOFILL OVERRIDE ==================== */
+.form-input:-webkit-autofill,
+.form-input:-webkit-autofill:hover,
+.form-input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px var(--color-bg-secondary) inset;
+    -webkit-text-fill-color: var(--color-text-primary);
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.form-input:-webkit-autofill ~ .floating-label {
+    top: 0.625rem;
+    transform: translateY(0) scale(1);
+    font-size: var(--font-size-xs);
+    color: var(--color-accent-blue);
+}
+
+/* ==================== CUSTOM SELECT ==================== */
+.custom-select {
+    position: relative;
+    cursor: pointer;
+}
+
+.select-trigger {
+    width: 100%;
+    padding: 1.25rem 1rem 0.75rem;
+    font-size: var(--font-size-base);
+    font-family: var(--font-primary);
+    color: var(--color-text-primary);
+    background: var(--color-bg-secondary);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all var(--transition-base);
+}
+
+.custom-select:focus .select-trigger,
+.custom-select[aria-expanded="true"] .select-trigger {
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.select-value {
+    color: var(--color-text-secondary);
+}
+
+.select-value.has-value {
+    color: var(--color-text-primary);
+}
+
+.select-arrow {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    transition: transform var(--transition-base);
+}
+
+.custom-select[aria-expanded="true"] .select-arrow {
+    transform: rotate(180deg);
+}
+
+.custom-select .floating-label {
+    top: 0.625rem;
+    transform: translateY(0) scale(1);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+}
+
+.custom-select:focus .floating-label,
+.custom-select[aria-expanded="true"] .floating-label {
+    color: var(--color-accent-blue);
+}
+
+.select-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background: var(--color-bg-secondary);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    list-style: none;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all var(--transition-base);
+    z-index: 100;
+}
+
+.custom-select[aria-expanded="true"] .select-dropdown {
+    max-height: 300px;
+    opacity: 1;
+    transform: translateY(0);
+    overflow-y: auto;
+}
+
+.select-option {
+    padding: 0.875rem 1rem;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+    color: var(--color-text-primary);
+    font-size: var(--font-size-sm);
+}
+
+.select-option:hover,
+.select-option:focus {
+    background-color: rgba(74, 144, 226, 0.08);
+    outline: none;
+}
+
+.select-option.selected {
+    background-color: rgba(74, 144, 226, 0.12);
+    font-weight: 600;
+}
+
+/* ==================== DYNAMIC FIELDS (PROGRESSIVE DISCLOSURE) ==================== */
+.dynamic-fields {
+    display: grid;
+    gap: 2rem;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all var(--transition-slow);
+}
+
+.dynamic-fields.active {
+    max-height: 1000px;
+    opacity: 1;
+    margin-bottom: 0;
+}
+
+.dynamic-field {
+    animation: slide-down var(--transition-slow) cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== ERROR TOOLTIP (GLASSMORPHIC) ==================== */
+.error-tooltip {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    transform: translate(100%, -50%);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+    font-size: var(--font-size-xs);
+    color: var(--color-error);
+    box-shadow: var(--glass-shadow);
+    max-width: 250px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--transition-base);
+    z-index: 10;
+}
+
+.error-tooltip::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    background: var(--glass-bg);
+    border-left: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+}
+
+.error-tooltip.visible {
+    opacity: 1;
+    pointer-events: auto;
+    right: -30px;
+}
+
+/* ==================== FORM ACTIONS ==================== */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn {
+    padding: 0.875rem 1.75rem;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    font-family: var(--font-primary);
+    letter-spacing: 0.08em;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: var(--color-text-primary);
+    color: white;
+    flex: 1;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: #1a1a1a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.btn-arrow {
+    transition: transform var(--transition-base);
+}
+
+.btn-primary:hover .btn-arrow {
+    transform: translateX(3px);
+}
+
+/* Button Spinner */
+.btn-spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+.btn-primary.loading .btn-text,
+.btn-primary.loading .btn-arrow {
+    display: none;
+}
+
+.btn-primary.loading .btn-spinner {
+    display: block;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==================== INFO CARD ==================== */
+.info-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+}
+
+.info-card-header {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.info-quote {
+    font-size: var(--font-size-base);
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--color-text-primary);
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--color-accent-blue);
+}
+
+.specs-section {
+    margin-bottom: 2rem;
+}
+
+.specs-header {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.spec-item:last-child {
+    border-bottom: none;
+}
+
+.spec-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.05em;
+}
+
+.spec-value {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    letter-spacing: 0.05em;
+}
+
+.progress-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.progress-bar {
+    height: 4px;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-warning), #FFB84D);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-slow);
+}
+
+.progress-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.05em;
+}
+
+/* ==================== FOOTER ==================== */
+.footer {
+    background: var(--color-bg-secondary);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 1.5rem 3rem;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.footer-text {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.05em;
+}
+
+.footer-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-primary);
+    transition: color var(--transition-base);
+}
+
+.footer-btn:hover {
+    color: var(--color-text-primary);
+}
+
+.globe-icon {
+    font-size: 1rem;
+}
+
+.autosave-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--font-size-xs);
+    color: var(--color-success);
+    letter-spacing: 0.05em;
+}
+
+.autosave-icon {
+    font-size: 1rem;
+}
+
+/* ==================== MODAL ==================== */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    animation: fade-in var(--transition-base);
+}
+
+.modal-content {
+    position: relative;
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: scale-in var(--transition-base);
+}
+
+.modal-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+}
+
+.modal-text {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.btn-danger {
+    background: var(--color-error);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #C62828;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scale-in {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==================== FOCUS MODE (DIM OTHER FIELDS) ==================== */
+.genesis-form.focus-mode .form-group:not(.focused) {
+    opacity: 0.4;
+    transition: opacity var(--transition-base);
+}
+
+.genesis-form.focus-mode .form-group.focused {
+    opacity: 1;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1024px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 6rem 2rem 3rem;
+    }
+    
+    .error-tooltip {
+        position: static;
+        transform: none;
+        margin-top: 0.5rem;
+        max-width: 100%;
+    }
+    
+    .error-tooltip::before {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .header {
+        padding: 1rem 1.5rem;
+    }
+    
+    .nav {
+        display: none;
+    }
+    
+    .form-card {
+        padding: 1.5rem;
+    }
+    
+    .form-title {
+        font-size: var(--font-size-xl);
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+}
