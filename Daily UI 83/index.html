@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quantum — The Kinetic Action System</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-left">
+    <span class="logo">Q.</span>
+    <div class="header-meta">
+      <p class="issue-label">Autumn Issue No. 83</p>
+      <p class="issue-sub">The Kinetic Action System</p>
+    </div>
+  </div>
+  <nav class="nav">
+    <a href="#">Principles</a>
+    <a href="#">Manifesto</a>
+    <a href="#">Archive</a>
+  </nav>
+</header>
+
+<!-- HERO SECTION -->
+<main class="main">
+  <section class="hero">
+    <div class="hero-image-wrapper">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80" alt="Kinetic Landscape" class="hero-img"/>
+      <div class="hero-overlay"></div>
+      <div class="hero-text">
+        <span class="hero-vol">Volume I: Interaction</span>
+        <h2 class="hero-title">The Weight of<br/>a Click.</h2>
+      </div>
+    </div>
+    <div class="hero-sidebar">
+      <div class="hero-sidebar-inner">
+        <h1 class="main-title">Quantum<br/><em>Kinetic</em></h1>
+        <p class="main-quote">"A button is not a rectangle with text; it is a state machine that communicates affordance, process, and outcome."</p>
+        <hr class="divider"/>
+        <div class="author">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Author" class="author-img"/>
+          <div>
+            <p class="author-name">Julian Thorne</p>
+            <p class="author-role">Director of Kinetic Systems</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO + SIDEBAR -->
+  <section class="intro-section">
+    <div class="intro-text">
+      <div class="columns-text">
+        <p class="drop-cap">When we speak of the button, we are not merely discussing an HTML element. We are discussing the rejection of the passive interface. The Quantum system treats every click as a soft collision—a momentary meeting of intent and response that feels as natural as a ripple in a mountain lake.</p>
+        <p class="italic-quote">"Geometry is the language of God, but motion is the breath of the living."</p>
+        <p>Technical manuals will tell you about click handlers and state management. They miss the soul of the work. To build with Quantum is to acknowledge that the cursor is an extension of the nervous system. When a button pulls toward the pointer, it is an act of digital empathy.</p>
+        <p>Our pursuit of the 'Kinetic' is a pursuit of permanence. In an industry obsessed with the next trend, we look back to the craft of the printmaker and the architect. We seek to build buttons that do not merely 'perform' but 'behave' with a dignity befitting the high-end experiences of tomorrow.</p>
+      </div>
+    </div>
+    <div class="inquiry-box">
+      <span class="material-symbols-outlined inquiry-icon">auto_awesome</span>
+      <h3 class="inquiry-title">The Kinetic Inquiry</h3>
+      <ul class="inquiry-list">
+        <li><span class="dot"></span> Magnetic Hover Fields</li>
+        <li><span class="dot"></span> Liquid Ripple Effects</li>
+        <li><span class="dot"></span> State Morphing Logic</li>
+        <li><span class="dot"></span> Organic Squircles</li>
+      </ul>
+      <div class="inquiry-footer">
+        <p class="inquiry-quote">"Design is the silent ambassador of your brand."</p>
+        <p class="inquiry-attr">— Paul Rand, interpreted through kinetic motion.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: MAGNETIC HOVER -->
+  <section class="demo-section" id="magnetic">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">The Magnetic Field</h2>
+      <p class="section-desc">As the cursor approaches, the button physically translates toward it—creating a playful tension before the click. A dampening factor of 0.3 ensures it doesn't follow 1:1.</p>
+    </div>
+    <div class="demo-area magnetic-demo">
+      <div class="demo-card">
+        <button class="btn btn-primary magnetic" data-btn-h="15" data-btn-s="55" data-btn-l="50">
+          <span class="btn-text">Explore System</span>
+          <span class="material-symbols-outlined btn-icon">arrow_forward</span>
+        </button>
+      </div>
+      <div class="demo-card">
+        <button class="btn btn-outline magnetic" data-btn-h="145" data-btn-s="30" data-btn-l="15">
+          <span class="material-symbols-outlined btn-icon">auto_awesome</span>
+          <span class="btn-text">Discover</span>
+        </button>
+      </div>
+      <div class="demo-card">
+        <button class="btn btn-ghost magnetic" data-btn-h="40" data-btn-s="40" data-btn-l="55">
+          <span class="btn-text">Learn More</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: LIQUID RIPPLE -->
+  <section class="demo-section" id="ripple">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">The Liquid Ripple</h2>
+      <p class="section-desc">A Canvas-based ripple that starts at the exact click coordinates and expands outward using a lighter shade derived from the button's HSL palette.</p>
+    </div>
+    <div class="demo-area ripple-demo">
+      <div class="demo-card">
+        <button class="btn btn-primary ripple-btn magnetic" data-btn-h="210" data-btn-s="60" data-btn-l="45">
+          <canvas class="ripple-canvas"></canvas>
+          <span class="btn-text">Send Message</span>
+          <span class="material-symbols-outlined btn-icon">send</span>
+        </button>
+      </div>
+      <div class="demo-card">
+        <button class="btn btn-primary ripple-btn magnetic" data-btn-h="15" data-btn-s="55" data-btn-l="50">
+          <canvas class="ripple-canvas"></canvas>
+          <span class="material-symbols-outlined btn-icon">favorite</span>
+          <span class="btn-text">Save to Collection</span>
+        </button>
+      </div>
+      <div class="demo-card">
+        <button class="btn btn-primary ripple-btn magnetic squircle-btn" data-btn-h="145" data-btn-s="30" data-btn-l="20">
+          <canvas class="ripple-canvas"></canvas>
+          <span class="material-symbols-outlined btn-icon">add</span>
+          <span class="btn-text">Create New</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMAGE BREAK -->
+  <section class="image-break">
+    <div class="image-break-grid">
+      <div class="img-card group">
+        <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80" alt="Organic Forms" class="img-card-img"/>
+        <div class="img-card-overlay"></div>
+        <h4 class="img-card-title">Elasticity in Void</h4>
+      </div>
+      <div class="img-card group">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Systematic Grid" class="img-card-img"/>
+        <div class="img-card-overlay"></div>
+        <h4 class="img-card-title">The Architecture of Silence</h4>
+      </div>
+    </div>
+    <div class="image-break-footer">
+      <p class="fig-label">Fig. 1.1 — Visualizing Interaction as a Physical Constant</p>
+    </div>
+  </section>
+
+  <!-- SECTION 3: STATE MORPHING -->
+  <section class="demo-section" id="morph">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">State Morphing</h2>
+      <p class="section-desc">The submit button morphs into a circle, spins a loading ring, then morphs back revealing a checkmark—all without causing layout shift.</p>
+    </div>
+    <div class="demo-area morph-demo">
+      <div class="demo-card demo-card-wide">
+        <div class="morph-wrapper">
+          <button class="btn btn-primary morph-btn magnetic ripple-btn" data-btn-h="15" data-btn-s="55" data-btn-l="50" id="submitBtn">
+            <canvas class="ripple-canvas"></canvas>
+            <span class="morph-content">
+              <span class="btn-text">Submit Application</span>
+              <span class="material-symbols-outlined btn-icon">arrow_forward</span>
+            </span>
+            <span class="morph-loader"></span>
+            <span class="morph-success">
+              <svg viewBox="0 0 24 24" class="check-svg"><polyline points="4 12 10 18 20 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div class="demo-card demo-card-wide">
+        <div class="morph-wrapper">
+          <button class="btn btn-primary morph-btn magnetic ripple-btn" data-btn-h="210" data-btn-s="60" data-btn-l="45" id="uploadBtn">
+            <canvas class="ripple-canvas"></canvas>
+            <span class="morph-content">
+              <span class="material-symbols-outlined btn-icon">cloud_upload</span>
+              <span class="btn-text">Upload Files</span>
+            </span>
+            <span class="morph-loader"></span>
+            <span class="morph-success">
+              <svg viewBox="0 0 24 24" class="check-svg"><polyline points="4 12 10 18 20 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: SQUIRCLE + DESTRUCTIVE -->
+  <section class="demo-section" id="squircle">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Squircle & Destructive</h2>
+      <p class="section-desc">Organic superellipse shapes replace standard border-radius. Destructive actions require a confirm step—click once for "Are you sure?", click again to execute.</p>
+    </div>
+    <div class="demo-area special-demo">
+      <div class="demo-card">
+        <button class="btn btn-primary squircle-btn magnetic ripple-btn" data-btn-h="40" data-btn-s="40" data-btn-l="55">
+          <canvas class="ripple-canvas"></canvas>
+          <span class="material-symbols-outlined btn-icon">add</span>
+          <span class="btn-text">Post +</span>
+        </button>
+      </div>
+      <div class="demo-card">
+        <button class="btn btn-destructive magnetic ripple-btn" data-btn-h="0" data-btn-s="65" data-btn-l="50" id="deleteBtn">
+          <canvas class="ripple-canvas"></canvas>
+          <span class="btn-text destructive-text">Delete Project</span>
+          <span class="material-symbols-outlined btn-icon destructive-icon">delete</span>
+        </button>
+      </div>
+      <div class="demo-card">
+        <button class="btn btn-primary squircle-btn magnetic ripple-btn" data-btn-h="270" data-btn-s="45" data-btn-l="50">
+          <canvas class="ripple-canvas"></canvas>
+          <span class="material-symbols-outlined btn-icon">palette</span>
+          <span class="btn-text">Theme Editor</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section">
+    <div class="cta-text">
+      <h3 class="cta-title">Ready to transcend the static?</h3>
+      <p class="cta-desc">Quantum is available for those who seek to build with purpose. Join our collective of architects, motion designers, and philosophers.</p>
+      <div class="cta-buttons">
+        <button class="btn btn-primary magnetic ripple-btn" data-btn-h="15" data-btn-s="55" data-btn-l="50">
+          <canvas class="ripple-canvas"></canvas>
+          <span class="btn-text">Apply for Access</span>
+        </button>
+        <button class="btn btn-outline magnetic" data-btn-h="145" data-btn-s="30" data-btn-l="15">
+          <span class="btn-text">Read the Dossier</span>
+        </button>
+      </div>
+    </div>
+    <div class="cta-grid">
+      <div class="cta-img-wrapper">
+        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&q=80" alt="Nature Concept" class="cta-img"/>
+      </div>
+      <div class="cta-quote-box">
+        <p class="cta-quote">"The machine must bow to the hand."</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-logo">Q.</span>
+      <p class="footer-tagline">Founded in the pursuit of motion that feels like memory.</p>
+    </div>
+    <div class="footer-col">
+      <h5 class="footer-heading">Publications</h5>
+      <p>The Superellipse Theory</p>
+      <p>Inertia as Language</p>
+      <p>Viscosity and UX</p>
+    </div>
+    <div class="footer-col">
+      <h5 class="footer-heading">Studio</h5>
+      <p>Design Philosophy</p>
+      <p>Kinetic Lab</p>
+      <p>Type Specimen</p>
+    </div>
+    <div class="footer-col">
+      <h5 class="footer-heading">Correspondence</h5>
+      <div class="footer-input">
+        <input type="text" placeholder="Enter your email"/>
+        <button class="material-symbols-outlined">arrow_forward</button>
+      </div>
+      <p class="footer-copy">© 2024 Quantum Systems.<br/>All rights reserved to the curious.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
