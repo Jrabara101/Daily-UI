@@ -1,0 +1,123 @@
+@layer base {
+    body {
+        letter-spacing: 0.1em;
+    }
+}
+
+.brutal-border {
+    border: 2px solid #ffffff;
+}
+
+.brutal-border-b {
+    border-bottom: 2px solid #ffffff;
+}
+
+.brutal-border-t {
+    border-top: 2px solid #ffffff;
+}
+
+.brutal-border-r {
+    border-right: 2px solid #ffffff;
+}
+
+.brutal-border-l {
+    border-left: 2px solid #ffffff;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #ffffff;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #00ff00;
+}
+
+/* Input/Select Brushing */
+select, input {
+    background: transparent !important;
+    border: 1px solid #ffffff !important;
+    color: #ffffff !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Pagination Specifics */
+.page-btn {
+    @apply h-10 w-10 flex items-center justify-center brutal-border font-bold transition-all duration-150 cursor-pointer uppercase relative overflow-hidden;
+}
+
+.page-btn:hover:not(.disabled) {
+    @apply bg-white text-black;
+}
+
+.page-btn.active {
+    @apply bg-status-green text-black border-status-green shadow-[0_0_15px_#00ff00];
+}
+
+.page-btn.disabled {
+    @apply opacity-30 cursor-not-allowed grayscale;
+}
+
+.ellipsis {
+    @apply px-2 font-black;
+}
+
+/* Kinetic Target States */
+.page-btn.active::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border: 2px solid #00ff00;
+    animation: pulse-border 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-border {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0; transform: scale(1.1); }
+}
+
+/* Mobile Morphing via Container Queries */
+@container (max-width: 600px) {
+    #pagination-hub {
+        @apply gap-1;
+    }
+    .page-btn:not(.nav-btn):not(.active) {
+        @apply hidden;
+    }
+}
+
+/* Glassmorphism for Info Scent */
+#info-tooltip {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+/* Table Row Highlights */
+#log-body tr {
+    transition: background-color 0.1s ease;
+}
+
+#log-body tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+#log-body tr.critical {
+    background-color: rgba(255, 0, 0, 0.05);
+}
+
+#log-body tr.critical:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}

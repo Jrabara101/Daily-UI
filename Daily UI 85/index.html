@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>LogStream - High-Volume Data Navigator</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "brutal-black": "#000000",
+                        "brutal-white": "#ffffff",
+                        "status-green": "#00ff00",
+                        "status-yellow": "#ffff00",
+                        "status-red": "#ff0000",
+                        "terminal-dim": "#444444",
+                    },
+                    fontFamily: {
+                        "mono": ["VT323", "monospace"]
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="selection:bg-status-green selection:text-black bg-brutal-black text-brutal-white font-mono lowercase">
+    <div class="relative flex min-h-screen flex-col overflow-x-hidden">
+        <!-- Header -->
+        <header class="brutal-border-b bg-brutal-black px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="flex h-12 w-12 items-center justify-center brutal-border bg-brutal-white text-brutal-black">
+                        <span class="material-symbols-outlined text-3xl font-bold">settings_input_component</span>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold tracking-tighter uppercase">LogStream Navigator</h1>
+                        <p id="system-status" class="text-sm text-status-green">[ operational_status: nominal ]</p>
+                    </div>
+                </div>
+                <!-- Real-time metrics -->
+                <div class="hidden lg:flex gap-4 ml-10">
+                    <div class="px-3 py-1 brutal-border border-status-green text-status-green text-lg">
+                        cpu_load: <span id="cpu-val">12.4%</span>
+                    </div>
+                    <div class="px-3 py-1 brutal-border border-status-yellow text-status-yellow text-lg">
+                        mem_use: <span id="mem-val">88.1%</span>
+                    </div>
+                    <div class="px-3 py-1 brutal-border border-status-red text-status-red text-lg">
+                        io_wait: <span id="io-val">0.02ms</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="flex flex-col items-end text-xs">
+                    <span>terminal_id: command_cntr_01</span>
+                    <span>session_expire: <span id="session-timer">04:59:22</span></span>
+                </div>
+                <div class="h-12 w-12 brutal-border flex items-center justify-center hover:bg-brutal-white hover:text-black cursor-pointer transition-colors active:scale-95">
+                    <span class="material-symbols-outlined text-3xl">settings</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Layout -->
+        <main class="flex-1 p-6 grid grid-cols-12 gap-6 overflow-hidden max-h-[calc(100vh-140px)]">
+            <!-- Sidebar -->
+            <aside class="col-span-12 lg:col-span-3 flex flex-col gap-6 overflow-y-auto custom-scrollbar">
+                <div class="brutal-border p-4 bg-brutal-black">
+                    <h3 class="text-xl font-bold mb-4 bg-brutal-white text-brutal-black px-2 uppercase italic">Core Systems</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center group cursor-crosshair">
+                            <span class="text-lg group-hover:text-status-green transition-colors">database_cluster</span>
+                            <span class="text-status-green font-bold">[ ok ]</span>
+                        </div>
+                        <div class="flex justify-between items-center group cursor-crosshair">
+                            <span class="text-lg group-hover:text-status-green transition-colors">redis_cache</span>
+                            <span class="text-status-green font-bold">[ ok ]</span>
+                        </div>
+                        <div class="flex justify-between items-center group cursor-crosshair">
+                            <span class="text-lg group-hover:text-status-yellow transition-colors">auth_service</span>
+                            <span class="text-status-yellow font-bold">[ lag ]</span>
+                        </div>
+                        <div class="flex justify-between items-center group cursor-crosshair">
+                            <span class="text-lg group-hover:text-status-red transition-colors">payment_gateway</span>
+                            <span class="text-status-red font-bold">[ err ]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="brutal-border p-4 bg-brutal-black flex-1">
+                    <h3 class="text-xl font-bold mb-4 bg-brutal-white text-brutal-black px-2 uppercase italic">Critical Alerts</h3>
+                    <div id="alerts-container" class="space-y-4 text-sm">
+                        <!-- Alerts injected by JS -->
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Table Section -->
+            <div class="col-span-12 lg:col-span-9 brutal-border flex flex-col bg-brutal-black overflow-hidden relative">
+                <div class="p-4 brutal-border-b flex flex-wrap items-center justify-between gap-4 bg-black z-20">
+                    <div class="flex items-center gap-2 flex-1">
+                        <span class="text-xl font-bold text-status-green animate-pulse">&gt;</span>
+                        <input id="log-pipe" class="w-full max-w-md h-10 px-4 focus:ring-1 focus:ring-status-green focus:outline-none placeholder:text-terminal-dim" placeholder="filter_logs --grep 'auth'" type="text"/>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="brutal-border px-4 py-1 hover:bg-brutal-white hover:text-black font-bold uppercase active:scale-95 transition-all">export_data</button>
+                        <button id="re-index" class="brutal-border bg-brutal-white text-brutal-black px-4 py-1 hover:invert font-bold uppercase active:scale-95 transition-all">re-index</button>
+                    </div>
+                </div>
+
+                <!-- Table Content -->
+                <div id="table-scroll-container" class="flex-1 overflow-auto custom-scrollbar">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="sticky top-0 z-10 bg-brutal-black brutal-border-b shadow-[0_4px_10px_rgba(0,0,0,0.8)]">
+                            <tr class="text-xl uppercase">
+                                <th class="px-4 py-2 brutal-border-r w-32">pid</th>
+                                <th class="px-4 py-2 brutal-border-r w-64">iso_time</th>
+                                <th class="px-4 py-2 brutal-border-r">event_stream</th>
+                                <th class="px-4 py-2 text-center">sig</th>
+                            </tr>
+                        </thead>
+                        <tbody id="log-body" class="text-lg divide-y divide-white/10">
+                            <!-- Rows injected by JS -->
+                        </tbody>
+                    </table>
+                    <div id="loading-overlay" class="absolute inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
+                        <div class="text-2xl font-bold animate-bounce text-status-green">synchronizing_data...</div>
+                    </div>
+                </div>
+
+                <!-- Pagination Engine Footer -->
+                <footer class="brutal-border-t p-4 @container bg-black z-20">
+                    <div class="flex flex-col @[800px]:flex-row items-center justify-between gap-4">
+                        <div class="text-xl order-2 @[800px]:order-1">
+                            showing_block: <span id="block-range" class="text-status-green">0-0</span> / <span id="total-count">0</span>
+                        </div>
+
+                        <!-- Smart Pagination Hub -->
+                        <nav id="pagination-hub" aria-label="Log Pagination" class="flex gap-2 items-center order-1 @[800px]:order-2">
+                            <!-- Page numbers and ellipses injected by JS -->
+                        </nav>
+
+                        <div class="flex items-center gap-4 order-3">
+                            <span class="text-sm uppercase opacity-50">jump_to:</span>
+                            <input id="jump-input" class="w-20 px-2 py-0.5 text-center focus:ring-1 focus:ring-status-green focus:outline-none" type="number" value="1" min="1"/>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </main>
+
+        <!-- Status Bar -->
+        <footer class="brutal-border-t px-6 py-2 bg-brutal-black flex items-center justify-between text-sm uppercase">
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-2">
+                    <span class="h-3 w-3 bg-status-green animate-pulse"></span>
+                    <span>kernel_ready</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-terminal-dim">node:</span>
+                    <span>us-east-primary-01</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-terminal-dim">uptime:</span>
+                    <span id="uptime">442d 12h 04m</span>
+                </div>
+            </div>
+            <div class="hidden md:flex gap-6">
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">terminal</span> cmd+l clear</span>
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">emergency_home</span> esc exit</span>
+                <span class="text-status-yellow">api_stable_v4.0</span>
+            </div>
+        </footer>
+
+        <!-- Info Scent Tooltip -->
+        <div id="info-tooltip" class="fixed pointer-events-none opacity-0 transition-opacity duration-200 z-[100] px-4 py-2 brutal-border bg-black/90 backdrop-blur-md text-status-green text-sm">
+            <!-- Metadata content -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
