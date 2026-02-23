@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --hero-blue: #1e40af;
+        --hero-green: #22c55e;
+        --hero-purple: #7e22ce;
+        --hero-gold: #fbbf24;
+        --comic-black: #1a1a1a;
+        --pvz-progress: 0%;
+    }
+
+    body {
+        font-family: 'Bangers', system-ui;
+        background-color: #1a1a2e;
+    }
+}
+
+@layer components {
+    .comic-border {
+        box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+        border: 3px solid black;
+    }
+
+    .comic-border-thick {
+        box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 1);
+        border: 4px solid black;
+    }
+
+    .text-comic-outline {
+        text-shadow:
+            3px 3px 0 #000,
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+    }
+
+    .font-action {
+        font-family: 'Luckiest Guy', cursive;
+    }
+
+    .battle-lane {
+        background: linear-gradient(to bottom, rgba(34, 197, 94, 0.05), rgba(34, 197, 94, 0.02));
+        border-left: 1px dashed rgba(255, 255, 255, 0.1);
+        border-right: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Brainz Meter Specific Styles */
+
+.flag-pole {
+    position: absolute;
+    bottom: 100%;
+    width: 4px;
+    height: 30px;
+    background: #4a3728;
+    border: 1px solid black;
+    transform-origin: bottom center;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: scaleY(0);
+}
+
+.flag-pole.raised {
+    transform: scaleY(1);
+}
+
+.flag-cloth {
+    position: absolute;
+    top: 0;
+    left: 4px;
+    width: 24px;
+    height: 18px;
+    background: #dc2626;
+    border: 2px solid black;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    animation: flag-wave 2s infinite ease-in-out;
+}
+
+.flag-cloth::after {
+    content: '!';
+    position: absolute;
+    left: 2px;
+    top: 0;
+    font-size: 12px;
+    color: white;
+    font-weight: bold;
+}
+
+@keyframes flag-wave {
+
+    0%,
+    100% {
+        transform: rotate(0deg) scaleX(1);
+    }
+
+    50% {
+        transform: rotate(5deg) scaleX(0.9);
+    }
+}
+
+.zombie-sprite {
+    image-rendering: pixelated;
+    filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.5));
+}
+
+/* Wave Warning Flash */
+body.wave-approaching {
+    animation: background-flash 0.5s repeat(3);
+}
+
+@keyframes background-flash {
+
+    0%,
+    100% {
+        background-color: #1a1a2e;
+    }
+
+    50% {
+        background-color: #450a0a;
+    }
+}
+
+/* Custom Tailwind Config simulation via CSS Variables */
+.bg-hero-purple {
+    background-color: var(--hero-purple);
+}
+
+.bg-hero-gold {
+    background-color: var(--hero-gold);
+}
+
+.bg-hero-green {
+    background-color: var(--hero-green);
+}
+
+.text-comic-black {
+    color: var(--comic-black);
+}
