@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ops Terminal - OmniTip Engine</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] font-sans antialiased overflow-hidden">
+    
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 border-r border-[#e2e8f0] bg-white flex flex-col shrink-0">
+            <div class="p-6 flex items-center gap-3">
+                <div class="bg-indigo-50 rounded-lg p-2 text-indigo-600">
+                    <span class="material-symbols-outlined leading-none text-xl">account_tree</span>
+                </div>
+                <div>
+                    <h1 class="text-sm font-bold leading-tight">Ops Terminal</h1>
+                    <p class="text-[11px] text-slate-500 font-medium uppercase tracking-wider">High Availability</p>
+                </div>
+            </div>
+            
+            <nav class="flex-1 px-4 py-4 flex flex-col gap-1">
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-slate-500 hover:bg-slate-50 transition-colors">
+                    <span class="material-symbols-outlined text-lg">space_dashboard</span>
+                    <span class="text-[13px] font-medium">Overview</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md bg-teal-50 text-teal-700 border border-teal-100" data-tooltip="View live verification stream" data-tooltip-type="rich">
+                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1">verified_user</span>
+                    <span class="text-[13px] font-semibold">Verification Logs</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-slate-500 hover:bg-slate-50 transition-colors" data-tooltip="Manage active security personnel">
+                    <span class="material-symbols-outlined text-lg">badge</span>
+                    <span class="text-[13px] font-medium">Personnel List</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-slate-500 hover:bg-slate-50 transition-colors">
+                    <span class="material-symbols-outlined text-lg">analytics</span>
+                    <span class="text-[13px] font-medium">System Metrics</span>
+                </a>
+                
+                <div class="mt-auto pt-4 border-t border-slate-100">
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-slate-500 hover:bg-slate-50 transition-colors">
+                        <span class="material-symbols-outlined text-lg">tune</span>
+                        <span class="text-[13px] font-medium">System Settings</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <header class="h-14 border-b border-[#e2e8f0] flex items-center justify-between px-8 bg-white z-10">
+                <div class="flex items-center gap-10">
+                    <h2 class="text-sm font-semibold">Operations Terminal</h2>
+                    <nav class="hidden md:flex items-center gap-6">
+                        <a href="#" class="text-[13px] font-medium text-slate-500 hover:text-teal-600 transition-colors" data-tooltip="Live event stream">Real-time Stream</a>
+                        <a href="#" class="text-[13px] font-medium text-slate-500 hover:text-teal-600 transition-colors" data-tooltip="Weekly system reports">Reports</a>
+                        <a href="#" class="text-[13px] font-medium text-slate-500 hover:text-teal-600 transition-colors">Audit Trail</a>
+                    </nav>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <div class="relative hidden sm:block">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+                        <input type="text" placeholder="Query records..." class="bg-slate-100 border-none rounded-full pl-9 pr-4 py-1.5 text-xs focus:ring-1 focus:ring-teal-500 w-56">
+                    </div>
+                    <button class="p-1.5 text-slate-500 hover:bg-slate-50 rounded-full relative" data-tooltip="3 Unread Alerts" data-tooltip-pos="bottom">
+                        <span class="material-symbols-outlined text-xl">notifications_active</span>
+                        <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full border-2 border-white"></span>
+                    </button>
+                    <div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden ring-2 ring-white cursor-pointer" data-tooltip="Marcus Thorne (Admin)" data-tooltip-pos="left">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Profile" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </header>
+
+            <section class="flex-1 p-8 overflow-y-auto">
+                <div class="max-w-6xl mx-auto">
+                    <div class="mb-8 flex justify-between items-end">
+                        <div>
+                            <h1 class="text-2xl font-bold text-slate-800 tracking-tight">Access Verification Log</h1>
+                            <p class="text-slate-500 text-sm mt-1">Status monitoring for active security shifts.</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="flex items-center gap-2 px-3 py-1.5 border border-slate-200 rounded text-[13px] font-medium bg-white hover:bg-slate-50 transition-colors shadow-sm">
+                                <span class="material-symbols-outlined text-sm">download</span> Export
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="p-5 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-between group hover:border-teal-200 transition-all cursor-help" data-tooltip="Current logged-in staff">
+                            <div>
+                                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Active Personnel</p>
+                                <p class="text-2xl font-semibold text-slate-800">42</p>
+                            </div>
+                            <div class="text-teal-600 bg-teal-50 p-2 rounded-lg group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined">how_to_reg</span>
+                            </div>
+                        </div>
+                        <div class="p-5 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-between group hover:border-indigo-200 transition-all cursor-help" data-tooltip="Overall completion percentage">
+                            <div>
+                                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Shift Progress</p>
+                                <p class="text-2xl font-semibold text-slate-800">64.5%</p>
+                            </div>
+                            <div class="text-indigo-600 bg-indigo-50 p-2 rounded-lg group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined">monitoring</span>
+                            </div>
+                        </div>
+                        <div class="p-5 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-between group hover:border-green-200 transition-all cursor-help" data-tooltip="System stability status">
+                            <div>
+                                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Alert Status</p>
+                                <p class="text-2xl font-semibold text-green-600">Nominal</p>
+                            </div>
+                            <div class="text-green-600 bg-green-50 p-2 rounded-lg group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined">check_circle</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Table -->
+                    <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50/50 border-b border-slate-100">
+                                    <th class="px-8 py-4 text-[11px] font-bold uppercase tracking-widest text-slate-400">Staff Identifier</th>
+                                    <th class="px-8 py-4 text-[11px] font-bold uppercase tracking-widest text-slate-400">Name</th>
+                                    <th class="px-8 py-4 text-[11px] font-bold uppercase tracking-widest text-slate-400">Last Check-in</th>
+                                    <th class="px-8 py-4 text-[11px] font-bold uppercase tracking-widest text-slate-400 text-center">Activity Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <!-- Row 1 -->
+                                <tr class="hover:bg-slate-50/50 transition-colors">
+                                    <td class="px-8 py-5">
+                                        <div class="inline-flex items-center gap-1.5 text-teal-600 font-bold text-[13px] hover:underline cursor-pointer" 
+                                             data-tooltip-type="user-card" 
+                                             data-user-id="SEC-8842">
+                                            SEC-8842
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-5 text-[13px] font-medium text-slate-700">Marcus Thorne</td>
+                                    <td class="px-8 py-5 text-[13px] text-slate-500">08:14:22 AM</td>
+                                    <td class="px-8 py-5 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-100">
+                                            Nominal
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Row 2 -->
+                                <tr class="hover:bg-slate-50/50 transition-colors">
+                                    <td class="px-8 py-5 text-slate-500 text-[13px]">
+                                        <div class="inline-flex items-center gap-1.5 text-teal-600 font-bold text-[13px] hover:underline cursor-pointer" 
+                                             data-tooltip-type="user-card" 
+                                             data-user-id="SEC-9103">
+                                            SEC-9103
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-5 text-[13px] font-medium text-slate-700">Elena Rodriguez</td>
+                                    <td class="px-8 py-5 text-[13px] text-slate-500">08:15:45 AM</td>
+                                    <td class="px-8 py-5 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-100">
+                                            Nominal
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Row 3 -->
+                                <tr class="hover:bg-slate-50/50 transition-colors">
+                                    <td class="px-8 py-5 text-slate-500 text-[13px]">
+                                        <div class="inline-flex items-center gap-1.5 text-teal-600 font-bold text-[13px] hover:underline cursor-pointer" 
+                                             data-tooltip-type="user-card" 
+                                             data-user-id="SEC-7721">
+                                            SEC-7721
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-5 text-[13px] font-medium text-slate-700">James Chen</td>
+                                    <td class="px-8 py-5 text-[13px] text-slate-500">08:18:10 AM</td>
+                                    <td class="px-8 py-5 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-50 text-amber-700 border border-amber-100">
+                                            On Break
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Row 4 -->
+                                <tr class="hover:bg-slate-50/50 transition-colors">
+                                    <td class="px-8 py-5 text-slate-500 text-[13px]">
+                                        <div class="inline-flex items-center gap-1.5 text-teal-600 font-bold text-[13px] hover:underline cursor-pointer" 
+                                             data-tooltip-type="user-card" 
+                                             data-user-id="SEC-5564">
+                                            SEC-5564
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-5 text-[13px] font-medium text-slate-700">Sarah Jenkins</td>
+                                    <td class="px-8 py-5 text-[13px] text-slate-500">10:05:33 AM</td>
+                                    <td class="px-8 py-5 text-center">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-500 border border-slate-200">
+                                            Inactive
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="px-8 py-4 bg-slate-50/30 flex items-center justify-between border-t border-slate-100">
+                            <p class="text-[12px] text-slate-500 font-medium">Showing 4 of 42 records</p>
+                            <div class="flex gap-2">
+                                <button class="px-3 py-1 border border-slate-200 rounded text-[11px] font-bold text-slate-600 hover:bg-white transition-colors bg-white/50">Previous</button>
+                                <button class="px-3 py-1 bg-white border border-slate-200 rounded text-[11px] font-bold text-slate-600 hover:bg-slate-50 transition-colors shadow-sm">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Tooltip Root -->
+    <div id="omnitip-root" class="omnitip-container hidden" role="tooltip" aria-hidden="true" inert>
+        <div class="omnitip-content"></div>
+        <div class="omnitip-arrow"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

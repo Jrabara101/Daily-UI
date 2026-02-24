@@ -1,0 +1,156 @@
+/* Custom attributes and logic styles */
+[data-tooltip] {
+    cursor: pointer;
+}
+
+/* Tooltip Singleton Styles */
+#omnitip-root {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    pointer-events: none;
+    /* Default to none, becomes 'auto' if rich/interactive */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
+    filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.1));
+}
+
+#omnitip-root.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0, 0) scale(1) !important;
+}
+
+/* Interaction Bridge (Transparent buffer to prevent hover loss) */
+#omnitip-root.omnitip-interactive::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    z-index: -3;
+}
+
+/* Glassmorphism for the content */
+.omnitip-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px 14px;
+    min-width: 120px;
+    max-width: 320px;
+    color: #1e293b;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Arrow styling */
+.omnitip-arrow {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    border-right: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    transform: rotate(45deg);
+    z-index: -1;
+}
+
+/* Intent Bridge (Invisible polygon) */
+.omnitip-bridge {
+    position: absolute;
+    background: transparent;
+    z-index: -2;
+}
+
+/* Morphing Animations based on direction */
+#omnitip-root[data-actual-pos="top"] {
+    transform: translate(0, 8px) scale(0.95);
+}
+
+#omnitip-root[data-actual-pos="bottom"] {
+    transform: translate(0, -8px) scale(0.95);
+}
+
+#omnitip-root[data-actual-pos="left"] {
+    transform: translate(8px, 0) scale(0.95);
+}
+
+#omnitip-root[data-actual-pos="right"] {
+    transform: translate(-8px, 0) scale(0.95);
+}
+
+/* Arrow Positioning */
+#omnitip-root[data-actual-pos="top"] .omnitip-arrow {
+    bottom: -6px;
+    left: calc(50% - 6px);
+    border-top: none;
+    border-left: none;
+}
+
+#omnitip-root[data-actual-pos="bottom"] .omnitip-arrow {
+    top: -6px;
+    left: calc(50% - 6px);
+    border-bottom: none;
+    border-right: none;
+    transform: rotate(225deg);
+}
+
+#omnitip-root[data-actual-pos="left"] .omnitip-arrow {
+    right: -6px;
+    top: calc(50% - 6px);
+    border-bottom: none;
+    border-left: none;
+    transform: rotate(-45deg);
+}
+
+#omnitip-root[data-actual-pos="right"] .omnitip-arrow {
+    left: -6px;
+    top: calc(50% - 6px);
+    border-top: none;
+    border-right: none;
+    transform: rotate(135deg);
+}
+
+/* User Card Rich Content */
+.user-card-tooltip {
+    min-width: 260px;
+    padding: 0;
+}
+
+.user-card-header {
+    padding: 16px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-card-body {
+    padding: 16px;
+}
+
+.progress-bar {
+    height: 6px;
+    background: #f1f5f9;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #0d9488;
+    transition: width 0.6s ease-out;
+}
+
+/* Utility for dynamic bridge */
+.omnitip-interactive {
+    pointer-events: auto !important;
+}
