@@ -1,0 +1,355 @@
+<html class="dark">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e2e8f0",
+                        "accent": "#94a3b8",
+                        "background-dark": "#0a0a0a",
+                    },
+                    fontFamily: {
+                        "serif": ["'Playfair Display'", "serif"],
+                        "sans": ["'Plus Jakarta Sans'", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="bg-background-dark">
+    <!-- Aura component SVG Defs -->
+    <svg width="0" height="0" class="absolute pointer-events-none">
+        <defs>
+            <clipPath id="aura-squircle" clipPathUnits="objectBoundingBox">
+                <!-- Mathematical superellipse Apple-style smooth squircle -->
+                <path d="M 0.5,0 C 0.1,0 0,0.1 0,0.5 C 0,0.9 0.1,1 0.5,1 C 0.9,1 1,0.9 1,0.5 C 1,0.1 0.9,0 0.5,0 Z" />
+            </clipPath>
+        </defs>
+    </svg>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="font-serif italic text-2xl tracking-tighter font-black">IDNTY.</span>
+            </div>
+            <div
+                class="hidden md:flex items-center gap-12 text-[11px] uppercase tracking-[0.2em] font-medium text-slate-400">
+                <a class="hover:text-white transition-colors" href="#">Portfolio</a>
+                <a class="hover:text-white transition-colors text-white border-b border-white/20 pb-1"
+                    href="#">Identity</a>
+                <a class="hover:text-white transition-colors" href="#">Archives</a>
+                <a class="hover:text-white transition-colors" href="#">Process</a>
+            </div>
+            <div class="flex items-center gap-6">
+                <button class="material-symbols-outlined text-xl">search</button>
+                <button
+                    class="bg-white text-black px-6 py-2 text-[10px] uppercase tracking-widest font-bold rounded-full hover:bg-slate-200 transition-all">
+                    Edit Studio
+                </button>
+            </div>
+        </div>
+    </nav>
+    <main class="relative pt-20">
+        <section class="relative min-h-[90vh] flex flex-col items-center justify-center px-8 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img alt="Background Texture" class="w-full h-full object-cover opacity-20 grayscale scale-110 blur-sm"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTw6U_xB5XZHF1VdHJxuKo5sKa-xjHRpB2pnR8wN4fldYablsxqx45s2sOna4ASYPiXEfWwd_FWFk_r4HZKwbMHRvzgXG8jh0sN9SMr-8M8ZPJiAK2yDYsQAyA-IUe5XLUZztilwsNX0XSX7I_j9m6qjhxl0LR5N-RuH9xrQZ_sihKHTh6ggc-hB5_GJV2CYgBMSda17OPjwb57njzf5MbIsEaTg6o3sDnoOKRSLty4Z9FITn3Ijig6CE8N6GoKMOGtXnnFhtzi3YG" />
+                <div class="absolute inset-0 hero-gradient"></div>
+            </div>
+            <div class="relative z-10 max-w-4xl text-center space-y-8">
+                <h2 class="text-slate-500 text-[10px] uppercase tracking-[0.4em] font-bold">Artist Statement</h2>
+                <h1 class="font-serif text-5xl md:text-8xl leading-tight font-light italic">
+                    Crafting digital <span class="font-bold not-italic">identities</span> through decentralized <span
+                        class="font-bold not-italic">architecture.</span>
+                </h1>
+                <p class="max-w-xl mx-auto text-lg text-slate-400 leading-relaxed font-light">
+                    Alex Rivera is a Product Designer based in San Francisco, merging the boundaries between human
+                    interaction and algorithmic patterns.
+                </p>
+                <div class="flex justify-center gap-8 pt-12 items-center">
+                    <!-- Aura Fluid Avatar Stack -->
+                    <div class="aura-stack group/stack flex items-center" role="group"
+                        aria-label="5 people currently logged in">
+                        <!-- Avatar 1 (Active Status Ring) -->
+                        <button class="aura-avatar-wrapper relative focus:outline-none min-w-[44px] min-h-[44px]"
+                            aria-label="Profile settings for Pearl">
+                            <div class="aura-ring squircle active"></div>
+                            <!-- Background spacer to handle border-like separation -->
+                            <div
+                                class="w-[50px] h-[50px] bg-background-dark squircle flex items-center justify-center relative z-10 transition-transform shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
+                                <img src="https://i.pravatar.cc/150?img=43" alt="Pearl" loading="lazy" decoding="async"
+                                    class="aura-avatar w-12 h-12 object-cover squircle bg-slate-800" />
+                            </div>
+                            <div class="aura-portal text-left">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <img src="https://i.pravatar.cc/150?img=43" class="w-8 h-8 rounded-full" alt="" />
+                                    <div>
+                                        <div class="text-[13px] font-bold text-white leading-none">Pearl</div>
+                                        <div class="text-[9px] text-slate-400 uppercase tracking-widest mt-1.5">Lead
+                                            Engineer</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center gap-1.5 text-[10px] font-medium text-green-400 border-t border-white/10 pt-2">
+                                    <span
+                                        class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]"></span>
+                                    Currently Active
+                                </div>
+                            </div>
+                        </button>
+
+                        <!-- Avatar 2 (Broken Image -> Deterministic Fallback) -->
+                        <button class="aura-avatar-wrapper relative focus:outline-none min-w-[44px] min-h-[44px]"
+                            aria-label="Profile settings for Marcus">
+                            <div
+                                class="w-[50px] h-[50px] bg-background-dark squircle flex items-center justify-center relative z-10 transition-transform shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
+                                <img src="invalid_image_path.jpg" alt="Marcus Reynolds" loading="lazy" decoding="async"
+                                    class="aura-avatar w-12 h-12 object-cover squircle bg-slate-800" />
+                            </div>
+                            <div class="aura-portal text-left">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <div
+                                        class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white shadow-inner bg-slate-600">
+                                        MR</div>
+                                    <div>
+                                        <div class="text-[13px] font-bold text-white leading-none">Marcus Reynolds</div>
+                                        <div class="text-[9px] text-slate-400 uppercase tracking-widest mt-1.5">UX
+                                            Designer</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center gap-1.5 text-[10px] font-medium text-slate-400 border-t border-white/10 pt-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+                                    Last seen 4h ago
+                                </div>
+                            </div>
+                        </button>
+
+                        <!-- Avatar 3 -->
+                        <button class="aura-avatar-wrapper relative focus:outline-none min-w-[44px] min-h-[44px]"
+                            aria-label="Profile settings for Sofia">
+                            <div
+                                class="w-[50px] h-[50px] bg-background-dark squircle flex items-center justify-center relative z-10 transition-transform shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
+                                <img src="https://i.pravatar.cc/150?img=12" alt="Sofia V." loading="lazy"
+                                    decoding="async" class="aura-avatar w-12 h-12 object-cover squircle bg-slate-800" />
+                            </div>
+                            <div class="aura-portal text-left">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <img src="https://i.pravatar.cc/150?img=12" class="w-8 h-8 rounded-full" alt="" />
+                                    <div>
+                                        <div class="text-[13px] font-bold text-white leading-none">Sofia V.</div>
+                                        <div class="text-[9px] text-slate-400 uppercase tracking-widest mt-1.5">Product
+                                            Manager</div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center gap-1.5 text-[10px] font-medium text-orange-400 border-t border-white/10 pt-2">
+                                    <span
+                                        class="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.5)]"></span>
+                                    In a Meeting
+                                </div>
+                            </div>
+                        </button>
+
+                        <!-- Avatar Stack +N Counter -->
+                        <button class="aura-avatar-wrapper relative focus:outline-none min-w-[44px] min-h-[44px]"
+                            aria-label="View 2 more online users">
+                            <div
+                                class="w-[50px] h-[50px] bg-background-dark squircle flex items-center justify-center relative z-10 transition-transform shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
+                                <div
+                                    class="w-12 h-12 flex items-center justify-center bg-slate-800 text-white font-bold squircle text-[13px] hover:bg-slate-700 transition-colors shadow-inner">
+                                    +2
+                                </div>
+                            </div>
+                            <div class="aura-portal text-center !min-w-[120px]">
+                                <div class="text-[11px] font-bold text-white uppercase tracking-widest">View all 5
+                                    online</div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="h-6 w-px bg-white/10 hidden md:block"></div>
+
+                    <!-- Personal Tags -->
+                    <div class="flex gap-3">
+                        <div
+                            class="px-5 py-2.5 bg-slate-800/50 rounded-full border border-slate-700/50 text-[10px] uppercase tracking-widest font-bold flex items-center gap-2 text-white">
+                            <span
+                                class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]"></span>
+                            Available
+                        </div>
+                        <div
+                            class="hidden md:flex items-center px-4 py-2 bg-slate-800/50 rounded-full border border-slate-700/50 text-[10px] uppercase tracking-widest font-bold text-slate-400">
+                            They / Them
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="max-w-7xl mx-auto px-8 py-32">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div class="max-w-xl">
+                    <h3 class="font-serif text-4xl font-light mb-4 italic">Visual DNA</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        A curated collection of visual touchpoints that define my creative presence within the IDNTY
+                        ecosystem. Each frame represents a facet of my professional and personal aesthetic.
+                    </p>
+                </div>
+                <div class="flex gap-4">
+                    <button
+                        class="group flex items-center gap-3 text-[10px] uppercase tracking-widest font-bold border border-slate-800 px-6 py-4 hover:bg-white hover:text-black transition-all">
+                        <span class="material-symbols-outlined text-sm">upload</span>
+                        Update Identity
+                    </button>
+                    <button
+                        class="group flex items-center gap-3 text-[10px] uppercase tracking-widest font-bold border border-slate-800 px-6 py-4 hover:bg-slate-800 transition-all">
+                        <span class="material-symbols-outlined text-sm">architecture</span>
+                        Regenerate Pattern
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-1 group relative aspect-[4/5] overflow-hidden bg-slate-900">
+                    <img alt="Primary Portrait"
+                        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTw6U_xB5XZHF1VdHJxuKo5sKa-xjHRpB2pnR8wN4fldYablsxqx45s2sOna4ASYPiXEfWwd_FWFk_r4HZKwbMHRvzgXG8jh0sN9SMr-8M8ZPJiAK2yDYsQAyA-IUe5XLUZztilwsNX0XSX7I_j9m6qjhxl0LR5N-RuH9xrQZ_sihKHTh6ggc-hB5_GJV2CYgBMSda17OPjwb57njzf5MbIsEaTg6o3sDnoOKRSLty4Z9FITn3Ijig6CE8N6GoKMOGtXnnFhtzi3YG" />
+                    <div
+                        class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
+                        <div class="translate-y-4 group-hover:translate-y-0 transition-transform">
+                            <span class="text-[10px] uppercase tracking-widest text-white/60">Profile Master</span>
+                            <p class="font-serif italic text-xl text-white">Alex Rivera</p>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute top-6 left-6 flex items-center gap-2 px-3 py-1 bg-white text-black text-[9px] font-bold uppercase tracking-tighter">
+                        <span class="material-symbols-outlined text-[14px]">verified</span> Verified
+                    </div>
+                </div>
+                <div class="md:col-span-1 flex flex-col gap-6">
+                    <div class="flex-1 relative group overflow-hidden bg-slate-900 min-h-[300px]">
+                        <div
+                            class="absolute inset-0 flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
+                            <span
+                                class="material-symbols-outlined text-6xl font-extralight text-slate-500">gesture</span>
+                        </div>
+                        <div class="absolute inset-0 p-8 flex flex-col justify-between">
+                            <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-600">Moodboard
+                                01</span>
+                            <p class="font-serif text-xl italic text-slate-400">Minimalist Entropy</p>
+                        </div>
+                    </div>
+                    <div class="h-48 relative group overflow-hidden bg-primary/5 border border-white/5">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+                            <p class="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500 mb-2">Presence
+                                Status</p>
+                            <p class="font-serif text-2xl">Available</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-1 group relative aspect-[4/5] overflow-hidden border border-white/5">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-slate-900 to-slate-800 flex items-center justify-center">
+                        <div class="p-12 border border-white/10 rounded-full">
+                            <span
+                                class="material-symbols-outlined text-7xl font-thin text-slate-700">architecture</span>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end">
+                        <span class="text-[10px] uppercase tracking-widest text-slate-500">Generative Pattern</span>
+                        <p class="font-serif italic text-xl">Identity Hash 8821</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="bg-white text-black py-32">
+            <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-12 gap-16">
+                <div class="md:col-span-4 space-y-12">
+                    <div>
+                        <h4 class="text-[10px] uppercase tracking-widest font-black text-slate-400 mb-6">Identity Specs
+                        </h4>
+                        <div class="space-y-6">
+                            <div class="border-b border-black/10 pb-4">
+                                <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Full
+                                    Name</label>
+                                <p class="font-serif text-2xl italic">Alex Rivera</p>
+                            </div>
+                            <div class="border-b border-black/10 pb-4">
+                                <label
+                                    class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Pronouns</label>
+                                <p class="font-serif text-2xl italic">They / Them</p>
+                            </div>
+                            <div class="border-b border-black/10 pb-4">
+                                <label class="block text-[10px] uppercase font-bold text-slate-500 mb-1">Base</label>
+                                <p class="font-serif text-2xl italic">San Francisco, CA</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        class="w-full bg-black text-white py-6 text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-slate-800 transition-colors">
+                        Request Collaboration
+                    </button>
+                </div>
+                <div class="md:col-span-8">
+                    <h4 class="text-[10px] uppercase tracking-widest font-black text-slate-400 mb-6">Extended Bio</h4>
+                    <div class="space-y-8 font-serif text-3xl md:text-4xl leading-snug">
+                        <p>
+                            Passionate about <span class="italic text-slate-400">identity systems</span> and
+                            decentralized architecture. Coffee enthusiast and early adopter of everything dark mode.
+                        </p>
+                        <p class="text-slate-300">
+                            Constantly exploring the intersection of <span class="text-black italic">privacy</span> and
+                            <span class="text-black italic">expression</span> in the modern web landscape.
+                        </p>
+                    </div>
+                    <div class="mt-20 pt-12 border-t border-black/5 flex flex-wrap gap-12">
+                        <div class="flex flex-col gap-2">
+                            <span class="text-[9px] uppercase tracking-widest font-bold text-slate-400">Platform
+                                Version</span>
+                            <span class="text-xs font-mono">v2.4.0-STABLE</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <span class="text-[9px] uppercase tracking-widest font-bold text-slate-400">Security
+                                Status</span>
+                            <span class="text-xs font-mono">ENCRYPTED L3</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <span class="text-[9px] uppercase tracking-widest font-bold text-slate-400">System
+                                Link</span>
+                            <span class="text-xs font-mono">IDNTY.SYSTEM/ARIVERA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="py-20 border-t border-white/5 px-8">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+                <span class="font-serif italic text-xl tracking-tighter opacity-50">IDNTY. Profile Management</span>
+                <div class="flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-500">
+                    <a class="hover:text-white transition-colors" href="#">Legal</a>
+                    <a class="hover:text-white transition-colors" href="#">Privacy</a>
+                    <a class="hover:text-white transition-colors" href="#">API</a>
+                    <a class="hover:text-white transition-colors" href="#">Sign Out</a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>
