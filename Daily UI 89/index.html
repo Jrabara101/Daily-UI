@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexicon — The Transparent Agreement Engine</title>
+    <!-- Modern Typography: EB Garamond (Serif) for body, Inter (Sans) for UI -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="app-header">
+        <div style="flex: 1; display: flex; align-items: center; gap: 20px;">
+            <h1 style="font-size: 1.2rem;">Lexicon</h1>
+            <div style="height: 20px; width: 1px; background: #eee;"></div>
+            <div class="search-container">
+                <input type="text" id="smart-search" class="search-input" placeholder="Smart Search (Regex enabled)...">
+            </div>
+        </div>
+        <div class="tldr-toggle-wrapper">
+            <button id="tldr-toggle" class="tldr-btn">Simplified Annotation (TL;DR)</button>
+        </div>
+    </header>
+
+    <div class="progress-container">
+        <div id="progress-bar" class="progress-bar"></div>
+    </div>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <nav>
+                <h4 class="label" style="font-size: 0.6rem; color: #999; margin-bottom: 2rem;">Table of Contents</h4>
+                <ul class="toc-list">
+                    <li class="toc-item"><a href="#section-01" class="toc-link">01 Introduction</a></li>
+                    <li class="toc-item"><a href="#section-02" class="toc-link">02 Core Services</a></li>
+                    <li class="toc-item"><a href="#section-03" class="toc-link">03 User Protocol</a></li>
+                    <li class="toc-item"><a href="#clause-data-handling" class="toc-link">04 Data Privacy</a></li>
+                    <li class="toc-item"><a href="#section-05" class="toc-link">05 Termination</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main id="main-content" class="content-area">
+            <header>
+                <h2 class="doc-title">Terms of Service Agreement</h2>
+                <p class="doc-meta">Version 4.2.0 — Effective September 2024</p>
+            </header>
+
+            <article>
+                <section id="section-01">
+                    <h3>01. Introduction</h3>
+                    <div class="clause-legal">
+                        <p>The following documentation establishes the formal relationship between the user and Lexicon.
+                            These Terms of Service ("Terms") govern your access to and use of Lexicon’s platform,
+                            services, and associated applications. By initiating interaction with the Service, you
+                            acknowledge a comprehensive understanding and agreement to be bound by these articles.</p>
+                    </div>
+                    <div class="clause-tldr">
+                        <p>By using Lexicon, you agree to follow these rules and understand how our services work.</p>
+                    </div>
+                </section>
+
+                <section id="section-02">
+                    <h3>02. Core Services</h3>
+                    <div class="clause-legal">
+                        <p>Lexicon provides a <span class="diff-new">real-time agreement engine</span> designed to
+                            facilitate transparent, verifiable, and legally binding digital agreements. The architecture
+                            is predicated upon service pillars including real-time comprehension verification and
+                            immutable audit logs.</p>
+                    </div>
+                    <div class="clause-tldr">
+                        <ul>
+                            <li>We provide tools for digital agreements.</li>
+                            <li>We track when and how you agree to terms.</li>
+                            <li>We use technology to make legal text easier to verify.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="section-03">
+                    <h3>03. User Protocol</h3>
+                    <div class="clause-legal">
+                        <p>Users are expected to interact with Lexicon's interface with intentionality. Bypassing
+                            reading requirements through automated scripts or rapid scrolling is strictly prohibited and
+                            <span class="diff-new">may result in account suspension</span>. Every interaction is
+                            recorded to ensure the integrity of the consensus-building process.</p>
+                    </div>
+                    <div class="clause-tldr">
+                        <p>Don't try to "speed-run" or cheat the agreement process. We record your progress to make sure
+                            it's valid.</p>
+                    </div>
+                </section>
+
+                <section id="clause-data-handling">
+                    <h3>04. Data Privacy & Handling</h3>
+                    <div class="clause-legal">
+                        <p>We treat your consent data with extreme rigor. Lexicon utilizes manual ID-based verification
+                            systems and zero-knowledge proof architectures to ensure that your agreement event is tied
+                            to your identity without exposing redundant personal metadata. We do not sell your
+                            interaction patterns to third-party advertisers.</p>
+                    </div>
+                    <div class="clause-tldr">
+                        <p>We take your privacy seriously. We verify your identity securely and never sell your data to
+                            advertisers.</p>
+                    </div>
+                    <p style="margin-top: 2rem; font-style: italic; color: #888; font-size: 0.9rem;">
+                        Note: This section requires active confirmation. Please ensure you have reviewed the data
+                        handling protocols thoroughly.
+                    </p>
+                </section>
+
+                <section id="section-05">
+                    <h3>05. Termination</h3>
+                    <div class="clause-legal">
+                        <p>Lexicon reserves the right to terminate access to the agreement engine if these protocols are
+                            violated. Upon termination, users may request a cryptographically signed copy of their
+                            agreement history for legal recourse.</p>
+                    </div>
+                    <div class="clause-tldr">
+                        <p>We can stop your access if you break the rules, but you can always get a copy of your past
+                            agreements.</p>
+                    </div>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <footer class="app-footer">
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+            <p class="label" style="font-size: 0.6rem; color: #999;">Consent Required</p>
+            <p id="status-text" style="font-family: var(--font-serif); font-style: italic; font-size: 0.9rem;">Read
+                Section 04 to unlock agreement.</p>
+        </div>
+        <div style="display: flex; gap: 20px; align-items: center;">
+            <button class="btn"
+                style="background: none; border: none; font-size: 0.7rem; color: #888; text-decoration: underline; cursor: pointer;">Download
+                PDF</button>
+            <button id="btn-agree" class="btn btn-agree">Locked</button>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

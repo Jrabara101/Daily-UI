@@ -1,0 +1,348 @@
+:root {
+    /* Color Palette — Modern, Approachable Lexicon */
+    --clr-accent: #FFB7C5;
+    /* Soft Baby Pink */
+    --clr-accent-hover: #FFA4B7;
+    --clr-paper: #FCFCFC;
+    --clr-paper-dark: #F3F4F6;
+    --clr-ink: #1A1A1A;
+    --clr-ink-muted: #666666;
+    --clr-border: #E5E7EB;
+    --clr-diff-glow: rgba(255, 183, 197, 0.15);
+
+    /* Typography */
+    --font-serif: 'EB Garamond', serif;
+    --font-sans: 'Inter', sans-serif;
+
+    /* Spacing & Sizing */
+    --measure: 65ch;
+    --header-height: 80px;
+    --footer-height: 100px;
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--clr-paper);
+    color: var(--clr-ink);
+    font-family: var(--font-serif);
+    line-height: 1.6;
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.25rem);
+    /* Fluid Typography */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Layout */
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--clr-border);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.progress-container {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: transparent;
+    z-index: 1001;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--clr-accent);
+    width: 0%;
+    transition: width 0.1s ease-out;
+}
+
+.main-layout {
+    display: flex;
+    max-width: 1200px;
+    margin: var(--header-height) auto var(--footer-height);
+    padding: 80px 40px;
+    gap: 60px;
+    flex: 1;
+}
+
+.sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    position: sticky;
+    top: calc(var(--header-height) + 80px);
+    height: fit-content;
+}
+
+.content-area {
+    flex: 1;
+    max-width: var(--measure);
+}
+
+/* Typography & Headings */
+h1,
+h2,
+h3,
+h4,
+.label,
+.btn {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.doc-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    text-transform: none;
+    letter-spacing: -0.02em;
+}
+
+.doc-meta {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--clr-ink-muted);
+    margin-bottom: 3rem;
+}
+
+section {
+    margin-bottom: 6rem;
+}
+
+section h3 {
+    font-size: 0.75rem;
+    color: var(--clr-ink-muted);
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--clr-border);
+    padding-bottom: 0.5rem;
+}
+
+/* Sidebar Navigation */
+.toc-list {
+    list-style: none;
+}
+
+.toc-item {
+    margin-bottom: 1.5rem;
+}
+
+.toc-link {
+    text-decoration: none;
+    color: var(--clr-ink-muted);
+    font-size: 0.7rem;
+    transition: all 0.3s ease;
+    border-left: 2px solid transparent;
+    padding-left: 1rem;
+    display: block;
+}
+
+.toc-link.active {
+    color: var(--clr-ink);
+    border-left-color: var(--clr-accent);
+}
+
+/* TL;DR Toggle */
+.tldr-toggle-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+}
+
+.tldr-btn {
+    background: none;
+    border: 1px solid var(--clr-border);
+    padding: 8px 16px;
+    font-size: 0.65rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.tldr-btn:hover {
+    border-color: var(--clr-accent);
+}
+
+.tldr-btn.active {
+    background: var(--clr-accent);
+    border-color: var(--clr-accent);
+    color: white;
+}
+
+.clause-legal {
+    display: block;
+}
+
+.clause-tldr {
+    display: none;
+    font-size: 1rem;
+    padding: 1.5rem;
+    background: var(--clr-paper-dark);
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+body.show-tldr .clause-legal {
+    display: none;
+}
+
+body.show-tldr .clause-tldr {
+    display: block;
+}
+
+/* Diff Highlighting */
+.diff-new {
+    position: relative;
+    background: var(--clr-diff-glow);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.diff-new::after {
+    content: "NEW";
+    position: absolute;
+    top: -12px;
+    right: 0;
+    font-size: 0.5rem;
+    font-family: var(--font-sans);
+    background: var(--clr-accent);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: 800;
+}
+
+/* Smart Search */
+.search-input {
+    border: 1px solid var(--clr-border);
+    padding: 8px 12px;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    border-radius: 4px;
+    width: 200px;
+}
+
+mark {
+    background-color: var(--clr-accent);
+    color: var(--clr-ink);
+    border-radius: 2px;
+}
+
+/* Footer & Accept Gate */
+.app-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--footer-height);
+    background: white;
+    border-top: 1px solid var(--clr-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    z-index: 1000;
+}
+
+.btn-agree {
+    padding: 12px 32px;
+    background: var(--clr-accent);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 1;
+}
+
+.btn-agree:disabled {
+    background: #e5e7eb;
+    color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.btn-agree.is-locked {
+    filter: grayscale(1);
+}
+
+/* Accessibility */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--clr-accent);
+    color: white;
+    padding: 8px;
+    z-index: 2000;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+        font-size: 12pt;
+    }
+
+    .app-header,
+    .app-footer,
+    .sidebar,
+    .progress-container,
+    .tldr-toggle-wrapper,
+    .search-container {
+        display: none !important;
+    }
+
+    .main-layout {
+        margin: 0;
+        padding: 0;
+        display: block;
+    }
+
+    .content-area {
+        max-width: 100%;
+    }
+
+    .clause-legal {
+        display: none !important;
+    }
+
+    .clause-tldr {
+        display: block !important;
+        background: transparent !important;
+        padding: 0 !important;
+    }
+
+    footer::after {
+        content: "Printed on " attr(data-date) " | Source: " attr(data-url);
+        display: block;
+        margin-top: 50px;
+        font-size: 0.8rem;
+        color: #666;
+        text-align: center;
+    }
+}
