@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Center | Project Architect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        outfit: ['Outfit', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-900 text-gray-100 min-h-screen font-sans overflow-x-hidden">
+    <!-- Background Sparkles/Gradients -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div
+            class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-pink-500/10 rounded-full blur-[120px] animate-pulse-slow">
+        </div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[120px] animate-pulse-slow"
+            style="animation-delay: 2s;"></div>
+    </div>
+
+    <main id="creation-hub" class="min-h-screen flex items-center justify-center p-6 transition-all duration-700">
+        <div id="input-container" style="view-transition-name: input-container"
+            class="w-full max-w-2xl space-y-8 relative motion-reduce:transition-none">
+            <div class="text-center space-y-2 mb-8">
+                <h1
+                    class="text-4xl md:text-5xl font-outfit font-bold tracking-tight bg-gradient-to-r from-pink-300 to-blue-300 bg-clip-text text-transparent">
+                    What are we building today?
+                </h1>
+                <p class="text-gray-400 text-lg">Describe your project and let the AI architect the phases.</p>
+            </div>
+
+            <div class="relative group">
+                <!-- Glassmorphism Textarea -->
+                <textarea id="command-input" rows="1" placeholder=" "
+                    class="peer w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 pt-10 text-xl text-white placeholder-transparent focus:outline-none focus:ring-2 focus:ring-pink-400/50 focus:border-pink-400/50 transition-all duration-300 shadow-2xl resize-none overflow-hidden"></textarea>
+
+                <!-- Floating Label -->
+                <label for="command-input"
+                    class="absolute left-6 top-6 text-gray-400 text-xl transition-all duration-300 pointer-events-none
+                           peer-focus:text-sm peer-focus:-translate-y-4 peer-focus:text-pink-400
+                           peer-[:not(:placeholder-shown)]:text-sm peer-[:not(:placeholder-shown)]:-translate-y-4 peer-[:not(:placeholder-shown)]:text-pink-400">
+                    Describe your vision...
+                </label>
+
+                <!-- Input Hints -->
+                <div
+                    class="absolute right-6 bottom-4 flex items-center space-x-2 text-xs text-gray-500 opacity-0 group-focus-within:opacity-100 transition-opacity duration-300">
+                    <span>Press</span>
+                    <kbd class="px-2 py-1 bg-white/10 rounded border border-white/20 text-gray-300">Enter</kbd>
+                    <span>to architect</span>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-12">
+                <div class="text-xs text-gray-500 font-medium tracking-widest uppercase">
+                    Unified Process Framework • v1.0
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Overlay (hidden by default) -->
+    <div id="loading-overlay"
+        class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-500">
+        <div class="relative w-24 h-24 mb-8">
+            <div class="absolute inset-0 border-4 border-pink-500/20 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-pink-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+        <div class="text-2xl font-outfit font-light tracking-widest text-pink-300 animate-pulse">ARCHITECTING...</div>
+        <button id="cancel-btn"
+            class="mt-12 px-6 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-sm text-gray-400 transition-colors">
+            Cancel (Esc)
+        </button>
+    </div>
+
+    <!-- Floating Toolbar (hidden by default) -->
+    <div id="floating-toolbar"
+        class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-gray-900/90 backdrop-blur-md border border-white/10 rounded-full px-4 py-2 shadow-2xl flex items-center space-x-4 hidden z-50">
+        <button class="p-2 hover:bg-white/10 rounded-lg transition-colors" title="Bold">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M6 4h8a4 4 0 014 4 0 01-4 4H6zM6 12h9a4 4 0 014 4 0 01-4 4H6z"></path>
+            </svg>
+        </button>
+        <button class="p-2 hover:bg-white/10 rounded-lg transition-colors" title="Italic">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4m-4-4l-4-4">
+                </path>
+            </svg>
+        </button>
+        <div class="w-px h-6 bg-white/10"></div>
+        <button id="save-btn"
+            class="px-4 py-1 bg-pink-500 hover:bg-pink-600 rounded-full text-sm font-semibold transition-colors">
+            Save Project
+        </button>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+/* View Transitions API Customizations */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Glassmorphism Refinements */
+.glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Bento Card Hover Effects */
+.bento-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.bento-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(236, 72, 153, 0.3);
+    /* pink-500/30 */
+    box-shadow: 0 20px 40px -20px rgba(236, 72, 153, 0.2);
+}
+
+/* Typewriter Cursor */
+.typewriter-cursor::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+
+    from,
+    to {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Custom Scrollbar for Textarea */
+#command-input::-webkit-scrollbar {
+    width: 0;
+}
+
+/* Motion Reduced Support */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Floating Label Animation */
+@keyframes floatUp {
+    from {
+        transform: translateY(0);
+        font-size: 1.25rem;
+    }
+
+    to {
+        transform: translateY(-1rem);
+        font-size: 0.875rem;
+        color: #f472b6;
+    }
+}
+
+/* Bento Reveal Animation */
+.reveal-card {
+    animation: revealUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0;
+}
+
+@keyframes revealUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
