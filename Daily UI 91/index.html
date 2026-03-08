@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Retro-CRT Terminal | Access Granted</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                font-family: 'JetBrains Mono', monospace;
+                background-color: #0a0a0a;
+                color: #4ade80;
+                overflow: hidden;
+            }
+            .press-start { font-family: 'Press Start 2P', cursive; }
+        }
+
+        .crt-overlay {
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 3px 100%;
+            z-index: 100;
+            opacity: 0.15;
+            animation: flicker 0.15s infinite;
+        }
+
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 101;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(0, 0, 0, 0) 100%);
+            opacity: 0.1;
+            position: absolute;
+            bottom: 100%;
+            animation: scanline 6s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            80% { bottom: 100%; }
+            100% { bottom: -100px; }
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.15; }
+            5% { opacity: 0.18; }
+            10% { opacity: 0.14; }
+            15% { opacity: 0.16; }
+            20% { opacity: 0.15; }
+            100% { opacity: 0.15; }
+        }
+
+        .char-pending { @apply text-gray-500; }
+        .char-correct { @apply text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.8)]; }
+        .char-error { @apply bg-red-900 text-red-100; }
+
+        #kinetic-caret {
+            transition: all 0.05s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .access-card {
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .chromatic-aberration {
+            text-shadow: 2px 0 1px rgba(255,0,0,0.5), -2px 0 1px rgba(0,0,255,0.5);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen relative bg-black selection:bg-green-500 selection:text-black">
+    <div class="crt-overlay"></div>
+    <div class="scanline"></div>
+
+    <!-- Caps Lock Warning -->
+    <div id="caps-lock-warning"
+        class="hidden fixed top-10 right-10 bg-yellow-500 text-black px-6 py-2 rounded-sm press-start text-[10px] z-[200] animate-bounce shadow-[0_0_20px_rgba(234,179,8,0.4)]">
+        CAPS LOCK ACTIVE
+    </div>
+
+    <!-- Results Modal / Access Card -->
+    <div id="results-container"
+        class="fixed inset-0 z-50 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-500">
+        <div id="access-card"
+            class="bg-gray-200 w-80 p-8 transform translate-y-full access-card shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-t-8 border-green-500">
+            <div class="text-black space-y-4">
+                <div class="border-b-2 border-black pb-2 mb-4">
+                    <h2 class="press-start text-[10px] tracking-tighter">ACCESS CARD</h2>
+                    <p class="text-[8px] opacity-60">EMPLOYEE# 88-BD-91</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between items-end">
+                        <span class="text-[8px] font-bold">STATUS</span>
+                        <span class="text-xs font-black text-green-700">AUTHORIZED</span>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <span class="text-[8px] font-bold">ACCURACY</span>
+                        <span id="final-accuracy" class="text-xl font-black">--%</span>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <span class="text-[8px] font-bold">VELOCITY</span>
+                        <span id="final-wpm" class="text-xl font-black">-- WPM</span>
+                    </div>
+                </div>
+                <div class="pt-8 flex flex-col items-center">
+                    <div class="w-full h-8 bg-black mb-2 flex items-center justify-center">
+                        <span class="text-white text-[8px] tracking-[4px] font-mono">|||||||||||||||||||</span>
+                    </div>
+                    <span class="text-[10px] italic font-serif opacity-80 self-end">Beejay T.</span>
+                </div>
+                <button id="restart-btn"
+                    class="w-full bg-black text-white py-2 text-[10px] press-start hover:bg-green-600 transition-colors pointer-events-auto">
+                    RE-INITIALIZE
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="relative z-10 flex flex-col h-screen w-full max-w-5xl mx-auto p-4 md:p-12">
+        <header class="mb-12 flex justify-between items-start opacity-70">
+            <div class="space-y-1">
+                <h1 class="press-start text-[12px] chromatic-aberration">TERMINAL_LINK.v91</h1>
+                <p class="text-[10px] opacity-50">STREAK SECURE CONNECTION ACTIVE</p>
+            </div>
+            <div class="text-right text-[10px] press-start">
+                <span id="real-time-timer">00:00:00</span>
+            </div>
+        </header>
+
+        <main class="flex-1 flex flex-col justify-center">
+            <div id="typing-box"
+                class="relative text-2xl md:text-3xl leading-relaxed tracking-wider text-justify select-none outline-none">
+                <!-- Kinetic Caret -->
+                <div id="kinetic-caret"
+                    class="w-3 h-7 md:w-4 md:h-9 bg-green-400 animate-pulse absolute -z-10 shadow-[0_0_15px_rgba(74,222,128,0.6)]">
+                </div>
+
+                <!-- Target Text Container -->
+                <div id="text-display" class="relative">
+                    <!-- Spans will be injected here -->
+                </div>
+            </div>
+        </main>
+
+        <footer class="mt-auto pt-12 flex flex-col md:flex-row justify-between items-end gap-8">
+            <div class="flex gap-12 text-sm">
+                <div class="flex flex-col gap-1 border-l border-green-900/50 pl-4">
+                    <span class="text-[8px] uppercase press-start opacity-40">Words Per Minute</span>
+                    <span id="live-wpm" class="text-3xl font-bold flex items-baseline gap-2">
+                        00 <span class="text-[10px] opacity-30">WPM</span>
+                    </span>
+                </div>
+                <div class="flex flex-col gap-1 border-l border-green-900/50 pl-4">
+                    <span class="text-[8px] uppercase press-start opacity-40">Accuracy Rate</span>
+                    <span id="live-accuracy" class="text-3xl font-bold flex items-baseline gap-2">
+                        100 <span class="text-[10px] opacity-30">%</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="bg-green-900/10 border border-green-500/20 px-4 py-2 text-[8px] space-y-1 relative group">
+                <div
+                    class="absolute bottom-4 right-4 press-start text-xs text-black pointer-events-none group-hover:text-green-500 transition-colors z-20">
+                    BEEJAY T.
+                </div>
+                <p class="opacity-50 press-start text-[6px]">ENCRYPTION STATUS: <span
+                        class="text-green-500">QUALIFIED</span></p>
+                <div class="flex gap-4 opacity-50">
+                    <span>KEY_LOGGER: ACTIVE</span>
+                    <span>LATENCY: 12ms</span>
+                    <span class="text-green-500">AUTHORIZED</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Mobile Input Fallback -->
+    <textarea id="mobile-input" class="fixed opacity-0 -z-50 pointer-events-none" autocomplete="off" autocorrect="off"
+        autocapitalize="off" spellcheck="false"></textarea>
+
+    <!-- Accessibility Live Region -->
+    <div id="a11y-live-region" aria-live="assertive" class="sr-only"></div>
+
+    <script>
+        const TEXT_DISPLAY = document.getElementById('text-display');
+        const CARET = document.getElementById('kinetic-caret');
+        const WPM_DISPLAY = document.getElementById('live-wpm');
+        const ACC_DISPLAY = document.getElementById('live-accuracy');
+        const MOBILE_INPUT = document.getElementById('mobile-input');
+        const RESULTS_CONTAINER = document.getElementById('results-container');
+        const ACCESS_CARD = document.getElementById('access-card');
+        const TIMER_DISPLAY = document.getElementById('real-time-timer');
+        const CAPS_WARNING = document.getElementById('caps-lock-warning');
+        const A11Y_REGION = document.getElementById('a11y-live-region');
+
+        let targetText = "";
+        let currentIndex = 0;
+        let mistakes = 0;
+        let startTime = null;
+        let isComplete = false;
+        let totalTyped = 0;
+        let timerInterval = null;
+
+        const QUOTES = [
+            "The cyberdeck hummed with a low-frequency vibration as the terminal scrolled past. Accessing the central mainframe required a dexterity only few possessed.",
+            "I've seen things you people wouldn't believe. Attack ships on fire off the shoulder of Orion. I watched C-beams glitter in the dark near the Tannhauser Gate.",
+            "In the neon-drenched streets of the lower sector, data was the only currency that mattered. Hackers traded secrets for oxygen in the shadows of monolithic spires.",
+            "A keyboard is a weapon if you know how to use it. Every keystroke is a calculated risk, a pulse of electricity through the veins of the digital world.",
+            "Information wants to be free, but the corporations want to lock it in high-security siloes. We are the locksmiths of the digital age, the architects of chaos."
+        ];
+
+        const sanitizeText = (text) => {
+            return text.replace(/[^a-zA-Z0-9 .,!?'-]/g, '').replace(/\s+/g, ' ').trim();
+        };
+
+        const initGame = () => {
+            const randomQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+            targetText = sanitizeText(randomQuote);
+
+            TEXT_DISPLAY.innerHTML = targetText.split('').map(char =>
+                `<span class="char-pending">${char}</span>`
+            ).join('');
+
+            currentIndex = 0;
+            mistakes = 0;
+            startTime = null;
+            isComplete = false;
+            totalTyped = 0;
+
+            RESULTS_CONTAINER.classList.add('opacity-0', 'pointer-events-none');
+            ACCESS_CARD.classList.add('translate-y-full');
+            TIMER_DISPLAY.textContent = "00:00:00";
+            WPM_DISPLAY.innerHTML = '00 <span class="text-[10px] opacity-30">WPM</span>';
+            ACC_DISPLAY.innerHTML = '100 <span class="text-[10px] opacity-30">%</span>';
+            clearInterval(timerInterval);
+
+            // Focus mobile input on click or anywhere
+            document.addEventListener('click', () => MOBILE_INPUT.focus());
+            MOBILE_INPUT.focus();
+
+            requestAnimationFrame(updateCaret);
+        };
+
+        const updateCaret = () => {
+            if (isComplete) return;
+            const charSpans = TEXT_DISPLAY.querySelectorAll('span');
+            if (currentIndex < charSpans.length) {
+                const rect = charSpans[currentIndex].getBoundingClientRect();
+                const containerRect = TEXT_DISPLAY.getBoundingClientRect();
+
+                CARET.style.left = `${rect.left - containerRect.left}px`;
+                CARET.style.top = `${rect.top - containerRect.top}px`;
+                CARET.style.width = `${rect.width}px`;
+                CARET.style.height = `${rect.height}px`;
+            }
+        };
+
+        const handleInput = (key) => {
+            if (isComplete) return;
+
+            if (!startTime) {
+                startTime = performance.now();
+                startTimer();
+            }
+
+            const charSpans = TEXT_DISPLAY.querySelectorAll('span');
+
+            if (key === 'Backspace') {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    charSpans[currentIndex].className = 'char-pending';
+                    updateCaret();
+                }
+                return;
+            }
+
+            if (key.length !== 1) return;
+
+            const expected = targetText[currentIndex];
+            totalTyped++;
+
+            if (key === expected) {
+                charSpans[currentIndex].className = 'char-correct';
+            } else {
+                charSpans[currentIndex].className = 'char-error';
+                mistakes++;
+            }
+
+            currentIndex++;
+            updateCaret();
+            updateStats();
+
+            if (currentIndex === targetText.length) {
+                completeGame();
+            }
+        };
+
+        const updateStats = () => {
+            const timeElapsed = (performance.now() - startTime) / 60000; // in minutes
+            const wpm = Math.round((totalTyped / 5) / timeElapsed) || 0;
+            const accuracy = Math.round(((totalTyped - mistakes) / totalTyped) * 100) || 100;
+
+            WPM_DISPLAY.innerHTML = `${wpm.toString().padStart(2, '0')} <span class="text-[10px] opacity-30">WPM</span>`;
+            ACC_DISPLAY.innerHTML = `${accuracy} <span class="text-[10px] opacity-30">%</span>`;
+        };
+
+        const startTimer = () => {
+            timerInterval = setInterval(() => {
+                const diff = performance.now() - startTime;
+                const ms = Math.floor(diff % 1000 / 10).toString().padStart(2, '0');
+                const s = Math.floor(diff / 1000 % 60).toString().padStart(2, '0');
+                const m = Math.floor(diff / 60000).toString().padStart(2, '0');
+                TIMER_DISPLAY.textContent = `${m}:${s}:${ms}`;
+            }, 10);
+        };
+
+        const completeGame = () => {
+            isComplete = true;
+            clearInterval(timerInterval);
+            const endTime = performance.now();
+            const timeElapsed = (endTime - startTime) / 60000;
+            const wpm = Math.round((totalTyped / 5) / timeElapsed);
+            const accuracy = Math.round(((totalTyped - mistakes) / totalTyped) * 100);
+
+            document.getElementById('final-wpm').textContent = `${wpm} WPM`;
+            document.getElementById('final-accuracy').textContent = `${accuracy}%`;
+
+            RESULTS_CONTAINER.classList.remove('opacity-0', 'pointer-events-none');
+            ACCESS_CARD.classList.remove('translate-y-full');
+
+            const message = `Access Granted. Velocity: ${wpm} Words Per Minute. Accuracy: ${accuracy} percent.`;
+            A11Y_REGION.textContent = message;
+        };
+
+        // Event Listeners
+        window.addEventListener('keydown', (e) => {
+            // Caps Lock check
+            if (e.getModifierState('CapsLock')) {
+                CAPS_WARNING.classList.remove('hidden');
+            } else {
+                CAPS_WARNING.classList.add('hidden');
+            }
+
+            // Handle Tab + Enter restart
+            if (e.key === 'Enter' && e.altKey) { // Using Alt+Enter or just Tab logic
+                initGame();
+                return;
+            }
+
+            // Intercept typing
+            if (e.ctrlKey || e.metaKey || (e.altKey && e.key !== 'Enter')) return;
+
+            if (e.key === 'Backspace' || e.key.length === 1) {
+                e.preventDefault();
+                handleInput(e.key);
+            }
+
+            // Restart on Tab
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                initGame();
+            }
+        });
+
+        MOBILE_INPUT.addEventListener('input', (e) => {
+            const val = MOBILE_INPUT.value;
+            if (val.length > 0) {
+                const char = val[val.length - 1];
+                handleInput(char);
+                MOBILE_INPUT.value = ''; // Keep it empty for next input
+            }
+        });
+
+        // Prevention for paste
+        window.addEventListener('paste', e => e.preventDefault());
+
+        document.getElementById('restart-btn').addEventListener('click', initGame);
+
+        // Resize updates caret position
+        window.addEventListener('resize', updateCaret);
+
+        // Initial Load
+        window.addEventListener('load', initGame);
+    </script>
+</body>
+
+</html>
