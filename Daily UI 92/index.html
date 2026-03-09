@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "charcoal": "#0D0D0D",
+                        "onyx": "#1A1A1A",
+                        "earth-muted": "#8C7B6E",
+                        "bronze": "#A68966",
+                        "silver-dim": "#C0C0C0",
+                        "primary": "#A68966",
+                    },
+                    fontFamily: {
+                        "serif": ["Playfair Display", "serif"],
+                        "sans": ["Plus Jakarta Sans", "sans-serif"],
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+        body {
+          @apply bg-charcoal text-silver-dim/90 selection:bg-bronze/30;
+        }
+        h1, h2, h3, h4 {
+          @apply font-sans font-bold tracking-tight text-white uppercase;
+        }
+        p {
+          @apply font-serif leading-relaxed text-justify;
+        }
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      }
+      /* Splash Screen Styles */
+      #splash-overlay {
+        @apply fixed inset-0 z-[100] bg-charcoal flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out;
+        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      }
+      .splash-content {
+        @apply relative flex flex-col items-center gap-8;
+      }
+      .splash-logo {
+        @apply w-24 h-24 text-bronze;
+      }
+      .splash-progress-container {
+        @apply w-48 h-1 bg-white/5 relative overflow-hidden;
+      }
+      .splash-progress-bar {
+        @apply absolute inset-0 bg-bronze origin-left scale-x-0 transition-transform duration-300;
+      }
+      
+      /* Variant: Static */
+      .splash--static .splash-logo {
+        @apply opacity-100;
+      }
+
+      /* Variant: Minimal */
+      .splash--minimal .splash-logo {
+        animation: splash-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes splash-pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.6; transform: scale(0.95); }
+      }
+
+      /* Variant: Branded */
+      .splash--branded .splash-logo {
+        stroke-dasharray: 100 100;
+        stroke-dashoffset: 100;
+        animation: dash 3s ease-in-out forwards;
+      }
+      @keyframes dash {
+        to { stroke-dashoffset: 0; }
+      }
+      .splash--branded .splash-logo path {
+         @apply fill-transparent stroke-bronze stroke-[0.2];
+      }
+      .splash--branded .splash-content::after {
+        content: '';
+        @apply absolute -inset-20 bg-bronze/5 blur-[100px] rounded-full;
+      }
+
+      /* App Shell Styles */
+      #app-shell {
+        @apply fixed inset-0 z-[90] bg-charcoal hidden overflow-y-auto;
+      }
+      .app-content {
+        @apply mx-auto max-w-screen-2xl p-8 pt-24;
+      }
+
+      /* Transitions */
+      .hidden-fade {
+        @apply opacity-0 pointer-events-none;
+      }
+      
+      /* Reduced Motion */
+      @media (prefers-reduced-motion: reduce) {
+        .splash-logo, .splash--minimal .splash-logo, .splash--branded .splash-logo {
+          animation: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      }
+    </style>
+</head>
+
+<!-- Splash Screen -->
+<div id="splash-overlay" class="splash--minimal" role="dialog" aria-modal="true" aria-labelledby="splash-status">
+    <div class="splash-content">
+        <svg class="splash-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L14.85 9.15L22 12L14.85 14.85L12 22L9.15 14.85L2 12L9.15 9.15L12 2Z" fill="currentColor" />
+        </svg>
+        <div class="splash-progress-container" id="splash-progress-wrapper" role="progressbar" aria-valuemin="0"
+            aria-valuemax="100" aria-valuenow="0">
+            <div class="splash-progress-bar" id="splash-progress"></div>
+        </div>
+        <p id="splash-status" class="text-[10px] tracking-[0.3em] uppercase text-bronze/60 font-bold">Initializing...
+        </p>
+    </div>
+</div>
+
+<!-- App Shell (Post-Splash) -->
+<div id="app-shell">
+    <header class="fixed top-0 z-50 w-full bg-charcoal/80 backdrop-blur-xl border-b border-white/10 px-6 lg:px-12">
+        <div class="mx-auto flex h-16 max-w-screen-2xl items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-bronze text-2xl">flare</span>
+                <h2 class="text-lg font-extrabold tracking-[0.2em]">Flux App</h2>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="exitApp()"
+                    class="text-[9px] font-bold tracking-widest hover:text-bronze transition-colors uppercase">Back to
+                    Landing</button>
+                <div class="w-8 h-8 rounded-full bg-white/10 border border-white/20"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-content">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <aside class="lg:col-span-3 space-y-6">
+                <div class="p-6 border border-white/10 bg-onyx/50">
+                    <h4 class="text-xs mb-4">Workspace</h4>
+                    <nav class="space-y-2">
+                        <div class="h-2 w-full bg-white/5"></div>
+                        <div class="h-2 w-3/4 bg-white/5"></div>
+                        <div class="h-2 w-1/2 bg-white/5"></div>
+                    </nav>
+                </div>
+            </aside>
+            <section class="lg:col-span-9">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="aspect-video bg-onyx/50 border border-white/10 p-6 flex flex-col justify-end">
+                        <div class="h-4 w-1/2 bg-bronze/20 mb-2"></div>
+                        <div class="h-2 w-full bg-white/5"></div>
+                    </div>
+                    <div class="aspect-video bg-onyx/50 border border-white/10 p-6 flex flex-col justify-end">
+                        <div class="h-4 w-1/2 bg-bronze/20 mb-2"></div>
+                        <div class="h-2 w-full bg-white/5"></div>
+                    </div>
+                    <div class="aspect-video bg-onyx/50 border border-white/10 p-6 flex flex-col justify-end">
+                        <div class="h-4 w-1/2 bg-bronze/20 mb-2"></div>
+                        <div class="h-2 w-full bg-white/5"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</div>
+
+<!-- Original Landing Page Wrapper -->
+<div id="landing-page" class="relative flex min-h-screen w-full flex-col">
+    <header class="fixed top-0 z-50 w-full bg-charcoal/80 backdrop-blur-xl border-b border-white/10 px-6 lg:px-12">
+        <div class="mx-auto flex h-16 max-w-screen-2xl items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-bronze text-2xl">flare</span>
+                <h2 class="text-lg font-extrabold tracking-[0.2em]">Flux</h2>
+            </div>
+            <nav class="hidden md:flex items-center gap-8">
+                <a class="text-[9px] font-bold tracking-widest hover:text-bronze transition-colors uppercase"
+                    href="#narrative">The Story</a>
+                <a class="text-[9px] font-bold tracking-widest hover:text-bronze transition-colors uppercase"
+                    href="#impact">Impact</a>
+                <a class="text-[9px] font-bold tracking-widest hover:text-bronze transition-colors uppercase"
+                    href="#craft">Craft</a>
+            </nav>
+            <div class="flex items-center gap-6">
+                <button onclick="launchExperience('minimal', 1500)"
+                    class="bg-white text-charcoal px-5 py-2 text-[9px] font-bold tracking-widest uppercase hover:bg-bronze hover:text-white transition-all">
+                    Launch Experience
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="flex-1 pt-16">
+        <section class="relative border-b border-white/10">
+            <div class="mx-auto max-w-screen-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[85vh]">
+                    <div
+                        class="lg:col-span-3 border-r border-white/10 p-8 flex flex-col justify-between order-2 lg:order-1">
+                        <div>
+                            <span
+                                class="text-[10px] font-bold tracking-[0.4em] uppercase text-bronze mb-6 block">Chapter
+                                I: The First Contact</span>
+                            <div class="h-px w-full bg-white/10 mb-6"></div>
+                            <img alt="Atmospheric abstract"
+                                class="w-full aspect-[3/4] object-cover grayscale opacity-50 mb-6"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDZ3aL_j6aPy2vd7wQk7b1dT3XBmxh5H8KAEKz9XPfdVOD9e4rRAGQ3z10fME0oMjeMtyddgWV0s3Yu4NetWBOzAMD3hss_zZ16cC8l_WnHR4Urr1Ke46bliABff2bBLCBwYvlzBJTQ6R9AEMOh_qWpUc11y0WKSyb5JDQ-Pqp0jQljb7hjH0pwkG8cgYi8p5Il1NqGH2yPluPatPzaxVi9KdOXaUQGurh63PcPHU1wpDsbI1PQoJFrJoqNnTEmBa7lWlPhlx42wU7" />
+                            <p class="text-sm text-silver-dim/60 italic leading-snug">
+                                An exploration into the threshold of user perception and digital entrance.
+                            </p>
+                        </div>
+                        <div class="mt-8">
+                            <button class="group flex items-center gap-4">
+                                <span
+                                    class="h-12 w-12 rounded-full border border-bronze/30 flex items-center justify-center group-hover:bg-bronze transition-all">
+                                    <span
+                                        class="material-symbols-outlined text-bronze group-hover:text-white text-sm transition-colors">play_arrow</span>
+                                </span>
+                                <span class="text-[10px] font-bold tracking-widest uppercase">Begin Narrative</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div
+                        class="lg:col-span-6 border-r border-white/10 p-8 flex flex-col justify-center order-1 lg:order-2">
+                        <div class="text-center lg:text-left">
+                            <h1
+                                class="text-6xl md:text-8xl lg:text-9xl mb-8 leading-[0.85] tracking-tighter italic font-serif normal-case">
+                                The Art of <br />
+                                <span class="text-bronze">The Opening.</span>
+                            </h1>
+                            <div class="h-1 w-24 bg-bronze mx-auto lg:mx-0 mb-8"></div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-3 p-8 flex flex-col justify-center order-3">
+                        <div class="space-y-6">
+                            <p class="text-xl text-silver-dim/80 italic font-serif leading-relaxed">
+                                In the digital realm, the first five seconds define the soul of an experience. Flux
+                                transforms technical latency into a moment of pure brand theater.
+                            </p>
+                            <div class="h-px w-full bg-white/10"></div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <span
+                                        class="block text-[10px] tracking-widest uppercase text-earth-muted mb-2 font-bold">Volume</span>
+                                    <span class="text-xs text-white">Issue No. 004</span>
+                                </div>
+                                <div>
+                                    <span
+                                        class="block text-[10px] tracking-widest uppercase text-earth-muted mb-2 font-bold">Est.</span>
+                                    <span class="text-xs text-white">MMXXIV</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 px-6 lg:px-12 bg-onyx border-b border-white/10" id="narrative">
+            <div class="mx-auto max-w-screen-2xl">
+                <div class="mb-16">
+                    <h2 class="text-4xl md:text-6xl mb-4 leading-tight">Hiding the Machine</h2>
+                    <h3 class="text-2xl md:text-3xl text-bronze italic font-serif normal-case mb-12">Revealing the
+                        Magic</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
+                    <div class="flex flex-col gap-8">
+                        <div class="relative group">
+                            <img alt="Cinematic loading"
+                                class="w-full grayscale hover:grayscale-0 transition-all duration-1000"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDZ3aL_j6aPy2vd7wQk7b1dT3XBmxh5H8KAEKz9XPfdVOD9e4rRAGQ3z10fME0oMjeMtyddgWV0s3Yu4NetWBOzAMD3hss_zZ16cC8l_WnHR4Urr1Ke46bliABff2bBLCBwYvlzBJTQ6R9AEMOh_qWpUc11y0WKSyb5JDQ-Pqp0jQljb7hjH0pwkG8cgYi8p5Il1NqGH2yPluPatPzaxVi9KdOXaUQGurh63PcPHU1wpDsbI1PQoJFrJoqNnTEmBa7lWlPhlx42wU7" />
+                            <div class="absolute inset-0 border border-bronze/20 pointer-events-none"></div>
+                        </div>
+                        <p
+                            class="text-lg text-silver-dim/80 leading-relaxed first-letter:text-5xl first-letter:font-bold first-letter:text-bronze first-letter:mr-3 first-letter:float-left">
+                            Modern applications are heavy, yet users demand weightlessness. Our system acts as a
+                            sophisticated veil, a curated sequence that synchronizes with your data layer.
+                        </p>
+                    </div>
+                    <div class="flex flex-col gap-8">
+                        <p class="text-lg text-silver-dim/80 leading-relaxed">
+                            It isn't just a loading bar; it's a psychological bridge. By establishing visual
+                            continuity from the desktop to the dashboard, we eliminate the friction of "waiting."
+                        </p>
+                        <div class="p-8 border border-white/10 bg-charcoal/30 italic">
+                            <span class="block text-4xl font-sans text-white mb-2">94%</span>
+                            <span class="text-[10px] uppercase tracking-widest text-earth-muted font-bold">Average
+                                Brand Recall Increase</span>
+                        </div>
+                        <p class="text-lg text-silver-dim/80 leading-relaxed">
+                            The transition is choreographed with millisecond precision to ensure user focus remains
+                            on the value, not the loading process.
+                        </p>
+                    </div>
+                    <div class="flex flex-col justify-between">
+                        <div class="border-l border-white/10 pl-8 space-y-12">
+                            <div>
+                                <span class="block text-4xl font-sans text-white mb-2">0.2s</span>
+                                <span class="text-[10px] uppercase tracking-widest text-earth-muted font-bold">Perceived
+                                    Latency Threshold</span>
+                            </div>
+                            <div class="h-px bg-white/10"></div>
+                            <p class="text-sm text-silver-dim/60 italic leading-relaxed">
+                                Our metrics demonstrate that the "first breath" of an application is where user
+                                loyalty is forged. Flux ensures that breath is deep, steady, and impressive.
+                            </p>
+                        </div>
+                        <div class="mt-12 flex justify-end">
+                            <span class="material-symbols-outlined text-bronze/40 text-6xl">fluid</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 px-6 lg:px-12 bg-charcoal border-b border-white/10" id="impact">
+            <div class="mx-auto max-w-screen-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-0 border border-white/10">
+                    <div class="p-12 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-center">
+                        <span class="text-bronze text-[10px] font-bold tracking-[0.5em] uppercase mb-4 block">The
+                            Impact</span>
+                        <h2 class="text-4xl font-serif normal-case italic leading-tight">Engineered for Elegance
+                        </h2>
+                    </div>
+                    <div
+                        class="p-12 border-b lg:border-b-0 lg:border-r border-white/10 hover:bg-onyx transition-colors group">
+                        <span
+                            class="material-symbols-outlined text-3xl text-bronze/60 mb-6 group-hover:text-bronze transition-colors">architecture</span>
+                        <h3 class="text-lg tracking-widest mb-4">Sensory Precision</h3>
+                        <p class="text-sm text-silver-dim/60 italic">
+                            Every micro-interaction is tuned to sub-millisecond accuracy, ensuring that performance
+                            is not just felt, but celebrated across every device.
+                        </p>
+                    </div>
+                    <div
+                        class="p-12 border-b lg:border-b-0 lg:border-r border-white/10 hover:bg-onyx transition-colors group">
+                        <span
+                            class="material-symbols-outlined text-3xl text-bronze/60 mb-6 group-hover:text-bronze transition-colors">auto_awesome</span>
+                        <h3 class="text-lg tracking-widest mb-4">Brand Atmosphere</h3>
+                        <p class="text-sm text-silver-dim/60 italic">
+                            Beyond logos. We define the movement, the light, and the texture of your application's
+                            first breath in the browser.
+                        </p>
+                    </div>
+                    <div class="p-12 hover:bg-onyx transition-colors group">
+                        <span
+                            class="material-symbols-outlined text-3xl text-bronze/60 mb-6 group-hover:text-bronze transition-colors">waves</span>
+                        <h3 class="text-lg tracking-widest mb-4">Fluid Continuity</h3>
+                        <p class="text-sm text-silver-dim/60 italic">
+                            A seamless handoff from the splash screen to the initial UI state. No jumps, no flashes,
+                            just one continuous editorial flow.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 px-6 lg:px-12 bg-onyx" id="craft">
+            <div class="mx-auto max-w-screen-2xl">
+                <div class="mb-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end border-b border-white/10 pb-12">
+                    <div class="lg:col-span-8">
+                        <h2 class="text-4xl mb-4">The Collection</h2>
+                        <p class="text-earth-muted font-serif italic text-lg">Curated sequences for distinct digital
+                            identities.</p>
+                    </div>
+                    <div class="lg:col-span-4 flex justify-start lg:justify-end gap-3">
+                        <span
+                            class="text-[9px] tracking-widest uppercase py-1.5 px-3 border border-white/10 rounded-full">Edition
+                            2024</span>
+                        <span
+                            class="text-[9px] tracking-widest uppercase py-1.5 px-3 border border-bronze/40 text-bronze rounded-full">Motion
+                            Ready</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+                    <div class="group cursor-pointer border-r border-white/5 pr-0 md:pr-12 last:border-0 last:pr-0">
+                        <div class="relative aspect-[4/5] overflow-hidden mb-8 bg-charcoal">
+                            <img alt="Static variant"
+                                class="w-full h-full object-cover opacity-20 grayscale group-hover:scale-105 transition-all duration-1000"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDZ3aL_j6aPy2vd7wQk7b1dT3XBmxh5H8KAEKz9XPfdVOD9e4rRAGQ3z10fME0oMjeMtyddgWV0s3Yu4NetWBOzAMD3hss_zZ16cC8l_WnHR4Urr1Ke46bliABff2bBLCBwYvlzBJTQ6R9AEMOh_qWpUc11y0WKSyb5JDQ-Pqp0jQljb7hjH0pwkG8cgYi8p5Il1NqGH2yPluPatPzaxVi9KdOXaUQGurh63PcPHU1wpDsbI1PQoJFrJoqNnTEmBa7lWlPhlx42wU7" />
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-px h-24 bg-bronze/30 group-hover:h-32 transition-all duration-700">
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="text-xs tracking-[0.3em] mb-3 font-bold text-white">01. The Monolith</h4>
+                        <div class="h-px w-8 bg-bronze mb-4"></div>
+                        <p class="text-sm text-silver-dim/50 font-serif italic leading-relaxed">
+                            Lightweight, static, and profoundly stable. Designed for utility-first platforms
+                            requiring immediate trust and structural integrity.
+                        </p>
+                    </div>
+                    <div class="group cursor-pointer border-r border-white/5 pr-0 md:pr-12 last:border-0 last:pr-0">
+                        <div class="relative aspect-[4/5] overflow-hidden mb-8 bg-charcoal">
+                            <img alt="Minimal variant"
+                                class="w-full h-full object-cover opacity-20 grayscale group-hover:scale-105 transition-all duration-1000"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDZ3aL_j6aPy2vd7wQk7b1dT3XBmxh5H8KAEKz9XPfdVOD9e4rRAGQ3z10fME0oMjeMtyddgWV0s3Yu4NetWBOzAMD3hss_zZ16cC8l_WnHR4Urr1Ke46bliABff2bBLCBwYvlzBJTQ6R9AEMOh_qWpUc11y0WKSyb5JDQ-Pqp0jQljb7hjH0pwkG8cgYi8p5Il1NqGH2yPluPatPzaxVi9KdOXaUQGurh63PcPHU1wpDsbI1PQoJFrJoqNnTEmBa7lWlPhlx42wU7" />
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div
+                                    class="w-10 h-10 rounded-full border border-bronze/20 flex items-center justify-center">
+                                    <div class="w-1.5 h-1.5 bg-bronze rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="text-xs tracking-[0.3em] mb-3 font-bold text-white">02. The Ethereal</h4>
+                        <div class="h-px w-8 bg-bronze mb-4"></div>
+                        <p class="text-sm text-silver-dim/50 font-serif italic leading-relaxed">
+                            Subtle pulses of light guiding the eye towards the center of gravity. Perfect for
+                            content-rich experiences that value elegance.
+                        </p>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <div class="relative aspect-[4/5] overflow-hidden mb-8 bg-charcoal">
+                            <img alt="Premium variant"
+                                class="w-full h-full object-cover opacity-20 grayscale group-hover:scale-105 transition-all duration-1000"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDZ3aL_j6aPy2vd7wQk7b1dT3XBmxh5H8KAEKz9XPfdVOD9e4rRAGQ3z10fME0oMjeMtyddgWV0s3Yu4NetWBOzAMD3hss_zZ16cC8l_WnHR4Urr1Ke46bliABff2bBLCBwYvlzBJTQ6R9AEMOh_qWpUc11y0WKSyb5JDQ-Pqp0jQljb7hjH0pwkG8cgYi8p5Il1NqGH2yPluPatPzaxVi9KdOXaUQGurh63PcPHU1wpDsbI1PQoJFrJoqNnTEmBa7lWlPhlx42wU7" />
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-4xl text-bronze/40">all_inclusive</span>
+                            </div>
+                        </div>
+                        <h4 class="text-xs tracking-[0.3em] mb-3 font-bold text-white">03. The Prestige</h4>
+                        <div class="h-px w-8 bg-bronze mb-4"></div>
+                        <p class="text-sm text-silver-dim/50 font-serif italic leading-relaxed">
+                            Complex particle choreography and custom easing for high-end luxury apps that demand a
+                            dramatic and unforgettable entrance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-32 px-6 lg:px-12 bg-charcoal border-y border-white/10 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-bronze/20"></div>
+            <div class="mx-auto max-w-screen-md text-center">
+                <h2 class="text-5xl md:text-7xl mb-8 font-serif normal-case italic leading-tight">Ready to redefine
+                    <br />your <span class="text-bronze">threshold?</span>
+                </h2>
+                <div class="w-20 h-1 bg-white/10 mx-auto mb-12"></div>
+                <p class="text-lg text-silver-dim/70 mb-16 italic max-w-xl mx-auto">
+                    Join the elite circle of digital craftsmen using Flux to orchestrate the world's most elegant
+                    software launches.
+                </p>
+                <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+                    <button onclick="launchExperience('branded', 2500)"
+                        class="w-full md:w-auto px-12 py-5 bg-bronze text-white text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-white hover:text-charcoal transition-all">
+                        Integrate Now
+                    </button>
+                    <button
+                        class="w-full md:w-auto px-12 py-5 border border-white/20 text-white text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-white/10 transition-all">
+                        Read the Whitepaper
+                    </button>
+                </div>
+
+                <!-- Design System Preview -->
+                <div class="mt-24 p-8 border border-white/10 bg-onyx/30 max-w-2xl mx-auto">
+                    <h4 class="text-[10px] tracking-[0.4em] uppercase text-earth-muted mb-8">Design System Preview</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div class="space-y-4">
+                            <span class="text-[9px] uppercase tracking-widest text-silver-dim/40 block">Variant</span>
+                            <select id="variant-select"
+                                class="w-full bg-charcoal border border-white/10 text-[10px] uppercase tracking-widest p-3 focus:border-bronze outline-none text-white appearance-none cursor-pointer">
+                                <option value="static">Static (Fast)</option>
+                                <option value="minimal" selected>Minimal Motion</option>
+                                <option value="branded">Branded Animation</option>
+                            </select>
+                        </div>
+                        <div class="space-y-4">
+                            <span class="text-[9px] uppercase tracking-widest text-silver-dim/40 block">Load
+                                Speed</span>
+                            <select id="speed-select"
+                                class="w-full bg-charcoal border border-white/10 text-[10px] uppercase tracking-widest p-3 focus:border-bronze outline-none text-white appearance-none cursor-pointer">
+                                <option value="600">Instant (0.6s)</option>
+                                <option value="1500" selected>Normal (1.5s)</option>
+                                <option value="6000">Slow (6.0s)</option>
+                                <option value="error">Network Error</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="triggerPreview()"
+                        class="w-full bg-white text-charcoal px-8 py-3.5 text-[9px] font-bold tracking-[0.2em] uppercase hover:bg-bronze hover:text-white transition-all">
+                        Simulate Launch
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-charcoal px-6 py-20 lg:px-12">
+        <div class="mx-auto max-w-screen-2xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-white/10 pt-16">
+                <div class="lg:col-span-4 border-r border-white/10 pr-12">
+                    <div class="flex items-center gap-3 mb-8">
+                        <span class="material-symbols-outlined text-bronze text-2xl">flare</span>
+                        <h3 class="text-xl tracking-[0.2em]">Flux</h3>
+                    </div>
+                    <p class="text-silver-dim/50 text-xs italic mb-8 leading-relaxed">
+                        An open-source tribute to the importance of the first impression. Designed in London,
+                        distributed globally for the builders of the next web.
+                    </p>
+                    <div class="flex gap-6">
+                        <a class="text-bronze hover:text-white transition-colors" href="#"><span
+                                class="material-symbols-outlined text-lg">language</span></a>
+                        <a class="text-bronze hover:text-white transition-colors" href="#"><span
+                                class="material-symbols-outlined text-lg">terminal</span></a>
+                        <a class="text-bronze hover:text-white transition-colors" href="#"><span
+                                class="material-symbols-outlined text-lg">alternate_email</span></a>
+                    </div>
+                </div>
+                <div class="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-12">
+                    <div class="flex flex-col gap-6">
+                        <h4 class="text-[9px] font-bold tracking-[0.4em] uppercase text-earth-muted">System</h4>
+                        <ul
+                            class="flex flex-col gap-3 text-[10px] tracking-[0.2em] text-silver-dim/60 font-sans uppercase">
+                            <li><a class="hover:text-bronze" href="#">Documentation</a></li>
+                            <li><a class="hover:text-bronze" href="#">API Reference</a></li>
+                            <li><a class="hover:text-bronze" href="#">The Studio</a></li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-col gap-6">
+                        <h4 class="text-[9px] font-bold tracking-[0.4em] uppercase text-earth-muted">Ethos</h4>
+                        <ul
+                            class="flex flex-col gap-3 text-[10px] tracking-[0.2em] text-silver-dim/60 font-sans uppercase">
+                            <li><a class="hover:text-bronze" href="#">Our Story</a></li>
+                            <li><a class="hover:text-bronze" href="#">Privacy First</a></li>
+                            <li><a class="hover:text-bronze" href="#">Accessibility</a></li>
+                        </ul>
+                    </div>
+                    <div class="hidden md:flex flex-col gap-6 border-l border-white/10 pl-8">
+                        <h4 class="text-[9px] font-bold tracking-[0.4em] uppercase text-earth-muted">Reduced Motion
+                        </h4>
+                        <p class="text-[10px] leading-relaxed text-silver-dim/40 font-serif italic">
+                            This experience respects your OS level preferences. Reduced motion is supported globally
+                            by default in our framework to ensure inclusivity.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-[9px] tracking-[0.3em] text-silver-dim/30 uppercase">
+                    © 2024 Flux Systems. All rights reserved.
+                </p>
+                <div class="flex gap-8 text-[9px] tracking-[0.3em] text-silver-dim/30 uppercase">
+                    <a class="hover:text-bronze" href="#">Terms</a>
+                    <a class="hover:text-bronze" href="#">Privacy</a>
+                    <a class="hover:text-bronze" href="#">Security</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+</div>
+
+<script>
+    const splashOverlay = document.getElementById('splash-overlay');
+    const splashProgress = document.getElementById('splash-progress');
+    const splashStatus = document.getElementById('splash-status');
+    const appShell = document.getElementById('app-shell');
+    const landingPage = document.getElementById('landing-page');
+    const splashProgressWrapper = document.getElementById('splash-progress-wrapper');
+
+    function triggerPreview() {
+        const variant = document.getElementById('variant-select').value;
+        const speedValue = document.getElementById('speed-select').value;
+
+        if (speedValue === 'error') {
+            launchExperience(variant, 4000, true);
+        } else {
+            launchExperience(variant, parseInt(speedValue), false);
+        }
+    }
+
+    function launchExperience(variant = 'minimal', duration = 2000, isError = false) {
+        // Setup variant
+        splashOverlay.className = '';
+        splashOverlay.classList.add('splash--' + variant);
+        splashOverlay.classList.remove('hidden-fade');
+
+        // Show/Hide page elements
+        landingPage.classList.add('hidden');
+        appShell.classList.add('hidden');
+        document.body.style.overflow = 'hidden';
+
+        // Reset states
+        splashProgress.style.transform = 'scaleX(0)';
+        splashProgress.classList.remove('bg-red-500');
+        splashStatus.innerText = 'Initializing...';
+        splashStatus.classList.remove('text-red-500');
+
+        if (duration < 800) {
+            splashProgressWrapper.classList.add('hidden');
+        } else {
+            splashProgressWrapper.classList.remove('hidden');
+        }
+
+        let start = null;
+        function animate(timestamp) {
+            if (!start) start = timestamp;
+            const elapsed = timestamp - start;
+            const progress = Math.min(elapsed / duration, 1);
+
+            splashProgress.style.transform = `scaleX(${progress})`;
+            splashProgressWrapper.setAttribute('aria-valuenow', Math.round(progress * 100));
+
+            if (isError && progress > 0.75) {
+                handleError();
+                return;
+            }
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                completeLoading();
+            }
+        }
+
+        // Simulate messages for long loads
+        if (duration > 5000) {
+            setTimeout(() => { if (!isError) splashStatus.innerText = 'Optimizing assets...'; }, 2000);
+            setTimeout(() => { if (!isError) splashStatus.innerText = 'Synchronizing data...'; }, 4000);
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    function handleError() {
+        splashStatus.innerText = 'Connection Failed. Retrying...';
+        splashStatus.classList.add('text-red-500');
+        splashProgress.classList.add('bg-red-500');
+
+        setTimeout(() => {
+            alert('Experience failed to load. Please check your network connection.');
+            exitApp();
+        }, 1500);
+    }
+
+    function completeLoading() {
+        splashStatus.innerText = 'Finalizing...';
+        setTimeout(() => {
+            splashOverlay.classList.add('hidden-fade');
+            appShell.classList.remove('hidden');
+            document.body.style.overflow = 'auto';
+        }, 800);
+    }
+
+    function exitApp() {
+        appShell.classList.add('hidden');
+        landingPage.classList.remove('hidden');
+        splashOverlay.classList.add('hidden-fade');
+    }
+
+    // Initialize with landing page visible
+    window.onload = () => {
+        splashOverlay.classList.add('hidden-fade');
+    };
+</script>
+</body>
+
+</html>
