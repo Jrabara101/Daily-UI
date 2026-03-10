@@ -1,0 +1,71 @@
+@layer base {
+    body {
+        @apply bg-[#fffcf5] text-slate-800 font-sans selection:bg-[#f9b9a5]/30 selection:text-[#b06d5a];
+    }
+}
+
+/* Glassmorphism Search Bar - Light Version */
+.glass-search {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid rgba(77, 161, 169, 0.15);
+}
+
+/* Fluid Grid Accordion */
+.accordion-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* We use a data attribute or class to control the open state for the grid */
+.accordion-content.is-open {
+    grid-template-rows: 1fr;
+}
+
+.accordion-inner {
+    overflow: hidden;
+}
+
+/* Custom Highlight */
+mark {
+    background-color: #f9b9a5;
+    color: #4a3731;
+    padding: 0 4px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+/* Micro-Feedback Animation */
+@keyframes morphCheck {
+    0% {
+        transform: scale(0.5) rotate(-45deg);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+.check-animation {
+    animation: morphCheck 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Authored Stamp Blend */
+.maker-mark {
+    mix-blend-mode: multiply;
+}
+
+/* Abstract Illustrations */
+.abstract-bg {
+    background: linear-gradient(135deg, #f9b9a5 0%, #4da1a9 100%);
+    opacity: 0.1;
+    filter: blur(80px);
+}

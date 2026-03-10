@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Friendly FAQ Guide | Support</title>
+    <meta name="description" content="A searchable FAQ designed with care for the best user experience.">
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="styles.css">
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#4da1a9", // Teal
+                        accent: "#f9b9a5",  // Peach/Coral
+                        cream: "#fffcf5",
+                    },
+                    fontFamily: {
+                        sans: ["Outfit", "Inter", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-cream text-slate-800 min-h-screen">
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden pt-10 pb-10">
+        <!-- Abstract Background Glows -->
+        <div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] abstract-bg rounded-full pointer-events-none"></div>
+        <div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] abstract-bg rounded-full pointer-events-none"
+            style="transform: rotate(180deg)"></div>
+
+        <header class="flex items-center justify-between px-6 py-6 lg:px-20 relative z-10 w-full max-w-7xl mx-auto">
+            <div class="flex items-center gap-3 text-primary">
+                <span class="material-symbols-outlined text-3xl font-bold">handshake</span>
+                <h2 class="text-xl font-bold tracking-tight">FAQ_CORE_v2.0</h2>
+            </div>
+            <div class="hidden md:flex gap-8 items-center">
+                <a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors"
+                    href="#">Documentation</a>
+                <button
+                    class="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all hover:shadow-lg hover:scale-105 active:scale-95">
+                    Support Portal
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1 flex flex-col items-center px-6 lg:px-20 max-w-5xl mx-auto w-full relative z-10">
+            <!-- Hero Illustration -->
+            <div class="relative w-full max-w-lg h-48 mb-8 flex items-center justify-center">
+                <div class="w-32 h-32 bg-accent/30 rounded-full flex items-center justify-center animate-bounce">
+                    <span class="material-symbols-outlined text-primary text-6xl">face_6</span>
+                </div>
+                <div class="absolute -right-8 top-4 w-16 h-16 bg-primary/20 rounded-full blur-md"></div>
+                <div class="absolute -left-12 bottom-2 w-20 h-20 bg-accent/20 rounded-full blur-lg"></div>
+            </div>
+
+            <!-- Header Section -->
+            <div class="text-center mb-12 space-y-4">
+                <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-slate-800 leading-tight">
+                    How can we <span class="text-primary italic">help</span> you?
+                </h1>
+                <p class="text-slate-500 text-lg max-w-xl mx-auto">
+                    Search our friendly guide for instant answers to your questions.
+                </p>
+            </div>
+
+            <!-- Command Prompt Search Bar -->
+            <div class="w-full max-w-3xl mb-16 relative group">
+                <div
+                    class="glass-search rounded-3xl flex items-center px-6 py-5 focus-within:ring-4 focus-within:ring-primary/10 transition-all shadow-xl">
+                    <span class="material-symbols-outlined text-primary mr-4 text-3xl">search</span>
+                    <input id="faq-search"
+                        class="bg-transparent border-none focus:ring-0 w-full text-xl placeholder:text-slate-400 text-slate-700 outline-none"
+                        placeholder="Search documentation... (e.g. 'Password')" type="text" autofocus />
+                    <div
+                        class="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-slate-100 rounded-xl border border-slate-200 text-slate-500 text-xs font-bold uppercase tracking-wider">
+                        <span>CMD</span>
+                        <span>+</span>
+                        <span>K</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ List -->
+            <div id="faq-container" class="w-full max-w-3xl space-y-6">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item group">
+                    <div
+                        class="bg-white border border-slate-100 rounded-[2.5rem] overflow-hidden transition-all hover:shadow-2xl hover:border-primary/20">
+                        <button class="faq-trigger w-full text-left p-8 flex items-center justify-between group"
+                            data-target="password-reset" aria-expanded="false">
+                            <h3
+                                class="text-2xl font-bold text-slate-700 transition-colors group-hover:text-primary pr-4">
+                                How do I reset my account password?
+                            </h3>
+                            <div
+                                class="bg-slate-50 p-3 rounded-full group-aria-expanded:bg-primary/10 transition-colors">
+                                <span
+                                    class="material-symbols-outlined text-slate-400 text-2xl transition-transform group-aria-expanded:rotate-180 group-aria-expanded:text-primary">
+                                    expand_more
+                                </span>
+                            </div>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <div
+                                    class="px-8 pb-8 pt-2 text-slate-500 text-lg leading-relaxed border-t border-slate-50 mx-4">
+                                    <p class="mt-4">
+                                        To reset your password, navigate to the <a href="#"
+                                            class="text-primary font-bold underline decoration-accent underline-offset-4">login
+                                            security settings</a> and click 'Forgot Password'. You will receive an
+                                        encrypted verification token via your registered email address within 60
+                                        seconds.
+                                    </p>
+                                    <div
+                                        class="feedback-loop mt-8 pt-6 border-t border-slate-100 flex items-center gap-4">
+                                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Was
+                                            this helpful?</span>
+                                        <div class="flex gap-2 interaction-buttons">
+                                            <button
+                                                class="feedback-btn p-2 rounded-xl bg-slate-50 hover:bg-primary/10 hover:text-primary transition-all text-slate-400"
+                                                data-type="positive">
+                                                <span class="material-symbols-outlined">thumb_up</span>
+                                            </button>
+                                            <button
+                                                class="feedback-btn p-2 rounded-xl bg-slate-50 hover:bg-accent/10 hover:text-accent transition-all text-slate-400"
+                                                data-type="negative">
+                                                <span class="material-symbols-outlined">thumb_down</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item group">
+                    <div
+                        class="bg-white border border-slate-100 rounded-[2.5rem] overflow-hidden transition-all hover:shadow-2xl hover:border-primary/20">
+                        <button class="faq-trigger w-full text-left p-8 flex items-center justify-between group"
+                            data-target="api-keys" aria-expanded="false">
+                            <h3
+                                class="text-2xl font-bold text-slate-700 transition-colors group-hover:text-primary pr-4">
+                                Where can I locate my production API keys?
+                            </h3>
+                            <div
+                                class="bg-slate-50 p-3 rounded-full group-aria-expanded:bg-primary/10 transition-colors">
+                                <span
+                                    class="material-symbols-outlined text-slate-400 text-2xl transition-transform group-aria-expanded:rotate-180 group-aria-expanded:text-primary">
+                                    expand_more
+                                </span>
+                            </div>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <div
+                                    class="px-8 pb-8 pt-2 text-slate-500 text-lg leading-relaxed border-t border-slate-50 mx-4">
+                                    <p class="mt-4">
+                                        Production keys are located in the Developer Dashboard under the 'Credentials'
+                                        tab. Please ensure you have enabled Multi-Factor Authentication (MFA) before
+                                        attempting to view live keys.
+                                    </p>
+                                    <div
+                                        class="feedback-loop mt-8 pt-6 border-t border-slate-100 flex items-center gap-4">
+                                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Was
+                                            this helpful?</span>
+                                        <div class="flex gap-2 interaction-buttons">
+                                            <button
+                                                class="feedback-btn p-2 rounded-xl bg-slate-50 hover:bg-primary/10 hover:text-primary transition-all text-slate-400"
+                                                data-type="positive">
+                                                <span class="material-symbols-outlined">thumb_up</span>
+                                            </button>
+                                            <button
+                                                class="feedback-btn p-2 rounded-xl bg-slate-50 hover:bg-accent/10 hover:text-accent transition-all text-slate-400"
+                                                data-type="negative">
+                                                <span class="material-symbols-outlined">thumb_down</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item group">
+                    <div
+                        class="bg-white border border-slate-100 rounded-[2.5rem] overflow-hidden transition-all hover:shadow-2xl hover:border-primary/20">
+                        <button class="faq-trigger w-full text-left p-8 flex items-center justify-between group"
+                            data-target="billing-cycle" aria-expanded="false">
+                            <h3
+                                class="text-2xl font-bold text-slate-700 transition-colors group-hover:text-primary pr-4">
+                                Can I upgrade my plan mid-cycle?
+                            </h3>
+                            <div
+                                class="bg-slate-50 p-3 rounded-full group-aria-expanded:bg-primary/10 transition-colors">
+                                <span
+                                    class="material-symbols-outlined text-slate-400 text-2xl transition-transform group-aria-expanded:rotate-180 group-aria-expanded:text-primary">
+                                    expand_more
+                                </span>
+                            </div>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <div
+                                    class="px-8 pb-8 pt-2 text-slate-500 text-lg leading-relaxed border-t border-slate-50 mx-4">
+                                    <p class="mt-4">
+                                        Yes, upgrades are processed instantly. Your billing will be pro-rated for the
+                                        remaining days in your current billing cycle. Downgrades take effect at the
+                                        start of the next period.
+                                    </p>
+                                    <div
+                                        class="feedback-loop mt-8 pt-6 border-t border-slate-100 flex items-center gap-4">
+                                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Was
+                                            this helpful?</span>
+                                        <div class="flex gap-2 interaction-buttons">
+                                            <button
+                                                class="feedback-btn p-2 rounded-xl bg-slate-50 hover:bg-primary/10 hover:text-primary transition-all text-slate-400"
+                                                data-type="positive">
+                                                <span class="material-symbols-outlined">thumb_up</span>
+                                            </button>
+                                            <button
+                                                class="feedback-btn p-2 rounded-xl bg-slate-50 hover:bg-accent/10 hover:text-accent transition-all text-slate-400"
+                                                data-type="negative">
+                                                <span class="material-symbols-outlined">thumb_down</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Results State -->
+            <div id="no-results" class="hidden flex-col items-center justify-center py-20 text-center space-y-4">
+                <div class="w-24 h-24 bg-accent/10 rounded-full flex items-center justify-center mb-4">
+                    <span class="material-symbols-outlined text-accent text-5xl">search_off</span>
+                </div>
+                <h3 class="text-3xl font-bold text-slate-800">No matches found</h3>
+                <p class="text-slate-500 max-w-sm text-lg">We couldn't find any FAQs matching your search. Try adjusting
+                    your query or contact support.</p>
+                <button
+                    class="mt-6 px-8 py-3 bg-primary text-white font-bold rounded-2xl hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/20">
+                    Get Personal Support
+                </button>
+            </div>
+
+            <!-- Footer / Maker's Mark -->
+            <footer class="mt-24 py-16 w-full flex flex-col items-center border-t border-slate-200/50">
+                <p class="text-slate-400 text-[10px] font-black uppercase tracking-[0.8em] mb-6">
+                    Professional Maker Standard
+                </p>
+                <div class="bg-transparent px-4 py-2">
+                    <span class="maker-mark text-black font-black text-sm uppercase tracking-widest">
+                        Beejay T.
+                    </span>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
