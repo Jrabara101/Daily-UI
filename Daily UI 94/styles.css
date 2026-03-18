@@ -1,0 +1,329 @@
+/* News for Business - Design System & Styles */
+
+:root {
+    /* Primary Palette - Reverted to Screen.png Aesthetic */
+    --color-obsidian: #121212;
+    --color-charcoal: #18181b;
+    --color-silver: #E2E2E2;
+    --color-emerald-vibrant: #00C853;
+    --color-emerald-deep: #004D40;
+    --color-slate-gray: #71717A;
+    --color-border-soft: rgba(226, 226, 226, 0.1);
+
+    /* Semantic Colors */
+    --bg-primary: var(--color-obsidian);
+    --bg-secondary: #0a0a0a;
+    --text-primary: var(--color-silver);
+    --text-secondary: var(--color-slate-gray);
+    --accent-color: var(--color-emerald-vibrant);
+    --border-color: var(--color-border-soft);
+
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2.5rem;
+    --space-xl: 4rem;
+    --space-2xl: 6rem;
+    --space-3xl: 8.75rem;
+}
+
+/* Base Reset & Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-heading {
+    font-family: 'Playfair Display', 'Inter', serif;
+    font-weight: 500;
+    line-height: 1;
+    color: white;
+    letter-spacing: -0.02em;
+}
+
+h1 {
+    font-style: normal;
+}
+
+h3 {
+    font-style: italic;
+}
+
+/* Layout Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+}
+
+.section-padding {
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+}
+
+/* UI Components */
+
+/* Announcement Bar */
+.announcement-bar {
+    background-color: var(--color-obsidian);
+    color: var(--color-ivory-white);
+    padding: var(--space-xs) 0;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+}
+
+.announcement-bar a {
+    color: var(--color-mint-signal);
+    text-decoration: none;
+    margin-left: var(--space-xs);
+}
+
+/* Header */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(250, 250, 247, 0.8);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--space-sm) 0;
+    transition: all 0.3s ease;
+}
+
+.site-header.scrolled {
+    padding: var(--space-xs) 0;
+    background-color: var(--color-ivory-white);
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--color-obsidian);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-icon {
+    width: 4px;
+    height: 24px;
+    background-color: var(--accent-color);
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: var(--space-lg);
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.main-nav a:hover {
+    color: var(--accent-color);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-soft-stone);
+}
+
+/* Hero Section */
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+    min-height: 70vh;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: var(--space-md);
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+    max-width: 540px;
+}
+
+.hero-visual {
+    background: var(--color-soft-stone);
+    border-radius: 8px;
+    padding: var(--space-md);
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Trust Bar */
+.trust-bar {
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--space-lg) 0;
+    margin-top: var(--space-2xl);
+    text-align: center;
+}
+
+.trust-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+    display: block;
+}
+
+.logo-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0.6;
+    filter: grayscale(1);
+}
+
+/* Cards & Grid */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+}
+
+.card {
+    padding: var(--space-lg);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-4px);
+}
+
+/* Animations - Data Pulse */
+@keyframes pulse-signal {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.95);
+        opacity: 0.5;
+    }
+}
+
+.signal-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-mint-signal);
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse-signal 2s infinite ease-in-out;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .main-nav {
+        display: none;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+}
