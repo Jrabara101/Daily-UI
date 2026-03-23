@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>THE ARTIFACT | CURATED_SERIES_01</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Montserrat:wght@300;400;500&amp;family=JetBrains+Mono:wght@300&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "earth-deep": "#2C2420",
+                        "earth-warm": "#5D4037",
+                        "clay": "#A1887F",
+                        "sand": "#F5F2ED",
+                        "gold-accent": "#C5A059",
+                        "surface": "#FAF9F6",
+                        "on-surface": "#2C2420",
+                        "primary": "#2C2420",
+                        "secondary": "#C5A059"
+                    },
+                    fontFamily: {
+                        "headline": ["Playfair Display", "serif"],
+                        "body": ["Montserrat", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    },
+                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-surface text-earth-deep font-body selection:bg-gold-accent selection:text-white;
+            }
+        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24; }
+        .lux-border { border-color: rgba(44, 36, 32, 0.1); }
+    </style>
+</head>
+
+<body>
+    <header
+        class="fixed top-0 w-full flex justify-between items-center px-8 py-6 md:px-16 bg-surface/90 backdrop-blur-md z-50 lux-border border-b">
+        <div class="font-headline italic text-xl tracking-tight text-earth-deep">
+            Curated Series 01
+        </div>
+        <nav class="hidden md:flex items-center space-x-12 font-body text-[10px] uppercase tracking-[0.3em]">
+            <a class="text-clay hover:text-earth-deep transition-colors" href="#">Collections</a>
+            <a class="text-earth-deep border-b border-gold-accent pb-1" href="#">The Drop</a>
+            <a class="text-clay hover:text-earth-deep transition-colors" href="#">Heritage</a>
+            <a class="text-clay hover:text-earth-deep transition-colors" href="#">Personal</a>
+        </nav>
+        <div class="flex items-center">
+            <button class="material-symbols-outlined text-earth-deep scale-90">local_mall</button>
+        </div>
+    </header>
+    <main class="pt-32 pb-32 max-w-screen-xl mx-auto px-6 md:px-16">
+        <div class="flex flex-col items-center">
+            <div class="w-full mb-24 relative group">
+                <div class="aspect-[16/9] overflow-hidden bg-sand">
+                    <img alt="Luxury Product Lifestyle"
+                        class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3SKmIRKwFsHKJej3H8lmkZKmj616BCbolck-hGt85RjEOUpjaIs4oP4vmdULWfq8923arG0Gq4eRqN51P8NJMxV14xh7OI4QeG6MSkvczL41gQ7Lo0tZf8Ixapi4SCsk5uDF7WU-RUtHPPmbNurUoIVENz30dnRykJAYYgfeF0-BxNyHNvIsi0NlJdZ1lx9BZtA9C-X8Qpcjt-KC4yz-QEaFAfUia3Ugamhq1rud-LCLKsSSW_suOLvwAICEA7MvyP7F9uz4ioq0" />
+                </div>
+                <div class="absolute -bottom-8 left-0 right-0 flex justify-center">
+                    <div class="bg-white/80 backdrop-blur-sm px-6 py-3 border border-sand shadow-sm">
+                        <span class="font-mono text-[9px] uppercase tracking-widest text-clay">Obsessive Craftsmanship •
+                            Limited Release</span>
+                    </div>
+                </div>
+            </div>
+            <div class="max-w-3xl w-full text-center mb-24">
+                <h1 class="font-headline text-5xl md:text-7xl mb-12 leading-[1.1] tracking-tight">
+                    A dialogue between <br /><span class="italic text-gold-accent">form and stillness.</span>
+                </h1>
+                <p class="font-headline text-xl italic text-earth-warm leading-relaxed mb-8">
+                    Born from the quiet morning light of the atelier, this piece transcends mere utility. It is an
+                    artifact of intentionality, designed for the individual who seeks depth in every texture.
+                </p>
+                <div class="w-12 h-px bg-gold-accent mx-auto mb-16"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-16 w-full items-start">
+                <div class="md:col-span-7 space-y-16">
+                    <div class="bg-sand aspect-square overflow-hidden">
+                        <img alt="Material Detail" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAefP3Z5helyd_mbfco0S7GJK0m2DJa81A_fxBfwMOrI56xiffLNjIDPN6xnBzCZ7dCDXXYFuMDRhpV9khnsxGWcl9Z-trrKx3qBVXP96L5tZ1z4dr9sW1-jFV2KqJkbwDg557s2U3Koanc8WwwrssmNL5bVm9vqf5UKoQ0bbueJmvfCGqteO5PV98ytVI5VrUHBolrP-PgdgXJKvTSkTsBs5K5iSl1XKEi-P1EbB2_4ndqUDrSku60-OxLOL6NCHr0DaJEM6NC6wA" />
+                    </div>
+                    <div class="bg-sand aspect-square overflow-hidden">
+                        <img alt="The Form" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-FBM9Ari8Apr_D4Fcv5W2r2OdIXfNdbcpRk2aAYiLY-8QcEKQkVy4B3mUpukzY0iACamCQU4IqGt25vncDRDKCFHtZRFN3n5rV2zG-jcWnWDdDPFgc7Bope9gETbBJXuDhil4jgM2fslfsQJ7-P8z14JptDCo1J7zUMeNg1kTtVCv3dKbR34I0F1fLlXLOUUxilRVk4xqLHimSDLuCWSQu6d_qYAF4HK3tKou94Bw72p9bI75_nA0cEv1Mn8WJxq_syRpSbIqnSE" />
+                    </div>
+                </div>
+                <div class="md:col-span-5 sticky top-32">
+                    <div class="space-y-12">
+                        <div>
+                            <div class="flex justify-between items-end mb-4">
+                                <span class="font-body text-[10px] uppercase tracking-[0.4em] text-clay">Reference No.
+                                    001</span>
+                                <span class="font-mono text-xs text-gold-accent" id="product-price">$840.00 USD</span>
+                            </div>
+                            <h2 class="font-headline text-4xl mb-6">The Essence Structure</h2>
+                            <div class="h-px bg-sand w-full"></div>
+                        </div>
+                        <div class="space-y-4 font-mono text-[10px] text-earth-warm uppercase tracking-widest">
+                            <div class="flex justify-between py-2 border-b border-sand">
+                                <span>Materials</span>
+                                <span class="text-earth-deep">Refined Earth Solids</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b border-sand">
+                                <span>Provenance</span>
+                                <span class="text-earth-deep">Hokkaido Artisans</span>
+                            </div>
+                        </div>
+                        <div class="space-y-8">
+                            <div>
+                                <label
+                                    class="font-body text-[9px] uppercase tracking-[0.3em] block mb-4 text-clay">Patina
+                                    Selection</label>
+                                <div class="flex gap-4" id="color-variants">
+                                    <button
+                                        class="w-8 h-8 rounded-full bg-earth-deep ring-1 ring-offset-4 ring-gold-accent"
+                                        data-price="840.00" data-variant="UMBER"></button>
+                                    <button
+                                        class="w-8 h-8 rounded-full bg-clay ring-1 ring-transparent hover:ring-clay/50 transition-all"
+                                        data-price="890.00" data-variant="SAND"></button>
+                                    <button
+                                        class="w-8 h-8 rounded-full bg-gold-accent ring-1 ring-transparent hover:ring-gold-accent/50 transition-all"
+                                        data-price="920.00" data-variant="AUREA"></button>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <label
+                                        class="font-body text-[9px] uppercase tracking-[0.3em] text-clay">Scale</label>
+                                    <button
+                                        class="font-body text-[9px] uppercase tracking-[0.2em] underline underline-offset-4 decoration-gold-accent">Reference
+                                        Guide</button>
+                                </div>
+                                <div class="grid grid-cols-4 gap-4" id="size-variants">
+                                    <button
+                                        class="border border-sand py-4 text-[10px] font-mono hover:bg-earth-deep hover:text-white transition-all"
+                                        data-size="S">I</button>
+                                    <button class="bg-earth-deep text-white py-4 text-[10px] font-mono"
+                                        data-size="M">II</button>
+                                    <button
+                                        class="border border-sand py-4 text-[10px] font-mono hover:bg-earth-deep hover:text-white transition-all"
+                                        data-size="L">III</button>
+                                    <button
+                                        class="border border-sand py-4 text-[10px] font-mono hover:bg-earth-deep hover:text-white transition-all"
+                                        data-size="XL">IV</button>
+                                </div>
+                            </div>
+                            <div class="pt-8">
+                                <div class="flex justify-between items-center mb-3">
+                                    <span class="font-body text-[9px] uppercase tracking-[0.3em] text-clay">Live
+                                        Allocation</span>
+                                    <span aria-live="polite" class="font-mono text-[10px] text-earth-deep"
+                                        id="stock-count">12 PIECES REMAINING</span>
+                                </div>
+                                <div class="w-full h-[1px] bg-sand mb-12 relative">
+                                    <div class="absolute left-0 top-0 h-full bg-gold-accent transition-all duration-1000"
+                                        id="pulse-meter" style="width: 80%;"></div>
+                                </div>
+                                <div id="cta-container">
+                                    <button
+                                        class="w-full bg-earth-deep text-white py-6 font-body text-[10px] uppercase tracking-[0.4em] hover:bg-earth-warm active:scale-[0.99] transition-all flex items-center justify-center gap-4"
+                                        id="add-to-cart">
+                                        <span id="btn-text">Acquire Object</span>
+                                        <span class="hidden animate-spin material-symbols-outlined text-sm"
+                                            id="loading-spinner">hourglass_empty</span>
+                                    </button>
+                                    <div class="hidden space-y-4" id="waitlist-ui">
+                                        <p class="font-headline italic text-sm text-center text-clay">Current allocation
+                                            has been fully realized.</p>
+                                        <div class="flex border-b border-earth-deep">
+                                            <input
+                                                class="flex-1 bg-transparent border-0 font-body text-xs focus:ring-0 px-0 py-4 placeholder:text-clay/50"
+                                                placeholder="JOIN THE PRIVATE WAITLIST" type="email" />
+                                            <button
+                                                class="text-earth-deep font-body text-[9px] uppercase tracking-widest px-4">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="mt-48 grid grid-cols-1 md:grid-cols-3 gap-24 border-t border-sand pt-24">
+            <div class="space-y-6">
+                <h3 class="font-headline text-2xl italic">The Philosophy</h3>
+                <p class="font-body text-sm leading-relaxed text-clay">We believe in objects that age with grace. Every
+                    curve is considered, every surface is treated with traditional techniques that respect the medium's
+                    inherent soul.</p>
+            </div>
+            <div class="space-y-6">
+                <h3 class="font-headline text-2xl italic">The Ritual</h3>
+                <p class="font-body text-sm leading-relaxed text-clay">Ownership is a ceremony. From the weight of the
+                    opening box to the first touch of the surface, each moment is orchestrated for the discerning
+                    connoisseur.</p>
+            </div>
+            <div class="space-y-6">
+                <h3 class="font-headline text-2xl italic">The Legacy</h3>
+                <p class="font-body text-sm leading-relaxed text-clay">Limited by nature, not by marketing. We produce
+                    only what our hands can master, ensuring each series remains a rare testament to human capability.
+                </p>
+            </div>
+        </section>
+        <footer class="mt-64 flex flex-col items-center">
+            <div
+                class="text-[80px] md:text-[180px] font-headline font-bold text-earth-deep mix-blend-multiply opacity-[0.03] select-none pointer-events-none leading-none tracking-tighter">
+                BEEJAY T.
+            </div>
+            <div
+                class="mt-24 w-full flex flex-col md:flex-row justify-between items-center py-12 border-t border-sand gap-8">
+                <p class="font-mono text-[9px] text-clay uppercase tracking-widest">© 2024 CURATED_SERIES_01 • ALL
+                    RIGHTS RESERVED</p>
+                <div class="flex gap-12">
+                    <a class="font-body text-[9px] uppercase tracking-[0.2em] text-clay hover:text-earth-deep"
+                        href="#">Privacy Portfolio</a>
+                    <a class="font-body text-[9px] uppercase tracking-[0.2em] text-clay hover:text-earth-deep"
+                        href="#">Terms of Acquisition</a>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <div class="md:hidden fixed bottom-0 left-0 w-full flex h-20 bg-surface z-[60] border-t border-sand">
+        <div class="flex flex-col items-center justify-center w-1/3 border-r border-sand">
+            <span class="font-mono text-[9px] text-gold-accent">RESERVE</span>
+        </div>
+        <button class="flex-1 bg-earth-deep text-white font-body text-[10px] uppercase tracking-[0.3em]"
+            id="mobile-add">
+            Acquire Now
+        </button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const state = {
+                color: 'UMBER',
+                size: 'M',
+                stock: 12,
+                price: 840,
+                loading: false
+            };
+            const stockCountEl = document.getElementById('stock-count');
+            const pulseMeterEl = document.getElementById('pulse-meter');
+            const priceEl = document.getElementById('product-price');
+            const addToCartBtn = document.getElementById('add-to-cart');
+            const btnText = document.getElementById('btn-text');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const waitlistUI = document.getElementById('waitlist-ui');
+            // Variant Management
+            document.querySelectorAll('#color-variants button').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const color = btn.dataset.variant;
+                    const price = btn.dataset.price;
+                    state.color = color;
+                    state.price = price;
+                    document.querySelectorAll('#color-variants button').forEach(b => b.classList.remove('ring-gold-accent', 'ring-offset-4'));
+                    btn.classList.add('ring-gold-accent', 'ring-offset-4');
+                    priceEl.innerText = `$${price}.00 USD`;
+                    updateURL();
+                });
+            });
+            document.querySelectorAll('#size-variants button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    state.size = btn.dataset.size;
+                    document.querySelectorAll('#size-variants button').forEach(b => {
+                        b.classList.remove('bg-earth-deep', 'text-white');
+                        b.classList.add('border', 'border-sand', 'text-earth-deep');
+                    });
+                    btn.classList.remove('border', 'border-sand');
+                    btn.classList.add('bg-earth-deep', 'text-white');
+                    updateURL();
+                });
+            });
+            function updateURL() {
+                const url = new URL(window.location);
+                url.searchParams.set('color', state.color);
+                url.searchParams.set('size', state.size);
+                window.history.pushState({}, '', url);
+            }
+            // Simulated WebSocket Stock Decrement
+            setInterval(() => {
+                if (state.stock > 0 && Math.random() > 0.8) {
+                    state.stock--;
+                    updateStockUI();
+                }
+            }, 5000);
+            function updateStockUI() {
+                stockCountEl.innerText = state.stock > 0 ? `${state.stock} PIECES REMAINING` : `ALL PIECES ACQUIRED`;
+                const percentage = (state.stock / 15) * 100;
+                pulseMeterEl.style.width = `${percentage}%`;
+                if (state.stock <= 3) {
+                    pulseMeterEl.classList.remove('bg-gold-accent');
+                    pulseMeterEl.classList.add('bg-red-800', 'animate-pulse');
+                    stockCountEl.classList.add('text-red-800');
+                } else if (state.stock <= 6) {
+                    pulseMeterEl.classList.remove('bg-gold-accent');
+                    pulseMeterEl.classList.add('bg-amber-700');
+                }
+                if (state.stock <= 0) {
+                    handleOutOfStock();
+                }
+            }
+            function handleOutOfStock() {
+                addToCartBtn.classList.add('hidden');
+                waitlistUI.classList.remove('hidden');
+            }
+            // Add to Cart Simulation
+            addToCartBtn.addEventListener('click', () => {
+                if (state.loading) return;
+                state.loading = true;
+                addToCartBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                btnText.innerText = 'Verifying Allocation';
+                loadingSpinner.classList.remove('hidden');
+                // Optimistic decrement
+                state.stock--;
+                updateStockUI();
+                setTimeout(() => {
+                    state.loading = false;
+                    addToCartBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    btnText.innerText = 'Added to Collection';
+                    loadingSpinner.classList.add('hidden');
+                    setTimeout(() => {
+                        btnText.innerText = 'Acquire Object';
+                    }, 2000);
+                }, 1000);
+            });
+        });
+    </script>
+
+    ```
+</body>
+
+</html>
