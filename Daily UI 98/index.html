@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>STUDIO NEON | THE IMPACT REVOLUTION</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-container": "#b4b5b5",
+                        "on-tertiary-container": "#556774",
+                        "error": "#ffb4ab",
+                        "secondary-fixed": "#e2e2e2",
+                        "inverse-on-surface": "#313031",
+                        "on-tertiary": "#21323e",
+                        "on-primary-fixed-variant": "#3c4d00",
+                        "on-secondary": "#2f3131",
+                        "primary-container": "#c3f400",
+                        "tertiary": "#ffffff",
+                        "surface-variant": "#353436",
+                        "tertiary-fixed": "#d2e5f5",
+                        "on-primary-fixed": "#161e00",
+                        "on-error": "#690005",
+                        "inverse-primary": "#506600",
+                        "surface-container": "#201f20",
+                        "surface-container-low": "#1c1b1c",
+                        "surface": "#131314",
+                        "primary": "#ffffff",
+                        "tertiary-fixed-dim": "#b6c9d8",
+                        "surface-tint": "#abd600",
+                        "surface-dim": "#131314",
+                        "outline": "#8e9379",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "outline-variant": "#444933",
+                        "surface-bright": "#3a393a",
+                        "surface-container-lowest": "#0e0e0f",
+                        "primary-fixed": "#c3f400",
+                        "background": "#131314",
+                        "on-primary-container": "#556d00",
+                        "on-tertiary-fixed-variant": "#374956",
+                        "on-background": "#e5e2e3",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#454747",
+                        "primary-fixed-dim": "#abd600",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "tertiary-container": "#d2e5f5",
+                        "surface-container-highest": "#353436",
+                        "on-surface": "#e5e2e3",
+                        "on-surface-variant": "#c4c9ac",
+                        "on-tertiary-fixed": "#0b1d29",
+                        "surface-container-high": "#2a2a2b",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#454747",
+                        "inverse-surface": "#e5e2e3",
+                        "on-primary": "#283500",
+                        "secondary": "#c6c6c7"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #131314;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #353436;
+            border-radius: 10px;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+    <!-- TopNavBar (Shared Component) -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-[#131314]/60 backdrop-blur-lg flex justify-between items-center px-6 md:px-12 py-6 w-full transition-all duration-300">
+        <div class="text-2xl font-black tracking-tighter text-white font-headline">STUDIO_NEON</div>
+        <div class="hidden md:flex gap-12 items-center">
+            <a class="font-['Space_Grotesk'] uppercase tracking-[0.1em] text-sm font-bold text-white/70 hover:text-[#CCFF00] transition-colors duration-300"
+                href="#">Work</a>
+            <a class="font-['Space_Grotesk'] uppercase tracking-[0.1em] text-sm font-bold text-white/70 hover:text-[#CCFF00] transition-colors duration-300"
+                href="#">Services</a>
+            <a class="font-['Space_Grotesk'] uppercase tracking-[0.1em] text-sm font-bold text-white/70 hover:text-[#CCFF00] transition-colors duration-300"
+                href="#">About</a>
+            <a class="font-['Space_Grotesk'] uppercase tracking-[0.1em] text-sm font-bold text-white/70 hover:text-[#CCFF00] transition-colors duration-300"
+                href="#">Contact</a>
+        </div>
+        <button
+            class="bg-[#CCFF00] text-[#161e00] font-headline font-bold uppercase tracking-[0.1em] text-xs px-6 py-3 rounded-DEFAULT scale-95 hover:scale-100 active:scale-90 transition-transform shadow-[0_0_20px_rgba(204,255,0,0.2)]">
+            Start a Project
+        </button>
+    </nav>
+    <main>
+        <!-- Section 1: Hero -->
+        <section
+            class="relative min-h-screen flex items-center justify-center pt-24 pb-12 px-6 md:px-12 overflow-hidden">
+            <div class="absolute inset-0 z-0 bg-[url('image-hero-bg')] bg-cover bg-center opacity-40 mix-blend-luminosity scale-110"
+                data-alt="cinematic wide shot of a dark futuristic cityscape at night with neon lime glowing architectural details and deep charcoal shadows">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background z-1"></div>
+            <div class="relative z-10 w-full text-center md:text-left">
+                <p class="font-headline text-primary-fixed uppercase tracking-[0.4em] text-sm md:text-base mb-6">Volume
+                    01: The Future of Vision</p>
+                <h1
+                    class="font-headline font-black text-6xl md:text-[10rem] leading-[0.85] tracking-tighter mb-12 text-white">
+                    THE IMPACT<br />REVOLUTION
+                </h1>
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <button
+                        class="bg-primary-fixed text-on-primary-fixed px-10 py-5 font-headline font-bold uppercase tracking-[0.15em] text-lg rounded-DEFAULT hover:shadow-[0_0_40px_rgba(195,244,0,0.4)] transition-all">
+                        Launch Project
+                    </button>
+                    <p class="max-w-md text-on-surface-variant font-light leading-relaxed">
+                        We don't just create ads. We engineer movements that shift cultural paradigms through cinematic
+                        precision and technical mastery.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- Section 2: Services -->
+        <section class="py-24 md:py-48 px-6 md:px-12 bg-surface-container-lowest">
+            <div class="mb-24 flex flex-col md:flex-row justify-between items-end gap-6">
+                <h2 class="font-headline text-5xl md:text-7xl font-bold tracking-tighter text-white">Our
+                    Core<br />Propulsion</h2>
+                <p class="font-label text-on-surface-variant uppercase tracking-[0.2em] mb-4">Core Competencies / 001
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-1px bg-outline-variant/20">
+                <div class="bg-surface-container-low p-12 hover:bg-surface-container-high transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-primary-fixed text-4xl mb-8 group-hover:scale-110 transition-transform"
+                        data-icon="hub">hub</span>
+                    <h3 class="font-headline text-3xl font-bold mb-6 text-white uppercase tracking-tight">Brand Strategy
+                    </h3>
+                    <p class="text-on-surface-variant leading-relaxed">Architecting visual identities that command
+                        attention across all digital and physical touchpoints.</p>
+                </div>
+                <div
+                    class="bg-surface-container-low p-12 hover:bg-surface-container-high transition-colors group border-y md:border-y-0 md:border-x border-outline-variant/20">
+                    <span
+                        class="material-symbols-outlined text-primary-fixed text-4xl mb-8 group-hover:scale-110 transition-transform"
+                        data-icon="monitoring">monitoring</span>
+                    <h3 class="font-headline text-3xl font-bold mb-6 text-white uppercase tracking-tight">Digital
+                        Marketing</h3>
+                    <p class="text-on-surface-variant leading-relaxed">Data-driven performance campaigns engineered for
+                        maximum ROI in the attention economy.</p>
+                </div>
+                <div class="bg-surface-container-low p-12 hover:bg-surface-container-high transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-primary-fixed text-4xl mb-8 group-hover:scale-110 transition-transform"
+                        data-icon="movie_edit">movie_edit</span>
+                    <h3 class="font-headline text-3xl font-bold mb-6 text-white uppercase tracking-tight">Campaign
+                        Creation</h3>
+                    <p class="text-on-surface-variant leading-relaxed">High-production cinematic content designed to
+                        disrupt feeds and dominate the visual landscape.</p>
+                </div>
+            </div>
+        </section>
+        <!-- Section 3: Portfolio Carousel -->
+        <section class="py-24 md:py-48 overflow-hidden bg-background">
+            <div class="px-6 md:px-12 mb-16 flex justify-between items-center">
+                <h2 class="font-headline text-5xl md:text-7xl font-bold tracking-tighter text-white">The Vault</h2>
+                <div class="flex gap-4">
+                    <button
+                        class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                        <span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+                    </button>
+                    <button
+                        class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center bg-primary-fixed text-black transition-all">
+                        <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+            <div class="flex gap-8 overflow-x-auto no-scrollbar px-6 md:px-12 snap-x snap-mandatory">
+                <div class="min-w-[85vw] md:min-w-[45vw] snap-center aspect-[16/9] relative group overflow-hidden">
+                    <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                        data-alt="high-fashion editorial advertisement featuring model in futuristic apparel with vibrant electric lime lighting and sharp geometric shadows"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDQs8VloUyxio01xTUUi2cqLluBt8kgNHr4Zyl825mW_3gUSElaN9_AVpdHNo30Iu9BIDu6L2jS7q75-U9ThQoYgZJBLAopAZzlLYsMJ-qYOhSa81FVEv5na-IODLvf-1JIzc9Fjcfs0j0DlBlGaGGr1YRNGCkJ9naQyvreh1Z_CPclBrm3sGmBaosk3IYLtKsTaBbHlC2nc7Jq9Ncqw8oAGdSHcZNBMX0CGlrQtBP-A7KRXDyI0V-8F_Sh_vyvEx57NiHIFnOLzdL" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+                    <div class="absolute bottom-10 left-10">
+                        <p class="font-label text-primary-fixed text-xs uppercase tracking-[0.2em] mb-2">Automotive /
+                            Global</p>
+                        <h4 class="font-headline text-3xl font-bold text-white uppercase">Project: Zenith</h4>
+                    </div>
+                </div>
+                <div class="min-w-[85vw] md:min-w-[45vw] snap-center aspect-[16/9] relative group overflow-hidden">
+                    <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                        data-alt="minimalist architectural visualization of a flagship store with sleek dark surfaces and subtle neon lime light strips under a night sky"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSyuX51ofHT2Y8391YrMc8rTHBk8k8OXRVvWX5jlZ1RcMtruLhLcbaZzJupPfDm0AneufeExiob_k-vuhrI09LJpceClfxurv9jUv5hRdQg76xYSJUGGRX3MwF-jiLTFtMUhX493arGyFzU6zRxKqLWWu7oB52NcucvMvjjr-WOTrsEn69jR1-TJuhV5VhfMNH18-7mKAHaQEn7QzHSmtzgxJRmjhUEU7V1u5P0nZCg6S_kEWdHXOcD-mdB1CqvwdCQmIm1nesRS0r" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+                    <div class="absolute bottom-10 left-10">
+                        <p class="font-label text-primary-fixed text-xs uppercase tracking-[0.2em] mb-2">Tech / Branding
+                        </p>
+                        <h4 class="font-headline text-3xl font-bold text-white uppercase">The Neural Grid</h4>
+                    </div>
+                </div>
+                <div class="min-w-[85vw] md:min-w-[45vw] snap-center aspect-[16/9] relative group overflow-hidden">
+                    <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                        data-alt="dramatic macro shot of liquid obsidian splashing with tiny flecks of glowing lime light particles in ultra-high resolution cinematic style"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTSSwTXEJgOCgAy0GcIQGAQm8aHFyCfHnMJPNLkLoemEwrwF_244UhyBDUcZ8L3VSlySoPycuHCV1NTuw90g40IwbxhVCO2TWduz_wQtU2xcUKe_6u4JvtSIPlTAujNIqFfA_p0erbERdOxmDzSk1Mv_2B2uHtBgcw3NAzrG0ynkZhCOTRjOPNEjq0EoDKzMSWfFZyjHbNdVa4P88Nf5W44roKksFFhCzJxAH5hcwYBzF5oHiKvFmVAD_ar1ETm_4KWU9KqsAw3fO9" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+                    <div class="absolute bottom-10 left-10">
+                        <p class="font-label text-primary-fixed text-xs uppercase tracking-[0.2em] mb-2">Cosmetics /
+                            Identity</p>
+                        <h4 class="font-headline text-3xl font-bold text-white uppercase">Void Essence</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section 4: Trust Marquee -->
+        <section class="py-12 border-y border-outline-variant/10 overflow-hidden bg-surface">
+            <div class="flex whitespace-nowrap animate-[marquee_20s_linear_infinite]">
+                <div class="flex items-center gap-24 px-12">
+                    <span
+                        class="font-headline text-3xl font-black text-on-surface-variant/30 uppercase tracking-tighter">NIKE</span>
+                    <span
+                        class="font-headline text-3xl font-black text-on-surface-variant/30 uppercase tracking-tighter">APPLE</span>
+                    <span
+                        class="font-headline text-3xl font-black text-on-surface-variant/30 uppercase tracking-tighter">TESLA</span>
+                    <span
+                        class="font-headline text-3xl font-black text-on-surface-variant/30 uppercase tracking-tighter">PORSCHE</span>
+                    <span
+                        class="font-headline text-3xl font-black text-on-surface-variant/30 uppercase tracking-tighter">SONY</span>
+                    <span
+                        class="font-headline text-3xl font-black text-on-surface-variant/30 uppercase tracking-tighter">BALENCIAGA</span>
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="flex items-center gap-24 px-12">
+                    <span
+                        class="font-headline text-3xl font-black text-on-surface-variant/30 uppercase tracking-tighter">NIKE</span>
+                    <span
+                        class="font-headline text-3xl font-black text-on-surface-variant/30 uppercase tracking-tighter">APPLE</span>
+                    <span
+                        class="font-headline text-3xl font-black text-on-surface-variant/30 uppercase tracking-tighter">TESLA</span>
+                    <span
+                        class="font-headline text-3xl font-black text-on-surface-variant/30 uppercase tracking-tighter">PORSCHE</span>
+                    <span
+                        class="font-headline text-3xl font-black text-on-surface-variant/30 uppercase tracking-tighter">SONY</span>
+                    <span
+                        class="font-headline text-3xl font-black text-on-surface-variant/30 uppercase tracking-tighter">BALENCIAGA</span>
+                </div>
+            </div>
+        </section>
+        <style>
+            @keyframes marquee {
+                0% {
+                    transform: translateX(0);
+                }
+
+                100% {
+                    transform: translateX(-50%);
+                }
+            }
+        </style>
+        <!-- Section 5: Metrics -->
+        <section class="py-24 md:py-48 px-6 md:px-12 bg-surface-container-low">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+                <div>
+                    <h5
+                        class="font-headline text-[8rem] md:text-[12rem] font-black text-white leading-none tracking-tighter">
+                        500M+</h5>
+                    <p class="font-label text-primary-fixed uppercase tracking-[0.3em] mt-4">Organic Impressions</p>
+                </div>
+                <div class="md:pt-24">
+                    <h5
+                        class="font-headline text-[8rem] md:text-[12rem] font-black text-white leading-none tracking-tighter">
+                        127%</h5>
+                    <p class="font-label text-primary-fixed uppercase tracking-[0.3em] mt-4">Avg. Visibility Lift</p>
+                </div>
+                <div class="md:pt-48">
+                    <h5
+                        class="font-headline text-[8rem] md:text-[12rem] font-black text-white leading-none tracking-tighter">
+                        24K</h5>
+                    <p class="font-label text-primary-fixed uppercase tracking-[0.3em] mt-4">Conversion Events</p>
+                </div>
+            </div>
+        </section>
+        <!-- Section 6: Process Timeline -->
+        <section class="py-24 md:py-48 px-6 md:px-12">
+            <div class="mb-24">
+                <h2 class="font-headline text-5xl md:text-7xl font-bold tracking-tighter text-white">The Neural Path
+                </h2>
+            </div>
+            <div class="relative">
+                <div class="absolute top-0 left-0 w-full h-[1px] bg-outline-variant/30"></div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div class="pt-12 relative group">
+                        <div
+                            class="absolute top-[-4px] left-0 w-2 h-2 rounded-full bg-primary-fixed group-hover:scale-[3] transition-transform">
+                        </div>
+                        <h6 class="font-headline text-sm text-primary-fixed uppercase tracking-[0.2em] mb-4">Phase 01
+                        </h6>
+                        <h4 class="font-headline text-2xl font-bold text-white mb-6 uppercase tracking-tight">
+                            Deconstruction</h4>
+                        <p class="text-on-surface-variant font-light">We strip your brand to its essential core to
+                            understand the raw narrative potential.</p>
+                    </div>
+                    <div class="pt-12 relative group">
+                        <div
+                            class="absolute top-[-4px] left-0 w-2 h-2 rounded-full bg-primary-fixed group-hover:scale-[3] transition-transform">
+                        </div>
+                        <h6 class="font-headline text-sm text-primary-fixed uppercase tracking-[0.2em] mb-4">Phase 02
+                        </h6>
+                        <h4 class="font-headline text-2xl font-bold text-white mb-6 uppercase tracking-tight">
+                            Augmentation</h4>
+                        <p class="text-on-surface-variant font-light">Injecting high-impact creative elements and
+                            technical precision into the visual DNA.</p>
+                    </div>
+                    <div class="pt-12 relative group">
+                        <div
+                            class="absolute top-[-4px] left-0 w-2 h-2 rounded-full bg-primary-fixed group-hover:scale-[3] transition-transform">
+                        </div>
+                        <h6 class="font-headline text-sm text-primary-fixed uppercase tracking-[0.2em] mb-4">Phase 03
+                        </h6>
+                        <h4 class="font-headline text-2xl font-bold text-white mb-6 uppercase tracking-tight">Detonation
+                        </h4>
+                        <p class="text-on-surface-variant font-light">Synchronized cross-platform deployment to saturate
+                            the target market's consciousness.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section 7: Testimonial -->
+        <section class="py-48 md:py-72 px-6 md:px-12 bg-surface-container-lowest relative overflow-hidden">
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(195,244,0,0.05)_0%,transparent_70%)]">
+            </div>
+            <div class="max-w-6xl mx-auto text-center relative z-10">
+                <span class="material-symbols-outlined text-primary-fixed text-6xl mb-12"
+                    data-icon="format_quote">format_quote</span>
+                <blockquote
+                    class="font-headline text-4xl md:text-8xl font-black text-white leading-tight tracking-tighter mb-12 italic">
+                    "STUDIO NEON TRANSFORMED OUR BRAND VISIBILITY FROM NOISE TO SIGNAL."
+                </blockquote>
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-[1px] bg-primary-fixed mb-6"></div>
+                    <p class="font-label text-white uppercase tracking-[0.3em] font-bold">MARCUS VANE</p>
+                    <p class="font-label text-on-surface-variant text-sm uppercase tracking-[0.1em] mt-2">CMO / AETHER
+                        GLOBAL</p>
+                </div>
+            </div>
+        </section>
+        <!-- Section 8: Final CTA -->
+        <section
+            class="min-h-[819px] flex flex-col items-center justify-center px-6 md:px-12 bg-background relative border-t border-outline-variant/10">
+            <div class="text-center">
+                <p class="font-label text-on-surface-variant uppercase tracking-[0.4em] mb-12">The Next Revolution
+                    Starts Here</p>
+                <h2
+                    class="font-headline text-[10vw] md:text-[8vw] font-black text-white leading-none tracking-tighter mb-20 hover:text-primary-fixed transition-colors cursor-default">
+                    LET'S BUILD IT
+                </h2>
+                <button class="group relative px-16 py-8 overflow-hidden bg-transparent border border-primary-fixed">
+                    <div
+                        class="absolute inset-0 bg-primary-fixed translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    </div>
+                    <span
+                        class="relative z-10 font-headline font-bold text-primary-fixed group-hover:text-black uppercase tracking-[0.2em] text-xl transition-colors duration-300">Initiate
+                        Contact</span>
+                </button>
+            </div>
+        </section>
+    </main>
+    <!-- Footer (Shared Component) -->
+    <footer
+        class="bg-[#0E0E0F] px-6 md:px-12 py-20 w-full min-h-[409px] flex flex-col justify-end relative overflow-hidden">
+        <div
+            class="text-[8rem] md:text-[18rem] font-black text-white/5 leading-none select-none absolute top-[-5rem] left-0 w-full text-center pointer-events-none font-headline">
+            STUDIO NEON
+        </div>
+        <div class="relative z-10 flex flex-col md:flex-row justify-between items-end gap-12">
+            <div class="flex flex-col gap-6">
+                <p class="font-['Space_Grotesk'] tracking-[0.05em] text-white/40 max-w-xs">
+                    Engineering cinematic brand experiences for a world that never stops watching.
+                </p>
+                <p class="font-['Space_Grotesk'] tracking-[0.05em] text-white/40 text-sm">
+                    © 2024 STUDIO NEON. ALL RIGHTS RESERVED.
+                </p>
+            </div>
+            <div class="flex flex-wrap gap-8 md:gap-12">
+                <a class="font-['Space_Grotesk'] tracking-[0.05em] text-white/40 hover:text-[#CCFF00] transition-all uppercase text-sm font-bold"
+                    href="#">Instagram</a>
+                <a class="font-['Space_Grotesk'] tracking-[0.05em] text-white/40 hover:text-[#CCFF00] transition-all uppercase text-sm font-bold"
+                    href="#">LinkedIn</a>
+                <a class="font-['Space_Grotesk'] tracking-[0.05em] text-white/40 hover:text-[#CCFF00] transition-all uppercase text-sm font-bold"
+                    href="#">Vimeo</a>
+                <a class="font-['Space_Grotesk'] tracking-[0.05em] text-white/40 hover:text-[#CCFF00] transition-all uppercase text-sm font-bold"
+                    href="#">Behance</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
