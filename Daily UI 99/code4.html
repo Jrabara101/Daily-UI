@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CodeNexus | The Architecture of Syntax</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700;800&amp;family=Inter:wght@300;400;600&amp;family=Space_Grotesk:wght@300;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed": "#00083f",
+                        "on-secondary-fixed-variant": "#4b5e67",
+                        "tertiary-fixed": "#f4a237",
+                        "surface-container-low": "#0f141a",
+                        "surface-bright": "#262c36",
+                        "error-container": "#a70138",
+                        "on-tertiary": "#593400",
+                        "surface-tint": "#9aa8ff",
+                        "outline": "#72757d",
+                        "on-tertiary-fixed-variant": "#573300",
+                        "error-dim": "#d73357",
+                        "secondary-dim": "#c3d8e2",
+                        "background": "#0a0e14",
+                        "on-tertiary-fixed": "#2a1600",
+                        "inverse-surface": "#f8f9ff",
+                        "outline-variant": "#44484f",
+                        "surface": "#0a0e14",
+                        "tertiary-dim": "#e4942a",
+                        "primary": "#9aa8ff",
+                        "error": "#ff6e84",
+                        "surface-container-lowest": "#000000",
+                        "on-primary-fixed-variant": "#1b2c7f",
+                        "inverse-primary": "#4958ac",
+                        "on-surface-variant": "#a8abb3",
+                        "surface-container-highest": "#20262f",
+                        "secondary-fixed-dim": "#c3d8e2",
+                        "tertiary-fixed-dim": "#e4942a",
+                        "tertiary": "#ffb151",
+                        "surface-container": "#151a21",
+                        "on-surface": "#f1f3fc",
+                        "on-background": "#f1f3fc",
+                        "secondary-container": "#374952",
+                        "inverse-on-surface": "#51555c",
+                        "on-secondary-fixed": "#2f424a",
+                        "on-secondary-container": "#bfd3de",
+                        "on-primary-container": "#00156d",
+                        "on-error": "#490013",
+                        "primary-fixed-dim": "#8998f0",
+                        "on-primary": "#122479",
+                        "secondary": "#d1e6f0",
+                        "primary-dim": "#8998f0",
+                        "surface-variant": "#20262f",
+                        "surface-dim": "#0a0e14",
+                        "secondary-fixed": "#d1e6f0",
+                        "on-tertiary-container": "#4b2b00",
+                        "surface-container-high": "#1b2028",
+                        "on-error-container": "#ffb2b9",
+                        "primary-container": "#8c9bf3",
+                        "on-secondary": "#41545d",
+                        "tertiary-container": "#f4a237",
+                        "primary-fixed": "#96a5ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(32, 38, 47, 0.4);
+            backdrop-filter: blur(12px);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #9aa8ff 0%, #8c9bf3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0a0e14]/60 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.4)] flex justify-between items-center h-20 px-8 w-full font-['Manrope'] antialiased tracking-tight">
+<div class="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#9aa8ff] to-[#8c9bf3]">
+            CodeNexus
+        </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#9aa8ff] border-b-2 border-[#9aa8ff] pb-1 font-bold" href="#">Categories</a>
+<a class="text-slate-400 font-medium hover:text-slate-200 transition-colors" href="#">Comparison</a>
+<a class="text-slate-400 font-medium hover:text-slate-200 transition-colors" href="#">Learning Resources</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="p-2 text-[#9aa8ff] hover:bg-[#262c36]/50 transition-all duration-300 rounded-full active:scale-95 transform">
+<span class="material-symbols-outlined" data-icon="contrast">contrast</span>
+</button>
+<div class="h-10 w-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="User Profile Avatar" data-alt="professional portrait of a developer with soft studio lighting and a neutral dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkGlZtdNrHdYs8uWdWkWsIv2rSKmjhUYPUaeIMes-6wmjRBnu09J6QyLPO3KmOQS_9O_5Q49MXwScezn8kEGFIzgpW3yB_u0de8PZJsIbnAeYLz6OyujEqvTaQ7D6LWb_fadscb0IUWJ_abKinV9itaNoJ_zCr3mEgO_vr8Oi_RtqKlHEvCcD4ql9BEIopC9KvfxnBgM8cVE0x2eYlRd0gK23O2Ectbm66DE70VrrbopEW_F9_YDnw3g-OFN7pjsrR6vMlWVtG7rT8"/>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-8 max-w-7xl mx-auto">
+<!-- Header -->
+<header class="mb-20 text-center md:text-left">
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter mb-4 text-on-surface">
+                The Architecture of <span class="text-gradient">Syntax</span>
+</h1>
+<p class="font-body text-xl text-on-surface-variant max-w-2xl leading-relaxed">
+                Browse the spectrum of languages from binary to high-level abstraction. Discover the logical foundations that power the digital universe.
+            </p>
+</header>
+<!-- Categories Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- 1. Machine Languages -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/15 transition-all duration-500 hover:shadow-[0_0_40px_rgba(154,168,255,0.15)]">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40 group-hover:scale-110 transition-transform duration-700" data-alt="extreme close up of a glowing blue silicon wafer and intricate circuitry patterns with neon accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi8IqzkehPoF0i-pZppB_wEKeKQBUUmmT0p-ggGJYZG8zKMFeeXLHofK_t7FaZGKUUQU7kSjYNze3LDXjW4-A_uDwxg1gP9e_hBkt31SZfMirw0I9K5AFPihTHobpodSngQdBprIYg557UkZmDWYgESgJvLWDn699ZlM5I36NdCbfppnHryTHER5zcVCiKeGVo_9tOyyOA-sxVrbYCLrTjcJvREzWDFATOgeSnhykVsdAZlqCF9J44DR8viBB9aHJJucspGKF9PV7_"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-surface-container/60 to-transparent"></div>
+</div>
+<div class="relative z-10 p-8 h-full flex flex-col justify-end min-h-[400px]">
+<span class="font-label text-xs uppercase tracking-widest text-primary mb-2">Level 0</span>
+<h3 class="font-headline text-3xl font-bold mb-3">Machine Languages</h3>
+<p class="text-on-surface-variant max-w-md">Direct binary execution. The raw heartbeat of the CPU where logic meets physical electricity.</p>
+</div>
+</div>
+<!-- 2. Low-level Programming -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/15 hover:shadow-[0_0_40px_rgba(244,162,55,0.1)]">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30 group-hover:scale-110 transition-transform duration-700" data-alt="retro computing hardware with a vintage processor and gold-plated pins on a dark circuit board" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiQqpQRWvpRG7uJwgzqU99HSHsnOBZgFc0GUKhyAPkMirdsbzlzgneP3MPMYI1AFc0cr25DrQiYQBjTH4xCq5puNd3qS2XIcKPmuHv-_Fv-ONi9BKBmQUctm2uBi8-e818mt2-cU5dLiPLW7jDmGK6jFGkggoBz7kJAiM_B5Z0nZG2cMVIvqf3njmjMU8sQnJ39lHGSSX_n4cLjJRJq0hXMWjJOw_4aD69WDBROgmJgRbtLYfBsuaiuc4gTgDqZWiRsz9PwREZKp-5"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+</div>
+<div class="relative z-10 p-8 h-full flex flex-col justify-end min-h-[400px]">
+<span class="font-label text-xs uppercase tracking-widest text-tertiary mb-2">Memory Bound</span>
+<h3 class="font-headline text-2xl font-bold mb-2">Low-level</h3>
+<p class="text-sm text-on-surface-variant">Assembly, C. Precise control over hardware resources and manual memory management.</p>
+</div>
+</div>
+<!-- 3. High-level Languages -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/15 hover:shadow-[0_0_40px_rgba(154,168,255,0.1)]">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30 group-hover:scale-110 transition-transform duration-700" data-alt="sleek modern software interface with vibrant purple and blue gradients and minimalist UI elements" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYYoquvAitr5Kj40EddirUz6rLQVgjr-NuEMytCucB1OYhiwqXtLob0cFuQ9MWhgun3RPKIPC9BX7kxgLTFYBmJf4NkEn4LrEdCGBi8qYBaQhhaJuuBslGkGnlTNj6LtO8Oq_1xfHUCc3wUiu2b6hIUxqWRIatos2B7XBUuiv3D0CpsBltad-ZENdI5y257tQuSW1x_MZUGN2FO8kIK7_n1t5rZlb2lxGw3JTkVs_sQ5Z4_LZLWvLdBUDu0yzBVL6ADjaf0F51U8jB"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+</div>
+<div class="relative z-10 p-8 h-full flex flex-col justify-end min-h-[400px]">
+<span class="font-label text-xs uppercase tracking-widest text-primary mb-2">Abstraction</span>
+<h3 class="font-headline text-2xl font-bold mb-2">High-level</h3>
+<p class="text-sm text-on-surface-variant">Python, Java. Human-centric syntax designed for rapid development and cross-platform portability.</p>
+</div>
+</div>
+<!-- 4. Functional Languages -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/15">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30 group-hover:scale-110 transition-transform duration-700" data-alt="abstract mathematical visualization with complex fractal geometry and glowing interconnected lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_h78TdGtrXTlG3wQa0SBFypC591WQ1qrdvZAYF6laGIICZN2WGtIKbgJYvGb5DT7zCQJmBvP7siMyQHECldGAal5ix7RHvDPpeqSPz5A6GyZJXStqpOm8GqH8mHACUA2Z7e1U1Nz6j9j3sZGkn9DlGFDAGiooMdfP3z7lvgd_WoLLHVvT9n7sTlfDT5yc9GYK09vWLppbMuVnLIGdp-IP84kM3BfTEMRtSN28PZsCjOlb90-aRdr03RpoqIhvJyI-MO-ZEpqkMmWA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+</div>
+<div class="relative z-10 p-8 h-full flex flex-col justify-end min-h-[400px]">
+<span class="font-label text-xs uppercase tracking-widest text-secondary-fixed mb-2">Pure Logic</span>
+<h3 class="font-headline text-2xl font-bold mb-2">Functional</h3>
+<p class="text-sm text-on-surface-variant">Haskell, Elixir. Declarative paradigms emphasizing immutability and mathematical functions.</p>
+</div>
+</div>
+<!-- 5. Scripting Languages -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/15">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30 group-hover:scale-110 transition-transform duration-700" data-alt="dynamic long exposure light trails in vibrant cyan and magenta representing rapid data flow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2zYQoUCAmrs0kfatXGWQ_Nm66hYHyZUMCUfOPb0zOy4jJSJYfcHxhq8EfcdMMPZCdR3kGBqsm6bXIQNCcRptEODUEcRdmWGN6_iMwgEhxvvl0Kyk80bHPWbyi0IFh2l4FRaQjn6xCNl6beiJz0Zbncz8ZKcQJOvZNsydeF93NQueZp642Pvry6sfPg6wLKfdiG_dU5CKn_LlzZdOTf5x3GZPiA9NNM37EqIr8cOR8e4OdKpx8ZcGHtKcu_SSdwoCzcXLd42gkZTsI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+</div>
+<div class="relative z-10 p-8 h-full flex flex-col justify-end min-h-[400px]">
+<span class="font-label text-xs uppercase tracking-widest text-error mb-2">Automation</span>
+<h3 class="font-headline text-2xl font-bold mb-2">Scripting</h3>
+<p class="text-sm text-on-surface-variant">Bash, Ruby. Interpreted languages for rapid automation and system orchestration.</p>
+</div>
+</div>
+<!-- 6. Web Languages -->
+<div class="md:col-span-6 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/15">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30 group-hover:scale-110 transition-transform duration-700" data-alt="stylized browser window frames floating in a digital 3D space with soft depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6baPOr8HlYNf4GuPqd1QVkxa2T2YJGjaeskOrd6YDFs3rzjgFSBe2MmvkPMuavkfM2iib7b3bLbTXuP_iUA1w_gU7TyUZbgTE_WDIC_Rj76N-o2GTsm4oHLFTcQtOESQ8NjjovmJseKPMYNKcaxuHky7I16ne-AJd_dgb4nh0VC7mOBZL9xx4ZqT4SGPch2OE3VZvc3IIzkUcNBR2weq_unPc9CUndHrjEn3PlcMA0UcBVjc63UbgcLV7dHv9o4FkJK3R5btBf3IK"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+</div>
+<div class="relative z-10 p-8 h-full flex flex-col justify-end min-h-[400px]">
+<span class="font-label text-xs uppercase tracking-widest text-primary mb-2">Universal UI</span>
+<h3 class="font-headline text-3xl font-bold mb-2">Web Languages</h3>
+<p class="text-on-surface-variant">JavaScript, TypeScript. The standard for building interactive experiences across the global web.</p>
+</div>
+</div>
+<!-- 7. Systems Languages -->
+<div class="md:col-span-6 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/15">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30 group-hover:scale-110 transition-transform duration-700" data-alt="industrial heavy machinery parts and mechanical gears with a dark metallic finish and sharp highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVer-oBuUnSy48SZQRi5xXFMAwjapX-Lc_9urbu8JUGQHAnDBIPVPm6jXxUZzR857QChtjebJsP0XXAAdrBK5L7N8eYANiY3sFHDDS95baiHfjFoVCoyNjSnwy2jYy3SUImKy7L-09cFexRRjYrbf8tFwHscojAgFYHDbbXjF58vw_5NM0seMH7wXokQbO727YOiMIVKunjZ5XdaJLycZz7FXjl5teqWbIXHTRXQrquaBqdrLD7lp7kaTZohcipToRMZDq0s2T-X11"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+</div>
+<div class="relative z-10 p-8 h-full flex flex-col justify-end min-h-[400px]">
+<span class="font-label text-xs uppercase tracking-widest text-tertiary mb-2">Infrastructure</span>
+<h3 class="font-headline text-3xl font-bold mb-2">Systems Languages</h3>
+<p class="text-on-surface-variant">Rust, Go. High-performance, memory-safe languages for building OS kernels and backends.</p>
+</div>
+</div>
+<!-- 8. Data Science Languages -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/15">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30 group-hover:scale-110 transition-transform duration-700" data-alt="dynamic data visualization charts and pulse graphs on a dark screen with glowing nodes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv_eaW2EhAUpnF35qZmRexD9Qu1i1OihMYHRSb5TlKISdMvVPsC1KUO62Rf0QNOX7wZ9Pkn9Vll_QG4fOEk6t0ZgmGaxEZyIzhgqDE6bzI9pN1Qv2H_asET4BB2Y6Xnv2UfKiqJeCCmY4LWHWMZjmm4Zy9Dm_FuBN_O_PimqY2E5BXtTwFXx_fnll5W_exZ2mOQLH4PJ4SjBGeZX9GSqxhebb5ehdBYwnY4Ygpbq4rk_-upNN4Y7Hjz6UajgBQ8NtF1trK8I6JMk5z"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+</div>
+<div class="relative z-10 p-8 h-full flex flex-col justify-end min-h-[400px]">
+<span class="font-label text-xs uppercase tracking-widest text-secondary-dim mb-2">Analysis</span>
+<h3 class="font-headline text-2xl font-bold mb-2">Data Science</h3>
+<p class="text-sm text-on-surface-variant">R, Julia. Specialized tools for statistical modeling and heavy numerical computation.</p>
+</div>
+</div>
+<!-- 9. Procedural Languages -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/15">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30 group-hover:scale-110 transition-transform duration-700" data-alt="sequential patterns of light moving through glass blocks in a dark minimalist setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIPmsgUFeDng3C69prrEIhH-it8u4gccIbbj_NNtEzXJlXWA7qle7vFeiOE0e5VpgXfh0LDM3ICE8IxyTGsVp8STc_n2fu4aXqbSZ9iCThUbg4ywq1q6GsWRRdsytNOx5UObf33eAq7M86ivvBDi9w1cbW4etO6_g_zny7bSU6mao3lGcm7wVJGBgf9NHpAJpUnNPrnyFSO9KQY5R7IuSNINeqsACo_PIoy4uFNiB9Pt0gdUAgbEcB-ln8zE3jw7R4N99UgEv2qoao"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+</div>
+<div class="relative z-10 p-8 h-full flex flex-col justify-end min-h-[400px]">
+<span class="font-label text-xs uppercase tracking-widest text-outline mb-2">Stepwise</span>
+<h3 class="font-headline text-2xl font-bold mb-2">Procedural</h3>
+<p class="text-sm text-on-surface-variant">Fortran, Pascal. Foundation of modern programming based on linear execution flows.</p>
+</div>
+</div>
+<!-- 10. Markup & Query -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/15">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30 group-hover:scale-110 transition-transform duration-700" data-alt="stacks of glowing digital documents and database symbols arranged in an orderly isometric grid" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1lO8URBSdZOoIKSie2_O9PEbK4yvYPBY3Oy2OFJLPBrmD7IH7fSiy8HaI4SaJiqRTLBG8-2rY1HNQaohmwlsdB0x_E_E12VHo9_oeZzPTFdPZ0Rt7hMCxqamaNlp7wl4bMVzO6_T3Ynhw2piupq9XS7FPeqvWKnSeEP0gnrDdQN-zshzwy3jDVt-U2MOWUUy_qg88o9ju8Eu-6_hTr7FldNbyb0gYbD1C3ay2uDQuNrgsMeSs5u62JaSTEw6Wf6Vu6VsD_Wa70rEr"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+</div>
+<div class="relative z-10 p-8 h-full flex flex-col justify-end min-h-[400px]">
+<span class="font-label text-xs uppercase tracking-widest text-primary-container mb-2">Structure</span>
+<h3 class="font-headline text-2xl font-bold mb-2">Markup &amp; Query</h3>
+<p class="text-sm text-on-surface-variant">SQL, HTML. Defining data structures and describing document semantics.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0a0e14] border-t border-[#44484f]/15 py-16 px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto font-['Inter'] text-sm leading-relaxed">
+<div class="md:col-span-1">
+<span class="text-xl font-black text-[#9aa8ff] mb-4 block">CodeNexus</span>
+<p class="text-slate-500 mb-6">The Enlightened Terminal for modern engineering and architectural syntax.</p>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-bold text-on-surface mb-2">Platform</h4>
+<a class="text-slate-500 hover:text-[#9aa8ff] transition-colors hover:translate-x-1 transition-transform" href="#">Sitemap</a>
+<a class="text-slate-500 hover:text-[#9aa8ff] transition-colors hover:translate-x-1 transition-transform" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-[#9aa8ff] transition-colors hover:translate-x-1 transition-transform" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-bold text-on-surface mb-2">Community</h4>
+<a class="text-slate-500 hover:text-[#9aa8ff] transition-colors hover:translate-x-1 transition-transform" href="#">Twitter</a>
+<a class="text-slate-500 hover:text-[#9aa8ff] transition-colors hover:translate-x-1 transition-transform" href="#">LinkedIn</a>
+<a class="text-slate-500 hover:text-[#9aa8ff] transition-colors hover:translate-x-1 transition-transform" href="#">Github</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-on-surface">Terminal Updates</h4>
+<div class="relative">
+<input class="w-full bg-surface-container border-none rounded-md px-4 py-2 text-sm focus:ring-1 focus:ring-primary transition-all" placeholder="Email address" type="email"/>
+</div>
+<button class="bg-gradient-to-br from-[#9aa8ff] to-[#8c9bf3] text-on-primary font-bold py-2 rounded-md active:scale-95 transition-transform">Subscribe</button>
+</div>
+</div>
+<div class="mt-16 pt-8 border-t border-[#44484f]/10 text-center text-slate-500">
+            © 2024 CodeNexus. The Enlightened Terminal.
+        </div>
+</footer>
+</body></html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;family=Space_Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed": "#00083f",
+              "on-secondary-fixed-variant": "#4b5e67",
+              "tertiary-fixed": "#f4a237",
+              "surface-container-low": "#0f141a",
+              "surface-bright": "#262c36",
+              "error-container": "#a70138",
+              "on-tertiary": "#593400",
+              "surface-tint": "#9aa8ff",
+              "outline": "#72757d",
+              "on-tertiary-fixed-variant": "#573300",
+              "error-dim": "#d73357",
+              "secondary-dim": "#c3d8e2",
+              "background": "#0a0e14",
+              "on-tertiary-fixed": "#2a1600",
+              "inverse-surface": "#f8f9ff",
+              "outline-variant": "#44484f",
+              "surface": "#0a0e14",
+              "tertiary-dim": "#e4942a",
+              "primary": "#9aa8ff",
+              "error": "#ff6e84",
+              "surface-container-lowest": "#000000",
+              "on-primary-fixed-variant": "#1b2c7f",
+              "inverse-primary": "#4958ac",
+              "on-surface-variant": "#a8abb3",
+              "surface-container-highest": "#20262f",
+              "secondary-fixed-dim": "#c3d8e2",
+              "tertiary-fixed-dim": "#e4942a",
+              "tertiary": "#ffb151",
+              "surface-container": "#151a21",
+              "on-surface": "#f1f3fc",
+              "on-background": "#f1f3fc",
+              "secondary-container": "#374952",
+              "inverse-on-surface": "#51555c",
+              "on-secondary-fixed": "#2f424a",
+              "on-secondary-container": "#bfd3de",
+              "on-primary-container": "#00156d",
+              "on-error": "#490013",
+              "primary-fixed-dim": "#8998f0",
+              "on-primary": "#122479",
+              "secondary": "#d1e6f0",
+              "primary-dim": "#8998f0",
+              "surface-variant": "#20262f",
+              "surface-dim": "#0a0e14",
+              "secondary-fixed": "#d1e6f0",
+              "on-tertiary-container": "#4b2b00",
+              "surface-container-high": "#1b2028",
+              "on-error-container": "#ffb2b9",
+              "primary-container": "#8c9bf3",
+              "on-secondary": "#41545d",
+              "tertiary-container": "#f4a237",
+              "primary-fixed": "#96a5ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            background: rgba(10, 14, 20, 0.6);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30">
+<!-- TopNavBar Component -->
+<nav class="fixed top-0 w-full z-50 bg-[#0a0e14]/60 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.4)] transition-all duration-300">
+<div class="flex justify-between items-center h-20 px-8 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#9aa8ff] to-[#8c9bf3] font-headline">CodeNexus</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-[#9aa8ff] border-b-2 border-[#9aa8ff] pb-1 font-bold font-headline transition-colors" href="#">Categories</a>
+<a class="text-slate-400 font-medium hover:text-slate-200 transition-colors font-headline" href="#">Comparison</a>
+<a class="text-slate-400 font-medium hover:text-slate-200 transition-colors font-headline" href="#">Learning Resources</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:text-[#9aa8ff] transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="contrast">contrast</span>
+</button>
+<div class="w-10 h-10 rounded-full border border-outline-variant/30 overflow-hidden">
+<img alt="User Profile Avatar" data-alt="professional portrait headshot of a software engineer with soft studio lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRsfQ5vQ6EzMdxewtP1Z8aNEx6gab1NjHi2pRhf5bC2JRnAMPauUv4QfJeLccmE7fYKLHEsq-DbJtMgO32JAjh9XQsf5DSvy8z6vVMeEmb7-d0QyB5D5W5hVeien-68XwAvzyGIFYESj_0i_iw-wxR4Gd5D9yLK80d5ktVQT52Ll1SRZut3uQXhBF8z9cTz5_kAwsPZRMa6SaRcM9i_rd-MlgE6E4IDJeFe-3ElLmnTSGSl5rYLLU9fy9CVOp1DS00_Muw8-W2RlmT"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative min-h-[716px] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Python Branding" class="w-full h-full object-cover opacity-30" data-alt="Futuristic neon green and blue snake silhouette made of glowing circuit lines on a deep black background, cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbH3VJWYqHRyu1-p3ShkP5l0DTIr7z802OtzmbfO2H_aN7CmUBzlBzvRb87DF4wO3a3QVydvozo6lrkQFJJaSFfqCXcH9OMQQSkiJePBa_nPG2LPWWp_95_7T5YGqhbi51re_rPER4BGRw43YrHtL6Wy3JweINeBaF5vqS78TzIv-ILGz-_lRYIKYvkk7Cob4QCFjhoDOXRn_nOdG_bSN0PAPGUehzClqyjjfSHJzvvrMyUg6joZUah-FCAHPYAEmImFAFV4sVfnhX"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+<div class="container mx-auto px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="space-y-6">
+<div class="inline-flex items-center px-4 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/15">
+<span class="font-label text-xs uppercase tracking-widest text-primary">High-Level / Scripting</span>
+</div>
+<h1 class="text-7xl md:text-8xl font-black font-headline tracking-tighter text-on-background">
+                        Python<span class="text-primary">.</span>
+</h1>
+<p class="text-xl text-on-surface-variant max-w-xl leading-relaxed">
+                        An interpreted, high-level, general-purpose programming language. Its design philosophy emphasizes code readability with its use of significant indentation.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="px-8 py-4 bg-gradient-to-br from-[#9aa8ff] to-[#8c9bf3] text-on-primary-container font-bold rounded-xl transition-all hover:opacity-90 active:scale-95">
+                            Get Started
+                        </button>
+<button class="px-8 py-4 bg-surface-container border border-outline-variant/30 text-on-surface font-bold rounded-xl transition-all hover:bg-surface-bright active:scale-95">
+                            Documentation
+                        </button>
+</div>
+</div>
+<!-- Stats Bento -->
+<div class="grid grid-cols-2 gap-4">
+<div class="p-6 rounded-xl bg-surface-container border border-outline-variant/10 flex flex-col justify-between h-40">
+<span class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Speed</span>
+<div class="space-y-2">
+<span class="text-3xl font-headline font-bold text-on-surface">Moderate</span>
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="w-2/4 h-full bg-primary"></div>
+</div>
+</div>
+</div>
+<div class="p-6 rounded-xl bg-surface-container border border-outline-variant/10 flex flex-col justify-between h-40">
+<span class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Complexity</span>
+<div class="space-y-2">
+<span class="text-3xl font-headline font-bold text-on-surface">Low</span>
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="w-1/4 h-full bg-tertiary"></div>
+</div>
+</div>
+</div>
+<div class="col-span-2 p-6 rounded-xl bg-surface-container border border-outline-variant/10 flex items-center justify-between">
+<div>
+<span class="text-on-surface-variant font-label text-xs uppercase tracking-widest block mb-1">Popularity</span>
+<span class="text-4xl font-headline font-black text-primary">#1 Ranked</span>
+</div>
+<span class="material-symbols-outlined text-5xl text-primary/40" data-icon="trending_up">trending_up</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Content Grid Section -->
+<section class="py-24 px-8 container mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+<!-- Main Content -->
+<div class="lg:col-span-7 space-y-16">
+<div class="space-y-6">
+<h2 class="text-4xl font-headline font-bold text-on-surface">Core Philosophy</h2>
+<div class="prose prose-invert max-w-none text-on-surface-variant leading-loose text-lg">
+<p>
+                                Python's design and philosophy have been highly influential in the programming world. Defined in "The Zen of Python," its principles prioritize clarity and simplicity: "Beautiful is better than ugly," "Explicit is better than implicit," and "Simple is better than complex."
+                            </p>
+</div>
+</div>
+<!-- Code Snippet -->
+<div class="space-y-4">
+<div class="flex items-center justify-between px-4 py-2 bg-surface-container-high rounded-t-xl border-b border-outline-variant/10">
+<span class="font-label text-xs text-on-surface-variant tracking-wider">hello_world.py</span>
+<div class="flex gap-2">
+<div class="w-3 h-3 rounded-full bg-error/40"></div>
+<div class="w-3 h-3 rounded-full bg-tertiary/40"></div>
+<div class="w-3 h-3 rounded-full bg-primary/40"></div>
+</div>
+</div>
+<div class="p-8 bg-surface-container-lowest rounded-b-xl border border-outline-variant/15 font-mono text-sm leading-relaxed overflow-x-auto">
+<pre class="text-slate-300"><span class="text-primary">def</span> <span class="text-tertiary">greet_nexus</span>(user):
+    <span class="text-on-surface-variant italic"># A classic welcome to the terminal</span>
+    message = <span class="text-primary-fixed-dim">f"Hello, {user}! Welcome to CodeNexus."</span>
+    <span class="text-primary">print</span>(message)
+
+<span class="text-tertiary">greet_nexus</span>(<span class="text-primary-fixed-dim">"Developer"</span>)</pre>
+</div>
+</div>
+<!-- Key Features -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="dynamic_form">dynamic_form</span>
+</div>
+<h3 class="text-xl font-headline font-bold">Dynamic Typing</h3>
+<p class="text-on-surface-variant">No need to declare variables explicitly. Python handles memory and types dynamically for faster iteration.</p>
+</div>
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" data-icon="library_books">library_books</span>
+</div>
+<h3 class="text-xl font-headline font-bold">Vast Ecosystem</h3>
+<p class="text-on-surface-variant">Access over 300,000 packages via PyPI, ranging from web frameworks to neural networks.</p>
+</div>
+</div>
+</div>
+<!-- Sidebar Content -->
+<div class="lg:col-span-5 space-y-12">
+<!-- Use Cases -->
+<div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/10 space-y-8">
+<h3 class="text-2xl font-headline font-bold">Primary Use Cases</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-container transition-all hover:bg-surface-bright border border-transparent hover:border-outline-variant/20 group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-icon="language">language</span>
+<span class="font-medium">Web Development (Django, Flask)</span>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-container transition-all hover:bg-surface-bright border border-transparent hover:border-outline-variant/20 group">
+<span class="material-symbols-outlined text-tertiary group-hover:scale-110 transition-transform" data-icon="psychology">psychology</span>
+<span class="font-medium">Artificial Intelligence &amp; ML</span>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-container transition-all hover:bg-surface-bright border border-transparent hover:border-outline-variant/20 group">
+<span class="material-symbols-outlined text-secondary-dim group-hover:scale-110 transition-transform" data-icon="analytics">analytics</span>
+<span class="font-medium">Data Science &amp; Analysis</span>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-container transition-all hover:bg-surface-bright border border-transparent hover:border-outline-variant/20 group">
+<span class="material-symbols-outlined text-error-dim group-hover:scale-110 transition-transform" data-icon="settings_suggest">settings_suggest</span>
+<span class="font-medium">Task Automation</span>
+</div>
+</div>
+</div>
+<!-- Comparison Teaser -->
+<div class="p-8 rounded-2xl bg-gradient-to-br from-[#151a21] to-[#0f141a] border border-outline-variant/20 relative overflow-hidden group">
+<div class="relative z-10 space-y-4">
+<h3 class="text-2xl font-headline font-bold">Python vs. JavaScript</h3>
+<p class="text-on-surface-variant">Struggling to choose your first language? Compare syntax, performance, and job market trends.</p>
+<a class="inline-flex items-center gap-2 text-primary font-bold group-hover:gap-4 transition-all" href="#">
+                                View Comparison <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<div class="absolute -right-8 -bottom-8 opacity-10">
+<span class="material-symbols-outlined text-[160px]" data-icon="compare_arrows">compare_arrows</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Ecosystem Gallery -->
+<section class="py-24 bg-surface-container-low">
+<div class="container mx-auto px-8 space-y-12">
+<div class="flex justify-between items-end">
+<div>
+<span class="font-label text-xs text-primary uppercase tracking-widest mb-2 block">Ecosystem</span>
+<h2 class="text-4xl font-headline font-bold">The Python Universe</h2>
+</div>
+<div class="flex gap-4">
+<button class="p-3 rounded-full border border-outline-variant/30 hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-3 rounded-full border border-outline-variant/30 hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="group rounded-2xl overflow-hidden bg-surface-container border border-outline-variant/10">
+<div class="h-48 overflow-hidden">
+<img alt="Django Framework" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Stylized web development interface with minimalist clean dark layout and complex backend structures, 3d render style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmkU2k88mOxB2ooix6JW_LL9W2Cl8Y6IIZOso2DY8YJR7Kan68iZSh3MKyif4tlaJ_Xkf5oXqg_K7EtnZj2fAeKIsEH71ZnMq4KkhI7_3Oq2V7qKoCJkqxj2zL0Cz2Nlw-9TQt9JkgQ6cy6xzDWQ99RHHjq3QwwOffZwRzA7a1-uGnsf3hoV2y5SILgA4cGT77gnDaJgWgr5Y89ZxA0NFGAxeu96tFUic-JEmDJBlZegBdAbjg1_yL39u7c6zkAZP0ON68xxjSsSxZ"/>
+</div>
+<div class="p-6 space-y-2">
+<h4 class="text-xl font-headline font-bold">Django</h4>
+<p class="text-on-surface-variant text-sm">The web framework for perfectionists with deadlines. High-level, secure, and fast.</p>
+</div>
+</div>
+<div class="group rounded-2xl overflow-hidden bg-surface-container border border-outline-variant/10">
+<div class="h-48 overflow-hidden">
+<img alt="NumPy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Abstract visualization of mathematical matrices and data arrays floating in digital space, cool blue tones, depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoySf-uKFujn7m2RozzXCnJUVHg1bIeLZP8anyWGHEzRj59dP93GVP4XQZSKAZ-0HMlECdkDA3LT2RYIgzoVd7SBP2KmohnkpecgvkuUN5vggcvkiZAAAuclpGYxRYiJrFIKKx5xO6sgUTQlivd5S4tyFmNrrDFiTNqIFuGRHUVxcs7FlBP9kd-R149XXLRKswMDh5CDIe7xSf0HzEGTphcETZ6HgiRGc0y_7W505-T6GaVKyjuRXTSXyhCUlPBqx3JXTE52EwGYTJ"/>
+</div>
+<div class="p-6 space-y-2">
+<h4 class="text-xl font-headline font-bold">NumPy</h4>
+<p class="text-on-surface-variant text-sm">Fundamental package for scientific computing with Python, featuring multi-dimensional arrays.</p>
+</div>
+</div>
+<div class="group rounded-2xl overflow-hidden bg-surface-container border border-outline-variant/10">
+<div class="h-48 overflow-hidden">
+<img alt="PyTorch" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Neural network nodes connecting in a neural web with glowing sparks of light, cinematic sci-fi data visualization" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLfLGtesc9qyyVYYVMBMRven_ppvlUwIUOqa4LaNqAADpyo5ehhzPRw-Jr47dMFCIMuf229g_23mXm_c57_SJk1cuBiXQ1IrF0X92ZgGy3WaPFVjS1Z9XTnL8f88VXgl_iJUbxEBGkU8aixj7nunMGPWXQry4PQO3ADU9ODSvHp2-3B7bRtNpEYo5QYbR_fOh582SZY4ni1sHl9envSNvVdayqmP-SRqYWm0LqV3zbcvMOZ77AuHXvY7aRTBlO5MkoRrgu8W4S6GEb"/>
+</div>
+<div class="p-6 space-y-2">
+<h4 class="text-xl font-headline font-bold">PyTorch</h4>
+<p class="text-on-surface-variant text-sm">An open source machine learning framework that accelerates the path from research to production.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Learning Resources -->
+<section class="py-24 container mx-auto px-8">
+<div class="max-w-4xl mx-auto text-center space-y-12">
+<h2 class="text-4xl font-headline font-bold">Accelerate Your Mastery</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<a class="flex flex-col items-center p-8 rounded-2xl bg-surface-container border border-outline-variant/10 hover:border-primary/50 transition-all group" href="#">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="menu_book">menu_book</span>
+<h4 class="text-lg font-bold mb-2">Official Docs</h4>
+<p class="text-on-surface-variant text-sm">Comprehensive technical references for all versions.</p>
+</a>
+<a class="flex flex-col items-center p-8 rounded-2xl bg-surface-container border border-outline-variant/10 hover:border-tertiary/50 transition-all group" href="#">
+<span class="material-symbols-outlined text-4xl text-tertiary mb-4" data-icon="school">school</span>
+<h4 class="text-lg font-bold mb-2">Nexus Bootcamp</h4>
+<p class="text-on-surface-variant text-sm">Guided curriculum from beginner to architecture levels.</p>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="bg-[#0a0e14] border-t border-[#44484f]/15 py-16 px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto font-['Inter'] text-sm leading-relaxed">
+<div class="col-span-1 md:col-span-1">
+<span class="text-xl font-black text-[#9aa8ff] mb-4 block">CodeNexus</span>
+<p class="text-slate-500 max-w-xs">Bridging the gap between raw syntax and architectural enlightenment. The modern terminal for the next billion developers.</p>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-6 font-headline uppercase tracking-widest text-xs">Platform</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-colors" href="#">Sitemap</a></li>
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-colors" href="#">Github</a></li>
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-colors" href="#">Learning Resources</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-6 font-headline uppercase tracking-widest text-xs">Community</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-colors" href="#">Twitter</a></li>
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-colors" href="#">LinkedIn</a></li>
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-6 font-headline uppercase tracking-widest text-xs">Newsletter</h4>
+<p class="text-slate-500 mb-4">Get the latest syntax updates.</p>
+<div class="flex gap-2">
+<input class="bg-surface-container border-none rounded-lg text-sm w-full focus:ring-1 focus:ring-primary" placeholder="email@nexus.com" type="email"/>
+<button class="p-2 bg-primary rounded-lg text-on-primary">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-outline-variant/10 text-center md:text-left">
+<p class="text-slate-500">© 2024 CodeNexus. The Enlightened Terminal.</p>
+</div>
+</footer>
+</body></html>

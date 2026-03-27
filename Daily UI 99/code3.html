@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CodeNexus | The Enlightened Terminal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;family=Space_Grotesk:wght@400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed": "#00083f",
+              "on-secondary-fixed-variant": "#4b5e67",
+              "tertiary-fixed": "#f4a237",
+              "surface-container-low": "#0f141a",
+              "surface-bright": "#262c36",
+              "error-container": "#a70138",
+              "on-tertiary": "#593400",
+              "surface-tint": "#9aa8ff",
+              "outline": "#72757d",
+              "on-tertiary-fixed-variant": "#573300",
+              "error-dim": "#d73357",
+              "secondary-dim": "#c3d8e2",
+              "background": "#0a0e14",
+              "on-tertiary-fixed": "#2a1600",
+              "inverse-surface": "#f8f9ff",
+              "outline-variant": "#44484f",
+              "surface": "#0a0e14",
+              "tertiary-dim": "#e4942a",
+              "primary": "#9aa8ff",
+              "error": "#ff6e84",
+              "surface-container-lowest": "#000000",
+              "on-primary-fixed-variant": "#1b2c7f",
+              "inverse-primary": "#4958ac",
+              "on-surface-variant": "#a8abb3",
+              "surface-container-highest": "#20262f",
+              "secondary-fixed-dim": "#c3d8e2",
+              "tertiary-fixed-dim": "#e4942a",
+              "tertiary": "#ffb151",
+              "surface-container": "#151a21",
+              "on-surface": "#f1f3fc",
+              "on-background": "#f1f3fc",
+              "secondary-container": "#374952",
+              "inverse-on-surface": "#51555c",
+              "on-secondary-fixed": "#2f424a",
+              "on-secondary-container": "#bfd3de",
+              "on-primary-container": "#00156d",
+              "on-error": "#490013",
+              "primary-fixed-dim": "#8998f0",
+              "on-primary": "#122479",
+              "secondary": "#d1e6f0",
+              "primary-dim": "#8998f0",
+              "surface-variant": "#20262f",
+              "surface-dim": "#0a0e14",
+              "secondary-fixed": "#d1e6f0",
+              "on-tertiary-container": "#4b2b00",
+              "surface-container-high": "#1b2028",
+              "on-error-container": "#ffb2b9",
+              "primary-container": "#8c9bf3",
+              "on-secondary": "#41545d",
+              "tertiary-container": "#f4a237",
+              "primary-fixed": "#96a5ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(32, 38, 47, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(154, 168, 255, 0.15), transparent),
+                        radial-gradient(circle at bottom left, rgba(255, 177, 81, 0.05), transparent);
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-scroll {
+            display: flex;
+            width: max-content;
+            animation: scroll 40s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0a0e14]/60 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.4)] h-20 px-8 flex justify-between items-center font-['Manrope'] antialiased tracking-tight">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#9aa8ff] to-[#8c9bf3]">CodeNexus</span>
+<div class="hidden md:flex gap-8">
+<a class="text-[#9aa8ff] border-b-2 border-[#9aa8ff] pb-1 font-bold" href="#">Categories</a>
+<a class="text-slate-400 font-medium hover:text-slate-200 transition-colors" href="#">Comparison</a>
+<a class="text-slate-400 font-medium hover:text-slate-200 transition-colors" href="#">Learning Resources</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="p-2 hover:bg-[#262c36]/50 transition-all duration-300 rounded-full active:scale-95 transform">
+<span class="material-symbols-outlined text-[#9aa8ff]" data-icon="contrast">contrast</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border border-outline-variant/15 overflow-hidden">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpaFLGt6aePArlOyrRMnVHEJV3rAkQG2ngO44ZdrY8Ps0g5nJYn9gLurGA-yTopoMV9jkiiaGybg5KMnZHY8iEdibnwmvI2Ggqyq2Sarw4tFgVM7LjZ1fmFhGXGKKvSua132USMPVcXpbUgrYhXH9p7eW5NQoOTHyqiCpEKzchM_EYPoT-fUaGkLI73Hhy06m4cfR5ZFgOQcWT9K7zqHxUXRFAooMeSlATgD5CFoW6y3-FHEyp2WuLdDv7llsRhjVvtejaWKqoEAIQ"/>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative min-h-[870px] flex flex-col items-center justify-center text-center px-4 overflow-hidden hero-gradient">
+<div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
+<img class="w-full h-full object-cover mix-blend-screen" data-alt="Futuristic dark data center with floating binary code fragments and glowing circuit patterns in neon indigo and amber" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGhKWdppyRV10Gk6ZgI7h4MHlG9pzrEvFPdF1PV7TDrlgZg5qyWifpF-4NZoUnx_NUyoEzTYFkjcz0LgOIXdA-9NS9A1qgubTM1NaWyCC_ITWWvUuHKjXfTB1xt8tHzgiq24ILzG6mIsGwL3WxJqrVSIAxEGahTnn0LrfdQRpTaL0-ULKdr45qWn3DdDWmWnB_hGz3HUI0mFBQFyUuiUk107aGyl6pxFVGgxzBMz70h4L7XWTeWNpuW9XkX6Ao3cBVhy9UTuC94kJj"/>
+</div>
+<div class="relative z-10 max-w-5xl mx-auto space-y-8">
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] text-transparent bg-clip-text bg-gradient-to-b from-on-surface to-on-surface-variant">
+                    The Enlightened Terminal: Deciphering the Languages of Machines and Men.
+                </h1>
+<div class="pt-6">
+<button class="px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold rounded-xl active:scale-95 transform transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40">
+                        Start Exploring
+                    </button>
+</div>
+<!-- Search & Quick Tags -->
+<div class="max-w-2xl mx-auto pt-16 w-full space-y-4">
+<div class="relative group">
+<span class="absolute left-5 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline" data-icon="search">search</span>
+<input class="w-full pl-14 pr-6 py-5 bg-surface-container-low border-none rounded-2xl focus:ring-2 focus:ring-primary/40 focus:bg-surface-container-high transition-all font-body text-lg" placeholder="Search for a syntax, library, or logic..." type="text"/>
+</div>
+<div class="flex flex-wrap justify-center gap-3 font-label text-xs tracking-widest uppercase text-outline">
+<span class="px-3 py-1 rounded-full border border-outline-variant/20 hover:bg-surface-bright cursor-pointer transition-colors">Python</span>
+<span class="px-3 py-1 rounded-full border border-outline-variant/20 hover:bg-surface-bright cursor-pointer transition-colors">Rust</span>
+<span class="px-3 py-1 rounded-full border border-outline-variant/20 hover:bg-surface-bright cursor-pointer transition-colors">C++</span>
+<span class="px-3 py-1 rounded-full border border-outline-variant/20 hover:bg-surface-bright cursor-pointer transition-colors">Go</span>
+<span class="px-3 py-1 rounded-full border border-outline-variant/20 hover:bg-surface-bright cursor-pointer transition-colors">TypeScript</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Ticker -->
+<section class="bg-surface-container-lowest py-4 border-y border-outline-variant/10 overflow-hidden">
+<div class="animate-scroll whitespace-nowrap">
+<div class="flex gap-16 px-8 items-center">
+<span class="font-label text-primary/80 flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="terminal">terminal</span> FORTRAN WAS THE FIRST HIGH-LEVEL LANGUAGE (1957)</span>
+<span class="font-label text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="history">history</span> PYTHON WAS CONCEIVED IN DECEMBER 1989</span>
+<span class="font-label text-primary/80 flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="code">code</span> OVER 700 PROGRAMMING LANGUAGES EXIST TODAY</span>
+<span class="font-label text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="memory">memory</span> C IS OFTEN CALLED THE "MOTHER OF ALL LANGUAGES"</span>
+<span class="font-label text-primary/80 flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="verified">verified</span> RUST HAS BEEN VOTED MOST LOVED FOR 8 YEARS STRAIGHT</span>
+</div>
+<!-- Duplicate for seamless loop -->
+<div class="flex gap-16 px-8 items-center">
+<span class="font-label text-primary/80 flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="terminal">terminal</span> FORTRAN WAS THE FIRST HIGH-LEVEL LANGUAGE (1957)</span>
+<span class="font-label text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="history">history</span> PYTHON WAS CONCEIVED IN DECEMBER 1989</span>
+<span class="font-label text-primary/80 flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="code">code</span> OVER 700 PROGRAMMING LANGUAGES EXIST TODAY</span>
+<span class="font-label text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="memory">memory</span> C IS OFTEN CALLED THE "MOTHER OF ALL LANGUAGES"</span>
+<span class="font-label text-primary/80 flex items-center gap-2"><span class="material-symbols-outlined text-sm" data-icon="verified">verified</span> RUST HAS BEEN VOTED MOST LOVED FOR 8 YEARS STRAIGHT</span>
+</div>
+</div>
+</section>
+<!-- Featured Categories -->
+<section class="py-24 px-8 max-w-7xl mx-auto">
+<div class="mb-16">
+<h2 class="font-headline text-4xl font-extrabold tracking-tight">Foundational Archetypes</h2>
+<p class="text-on-surface-variant mt-2 font-body max-w-xl">Explore the specialized domains of computing through curated architectural classifications.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Machine Languages -->
+<div class="group relative overflow-hidden rounded-2xl glass-panel p-8 border border-outline-variant/10 hover:bg-surface-bright transition-all duration-500">
+<div class="mb-8 w-16 h-16 rounded-xl bg-tertiary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-4xl" data-icon="settings_input_component">settings_input_component</span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-4">Machine Languages</h3>
+<p class="text-on-surface-variant font-body mb-8">The hardware-native dialect. Precision-engineered for silicon efficiency and low-level control.</p>
+<div class="absolute -right-12 -bottom-12 opacity-10 group-hover:opacity-20 transition-opacity">
+<img class="w-48 h-48 object-cover" data-alt="Macro photography of a sleek industrial CPU architecture with intricate copper paths and glowing semiconductors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkNW_Vy2PYHSE-UcVGZjr8uKbfPZFQcvnWgHtFw0D00u0PBr8MkJW1wFUDYwGF9AnP6H9DgW4HGlq6bNHikAJGzAbQQZqzPZZHJOwqVk1PrMDwcZXwsSTjfx7IUq-nJ6MvHMLc4-G-wryy79ixVkv21zonv6L-aSTxCdmuQ4KjqeOvHMkx6u6tYUj-gWjAT87A4lDR0-2wFWejacwxAm_xfcfldJCRc0OafVlIApL15DjbIVREi4LKCZkuXVwhwyPRwiZ-6lx4vgqh"/>
+</div>
+<button class="font-label text-xs uppercase tracking-widest text-primary flex items-center gap-2 group/btn">
+                        Learn Hardware <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- High-Level Languages -->
+<div class="group relative overflow-hidden rounded-2xl glass-panel p-8 border border-outline-variant/10 hover:bg-surface-bright transition-all duration-500">
+<div class="mb-8 w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="layers">layers</span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-4">High-Level Languages</h3>
+<p class="text-on-surface-variant font-body mb-8">Human-readable abstractions designed for rapid development and cross-platform versatility.</p>
+<div class="absolute -right-12 -bottom-12 opacity-10 group-hover:opacity-20 transition-opacity">
+<img class="w-48 h-48 object-cover" data-alt="Abstract translucent 3D geometric shapes representing software layers with soft blue and violet light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTCNcXwhE336_2y7yZsgwXVsQKfDXUrWvKc7GWd1mG-4EGJg-orFyzEZ25v1JYSgQfdWLCx-mgC1iZJhcpsWsFS3-MtJ7TInVRj3OOejXTF5q2mr1-c_9AV0L_197vp-q7raO4UFBA361BFxcG3Xl9zZxIXuAvlOyiTDCIHaQpqM-H7TfP2tPV6GbPQSNNdDwKtMtRCSHgfRa2FcK3xAdOVQTI8hTjHLD8tFG0Osv_Z35PSP7MVIgm1dgstbRrq2a9RhlDbZvvg-Kd"/>
+</div>
+<button class="font-label text-xs uppercase tracking-widest text-primary flex items-center gap-2 group/btn">
+                        Explore Logic <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Scripting & Data -->
+<div class="group relative overflow-hidden rounded-2xl glass-panel p-8 border border-outline-variant/10 hover:bg-surface-bright transition-all duration-500">
+<div class="mb-8 w-16 h-16 rounded-xl bg-secondary-dim/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-dim text-4xl" data-icon="monitoring">monitoring</span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-4">Scripting &amp; Data</h3>
+<p class="text-on-surface-variant font-body mb-8">The connective tissue of the web. Optimized for automation, analysis, and rapid iteration.</p>
+<div class="absolute -right-12 -bottom-12 opacity-10 group-hover:opacity-20 transition-opacity">
+<img class="w-48 h-48 object-cover" data-alt="Digital pulse line waves and glowing matrix-like data streams flowing vertically in deep teal colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9wiRc7J4brXGcsIXa1DFq5nNR7mYXesIPQXJF0Jjkc9D0zm7UZZv_lmnnTt_1yER2RJwntYlhQBgCQzsmSvwsRPtuCe1T9rpcITAUsAkpfTwuq4GG5ReVQkUsddmyHAqL5bWwXpje-c5HdPU5_Nm0dgGAlYMlac2hAL3VUVL_7cIcovEMbp4LolhYNL76325g1Nkj2BpXqTwvK-1RHtP33UrT-dczrC6CRrXcWnskqa9kh0W_pURNu7ujDb-9k16-mdipwVXIK1Pf"/>
+</div>
+<button class="font-label text-xs uppercase tracking-widest text-primary flex items-center gap-2 group/btn">
+                        Analyze Flow <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Language of the Day -->
+<section class="py-24 px-8 bg-surface-container-low">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="order-2 lg:order-1">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/10 text-tertiary font-label text-xs uppercase tracking-widest mb-6">
+<span class="material-symbols-outlined text-xs" data-icon="stars" style="font-variation-settings: 'FILL' 1;">stars</span> Syntax of the Day
+                    </div>
+<h2 class="font-headline text-5xl font-extrabold tracking-tight mb-6">Python: The Elegant Serpent</h2>
+<p class="text-on-surface-variant font-body text-lg mb-10 leading-relaxed">
+                        Readability is not just a feature; it's the core philosophy. Python bridges the gap between complex computation and human expression, making it the dominant force in AI and research.
+                    </p>
+<div class="grid grid-cols-3 gap-8 mb-10">
+<div class="space-y-1">
+<span class="font-label text-xs uppercase text-outline">Performance</span>
+<div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[40%]"></div>
+</div>
+<span class="font-label text-sm text-on-surface">4.5 / 10</span>
+</div>
+<div class="space-y-1">
+<span class="font-label text-xs uppercase text-outline">Learning Curve</span>
+<div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[95%]"></div>
+</div>
+<span class="font-label text-sm text-on-surface">9.5 / 10</span>
+</div>
+<div class="space-y-1">
+<span class="font-label text-xs uppercase text-outline">Popularity</span>
+<div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary-fixed-dim w-[98%]"></div>
+</div>
+<span class="font-label text-sm text-on-surface">Top Tier</span>
+</div>
+</div>
+<a class="inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-outline-variant/30 font-bold hover:bg-surface-bright transition-all active:scale-95" href="#">
+                        Deep Dive into Python <span class="material-symbols-outlined" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+<div class="order-1 lg:order-2 flex justify-center">
+<div class="relative w-full aspect-square max-w-lg">
+<div class="absolute inset-0 bg-primary/20 blur-[120px] rounded-full"></div>
+<img class="relative z-10 w-full h-full object-contain" data-alt="Futuristic artistic rendering of a stylized digital snake composed of glowing green and gold code lines spiraling gracefully" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApP6XPVLNCBdQ6gz3w7v4JefR4k_Zolm5HN8-Mf3XbM3H-8MyfDqPxuHyFljOsFPHMo14XLJg_hEcn62PJozgidupzUS_5N4HMenSur-spaOaLkecqp0PhzLkHfMnR1FKdnuqtw26vRtFvGtvvBRVUKQ8qmHRAN8AtKKH83CJx_x8e7us9XPL57vdWLytNMHqL8n87RocymsRnl565CmMXL0-WsjblvlouNGVFTIktH7D4bqsOIjwj7W2xt6tsteLfH1ib8DQ8cb1x"/>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0a0e14] border-t border-[#44484f]/15 w-full py-16 px-8 mt-12">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<span class="text-xl font-black text-[#9aa8ff] mb-4 block">CodeNexus</span>
+<p class="font-['Inter'] text-sm leading-relaxed text-slate-500">
+                    The Enlightened Terminal. A comprehensive cartography of machine logic and synthetic expression.
+                </p>
+<div class="mt-8 flex gap-4">
+<span class="material-symbols-outlined text-slate-500 hover:text-primary cursor-pointer" data-icon="terminal">terminal</span>
+<span class="material-symbols-outlined text-slate-500 hover:text-primary cursor-pointer" data-icon="memory">memory</span>
+<span class="material-symbols-outlined text-slate-500 hover:text-primary cursor-pointer" data-icon="data_object">data_object</span>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant font-bold">Network</h4>
+<ul class="space-y-3 font-['Inter'] text-sm">
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-transform hover:translate-x-1 block" href="#">Sitemap</a></li>
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-transform hover:translate-x-1 block" href="#">Twitter</a></li>
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-transform hover:translate-x-1 block" href="#">LinkedIn</a></li>
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-transform hover:translate-x-1 block" href="#">Github</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant font-bold">Legal</h4>
+<ul class="space-y-3 font-['Inter'] text-sm">
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-transform hover:translate-x-1 block" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-transform hover:translate-x-1 block" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h4 class="font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant font-bold">Newsletter</h4>
+<div class="flex flex-col gap-3">
+<p class="font-['Inter'] text-xs text-slate-500">Get syntax updates and architectural deep-dives.</p>
+<div class="flex">
+<input class="bg-surface-container-low border-none rounded-l-lg py-2 px-3 text-sm focus:ring-1 focus:ring-primary w-full" placeholder="dev@nexus.io" type="email"/>
+<button class="bg-primary px-4 py-2 rounded-r-lg text-on-primary font-bold active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-outline-variant/10 text-center">
+<p class="font-['Inter'] text-xs text-slate-600">© 2024 CodeNexus. The Enlightened Terminal.</p>
+</div>
+</footer>
+</body></html>

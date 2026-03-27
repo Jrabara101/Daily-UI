@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CodeNexus | Machine &amp; Low-Level Languages</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Inter:wght@100..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed": "#00083f",
+              "on-secondary-fixed-variant": "#4b5e67",
+              "tertiary-fixed": "#f4a237",
+              "surface-container-low": "#0f141a",
+              "surface-bright": "#262c36",
+              "error-container": "#a70138",
+              "on-tertiary": "#593400",
+              "surface-tint": "#9aa8ff",
+              "outline": "#72757d",
+              "on-tertiary-fixed-variant": "#573300",
+              "error-dim": "#d73357",
+              "secondary-dim": "#c3d8e2",
+              "background": "#0a0e14",
+              "on-tertiary-fixed": "#2a1600",
+              "inverse-surface": "#f8f9ff",
+              "outline-variant": "#44484f",
+              "surface": "#0a0e14",
+              "tertiary-dim": "#e4942a",
+              "primary": "#9aa8ff",
+              "error": "#ff6e84",
+              "surface-container-lowest": "#000000",
+              "on-primary-fixed-variant": "#1b2c7f",
+              "inverse-primary": "#4958ac",
+              "on-surface-variant": "#a8abb3",
+              "surface-container-highest": "#20262f",
+              "secondary-fixed-dim": "#c3d8e2",
+              "tertiary-fixed-dim": "#e4942a",
+              "tertiary": "#ffb151",
+              "surface-container": "#151a21",
+              "on-surface": "#f1f3fc",
+              "on-background": "#f1f3fc",
+              "secondary-container": "#374952",
+              "inverse-on-surface": "#51555c",
+              "on-secondary-fixed": "#2f424a",
+              "on-secondary-container": "#bfd3de",
+              "on-primary-container": "#00156d",
+              "on-error": "#490013",
+              "primary-fixed-dim": "#8998f0",
+              "on-primary": "#122479",
+              "secondary": "#d1e6f0",
+              "primary-dim": "#8998f0",
+              "surface-variant": "#20262f",
+              "surface-dim": "#0a0e14",
+              "secondary-fixed": "#d1e6f0",
+              "on-tertiary-container": "#4b2b00",
+              "surface-container-high": "#1b2028",
+              "on-error-container": "#ffb2b9",
+              "primary-container": "#8c9bf3",
+              "on-secondary": "#41545d",
+              "tertiary-container": "#f4a237",
+              "primary-fixed": "#96a5ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-nav {
+            background: rgba(10, 14, 20, 0.6);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0a0e14]/60 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.4)] font-['Manrope'] antialiased tracking-tight">
+<div class="flex justify-between items-center h-20 px-8 w-full">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#9aa8ff] to-[#8c9bf3]">CodeNexus</span>
+<div class="hidden md:flex gap-8">
+<a class="text-[#9aa8ff] border-b-2 border-[#9aa8ff] pb-1 font-bold" href="#">Categories</a>
+<a class="text-slate-400 font-medium hover:text-slate-200 transition-colors" href="#">Comparison</a>
+<a class="text-slate-400 font-medium hover:text-slate-200 transition-colors" href="#">Learning Resources</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="bg-[#262c36]/50 rounded-full px-4 py-2 flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-on-surface placeholder-slate-500 w-48" placeholder="Search architecture..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-slate-400 hover:text-[#9aa8ff] transition-colors">contrast</button>
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full border border-outline-variant/20" data-alt="close-up portrait of a professional software engineer with neutral lighting and clean studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAA49MIEh3fgQMpAAVo5wnHP-XT__oKDs7_J5UgdGD2k3GHsFpegkrHFlgF5Is0Tb6DiNRZincWBzEV3kJ5-WeehkliE4Ea2oyqT7zwM6zvAkMKscSxGAF5DxB2AB7w_Q5SxZ7q6GsNLIVVnM5o0l9yQe79jzbATID1TBqhK5oJsmJw5Q8drdmzeqdCspTidnGV9eIdIMsD6df1dZ3ICsFkNWo-5btaDdstMBLg2cSCFekuUypU6JJZxpSzL4BCvGqwMJ4AXMcBo_KX"/>
+</div>
+</div>
+</nav>
+<main class="pt-20 min-h-screen flex">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col gap-2 p-6 h-[calc(100vh-5rem)] w-72 sticky top-20 bg-[#0f141a] contrast-125 border-r border-[#44484f]/15">
+<div class="mb-8">
+<div class="flex items-center justify-between mb-4">
+<span class="text-lg font-bold text-[#9aa8ff] font-['Space_Grotesk']">Library Filters</span>
+<button class="text-[10px] uppercase tracking-widest text-slate-500 hover:text-primary transition-colors">Reset All</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">tune</span>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-['Space_Grotesk']">Refine Syntax</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col gap-1 font-['Space_Grotesk'] text-sm uppercase tracking-widest">
+<div class="text-slate-500 hover:text-slate-300 px-4 py-3 flex items-center gap-3 hover:bg-[#151a21] transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+<span>Functional</span>
+</div>
+<div class="text-slate-500 hover:text-slate-300 px-4 py-3 flex items-center gap-3 hover:bg-[#151a21] transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span>Object-Oriented</span>
+</div>
+<div class="bg-[#262c36] text-[#9aa8ff] rounded-md px-4 py-3 flex items-center gap-3 cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="memory">memory</span>
+<span>Low-Level</span>
+</div>
+<div class="text-slate-500 hover:text-slate-300 px-4 py-3 flex items-center gap-3 hover:bg-[#151a21] transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span>High-Level</span>
+</div>
+<div class="text-slate-500 hover:text-slate-300 px-4 py-3 flex items-center gap-3 hover:bg-[#151a21] transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span>Trending</span>
+</div>
+<div class="text-slate-500 hover:text-slate-300 px-4 py-3 flex items-center gap-3 hover:bg-[#151a21] transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span>Most Loved</span>
+</div>
+</nav>
+<div class="mt-auto p-4 bg-surface-container-low rounded-xl border border-outline-variant/10">
+<p class="text-[10px] text-slate-500 mb-3">SYSTEM STATUS</p>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<span class="text-xs font-label">Core Pulse: Optimal</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<section class="flex-1 bg-surface-container-low p-8 lg:p-12 overflow-y-auto">
+<!-- Industrial Hero Header -->
+<header class="relative w-full h-[400px] rounded-3xl overflow-hidden mb-16 group">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent z-10"></div>
+<img alt="CPU and circuitry" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Futuristic glowing CPU processor on a dark motherboard with electric blue and orange light pulses traveling through circuits" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBm7sXQbUvvWHVczmhEflA9HeQSngqHQli-wtC635z40rGGSJ843MmuIUvc_rGx2QzAZKr5bkCow3FtgGN3JnTSvdohuqvGaAPe86WIZXI0FeKoQDiLFbAFAb59GEy59PmJlfOv13Ef5C6xnoFOXeId-_ZaMlzKI74cMYLhyWcD55kWwyeGw6i-bDWGHaX-ZS4cmBSAoZlVdFn0s7QGHjor8iCMKyV2jVlepw-qCkDbm3MLm8lyE7-pEZOSrtEE8g7Y1l6XZzt9oBYD"/>
+<div class="absolute bottom-12 left-12 z-20 max-w-2xl">
+<div class="flex items-center gap-3 mb-4">
+<span class="px-3 py-1 bg-primary/20 border border-primary/30 text-primary text-[10px] font-label uppercase tracking-widest rounded-full">Foundation Layer</span>
+<div class="h-[1px] w-12 bg-outline-variant/30"></div>
+</div>
+<h1 class="text-5xl lg:text-7xl font-headline font-black tracking-tighter text-on-surface mb-6">Machine &amp; Low-Level Languages</h1>
+<p class="text-xl text-on-surface-variant font-body leading-relaxed italic opacity-80">"The pulse of the silicon."</p>
+</div>
+</header>
+<!-- Language Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16">
+<!-- Machine Language Card -->
+<div class="md:col-span-8 bg-surface-container rounded-3xl overflow-hidden border border-outline-variant/5 hover:border-primary/20 transition-all flex flex-col md:flex-row">
+<div class="flex-1 p-8 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">data_object</span>
+<span class="text-xs font-label text-slate-400 tracking-widest uppercase">Direct Execution</span>
+</div>
+<h3 class="text-3xl font-headline font-extrabold mb-4">Machine Language</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">The only language understood directly by the CPU. Comprised of raw binary opcodes that trigger fundamental logical operations in the silicon gates.</p>
+</div>
+<div class="flex gap-4">
+<span class="px-3 py-1 bg-surface-bright rounded text-[10px] font-label">OPCODE 0x01</span>
+<span class="px-3 py-1 bg-surface-bright rounded text-[10px] font-label">BINARY</span>
+</div>
+</div>
+<div class="w-full md:w-64 h-64 md:h-auto relative overflow-hidden bg-surface-container-highest">
+<img alt="Binary pattern" class="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 transition-all" data-alt="Abstract dark digital background with cascading glowing green and blue binary code digits reflecting depth" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChaVwPX8na7XiJx1ZeEILdujxWO7jwcO7EwCf7cOQ0UiJc-lzA8oQxibrznZlhuMobr5FgFZVB3Bv12AZN28y_iv2lCL22gdNGBFqW2wo-KRUJOtWg0a9T6MtEe0QFSfrA4OUID5sTdWouAt_SL-c7k6nhGzsWXgIAkai5i3XShRQ2h5UjuvS6ry8ZjnrkyqllDfemix87mK8khgWSnfmG99_rYeS-3aaPfubQ-nOTwNwEcs-Oy280MHgtFrSP-H-A6JNaAS_FLf2c"/>
+<div class="absolute inset-0 bg-gradient-to-l from-surface-container via-transparent to-transparent"></div>
+</div>
+</div>
+<!-- Assembly Card -->
+<div class="md:col-span-4 bg-surface-container rounded-3xl p-8 border border-outline-variant/5 flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary">memory</span>
+</div>
+<h3 class="text-2xl font-headline font-bold mb-3">Assembly</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">A low-level symbolic representation of machine code, using mnemonics like MOV, JMP, and ADD to interface with specific architectures.</p>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/10">
+<div class="text-xs font-label text-tertiary mb-2">MNEMONIC SET</div>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] bg-surface-container-low px-2 py-1 rounded">X86_64</span>
+<span class="text-[10px] bg-surface-container-low px-2 py-1 rounded">ARMv8</span>
+</div>
+</div>
+</div>
+<!-- Binary Representation Card -->
+<div class="md:col-span-4 bg-surface-container rounded-3xl overflow-hidden border border-outline-variant/5 group">
+<div class="h-48 relative overflow-hidden">
+<img alt="Binary 0 and 1" class="w-full h-full object-cover opacity-40 group-hover:scale-110 transition-transform duration-1000" data-alt="Dramatic close-up of a digital screen showing glowing white binary code on a dark navy background with shallow depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjrq0cPJuRvr7TEGj2ZncNuHb2jG4__CaFsU3ZVk7BffQqKXMkAaTVoDR27v0GyeRfWCxywgkDRI8dLbqq7ibti_5KO5bOcTqvl0W7PXFR-Zywp8jbq-cr4m4FPIsB6PD1h3Wt7amY5JPbo1Ow3BGQ8xy4rAkCEYKeLdZRifYQKLo8HaepyOGUPubIO7osJ_iKHS0dUnwBwRlqCfTSVoBE7sDL6aWxgMJZUNYRDq4QgrabbkL1W2srx0YiQoENTdVYGwqq4IBqT0ld"/>
+</div>
+<div class="p-8">
+<h3 class="text-xl font-headline font-bold mb-3">Binary Representation</h3>
+<p class="text-on-surface-variant text-xs leading-relaxed">The atomic unit of information. Understanding how integers, floats, and characters are encoded into high and low voltage states.</p>
+</div>
+</div>
+<!-- Computer Architecture Card -->
+<div class="md:col-span-8 bg-surface-container rounded-3xl overflow-hidden border border-outline-variant/5 flex flex-col md:flex-row items-stretch">
+<div class="flex-1 p-8">
+<h3 class="text-2xl font-headline font-bold mb-4">Computer Architecture</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">The conceptual design and operational structure of a computer system. Exploring the Von Neumann bottleneck and modern Harvard architectures.</p>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-3 rounded-xl">
+<span class="text-[10px] font-label text-primary block mb-1">REGISTERS</span>
+<span class="text-lg font-headline font-bold">ALU Control</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-xl">
+<span class="text-[10px] font-label text-primary block mb-1">BUS</span>
+<span class="text-lg font-headline font-bold">Data Path</span>
+</div>
+</div>
+</div>
+<div class="hidden md:block w-72 bg-[#000000] p-6 relative">
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#44484f 1px, transparent 1px); background-size: 20px 20px;"></div>
+<div class="relative h-full border border-primary/20 rounded-lg flex items-center justify-center p-4">
+<div class="text-center">
+<span class="material-symbols-outlined text-primary text-4xl mb-2">schema</span>
+<p class="text-[10px] font-label uppercase tracking-widest text-slate-500">System Blueprint</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Deep Content Section -->
+<div class="max-w-4xl">
+<h2 class="text-3xl font-headline font-black mb-12 flex items-center gap-4">
+<span class="w-8 h-[2px] bg-primary"></span>
+                    Core Execution Mechanics
+                </h2>
+<div class="space-y-16">
+<div class="grid md:grid-cols-2 gap-12">
+<div>
+<h4 class="text-primary font-label text-xs uppercase tracking-[0.3em] mb-4">Processing</h4>
+<h3 class="text-2xl font-headline font-bold mb-4">Opcode &amp; Operands</h3>
+<p class="text-on-surface-variant leading-relaxed">The opcode (operation code) is the portion of a machine language instruction that specifies the operation to be performed. Paired with operands—which provide the data or memory locations—they form the fundamental "verb" and "noun" of the silicon world.</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/10 rounded-2xl p-6 font-label text-sm">
+<div class="flex justify-between text-slate-500 mb-4 border-b border-outline-variant/10 pb-2">
+<span>Instruction</span>
+<span>Binary Map</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between">
+<span class="text-primary">MOV EAX, 1</span>
+<span class="text-tertiary">B8 01 00 00 00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-primary">ADD EAX, EBX</span>
+<span class="text-tertiary">01 D8</span>
+</div>
+<div class="flex justify-between">
+<span class="text-primary">RET</span>
+<span class="text-tertiary">C3</span>
+</div>
+</div>
+</div>
+</div>
+<div class="grid md:grid-cols-2 gap-12 items-center">
+<div class="order-2 md:order-1">
+<div class="relative aspect-video rounded-2xl overflow-hidden border border-outline-variant/20">
+<img alt="Hardware register" class="w-full h-full object-cover grayscale" data-alt="Microscopic view of high-tech circuit components with metallic textures and glowing amber light accents on a black base" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA1DEb0eAzg6sLyqKPc6TDj3Bh-pSzxhsDrw-x61xcv-qbeh8ONoPLTRRk3qjkec4Frj3rKT4r4lwXnJpr6y7N7vSn9PijszBk6t5KLs9Z_4ddqApO2DA7Qnp0PrBycO_xxxD-q0iaY52oROcZ6jNCsyO6gSa1sUWsS4UKxura3Wvpj94efJpikrftnqurZDJG4i324CsBaJ8TzWUc1ySW-Ce0Ju9vYNBrSKPC0bRNQ8PH5CG10Us5jttc-sShVf0XixWB7PF45Ced"/>
+</div>
+</div>
+<div class="order-1 md:order-2">
+<h4 class="text-primary font-label text-xs uppercase tracking-[0.3em] mb-4">Storage</h4>
+<h3 class="text-2xl font-headline font-bold mb-4">Registers &amp; Memory</h3>
+<p class="text-on-surface-variant leading-relaxed">Registers are the fastest storage elements within the CPU itself. Memory management at this level involves manual manipulation of the stack and heap, requiring precise control over memory pointers and allocation cycles to avoid fragmentation or overflow.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-16 px-8 border-t border-[#44484f]/15 bg-[#0a0e14] tonal-shift bg-[#0f141a] font-['Inter'] text-sm leading-relaxed">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div>
+<span class="text-xl font-black text-[#9aa8ff] mb-4 block">CodeNexus</span>
+<p class="text-slate-500 mb-6">Democratizing the deepest layers of technology through enlightened design and pedagogical precision.</p>
+<div class="flex gap-4">
+<a class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">share</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6 uppercase tracking-widest text-[10px]">Ecosystem</h4>
+<ul class="flex flex-col gap-4">
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-colors hover:translate-x-1 inline-block transition-transform" href="#">Sitemap</a></li>
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-colors hover:translate-x-1 inline-block transition-transform" href="#">Learning Path</a></li>
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-colors hover:translate-x-1 inline-block transition-transform" href="#">Github</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6 uppercase tracking-widest text-[10px]">Community</h4>
+<ul class="flex flex-col gap-4">
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-colors hover:translate-x-1 inline-block transition-transform" href="#">Twitter</a></li>
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-colors hover:translate-x-1 inline-block transition-transform" href="#">LinkedIn</a></li>
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-colors hover:translate-x-1 inline-block transition-transform" href="#">Discord</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6 uppercase tracking-widest text-[10px]">Legal</h4>
+<ul class="flex flex-col gap-4">
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-colors hover:translate-x-1 inline-block transition-transform" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-500 hover:text-[#9aa8ff] transition-colors hover:translate-x-1 inline-block transition-transform" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="text-slate-500 text-xs">© 2024 CodeNexus. The Enlightened Terminal.</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] font-label text-slate-500 uppercase tracking-tighter">System Version 4.0.2 - Stable Build</span>
+</div>
+</div>
+</footer>
+</body></html>
