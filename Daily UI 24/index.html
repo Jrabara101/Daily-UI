@@ -2,166 +2,253 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Premium Animated Boarding Pass</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alaska Airlines Boarding Pass</title>
+    
+    <!-- Modern Typefaces -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Setup Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Alaska Airlines Boarding Pass Generator</h1>
+    <!-- Ambient Background Animation Elements -->
+    <div class="ambient-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="app-container">
         
-        <div class="form-section">
-            <h2>Passenger Information</h2>
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="gradient-text">Airstream <span>Boarding</span></h1>
+            <p>Generate your digital travel credential</p>
+        </header>
+
+        <main class="dashboard-layout">
             
-            <div class="form-group">
-                <label for="passengerName">Passenger Name</label>
-                <input type="text" id="passengerName" placeholder="GLEN B. KAISER" value="GLEN B. KAISER">
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="origin">Origin</label>
-                    <input type="text" id="origin" placeholder="JFK" value="JFK">
+            <!-- Left Side: Interactive Form -->
+            <section class="config-section glass-panel">
+                <div class="panel-header">
+                    <h2><i class="fa-solid fa-sliders"></i> Configuration</h2>
                 </div>
-                <div class="form-group">
-                    <label for="destination">Destination</label>
-                    <input type="text" id="destination" placeholder="SFO" value="SFO">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="originCity">Origin City</label>
-                    <input type="text" id="originCity" placeholder="NEW YORK CITY" value="NEW YORK CITY">
-                </div>
-                <div class="form-group">
-                    <label for="destCity">Destination City</label>
-                    <input type="text" id="destCity" placeholder="SAN FRANCISCO" value="SAN FRANCISCO">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="gate">Gate</label>
-                    <input type="text" id="gate" placeholder="34" value="34">
-                </div>
-                <div class="form-group">
-                    <label for="seat">Seat</label>
-                    <input type="text" id="seat" placeholder="56E" value="56E">
-                </div>
-                <div class="form-group">
-                    <label for="flight">Flight Number</label>
-                    <input type="text" id="flight" placeholder="186" value="186">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="date">Date</label>
-                    <input type="text" id="date" placeholder="APRIL 14, 2016" value="APRIL 14, 2016">
-                </div>
-                <div class="form-group">
-                    <label for="time">Boarding Time</label>
-                    <input type="text" id="time" placeholder="6:03 PM" value="6:03 PM">
-                </div>
-            </div>
-
-            <button id="generateBtn" class="btn-generate">Generate Boarding Pass</button>
-            <button id="resetBtn" class="btn-reset">Reset</button>
-        </div>
-
-        <div class="boarding-pass-container">
-            <div class="boarding-pass">
-                <!-- Top Header -->
-                <div class="header-section">
-                    <div class="airline-logo">Alaska</div>
-                    <div class="header-right">
-                        <div class="airline-logo">Alaska</div>
+                
+                <form id="ticketForm" class="stagger-reveal">
+                    
+                    <div class="form-group custom-input full-width">
+                        <i class="fa-solid fa-user icon"></i>
+                        <input type="text" id="passengerName" value="ALEX JENKINS" autocomplete="off" required>
+                        <label for="passengerName">Passenger Name</label>
+                        <div class="focus-border"></div>
                     </div>
-                </div>
 
-                <!-- Left Side -->
-                <div class="main-content">
-                    <div class="left-side">
-                        <div class="passenger-info">
-                            <div class="label">PASSENGER</div>
-                            <div class="value" id="displayName">GLEN B. KAISER</div>
+                    <div class="form-row">
+                        <div class="form-group custom-input">
+                            <i class="fa-solid fa-plane-departure icon"></i>
+                            <input type="text" id="origin" value="JFK" maxlength="3" autocomplete="off" required>
+                            <label for="origin">Origin (Code)</label>
+                            <div class="focus-border"></div>
                         </div>
-
-                        <div class="ticket-details">
-                            <div class="detail-box">
-                                <div class="label">GATE</div>
-                                <div class="value" id="displayGate">34</div>
-                            </div>
-                            <div class="detail-box">
-                                <div class="label">SEAT</div>
-                                <div class="value" id="displaySeat">56E</div>
-                            </div>
-                            <div class="detail-box">
-                                <div class="label">FLIGHT</div>
-                                <div class="value" id="displayFlight">186</div>
-                            </div>
-                        </div>
-
-                        <div class="boarding-info">
-                            <p>BE AT THE GATE 30MIN BEFORE DEPARTURE.</p>
+                        <div class="form-group custom-input">
+                            <i class="fa-solid fa-plane-arrival icon"></i>
+                            <input type="text" id="destination" value="LAX" maxlength="3" autocomplete="off" required>
+                            <label for="destination">Dest (Code)</label>
+                            <div class="focus-border"></div>
                         </div>
                     </div>
 
-                    <!-- Center Section -->
-                    <div class="center-section">
-                        <div class="route">
-                            <span id="displayOriginCode">JFK</span>
-                            <span class="arrow">→</span>
-                            <span id="displayDestCode">SFO</span>
+                    <div class="form-row">
+                        <div class="form-group custom-input">
+                            <i class="fa-solid fa-city icon"></i>
+                            <input type="text" id="originCity" value="NEW YORK" autocomplete="off" required>
+                            <label for="originCity">Origin City</label>
+                            <div class="focus-border"></div>
                         </div>
-                        <div class="route-cities">
-                            <span id="displayOriginCity">NEW YORK CITY</span>
-                            <span class="arrow">❖</span>
-                            <span id="displayDestCity">SAN FRANCISCO</span>
-                        </div>
-
-                        <div class="boarding-section">
-                            <div class="boarding-label">BOARDING TIME</div>
-                            <div class="boarding-date" id="displayDate">APRIL 14, 2016</div>
-                            <div class="boarding-time" id="displayTime">6:03 PM</div>
-                        </div>
-
-                        <div class="barcode">
-                            <div class="barcode-placeholder">▮▯▮▮▯▮▯▮▮▯▮▮▯▮▯▮▮▯▮</div>
+                        <div class="form-group custom-input">
+                            <i class="fa-solid fa-city icon"></i>
+                            <input type="text" id="destCity" value="LOS ANGELES" autocomplete="off" required>
+                            <label for="destCity">Dest City</label>
+                            <div class="focus-border"></div>
                         </div>
                     </div>
 
-                    <!-- Right Side -->
-                    <div class="right-side">
-                        <div class="passenger-info">
-                            <div class="label">PASSENGER</div>
-                            <div class="value" id="displayNameRight">GLEN B. KAISER</div>
+                    <div class="form-row form-row-3">
+                        <div class="form-group custom-input">
+                            <input type="text" id="gate" value="B14" autocomplete="off" required>
+                            <label for="gate" class="small-label">Gate</label>
+                            <div class="focus-border"></div>
+                        </div>
+                        <div class="form-group custom-input">
+                            <input type="text" id="seat" value="12F" autocomplete="off" required>
+                            <label for="seat" class="small-label">Seat</label>
+                            <div class="focus-border"></div>
+                        </div>
+                        <div class="form-group custom-input">
+                            <input type="text" id="flight" value="AA038" autocomplete="off" required>
+                            <label for="flight" class="small-label">Flight #</label>
+                            <div class="focus-border"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group custom-input">
+                            <i class="fa-regular fa-calendar icon"></i>
+                            <input type="text" id="date" value="OCT 24, 2026" autocomplete="off" required>
+                            <label for="date">Date</label>
+                            <div class="focus-border"></div>
+                        </div>
+                        <div class="form-group custom-input">
+                            <i class="fa-regular fa-clock icon"></i>
+                            <input type="text" id="time" value="09:45 AM" autocomplete="off" required>
+                            <label for="time">Time</label>
+                            <div class="focus-border"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="generateBtn" class="btn btn-glow">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Pass
+                        </button>
+                        <button type="button" id="resetBtn" class="btn btn-outline">
+                            <i class="fa-solid fa-rotate-left"></i>
+                        </button>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- Right Side: Live Preview Boarding Pass -->
+            <section class="preview-section">
+                
+                <!-- The Ticket Card Container with 3D perspective -->
+                <div class="ticket-perspective">
+                    <div class="boarding-ticket" id="ticketCard">
+                        
+                        <!-- Main Left Body -->
+                        <div class="ticket-body glass-card">
+                            <div class="ticket-top">
+                                <div class="brand">
+                                    <i class="fa-solid fa-plane"></i> Airstream
+                                </div>
+                                <div class="class-badge">FIRST CLASS</div>
+                            </div>
+
+                            <div class="flight-route">
+                                <div class="route-point">
+                                    <h2 id="displayOriginCode">JFK</h2>
+                                    <p id="displayOriginCity">NEW YORK</p>
+                                </div>
+                                <div class="route-visual">
+                                    <div class="line"></div>
+                                    <i class="fa-solid fa-plane plane-icon"></i>
+                                    <div class="line"></div>
+                                </div>
+                                <div class="route-point text-right">
+                                    <h2 id="displayDestCode">LAX</h2>
+                                    <p id="displayDestCity">LOS ANGELES</p>
+                                </div>
+                            </div>
+
+                            <div class="passenger-details">
+                                <div class="detail-block full">
+                                    <span class="label">PASSENGER NAME</span>
+                                    <strong class="value" id="displayName">ALEX JENKINS</strong>
+                                </div>
+                            </div>
+
+                            <div class="flight-metrics">
+                                <div class="metric">
+                                    <span class="label">FLIGHT</span>
+                                    <strong class="value mono" id="displayFlight">AA038</strong>
+                                </div>
+                                <div class="metric">
+                                    <span class="label">DATE</span>
+                                    <strong class="value" id="displayDate">OCT 24, 2026</strong>
+                                </div>
+                                <div class="metric">
+                                    <span class="label">BOARDING TIME</span>
+                                    <strong class="value highlight" id="displayTime">09:45 AM</strong>
+                                </div>
+                                <div class="metric">
+                                    <span class="label">GATE</span>
+                                    <strong class="value mono" id="displayGate">B14</strong>
+                                </div>
+                                <div class="metric">
+                                    <span class="label">SEAT</span>
+                                    <strong class="value mono" id="displaySeat">12F</strong>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="route-right">
-                            <div class="label">
+                        <!-- Ticket Perforation -->
+                        <div class="ticket-divider">
+                            <div class="circle top"></div>
+                            <div class="dashed-line"></div>
+                            <div class="circle bottom"></div>
+                        </div>
+
+                        <!-- Ticket Stub (Right) -->
+                        <div class="ticket-stub glass-card">
+                            <div class="stub-brand">
+                                <i class="fa-solid fa-plane"></i>
+                            </div>
+                            
+                            <div class="stub-route">
                                 <span id="displayOriginCodeRight">JFK</span>
-                                <span class="arrow">→</span>
-                                <span id="displayDestCodeRight">SFO</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                                <span id="displayDestCodeRight">LAX</span>
                             </div>
-                            <div class="sub-label">NEW YORK CITY ❖ SAN FRANCISCO</div>
+
+                            <div class="stub-details">
+                                <div class="stub-item">
+                                    <span class="label">PASSENGER</span>
+                                    <strong class="value" id="displayNameRight">ALEX JENKINS</strong>
+                                </div>
+                                
+                                <div class="stub-row">
+                                    <div class="stub-item">
+                                        <span class="label">FLIGHT</span>
+                                        <strong class="value mono" id="displayFlightRight">AA038</strong>
+                                    </div>
+                                    <div class="stub-item">
+                                        <span class="label">SEAT</span>
+                                        <strong class="value mono highlight" id="displaySeatRight">12F</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="barcode">
+                                <svg id="barcode-svg" width="100%" height="100%" preserveAspectRatio="none">
+                                    <pattern id="lines" width="10" height="40" patternUnits="userSpaceOnUse">
+                                        <rect width="2" height="40" fill="currentColor"></rect>
+                                        <rect x="3" width="1" height="40" fill="currentColor"></rect>
+                                        <rect x="6" width="3" height="40" fill="currentColor"></rect>
+                                    </pattern>
+                                    <rect width="100%" height="100%" fill="url(#lines)"></rect>
+                                </svg>
+                            </div>
                         </div>
 
-                        <div class="ticket-details-right">
-                            <div class="detail-box">
-                                <div class="label">SEAT</div>
-                                <div class="value" id="displaySeatRight">56E</div>
-                            </div>
-                            <div class="detail-box">
-                                <div class="label">FLIGHT</div>
-                                <div class="value" id="displayFlightRight">186</div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                
+                <!-- Notice Footer -->
+                <div class="preview-footer">
+                    <p><i class="fa-solid fa-circle-info"></i> Interactive 3D preview. Tilt the card by hovering.</p>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">
+        <i class="fa-solid fa-check-circle"></i>
+        <span id="toastMsg">Boarding pass generated!</span>
     </div>
 
     <script src="script.js"></script>

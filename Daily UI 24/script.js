@@ -1,173 +1,156 @@
 // DOM Elements
-const passengerNameInput = document.getElementById('passengerName');
-const originInput = document.getElementById('origin');
-const destinationInput = document.getElementById('destination');
-const originCityInput = document.getElementById('originCity');
-const destCityInput = document.getElementById('destCity');
-const gateInput = document.getElementById('gate');
-const seatInput = document.getElementById('seat');
-const flightInput = document.getElementById('flight');
-const dateInput = document.getElementById('date');
-const timeInput = document.getElementById('time');
+const formInputs = {
+    passengerName: document.getElementById('passengerName'),
+    origin: document.getElementById('origin'),
+    destination: document.getElementById('destination'),
+    originCity: document.getElementById('originCity'),
+    destCity: document.getElementById('destCity'),
+    gate: document.getElementById('gate'),
+    seat: document.getElementById('seat'),
+    flight: document.getElementById('flight'),
+    date: document.getElementById('date'),
+    time: document.getElementById('time')
+};
+
+const displayElements = {
+    displayName: document.getElementById('displayName'),
+    displayNameRight: document.getElementById('displayNameRight'),
+    displayOriginCode: document.getElementById('displayOriginCode'),
+    displayOriginCodeRight: document.getElementById('displayOriginCodeRight'),
+    displayDestCode: document.getElementById('displayDestCode'),
+    displayDestCodeRight: document.getElementById('displayDestCodeRight'),
+    displayOriginCity: document.getElementById('displayOriginCity'),
+    displayDestCity: document.getElementById('displayDestCity'),
+    displayGate: document.getElementById('displayGate'),
+    displaySeat: document.getElementById('displaySeat'),
+    displaySeatRight: document.getElementById('displaySeatRight'),
+    displayFlight: document.getElementById('displayFlight'),
+    displayFlightRight: document.getElementById('displayFlightRight'),
+    displayDate: document.getElementById('displayDate'),
+    displayTime: document.getElementById('displayTime')
+};
 
 const generateBtn = document.getElementById('generateBtn');
 const resetBtn = document.getElementById('resetBtn');
+const ticketCard = document.getElementById('ticketCard');
+const toast = document.getElementById('toast');
 
-// Display Elements
-const displayName = document.getElementById('displayName');
-const displayNameRight = document.getElementById('displayNameRight');
-const displayOriginCode = document.getElementById('displayOriginCode');
-const displayOriginCodeRight = document.getElementById('displayOriginCodeRight');
-const displayDestCode = document.getElementById('displayDestCode');
-const displayDestCodeRight = document.getElementById('displayDestCodeRight');
-const displayOriginCity = document.getElementById('displayOriginCity');
-const displayDestCity = document.getElementById('displayDestCity');
-const displayGate = document.getElementById('displayGate');
-const displaySeat = document.getElementById('displaySeat');
-const displaySeatRight = document.getElementById('displaySeatRight');
-const displayFlight = document.getElementById('displayFlight');
-const displayFlightRight = document.getElementById('displayFlightRight');
-const displayDate = document.getElementById('displayDate');
-const displayTime = document.getElementById('displayTime');
+// Real-time Update Setup
+Object.keys(formInputs).forEach(key => {
+    formInputs[key].addEventListener('input', updateBoardingPass);
+});
 
-// Event Listeners
-generateBtn.addEventListener('click', generateBoardingPass);
-resetBtn.addEventListener('click', resetForm);
-
-// Real-time update listeners
-passengerNameInput.addEventListener('input', updateBoardingPass);
-originInput.addEventListener('input', updateBoardingPass);
-destinationInput.addEventListener('input', updateBoardingPass);
-originCityInput.addEventListener('input', updateBoardingPass);
-destCityInput.addEventListener('input', updateBoardingPass);
-gateInput.addEventListener('input', updateBoardingPass);
-seatInput.addEventListener('input', updateBoardingPass);
-flightInput.addEventListener('input', updateBoardingPass);
-dateInput.addEventListener('input', updateBoardingPass);
-timeInput.addEventListener('input', updateBoardingPass);
-
-// Generate Boarding Pass
-function generateBoardingPass() {
+// Controls Setup
+generateBtn.addEventListener('click', () => {
     updateBoardingPass();
     
-    // Add a visual feedback
-    generateBtn.style.transform = 'scale(0.95)';
+    // Add brief flash/glow effect to the ticket 
+    ticketCard.style.boxShadow = "0 0 50px 20px rgba(0, 229, 255, 0.4)";
     setTimeout(() => {
-        generateBtn.style.transform = 'scale(1)';
-    }, 100);
+        ticketCard.style.boxShadow = ""; // Revert to CSS hover/default state
+    }, 400);
 
-    // Show success message
-    showNotification('Boarding pass generated successfully!');
-}
+    showNotification('Boarding Pass Generated!');
+});
 
-// Update Boarding Pass in real-time
+resetBtn.addEventListener('click', resetForm);
+
+// Core Update Function
 function updateBoardingPass() {
-    const passengerName = passengerNameInput.value.toUpperCase() || 'PASSENGER NAME';
-    const origin = originInput.value.toUpperCase() || 'XXX';
-    const destination = destinationInput.value.toUpperCase() || 'XXX';
-    const originCity = originCityInput.value.toUpperCase() || 'ORIGIN CITY';
-    const destCity = destCityInput.value.toUpperCase() || 'DESTINATION CITY';
-    const gate = gateInput.value || '00';
-    const seat = seatInput.value.toUpperCase() || '00A';
-    const flight = flightInput.value || '000';
-    const date = dateInput.value.toUpperCase() || 'DATE NOT SET';
-    const time = timeInput.value || 'TIME NOT SET';
+    const vals = {
+        passengerName: formInputs.passengerName.value.toUpperCase() || 'XXX XXX',
+        origin: formInputs.origin.value.toUpperCase() || 'XXX',
+        destination: formInputs.destination.value.toUpperCase() || 'XXX',
+        originCity: formInputs.originCity.value.toUpperCase() || 'CITY',
+        destCity: formInputs.destCity.value.toUpperCase() || 'CITY',
+        gate: formInputs.gate.value.toUpperCase() || '--',
+        seat: formInputs.seat.value.toUpperCase() || '--',
+        flight: formInputs.flight.value.toUpperCase() || '-----',
+        date: formInputs.date.value.toUpperCase() || '--/--/----',
+        time: formInputs.time.value.toUpperCase() || '--:--'
+    };
 
-    // Update left side
-    displayName.textContent = passengerName;
-    displayOriginCode.textContent = origin;
-    displayDestCode.textContent = destination;
-    displayOriginCity.textContent = originCity;
-    displayDestCity.textContent = destCity;
-    displayGate.textContent = gate;
-    displaySeat.textContent = seat;
-    displayFlight.textContent = flight;
-    displayDate.textContent = date;
-    displayTime.textContent = time;
+    // Update Left
+    displayElements.displayName.textContent = vals.passengerName;
+    displayElements.displayOriginCode.textContent = vals.origin;
+    displayElements.displayDestCode.textContent = vals.destination;
+    displayElements.displayOriginCity.textContent = vals.originCity;
+    displayElements.displayDestCity.textContent = vals.destCity;
+    displayElements.displayGate.textContent = vals.gate;
+    displayElements.displaySeat.textContent = vals.seat;
+    displayElements.displayFlight.textContent = vals.flight;
+    displayElements.displayDate.textContent = vals.date;
+    displayElements.displayTime.textContent = vals.time;
 
-    // Update right side
-    displayNameRight.textContent = passengerName;
-    displayOriginCodeRight.textContent = origin;
-    displayDestCodeRight.textContent = destination;
-    displaySeatRight.textContent = seat;
-    displayFlightRight.textContent = flight;
+    // Update Right
+    displayElements.displayNameRight.textContent = vals.passengerName;
+    displayElements.displayOriginCodeRight.textContent = vals.origin;
+    displayElements.displayDestCodeRight.textContent = vals.destination;
+    displayElements.displaySeatRight.textContent = vals.seat;
+    displayElements.displayFlightRight.textContent = vals.flight;
 }
 
-// Reset Form
+// Reset Form Function
 function resetForm() {
-    passengerNameInput.value = 'GLEN B. KAISER';
-    originInput.value = 'JFK';
-    destinationInput.value = 'SFO';
-    originCityInput.value = 'NEW YORK CITY';
-    destCityInput.value = 'SAN FRANCISCO';
-    gateInput.value = '34';
-    seatInput.value = '56E';
-    flightInput.value = '186';
-    dateInput.value = 'APRIL 14, 2016';
-    timeInput.value = '6:03 PM';
+    formInputs.passengerName.value = 'ALEX JENKINS';
+    formInputs.origin.value = 'JFK';
+    formInputs.destination.value = 'LAX';
+    formInputs.originCity.value = 'NEW YORK';
+    formInputs.destCity.value = 'LOS ANGELES';
+    formInputs.gate.value = 'B14';
+    formInputs.seat.value = '12F';
+    formInputs.flight.value = 'AA038';
+    formInputs.date.value = 'OCT 24, 2026';
+    formInputs.time.value = '09:45 AM';
 
     updateBoardingPass();
-    showNotification('Form reset to default values!');
+    showNotification('Form reset to default.');
 }
 
-// Show Notification
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #667eea;
-        color: white;
-        padding: 15px 20px;
-        border-radius: 6px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        font-size: 14px;
-        font-weight: 500;
-        z-index: 1000;
-        animation: slideIn 0.3s ease-out;
-    `;
-    notification.textContent = message;
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease-out forwards';
-        setTimeout(() => notification.remove(), 300);
+// Toast Notification
+let toastTimeout;
+function showNotification(msg) {
+    clearTimeout(toastTimeout);
+    document.getElementById('toastMsg').textContent = msg;
+    toast.classList.add('show');
+    
+    toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
     }, 3000);
 }
 
-// Add animations
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
+// 3D Tilt Effect on Ticket Card
+const previewSection = document.querySelector('.preview-section');
 
-    @keyframes slideOut {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-    }
+previewSection.addEventListener('mousemove', (e) => {
+    // Determine mouse position relative to the preview section center
+    const rect = previewSection.getBoundingClientRect();
+    const x = e.clientX - rect.left; // x position within the element
+    const y = e.clientY - rect.top; // y position within the element
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    // Calculate rotation (max 10 degrees)
+    const rotateX = ((y - centerY) / centerY) * -10;
+    const rotateY = ((x - centerX) / centerX) * 10;
+    
+    ticketCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+});
 
-    .btn-generate {
-        transition: transform 0.1s ease, box-shadow 0.3s ease;
-    }
-`;
-document.head.appendChild(style);
+previewSection.addEventListener('mouseleave', () => {
+    // Reset ticket position gracefully
+    ticketCard.style.transform = `rotateX(0) rotateY(0) translateZ(0)`;
+});
 
-// Initialize boarding pass on page load
+// Initialize on load
 window.addEventListener('load', () => {
     updateBoardingPass();
+    
+    // Add staggered entrance animations to form inputs
+    const inputs = document.querySelectorAll('.custom-input');
+    inputs.forEach((input, index) => {
+        input.style.opacity = '0';
+        input.style.animation = `fadeInLeft 0.5s ${0.2 + (index * 0.05)}s forwards`;
+    });
 });
