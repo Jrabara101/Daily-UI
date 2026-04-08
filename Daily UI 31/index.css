@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: #0f172a;
+  color: #e2e8f0;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+::-webkit-scrollbar-thumb {
+  background: #4ade80;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #22c55e;
+}

@@ -1,0 +1,128 @@
+.component-container {
+  padding: 2.5rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  letter-spacing: 5px;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 1rem;
+}
+
+.tracks-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.track-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.track-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.track-item.active {
+  background: rgba(255, 0, 85, 0.1);
+  border-color: rgba(255, 0, 85, 0.3);
+}
+
+.track-number {
+  width: 40px;
+  color: var(--text-secondary);
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.track-item.active .track-number,
+.track-item.active .track-title {
+  color: var(--accent-color);
+}
+
+.track-info {
+  flex: 1;
+}
+
+.track-title {
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+.track-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.track-duration {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-family: var(--font-secondary);
+}
+
+.track-more-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.track-item:hover .track-more-btn,
+.track-item.active .track-more-btn {
+  opacity: 1;
+}
+
+.track-more-btn:hover {
+  color: var(--text-primary);
+}
+
+.text-accent {
+  color: var(--accent-color);
+}
+
+/* EQ Animation */
+.playing-eq {
+  display: flex;
+  align-items: flex-end;
+  height: 14px;
+  gap: 2px;
+}
+
+.eq-bar {
+  width: 3px;
+  background-color: var(--accent-color);
+  border-radius: 1px;
+  animation: eq-bounce 1s infinite alternate ease-in-out;
+}
+
+.eq-bar:nth-child(2) {
+  animation-delay: -0.4s;
+}
+
+.eq-bar:nth-child(3) {
+  animation-delay: -0.8s;
+}
+
+@keyframes eq-bounce {
+  0% { height: 3px; }
+  100% { height: 14px; }
+}

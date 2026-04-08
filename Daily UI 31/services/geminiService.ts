@@ -1,8 +1,5 @@
+/// <reference types="vite/client" />
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
-
-// Initialize Gemini
-// Note: process.env.API_KEY is injected by the environment.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const fileToGenerativePart = async (file: File): Promise<{ inlineData: { data: string; mimeType: string } }> => {
   return new Promise((resolve, reject) => {
@@ -24,6 +21,14 @@ const fileToGenerativePart = async (file: File): Promise<{ inlineData: { data: s
 
 export const analyzeSpectralEntity = async (file: File): Promise<string> => {
   try {
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY || (typeof process !== 'undefined' && process.env && process.env.API_KEY) || import.meta.env.GEMINI_API_KEY;
+    
+    if (!apiKey || apiKey === 'undefined' || apiKey === 'PLACEHOLDER_API_KEY') {
+      console.warn("API Key is missing. Please set VITE_GEMINI_API_KEY in your environment.");
+      return "PKE Meter Malfunction: Missing API Key. Entity recorded but not analyzed. Please provide a valid Gemini API Key.";
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
     const modelId = file.type.startsWith('image/') ? 'gemini-2.5-flash-image' : 'gemini-2.5-flash';
     
     // Convert file to compatible part
