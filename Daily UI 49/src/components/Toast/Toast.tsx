@@ -20,8 +20,8 @@ const iconMap = {
 export const Toast: React.FC<ToastProps> = ({ notification, onRemove, position }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(100);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const progressTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const progressTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const startTimeRef = useRef<number>(Date.now());
   const totalElapsedRef = useRef<number>(0);
 

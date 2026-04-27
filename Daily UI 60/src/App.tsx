@@ -170,7 +170,7 @@ export default function App() {
               </h2>
               <ColorPicker
                 color={color}
-                colorSpace={colorSpace}
+                colorSpace={colorSpace as any}
                 onChange={handleColorChange}
                 size={300}
               />

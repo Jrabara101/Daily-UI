@@ -3,7 +3,7 @@
  * Supports Tailwind Config, CSS Variables, JSON, and Adobe Swatch Exchange (.ase)
  */
 
-import type { Color, ColorWithMetadata } from '@/core/types';
+import type { Color, HexColor, RGBColor, HSLColor } from '@/core/types';
 import { convertColor, colorToCSS } from '@/core/conversions';
 
 export type ExportFormat = 'tailwind' | 'css' | 'json' | 'ase';
@@ -24,7 +24,7 @@ export function exportTailwindConfig(
   const colorEntries: string[] = [];
   
   colors.forEach((color, index) => {
-    const hex = convertColor(color, 'hex');
+    const hex = convertColor(color, 'hex') as HexColor;
     const name = `color-${index + 1}`;
     colorEntries.push(`    '${name}': '${hex.value}'`);
   });
@@ -79,9 +79,9 @@ export function exportJSON(
     name: paletteName,
     colors: colors.map((color, index) => ({
       id: index + 1,
-      hex: convertColor(color, 'hex').value,
-      rgb: convertColor(color, 'rgb'),
-      hsl: convertColor(color, 'hsl'),
+      hex: (convertColor(color, 'hex') as HexColor).value,
+      rgb: convertColor(color, 'rgb') as RGBColor,
+      hsl: convertColor(color, 'hsl') as HSLColor,
       css: colorToCSS(color),
     })),
     exportedAt: new Date().toISOString(),
@@ -108,7 +108,6 @@ export function exportASE(
   //   - Color model (4 bytes): "RGB ", "Gray", "CMYK", "LAB "
   //   - Color values (depends on model)
   
-  const encoder = new TextEncoder();
   const buffer: number[] = [];
   
   // Helper to write bytes
@@ -150,7 +149,7 @@ export function exportASE(
   
   // Write each color
   colors.forEach((color, index) => {
-    const rgb = convertColor(color, 'rgb');
+    const rgb = convertColor(color, 'rgb') as RGBColor;
     const colorName = `${paletteName}-${index + 1}`;
     
     // Block type: Color entry (0x0001)
