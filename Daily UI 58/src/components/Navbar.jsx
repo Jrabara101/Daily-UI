@@ -11,12 +11,10 @@ const Navbar = ({ onCartClick, currentPage, setCurrentPage }) => {
     if (!navRef.current) return;
     const { gsap } = window;
     if (gsap) {
-      gsap.from(navRef.current, {
-        y: -100,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out'
-      });
+      gsap.fromTo(navRef.current,
+        { y: -100, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }
+      );
     }
   }, { scope: navRef });
 

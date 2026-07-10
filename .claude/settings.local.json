@@ -1,7 +1,26 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep -E '\\\\.\\(toml|json|jsonc|ps1|yml|yaml\\)$')"
+      "Bash(grep -E '\\\\.\\(toml|json|jsonc|ps1|yml|yaml\\)$')",
+      "PowerShell(npx wrangler whoami)",
+      "PowerShell(npx wrangler pages project create daily-ui-73 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-74 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-75 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-76 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project list 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-77 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-78 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-79 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-80 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-81 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-82 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-83 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-84 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-85 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-93 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-94 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-95 --production-branch main 2>&1)",
+      "PowerShell(npx wrangler pages project create daily-ui-99 --production-branch main 2>&1)"
     ]
   }
 }

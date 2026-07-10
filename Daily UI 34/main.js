@@ -51,7 +51,7 @@ const roadWidth = 4;
 function loadCarTexture(carNumber) {
     return new Promise((resolve) => {
         textureLoader.load(
-            `${carNumber}.png`,
+            `/${carNumber}.png`,
             (texture) => {
                 texture.magFilter = THREE.NearestFilter;
                 texture.minFilter = THREE.NearestFilter;
@@ -94,7 +94,7 @@ async function loadRoadTiles() {
     return new Promise((resolve) => {
         let loaded = 0;
         
-        textureLoader.load('street_tile_2.png', (texture) => {
+        textureLoader.load('/street_tile_2.png', (texture) => {
             texture.magFilter = THREE.NearestFilter;
             texture.minFilter = THREE.NearestFilter;
             texture.generateMipmaps = false;
@@ -105,7 +105,7 @@ async function loadRoadTiles() {
             if (loaded === 2) resolve();
         });
         
-        textureLoader.load('street_tile_2_1.png', (texture) => {
+        textureLoader.load('/street_tile_2_1.png', (texture) => {
             texture.magFilter = THREE.NearestFilter;
             texture.minFilter = THREE.NearestFilter;
             texture.generateMipmaps = false;
@@ -310,10 +310,10 @@ function showArrivalScene() {
     
     // Random house
     const houseNumber = Math.floor(Math.random() * 4) + 9;
-    houseImage.src = `${houseNumber}.png`;
+    houseImage.src = `/${houseNumber}.png`;
     
     // Character
-    arrivalCharacter.src = `${gameState.currentCharacter}.png`;
+    arrivalCharacter.src = `/${gameState.currentCharacter}.png`;
     
     // Location
     arrivalLocation.textContent = gameState.destination;

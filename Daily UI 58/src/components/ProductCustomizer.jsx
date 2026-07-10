@@ -18,12 +18,10 @@ const ProductCustomizer = ({ product, onClose }) => {
     if (!containerRef.current) return;
     const { gsap } = window;
     if (gsap) {
-      gsap.from(containerRef.current, {
-        scale: 0.8,
-        opacity: 0,
-        duration: 0.5,
-        ease: 'back.out(1.7)'
-      });
+      gsap.fromTo(containerRef.current,
+        { scale: 0.8, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.7)' }
+      );
     }
   }, { scope: containerRef });
 

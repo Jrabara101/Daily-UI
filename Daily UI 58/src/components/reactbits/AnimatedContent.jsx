@@ -1,5 +1,5 @@
 import { useRef, useEffect, memo, useState } from 'react';
-import { useGSAP } from '../hooks/useGSAP';
+import { useGSAP } from '../../hooks/useGSAP';
 
 const AnimatedContent = memo(({
   children,

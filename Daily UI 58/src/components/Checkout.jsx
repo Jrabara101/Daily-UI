@@ -28,12 +28,10 @@ const Checkout = ({ onComplete, onBack }) => {
     if (!containerRef.current) return;
     const { gsap } = window;
     if (gsap) {
-      gsap.from(containerRef.current, {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out'
-      });
+      gsap.fromTo(containerRef.current,
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }
+      );
     }
   }, { scope: containerRef });
 

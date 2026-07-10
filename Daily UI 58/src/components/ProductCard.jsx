@@ -4,7 +4,6 @@ import TextPressure from './reactbits/TextPressure';
 import ClickSpark from './reactbits/ClickSpark';
 import AnimatedContent from './reactbits/AnimatedContent';
 import { useCart } from '../context/CartContext';
-import { useGSAP } from '../hooks/useGSAP';
 
 const ProductCard = ({ product, index, onCustomize }) => {
   const { addItem } = useCart();
@@ -55,25 +54,11 @@ const ProductCard = ({ product, index, onCustomize }) => {
     }
   };
 
-  useGSAP(() => {
-    if (!cardRef.current) return;
-    const { gsap } = window;
-    if (gsap) {
-      gsap.from(cardRef.current, {
-        y: 100,
-        opacity: 0,
-        duration: 0.8,
-        delay: index * 0.1,
-        ease: 'back.out(1.7)'
-      });
-    }
-  }, { scope: cardRef, dependencies: [index] });
-
   return (
     <AnimatedContent delay={index * 0.1} from={{ y: 100, opacity: 0 }} to={{ y: 0, opacity: 1 }}>
       <div
         ref={cardRef}
-        className="bg-white/5 backdrop-blur-sm rounded-lg overflow-hidden border border-white/10 hover:border-primary/50 transition-all duration-300 group cursor-pointer"
+        className="bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800 hover:border-primary/50 transition-all duration-300 group cursor-pointer"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => onCustomize(product)}
@@ -92,7 +77,7 @@ const ProductCard = ({ product, index, onCustomize }) => {
           <TextPressure intensity={0.3}>
             <h3 className="text-xl font-bold mb-2">{product.name}</h3>
           </TextPressure>
-          <p className="text-white/60 text-sm mb-4 line-clamp-2">{product.description}</p>
+          <p className="text-zinc-400 text-sm mb-4 line-clamp-2">{product.description}</p>
           
           <div className="flex items-center justify-between">
             <span className="text-2xl font-bold text-primary">${product.price}</span>
