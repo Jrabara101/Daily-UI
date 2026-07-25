@@ -4,54 +4,201 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lumina News — The Intelligent Editorial Feed</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="dashboard-container">
-        <!-- Lumina News Widget -->
-        <aside class="lumina-news-widget" id="lumina-widget">
-            <!-- Glassmorphic Header -->
-            <header class="widget-header">
-                <div class="header-content">
-                    <h2 class="widget-title">
-                        <span class="title-icon">📰</span>
-                        Lumina News
-                    </h2>
-                    <div class="header-actions">
-                        <button class="action-btn" id="refresh-btn" aria-label="Refresh news">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M8 2V6M8 10V14M2 8H6M10 8H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <div class="newspaper-app">
+        <!-- Main Top Bar & Branding -->
+        <header class="newspaper-header">
+            <div class="header-top-bar">
+                <div class="header-date-weather">
+                    <span class="header-date" id="current-date">Friday, July 24, 2026</span>
+                    <span class="date-divider">•</span>
+                    <span class="header-weather">
+                        <span class="weather-icon">☀️</span> 24°C Sunny
+                    </span>
+                </div>
+
+                <div class="brand-container">
+                    <h1 class="brand-title">
+                        <span class="brand-icon">📰</span>
+                        LUMINA NEWS
+                    </h1>
+                    <p class="brand-tagline">The Intelligent Editorial & Technology Digest</p>
+                </div>
+
+                <div class="header-controls">
+                    <!-- Search Input -->
+                    <div class="search-box">
+                        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="search-input" placeholder="Search news & topics..." aria-label="Search news">
+                    </div>
+
+                    <!-- View Switcher -->
+                    <div class="view-switcher" role="radiogroup" aria-label="Layout view mode">
+                        <button class="view-btn active" id="grid-view-btn" data-view="grid" title="Grid View" aria-label="Grid view">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                        </button>
+                        <button class="view-btn" id="list-view-btn" data-view="list" title="List View" aria-label="List view">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="8" y1="6" x2="21" y2="6"></line>
+                                <line x1="8" y1="12" x2="21" y2="12"></line>
+                                <line x1="8" y1="18" x2="21" y2="18"></line>
+                                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                <line x1="3" y1="18" x2="3.01" y2="18"></line>
                             </svg>
                         </button>
                     </div>
-                </div>
-            </header>
 
-            <!-- Breaking News Ticker -->
-            <div class="breaking-news-container" id="breaking-news">
-                <div class="breaking-label">BREAKING</div>
-                <div class="ticker-wrapper">
-                    <div class="ticker-content" id="ticker-content">
-                        <!-- Ticker items will be injected here -->
+                    <!-- Refresh Button -->
+                    <button class="action-btn" id="refresh-btn" aria-label="Refresh news feed" title="Refresh Feed">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 4v6h-6"></path>
+                            <path d="M1 20v-6h6"></path>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Categories Navigation Bar -->
+            <nav class="category-nav" aria-label="News categories">
+                <div class="category-pills" id="category-pills">
+                    <button class="category-pill active" data-category="all">All Stories</button>
+                    <button class="category-pill" data-category="technology">Technology</button>
+                    <button class="category-pill" data-category="ai">AI & Quantum</button>
+                    <button class="category-pill" data-category="space">Space & Science</button>
+                    <button class="category-pill" data-category="business">Business & Markets</button>
+                    <button class="category-pill" data-category="climate">Energy & Climate</button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Breaking News Ticker -->
+        <div class="breaking-news-container" id="breaking-news">
+            <div class="breaking-label">
+                <span class="pulse-dot"></span>
+                BREAKING
+            </div>
+            <div class="ticker-wrapper">
+                <div class="ticker-content" id="ticker-content">
+                    <!-- Ticker items injected via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Newspaper Main Editorial Layout (2-Column Grid) -->
+        <main class="newspaper-layout">
+            <!-- Left Column: Main News Feed & Hero Showcase -->
+            <section class="news-main-column">
+                <div class="section-header">
+                    <h2 class="section-title" id="section-title">Top Headlines & Feature Stories</h2>
+                    <span class="feed-count" id="feed-count">20 Stories</span>
+                </div>
+
+                <!-- Dynamically Generated News Feed (Grid/List View) -->
+                <div class="news-feed grid-view" id="news-feed" role="feed" aria-label="Editorial News Feed">
+                    <!-- Cards injected by JS -->
+                </div>
+
+                <!-- Loading Indicator -->
+                <div class="loading-indicator" id="loading-indicator">
+                    <div class="spinner"></div>
+                    <span>Fetching live editorial stories...</span>
+                </div>
+            </section>
+
+            <!-- Right Column: Editorial Sidebar -->
+            <aside class="newspaper-sidebar">
+                <!-- Trending Stories Widget -->
+                <div class="sidebar-card trending-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">
+                            <span class="widget-icon">🔥</span>
+                            Trending Stories
+                        </h3>
+                    </div>
+                    <ul class="trending-list" id="trending-list">
+                        <!-- Injected dynamically -->
+                    </ul>
+                </div>
+
+                <!-- Market Overview Widget -->
+                <div class="sidebar-card market-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">
+                            <span class="widget-icon">📈</span>
+                            Tech & Market Indices
+                        </h3>
+                    </div>
+                    <div class="market-grid">
+                        <div class="market-item">
+                            <span class="market-name">S&P 500</span>
+                            <span class="market-value">5,842.10</span>
+                            <span class="market-change positive">+0.85%</span>
+                        </div>
+                        <div class="market-item">
+                            <span class="market-name">NASDAQ</span>
+                            <span class="market-value">18,340.50</span>
+                            <span class="market-change positive">+1.42%</span>
+                        </div>
+                        <div class="market-item">
+                            <span class="market-name">AI Index</span>
+                            <span class="market-value">4,120.90</span>
+                            <span class="market-change positive">+2.15%</span>
+                        </div>
+                        <div class="market-item">
+                            <span class="market-name">CleanTech</span>
+                            <span class="market-value">1,980.20</span>
+                            <span class="market-change negative">-0.34%</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- News Feed -->
-            <div class="news-feed" id="news-feed" role="feed" aria-label="News feed">
-                <!-- News cards will be dynamically generated -->
-            </div>
+                <!-- Daily Digest Newsletter Box -->
+                <div class="sidebar-card newsletter-widget">
+                    <div class="newsletter-content">
+                        <span class="newsletter-badge">EDITORIAL BRIEF</span>
+                        <h4>Lumina Morning Edition</h4>
+                        <p>Get essential technology news and deep-dive commentary delivered every morning.</p>
+                        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed to Lumina Morning Edition!');">
+                            <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter">
+                            <button type="submit" class="newsletter-btn">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </aside>
+        </main>
 
-            <!-- Loading Indicator -->
-            <div class="loading-indicator" id="loading-indicator">
-                <div class="spinner"></div>
-                <span>Loading news...</span>
+        <!-- Footer -->
+        <footer class="newspaper-footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">📰 LUMINA NEWS</span>
+                    <p>© 2026 Lumina Media Inc. All rights reserved. Intelligent Editorial Feed.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Editorial Standards</a>
+                    <a href="#">API Access</a>
+                </div>
             </div>
-        </aside>
+        </footer>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
-
