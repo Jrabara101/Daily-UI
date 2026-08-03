@@ -137,33 +137,33 @@ const isEarlyBird = (checkIn) => {
 
 const updateTotals = () => {
     if (!state.checkIn || !state.checkOut) {
-        nightCountEl.textContent = "0";
-        subtotalAmount.textContent = "$0.00";
-        taxAmount.textContent = "$0.00";
-        totalAmount.textContent = "$0.00";
-        discountAmount.textContent = "-$0.00";
-        sideTotal.textContent = "$0";
-        barTotal.textContent = "$0";
+        if (nightCountEl) nightCountEl.textContent = "0";
+        if (subtotalAmount) subtotalAmount.textContent = "$0.00";
+        if (taxAmount) taxAmount.textContent = "$0.00";
+        if (totalAmount) totalAmount.textContent = "$0.00";
+        if (discountAmount) discountAmount.textContent = "-$0.00";
+        if (sideTotal) sideTotal.textContent = "$0";
+        if (barTotal) barTotal.textContent = "$0";
         return;
     }
 
     const totals = calculateDynamicTotal(state.checkIn, state.checkOut);
-    nightCountEl.textContent = totals.nights;
-    subtotalAmount.textContent = `$${totals.subtotal.toFixed(2)}`;
-    taxAmount.textContent = `$${totals.tax.toFixed(2)}`;
-    discountAmount.textContent = `-$${totals.earlyBird.toFixed(2)}`;
-    totalAmount.textContent = `$${totals.total.toFixed(2)}`;
-    sideTotal.textContent = `$${totals.total.toFixed(2)}`;
-    barTotal.textContent = `$${totals.total.toFixed(0)}`;
+    if (nightCountEl) nightCountEl.textContent = totals.nights;
+    if (subtotalAmount) subtotalAmount.textContent = `$${totals.subtotal.toFixed(2)}`;
+    if (taxAmount) taxAmount.textContent = `$${totals.tax.toFixed(2)}`;
+    if (discountAmount) discountAmount.textContent = `-$${totals.earlyBird.toFixed(2)}`;
+    if (totalAmount) totalAmount.textContent = `$${totals.total.toFixed(2)}`;
+    if (sideTotal) sideTotal.textContent = `$${totals.total.toFixed(2)}`;
+    if (barTotal) barTotal.textContent = `$${totals.total.toFixed(0)}`;
 };
 
 const updateInputs = () => {
-    checkInInput.value = state.checkIn ? formatDate(state.checkIn) : "";
-    checkOutInput.value = state.checkOut ? formatDate(state.checkOut) : "";
-    sideCheckIn.textContent = state.checkIn ? formatDate(state.checkIn) : "Select";
-    sideCheckOut.textContent = state.checkOut ? formatDate(state.checkOut) : "Select";
-    barCheckIn.textContent = state.checkIn ? formatDate(state.checkIn) : "Select";
-    barCheckOut.textContent = state.checkOut ? formatDate(state.checkOut) : "Select";
+    if (checkInInput) checkInInput.value = state.checkIn ? formatDate(state.checkIn) : "";
+    if (checkOutInput) checkOutInput.value = state.checkOut ? formatDate(state.checkOut) : "";
+    if (sideCheckIn) sideCheckIn.textContent = state.checkIn ? formatDate(state.checkIn) : "Select";
+    if (sideCheckOut) sideCheckOut.textContent = state.checkOut ? formatDate(state.checkOut) : "Select";
+    if (barCheckIn) barCheckIn.textContent = state.checkIn ? formatDate(state.checkIn) : "Select";
+    if (barCheckOut) barCheckOut.textContent = state.checkOut ? formatDate(state.checkOut) : "Select";
 };
 
 const updateCalendar = () => {
@@ -371,17 +371,19 @@ const initObservers = () => {
     const roomDescription = document.getElementById("roomDescription");
     const bookingCard = document.getElementById("bookingCard");
 
-    const heroObserver = new IntersectionObserver(([entry]) => {
-        document.body.classList.toggle("booking-bar-active", !entry.isIntersecting);
-    }, { threshold: 0.1 });
+    if (heroMeta) {
+        const heroObserver = new IntersectionObserver(([entry]) => {
+            document.body.classList.toggle("booking-bar-active", !entry.isIntersecting);
+        }, { threshold: 0.1 });
+        heroObserver.observe(heroMeta);
+    }
 
-    heroObserver.observe(heroMeta);
-
-    const bookingObserver = new IntersectionObserver(([entry]) => {
-        bookingCard.classList.toggle("is-stuck", !entry.isIntersecting);
-    }, { threshold: 0.2 });
-
-    bookingObserver.observe(roomDescription);
+    if (bookingCard && roomDescription) {
+        const bookingObserver = new IntersectionObserver(([entry]) => {
+            bookingCard.classList.toggle("is-stuck", !entry.isIntersecting);
+        }, { threshold: 0.2 });
+        bookingObserver.observe(roomDescription);
+    }
 };
 
 const initLazyImages = () => {
