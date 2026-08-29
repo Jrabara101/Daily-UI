@@ -4,98 +4,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stellar Flow — Anticipatory Loading</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Stellar Flow — Anticipatory Loading Engine (Daily UI #076)</title>
+    <meta name="description"
+        content="Zero-CLS anticipatory skeleton loading architecture with network-adaptive transitions, anti-flash perceptual optimization, and real-time interactive Kanban task management.">
+
+    <!-- Favicon Links to eliminate 404 console errors -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.svg">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!-- Top Interactive Engine Control Deck / Benchmark Bar -->
+    <aside class="engine-control-deck" aria-label="Loading Simulation Controls">
+        <div class="control-deck-inner">
+            <div class="deck-branding">
+                <span class="pulsar-dot" id="network-dot"></span>
+                <span class="deck-title">ANTICIPATORY ENGINE:</span>
+                <span class="deck-status" id="engine-status">IDLE (HYDRATED)</span>
+            </div>
 
+            <div class="deck-controls">
+                <div class="control-group">
+                    <label for="network-profile" class="control-label">Network Latency:</label>
+                    <select id="network-profile" class="deck-select">
+                        <option value="adaptive">⚡ Adaptive (Real Network)</option>
+                        <option value="instant">🚀 Instant (30ms - Fast Cache)</option>
+                        <option value="fast4g" selected>📶 Fast 4G (250ms)</option>
+                        <option value="slow3g">🐢 Slow 3G (1200ms)</option>
+                        <option value="throttled">⏳ Heavy Throttle (2500ms)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="shimmer-style" class="control-label">Skeleton Shimmer:</label>
+                    <select id="shimmer-style" class="deck-select">
+                        <option value="wave" selected>🌊 Laser Wave (GPU)</option>
+                        <option value="pulse">💡 Breathing Pulse</option>
+                        <option value="low-bandwidth">⚡ Eco / Low Bandwidth</option>
+                    </select>
+                </div>
+
+                <div class="control-actions">
+                    <button id="retrigger-btn" class="deck-btn deck-btn-primary" title="Re-trigger anticipatory loading cycle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="deck-btn-icon">
+                            <path d="M23 4v6h-6M1 20v-6h6"></path>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                        </svg>
+                        <span>Re-simulate Loading</span>
+                    </button>
+
+                    <button id="freeze-skeleton-btn" class="deck-btn deck-btn-ghost" title="Freeze skeleton state to inspect wireframe alignment">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="deck-btn-icon">
+                            <rect x="2" y="2" width="20" height="20" rx="4"></rect>
+                            <path d="M8 12h8M12 8v8"></path>
+                        </svg>
+                        <span id="freeze-text">Inspect Skeletons</span>
+                    </button>
+                </div>
+
+                <div class="deck-telemetry">
+                    <div class="telemetry-item">
+                        <span class="telemetry-label">Perceived Delay:</span>
+                        <span class="telemetry-val" id="telemetry-delay">0ms</span>
+                    </div>
+                    <div class="telemetry-item">
+                        <span class="telemetry-label">CLS Shift:</span>
+                        <span class="telemetry-val highlight" id="telemetry-cls">0.000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main App Container -->
     <div id="app-container" class="app-layout" aria-busy="true">
         <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo-area skeleton" aria-hidden="true"></div>
-            <nav class="nav-links">
-                <div class="nav-item skeleton" style="width: 80%;" aria-hidden="true"></div>
-                <div class="nav-item skeleton" style="width: 60%;" aria-hidden="true"></div>
-                <div class="nav-item skeleton" style="width: 70%;" aria-hidden="true"></div>
-                <div class="nav-item skeleton" style="width: 50%;" aria-hidden="true"></div>
+        <aside class="sidebar" aria-label="Sidebar Navigation">
+            <!-- Brand Logo Area -->
+            <div class="logo-area" id="logo-slot">
+                <div class="skeleton logo-skeleton" aria-hidden="true"></div>
+            </div>
+
+            <!-- Main Nav Links -->
+            <nav class="nav-links" aria-label="Main Navigation">
+                <div class="nav-item-slot" data-nav-index="0">
+                    <div class="nav-item skeleton" style="width: 88%;" aria-hidden="true"></div>
+                </div>
+                <div class="nav-item-slot" data-nav-index="1">
+                    <div class="nav-item skeleton" style="width: 72%;" aria-hidden="true"></div>
+                </div>
+                <div class="nav-item-slot" data-nav-index="2">
+                    <div class="nav-item skeleton" style="width: 80%;" aria-hidden="true"></div>
+                </div>
+                <div class="nav-item-slot" data-nav-index="3">
+                    <div class="nav-item skeleton" style="width: 65%;" aria-hidden="true"></div>
+                </div>
+                <div class="nav-item-slot" data-nav-index="4">
+                    <div class="nav-item skeleton" style="width: 76%;" aria-hidden="true"></div>
+                </div>
+                <div class="nav-item-slot" data-nav-index="5">
+                    <div class="nav-item skeleton" style="width: 58%;" aria-hidden="true"></div>
+                </div>
             </nav>
-            <div class="user-profile skeleton" aria-hidden="true"></div>
+
+            <!-- Workspace Storage Card -->
+            <div class="sidebar-widget" id="sidebar-widget-slot">
+                <div class="skeleton widget-skeleton" aria-hidden="true"></div>
+            </div>
+
+            <!-- User Profile Area -->
+            <div class="user-profile" id="user-profile-slot">
+                <div class="user-profile-skeleton">
+                    <div class="skeleton circle medium" aria-hidden="true"></div>
+                    <div class="user-profile-text-skeleton">
+                        <div class="skeleton" style="width: 90px; height: 14px; margin-bottom: 6px;" aria-hidden="true"></div>
+                        <div class="skeleton" style="width: 60px; height: 10px;" aria-hidden="true"></div>
+                    </div>
+                </div>
+            </div>
         </aside>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Header -->
+        <!-- Main Content Viewport -->
+        <main class="main-content" id="main-content-scroll">
+            <!-- Top Bar Header -->
             <header class="top-bar">
-                <div class="search-bar skeleton" aria-hidden="true"></div>
-                <div class="actions">
-                    <button id="post-btn" class="btn-primary">
-                        <span class="btn-text">Post +</span>
-                        <div class="loader-ring"></div>
+                <!-- Search & Filters -->
+                <div class="search-container" id="search-slot">
+                    <div class="search-bar skeleton" aria-hidden="true"></div>
+                </div>
+
+                <!-- Top Bar Actions -->
+                <div class="top-actions">
+                    <!-- Quick Tag Filter -->
+                    <div class="filter-pills-container" id="filter-pills-slot">
+                        <div class="skeleton filter-skeleton" style="width: 80px;" aria-hidden="true"></div>
+                        <div class="skeleton filter-skeleton" style="width: 70px;" aria-hidden="true"></div>
+                    </div>
+
+                    <!-- Post Button with Morphing Loader Ring -->
+                    <button id="post-btn" class="btn-primary" aria-label="Add new sprint task">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="btn-plus-icon">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        <span class="btn-text">New Task</span>
+                        <div class="loader-ring" aria-hidden="true"></div>
                     </button>
-                    <div class="notification-icon skeleton circle" aria-hidden="true"></div>
+
+                    <!-- Notification Button with Popover -->
+                    <div class="notification-wrapper" id="notif-wrapper">
+                        <div class="notification-icon-slot" id="notification-slot">
+                            <div class="notification-icon skeleton circle" aria-hidden="true"></div>
+                        </div>
+
+                        <!-- Notification Dropdown Menu -->
+                        <div class="notification-dropdown hidden" id="notification-dropdown" role="menu">
+                            <div class="dropdown-header">
+                                <h3>Real-Time Activity</h3>
+                                <button class="clear-all-btn" id="mark-all-read">Mark all read</button>
+                            </div>
+                            <ul class="notif-list" id="notif-list">
+                                <!-- Populated dynamically -->
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </header>
 
-            <!-- Stats Row -->
-            <section class="stats-row">
-                <div class="card skeleton-card staggered-item">
-                    <div class="card-header skeleton" style="width: 40%;" aria-hidden="true"></div>
-                    <div class="card-value skeleton" style="width: 60%; height: 2rem; margin-top: 1rem;"
-                        aria-hidden="true"></div>
+            <!-- Dashboard Welcome Banner -->
+            <section class="banner-section staggered-item" id="welcome-banner-slot">
+                <div class="skeleton banner-skeleton" aria-hidden="true"></div>
+            </section>
+
+            <!-- Metrics / Stats Row (4 Cards) -->
+            <section class="stats-row" aria-label="Key Performance Indicators">
+                <!-- Card 1: Total Active Tasks -->
+                <div class="card skeleton-card staggered-item" id="stat-card-0">
+                    <div class="card-header skeleton" style="width: 50%; height: 16px;" aria-hidden="true"></div>
+                    <div class="card-body-skeleton">
+                        <div class="skeleton" style="width: 45%; height: 2.2rem; margin: 0.8rem 0;" aria-hidden="true"></div>
+                        <div class="skeleton" style="width: 75%; height: 12px;" aria-hidden="true"></div>
+                    </div>
                 </div>
-                <!-- Efficiency Gauge Card -->
-                <div class="card skeleton-card staggered-item">
-                    <div class="card-header skeleton" style="width: 40%;" aria-hidden="true"></div>
+
+                <!-- Card 2: UI Efficiency Circular Gauge -->
+                <div class="card skeleton-card staggered-item" id="stat-card-1">
+                    <div class="card-header skeleton" style="width: 55%; height: 16px;" aria-hidden="true"></div>
                     <div class="gauge-area">
                         <div class="skeleton circle large" aria-hidden="true"></div>
                     </div>
+                    <div class="skeleton" style="width: 60%; height: 12px; margin-top: 0.5rem;" aria-hidden="true"></div>
                 </div>
-                <div class="card skeleton-card staggered-item">
-                    <div class="card-header skeleton" style="width: 30%;" aria-hidden="true"></div>
+
+                <!-- Card 3: Team Collaborators Stack -->
+                <div class="card skeleton-card staggered-item" id="stat-card-2">
+                    <div class="card-header skeleton" style="width: 45%; height: 16px;" aria-hidden="true"></div>
                     <div class="avatars-row">
                         <div class="skeleton circle small" aria-hidden="true"></div>
                         <div class="skeleton circle small" aria-hidden="true"></div>
                         <div class="skeleton circle small" aria-hidden="true"></div>
+                        <div class="skeleton circle small" aria-hidden="true"></div>
+                    </div>
+                    <div class="skeleton" style="width: 70%; height: 12px; margin-top: 0.5rem;" aria-hidden="true"></div>
+                </div>
+
+                <!-- Card 4: Anticipatory Cache Hit Rate -->
+                <div class="card skeleton-card staggered-item" id="stat-card-3">
+                    <div class="card-header skeleton" style="width: 60%; height: 16px;" aria-hidden="true"></div>
+                    <div class="card-body-skeleton">
+                        <div class="skeleton" style="width: 50%; height: 2.2rem; margin: 0.8rem 0;" aria-hidden="true"></div>
+                        <div class="skeleton" style="width: 80%; height: 12px;" aria-hidden="true"></div>
                     </div>
                 </div>
             </section>
 
-            <!-- Kanban Board -->
-            <section class="kanban-board staggered-item delay-1">
-                <div class="column">
-                    <div class="column-header skeleton" style="width: 50%;" aria-hidden="true"></div>
-                    <div class="task-card skeleton-card">
-                        <div class="skeleton" style="width: 100%; height: 100px;" aria-hidden="true"></div>
+            <!-- Kanban Board Section -->
+            <section class="kanban-section staggered-item delay-1" aria-label="Interactive Sprint Kanban Board">
+                <div class="kanban-top-header">
+                    <div class="board-heading-wrapper">
+                        <h2 class="board-heading">Sprint 42 — Core Velocity</h2>
+                        <span class="board-badge">Active Milestone</span>
                     </div>
-                    <div class="task-card skeleton-card">
-                        <div class="skeleton" style="width: 100%; height: 100px;" aria-hidden="true"></div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="column-header skeleton" style="width: 50%;" aria-hidden="true"></div>
-                    <div class="task-card skeleton-card">
-                        <div class="skeleton" style="width: 100%; height: 100px;" aria-hidden="true"></div>
+                    <div class="board-actions">
+                        <span class="board-counter" id="board-total-count">Showing 10 tasks</span>
                     </div>
                 </div>
-                <div class="column">
-                    <div class="column-header skeleton" style="width: 50%;" aria-hidden="true"></div>
-                    <div class="task-card skeleton-card">
-                        <div class="skeleton" style="width: 100%; height: 80px;" aria-hidden="true"></div>
+
+                <!-- Kanban Columns Grid -->
+                <div class="kanban-board" id="kanban-board-container">
+                    <!-- Column 1: Backlog / To Do -->
+                    <div class="column" data-col-id="todo">
+                        <div class="column-header skeleton" style="width: 60%; height: 24px;" aria-hidden="true"></div>
+                        <div class="task-cards-list">
+                            <div class="task-card skeleton-card">
+                                <div class="skeleton" style="width: 100%; height: 115px;" aria-hidden="true"></div>
+                            </div>
+                            <div class="task-card skeleton-card">
+                                <div class="skeleton" style="width: 100%; height: 115px;" aria-hidden="true"></div>
+                            </div>
+                            <div class="task-card skeleton-card">
+                                <div class="skeleton" style="width: 100%; height: 115px;" aria-hidden="true"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: In Progress -->
+                    <div class="column" data-col-id="inprogress">
+                        <div class="column-header skeleton" style="width: 60%; height: 24px;" aria-hidden="true"></div>
+                        <div class="task-cards-list">
+                            <div class="task-card skeleton-card">
+                                <div class="skeleton" style="width: 100%; height: 115px;" aria-hidden="true"></div>
+                            </div>
+                            <div class="task-card skeleton-card">
+                                <div class="skeleton" style="width: 100%; height: 115px;" aria-hidden="true"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 3: Review / QA -->
+                    <div class="column" data-col-id="review">
+                        <div class="column-header skeleton" style="width: 60%; height: 24px;" aria-hidden="true"></div>
+                        <div class="task-cards-list">
+                            <div class="task-card skeleton-card">
+                                <div class="skeleton" style="width: 100%; height: 115px;" aria-hidden="true"></div>
+                            </div>
+                            <div class="task-card skeleton-card">
+                                <div class="skeleton" style="width: 100%; height: 115px;" aria-hidden="true"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 4: Completed -->
+                    <div class="column" data-col-id="done">
+                        <div class="column-header skeleton" style="width: 60%; height: 24px;" aria-hidden="true"></div>
+                        <div class="task-cards-list">
+                            <div class="task-card skeleton-card">
+                                <div class="skeleton" style="width: 100%; height: 115px;" aria-hidden="true"></div>
+                            </div>
+                            <div class="task-card skeleton-card">
+                                <div class="skeleton" style="width: 100%; height: 115px;" aria-hidden="true"></div>
+                            </div>
+                            <div class="task-card skeleton-card">
+                                <div class="skeleton" style="width: 100%; height: 115px;" aria-hidden="true"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- Template for Real Content (Hidden initially, used by JS to 'hydrate') -->
-    <template id="real-content-template">
-        <!-- We will inject text/remove skeleton classes via JS logic or replace DOM elements -->
-    </template>
+    <!-- Modal for Creating a New Task -->
+    <div class="modal-overlay hidden" id="task-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title-wrapper">
+                    <span class="modal-badge">Sprint 42</span>
+                    <h3 id="modal-title">Create New Task</h3>
+                </div>
+                <button class="modal-close-btn" id="close-modal-btn" aria-label="Close modal">&times;</button>
+            </div>
 
+            <form id="new-task-form" class="modal-form">
+                <div class="form-group">
+                    <label for="task-title-input">Task Title *</label>
+                    <input type="text" id="task-title-input" required placeholder="e.g., Optimize GPU shader buffers for iOS" autocomplete="off">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="task-column-select">Board Column</label>
+                        <select id="task-column-select">
+                            <option value="todo">📋 To Do</option>
+                            <option value="inprogress" selected>⚡ In Progress</option>
+                            <option value="review">🔍 Review / QA</option>
+                            <option value="done">✅ Done</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task-priority-select">Priority</label>
+                        <select id="task-priority-select">
+                            <option value="Urgent">🚨 Urgent</option>
+                            <option value="High" selected>🔥 High</option>
+                            <option value="Medium">⚡ Medium</option>
+                            <option value="Low">🌱 Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="task-tag-select">Category Tag</label>
+                        <select id="task-tag-select">
+                            <option value="Architecture">🏗️ Architecture</option>
+                            <option value="Frontend" selected>🎨 Frontend / UX</option>
+                            <option value="Backend">⚙️ Core Engine</option>
+                            <option value="Performance">🚀 Performance</option>
+                            <option value="Security">🔒 Security</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task-assignee-select">Assignee</label>
+                        <select id="task-assignee-select">
+                            <option value="Slava K.">Slava K. (You)</option>
+                            <option value="Elena R.">Elena R.</option>
+                            <option value="Marcus V.">Marcus V.</option>
+                            <option value="Aria C.">Aria C.</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" id="cancel-modal-btn">Cancel</button>
+                    <button type="submit" class="btn-primary modal-submit-btn" id="submit-task-btn">
+                        <span class="btn-text">Create Task</span>
+                        <div class="loader-ring" aria-hidden="true"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Floating Toast Notification System -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <!-- Scripts -->
     <script src="script.js"></script>
 </body>
 
