@@ -1,9 +1,15 @@
+/**
+ * TextEngine — Input Parser, Rich Formatting, Trigger Dispatcher, and AI Block Integration
+ */
 export class TextEngine {
-    constructor(editor, commandSystem, mentionSystem, trie) {
+    constructor(editor, commandSystem, mentionSystem, trie, blockRegistry, aiCoPilot, soundEngine) {
         this.editor = editor;
         this.commandSystem = commandSystem;
         this.mentionSystem = mentionSystem;
         this.trie = trie;
+        this.blockRegistry = blockRegistry;
+        this.aiCoPilot = aiCoPilot;
+        this.soundEngine = soundEngine;
 
         this.init();
     }
@@ -12,19 +18,15 @@ export class TextEngine {
         this.editor.addEventListener('keydown', (e) => this.handleKeydown(e));
         this.editor.addEventListener('input', (e) => this.handleInput(e));
         this.editor.addEventListener('paste', (e) => this.handlePaste(e));
-        this.editor.addEventListener('blur', () => {
-            // Optional: hide menu on blur, but might interfere with clicks
-            setTimeout(() => {
-                this.commandSystem.hide();
-                this.mentionSystem && this.mentionSystem.hide();
-            }, 200);
-        });
+
+        // Global hook for mouse selections from menu
+        window.__pulseStream_onCommandSelect = (cmd) => this.executeCommand(cmd);
+        window.__pulseStream_onMentionSelect = (name) => this.insertMention(name);
     }
 
     handlePaste(e) {
         e.preventDefault();
-        const text = (e.clipboardData || window.clipboardData).getData('text');
-        // Simple plain text insertion
+        const text = (e.clipboardData || window.clipboardData).getData('text/plain');
         document.execCommand('insertText', false, text);
     }
 
@@ -57,6 +59,11 @@ export class TextEngine {
                 activeSystem.hide();
                 return;
             }
+        } else {
+            // Typing key sound
+            if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
+                this.soundEngine && this.soundEngine.keyTap();
+            }
         }
     }
 
@@ -67,97 +74,133 @@ export class TextEngine {
         const range = selection.getRangeAt(0);
         const textNode = range.startContainer;
 
-        // Only trigger if we are in a text node
         if (textNode.nodeType === Node.TEXT_NODE) {
             const text = textNode.textContent;
             const cursorIndex = range.startOffset;
-            const charBeforeCursor = text[cursorIndex - 1];
 
-            // Trigger for Slash Command
-            if (charBeforeCursor === '/') {
-                if (cursorIndex === 1 || text[cursorIndex - 2] === ' ' || text[cursorIndex - 2] === '\u00A0') {
+            // Check Slash command
+            const lastSlash = text.lastIndexOf('/', cursorIndex - 1);
+            if (lastSlash !== -1 && (lastSlash === 0 || text[lastSlash - 1] === ' ' || text[lastSlash - 1] === '\u00A0')) {
+                const query = text.substring(lastSlash + 1, cursorIndex);
+                if (!query.includes(' ')) {
                     const rect = range.getBoundingClientRect();
-                    this.commandSystem.show(rect.left, rect.bottom + window.scrollY);
+                    this.commandSystem.show(rect.left, rect.bottom + window.scrollY, query);
                     this.mentionSystem && this.mentionSystem.hide();
+                    return;
                 }
             }
-            // Trigger for Mention
-            else if (charBeforeCursor === '@') {
-                if (cursorIndex === 1 || text[cursorIndex - 2] === ' ' || text[cursorIndex - 2] === '\u00A0') {
-                    const rect = range.getBoundingClientRect();
-                    this.mentionSystem && this.mentionSystem.show(rect.left, rect.bottom + window.scrollY, '');
-                    this.commandSystem.hide();
-                }
-            } else {
-                this.commandSystem.hide();
 
-                // Check if we are inside a mention sequence
-                if (this.mentionSystem && this.mentionSystem.isVisible) {
-                    // Find the last @ index
-                    const lastAt = text.lastIndexOf('@', cursorIndex - 1);
-                    if (lastAt !== -1) {
-                        const query = text.substring(lastAt + 1, cursorIndex);
-                        // Check for spaces which might invalidate the mention
-                        if (!query.includes(' ')) {
-                            const rect = range.getBoundingClientRect();
-                            this.mentionSystem.show(rect.left, rect.bottom + window.scrollY, query);
-                        } else {
-                            this.mentionSystem.hide();
-                        }
-                    } else {
-                        this.mentionSystem.hide();
-                    }
+            // Check Mention @
+            const lastAt = text.lastIndexOf('@', cursorIndex - 1);
+            if (lastAt !== -1 && (lastAt === 0 || text[lastAt - 1] === ' ' || text[lastAt - 1] === '\u00A0')) {
+                const query = text.substring(lastAt + 1, cursorIndex);
+                if (!query.includes(' ')) {
+                    const rect = range.getBoundingClientRect();
+                    this.mentionSystem.show(rect.left, rect.bottom + window.scrollY, query, '@');
+                    this.commandSystem.hide();
+                    return;
                 }
             }
-        } else {
-            this.commandSystem.hide();
-            this.mentionSystem && this.mentionSystem.hide();
+
+            // Check Hashtag #
+            const lastHash = text.lastIndexOf('#', cursorIndex - 1);
+            if (lastHash !== -1 && (lastHash === 0 || text[lastHash - 1] === ' ' || text[lastHash - 1] === '\u00A0')) {
+                const query = text.substring(lastHash + 1, cursorIndex);
+                if (!query.includes(' ')) {
+                    const rect = range.getBoundingClientRect();
+                    this.mentionSystem.show(rect.left, rect.bottom + window.scrollY, query, '#');
+                    this.commandSystem.hide();
+                    return;
+                }
+            }
         }
+
+        this.commandSystem.hide();
+        this.mentionSystem && this.mentionSystem.hide();
     }
 
-    executeCommand(command) {
+    async executeCommand(command) {
         if (!command) return;
 
-        // Cleanup triggers
-        document.execCommand('delete', false, null);
+        this.commandSystem.hide();
 
-        if (this.commandSystem.isVisible) {
-            let htmlToInsert = '';
-            // Slash Command Logic
-            if (command === 'code') {
-                htmlToInsert = '<pre style="background:rgba(0,0,0,0.5); padding:10px; border-radius:4px; font-family:monospace; color:#eee;"><code>// Code block\n</code></pre><p><br></p>';
-            } else if (command === 'task') {
-                htmlToInsert = '<div class="task-item" style="display:flex; gap:8px; align-items:center;"><input type="checkbox"> <span>New Task</span></div><p><br></p>';
-            } else if (command === 'poll') {
-                htmlToInsert = '<div class="poll-widget" style="background:rgba(255,255,255,0.05); padding:10px; border-radius:8px;"><strong>Poll Question?</strong><br>⚪ Option 1<br>⚪ Option 2</div><p><br></p>';
+        // Delete the typed /query
+        const selection = window.getSelection();
+        if (selection.rangeCount) {
+            const range = selection.getRangeAt(0);
+            const textNode = range.startContainer;
+            if (textNode.nodeType === Node.TEXT_NODE) {
+                const text = textNode.textContent;
+                const cursorIndex = range.startOffset;
+                const lastSlash = text.lastIndexOf('/', cursorIndex - 1);
+                if (lastSlash !== -1) {
+                    range.setStart(textNode, lastSlash);
+                    range.setEnd(textNode, cursorIndex);
+                    range.deleteContents();
+                }
             }
-            if (htmlToInsert) document.execCommand('insertHTML', false, htmlToInsert);
-            this.commandSystem.hide();
+        }
 
+        // 1. Interactive Blocks
+        if (command === 'poll') {
+            const pollHtml = this.blockRegistry.createPollTemplate();
+            document.execCommand('insertHTML', false, pollHtml + '<p><br></p>');
+            this.soundEngine && this.soundEngine.pollChime();
+        } else if (command === 'task') {
+            const taskHtml = this.blockRegistry.createTaskTemplate();
+            document.execCommand('insertHTML', false, taskHtml + '<p><br></p>');
+            this.soundEngine && this.soundEngine.keyTap();
+        } else if (command === 'code') {
+            const codeHtml = this.blockRegistry.createCodeTemplate();
+            document.execCommand('insertHTML', false, codeHtml + '<p><br></p>');
+            this.soundEngine && this.soundEngine.keyTap();
+        } else if (command === 'voice') {
+            const voiceHtml = this.blockRegistry.createVoiceTemplate();
+            document.execCommand('insertHTML', false, voiceHtml + '<p><br></p>');
+            this.soundEngine && this.soundEngine.menuPop();
+        } 
+        // 2. AI Co-Pilot Transformations
+        else if (command === 'ai-polish') {
+            const polished = await this.aiCoPilot.polishTone(this.editor.innerHTML);
+            this.editor.innerHTML = polished;
+        } else if (command === 'ai-standup') {
+            const standup = await this.aiCoPilot.formatStandup(this.editor.innerHTML);
+            this.editor.innerHTML = standup;
+        } else if (command === 'ai-tldr') {
+            const tldr = await this.aiCoPilot.generateTLDR(this.editor.innerHTML);
+            this.editor.innerHTML = tldr;
         }
     }
 
     insertMention(name) {
         if (!name) return;
 
-        const selection = window.getSelection();
-        const range = selection.getRangeAt(0);
-        const textNode = range.startContainer;
-        const text = textNode.textContent;
-        const cursorIndex = range.startOffset;
-        const lastAt = text.lastIndexOf('@', cursorIndex - 1);
+        const isHash = this.mentionSystem.mode === '#';
+        const triggerChar = isHash ? '#' : '@';
 
-        // Remove the @query part
-        if (lastAt !== -1) {
-            range.setStart(textNode, lastAt);
-            range.setEnd(textNode, cursorIndex);
-            range.deleteContents();
+        const selection = window.getSelection();
+        if (selection.rangeCount) {
+            const range = selection.getRangeAt(0);
+            const textNode = range.startContainer;
+            if (textNode.nodeType === Node.TEXT_NODE) {
+                const text = textNode.textContent;
+                const cursorIndex = range.startOffset;
+                const lastTrigger = text.lastIndexOf(triggerChar, cursorIndex - 1);
+
+                if (lastTrigger !== -1) {
+                    range.setStart(textNode, lastTrigger);
+                    range.setEnd(textNode, cursorIndex);
+                    range.deleteContents();
+                }
+            }
         }
 
-        // Insert chip
-        const chip = `<span class="mention-chip" contenteditable="false" style="color: #a5b4fc; background: rgba(99, 102, 241, 0.2); padding: 2px 6px; border-radius: 4px; display: inline-block;">@${name}</span>&nbsp;`;
-        document.execCommand('insertHTML', false, chip);
+        const chipHtml = isHash 
+            ? `<span class="hashtag-chip" contenteditable="false">#${name}</span>&nbsp;`
+            : `<span class="mention-chip" contenteditable="false">@${name}</span>&nbsp;`;
 
+        document.execCommand('insertHTML', false, chipHtml);
         this.mentionSystem.hide();
+        this.soundEngine && this.soundEngine.keyTap();
     }
 }

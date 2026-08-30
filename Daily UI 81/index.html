@@ -3,108 +3,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PulseStream — Intelligent Context Engine</title>
+    <title>PulseStream — Intelligent Context Engine &amp; Real-Time Status Stream (Daily UI #081)</title>
+    <meta name="description" content="Intelligent context stream with live interactive widgets, AI context co-pilot, procedural Web Audio micro-haptics, and simulation telemetry.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.svg">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="theme-obsidian">
+
+    <!-- Top Simulation HUD Control Deck -->
+    <aside class="engine-control-deck" aria-label="Engine Simulation Deck">
+        <div class="control-deck-inner">
+            <div class="deck-branding">
+                <span class="pulsar-dot" id="networkStatusDot"></span>
+                <span class="deck-title">PULSE ENGINE:</span>
+                <span class="deck-status" id="engineStatusText" style="color:var(--success-color); font-weight:600;">STREAM ACTIVE</span>
+            </div>
+
+            <div class="deck-controls">
+                <div class="control-group">
+                    <label for="networkProfileSelect" class="control-label">Network:</label>
+                    <select id="networkProfileSelect" class="deck-select">
+                        <option value="fast4g" selected>📶 Fast 4G (250ms)</option>
+                        <option value="instant">⚡ Instant (30ms Cache)</option>
+                        <option value="slow3g">🐢 Slow 3G (1200ms)</option>
+                        <option value="offline">🔌 Offline Queue</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="personaSelect" class="control-label">Persona:</label>
+                    <select id="personaSelect" class="deck-select">
+                        <option value="alex" selected>Alex Rivera (Eng Lead)</option>
+                        <option value="sarah">Sarah Chen (Lead Design)</option>
+                        <option value="marcus">Marcus Vance (Principal SRE)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="streamSpeedSelect" class="control-label">Team Influx:</label>
+                    <select id="streamSpeedSelect" class="deck-select">
+                        <option value="normal" selected>🟢 Normal (25s)</option>
+                        <option value="rapid">⚡ Rapid (6s)</option>
+                        <option value="paused">⏸️ Paused</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="themeSelect" class="control-label">Theme:</label>
+                    <select id="themeSelect" class="deck-select">
+                        <option value="theme-obsidian" selected>🌌 Obsidian Dark</option>
+                        <option value="theme-cyber">⚡ Cyberpunk Neon</option>
+                        <option value="theme-slate">🪐 Slate Minimal</option>
+                        <option value="theme-light">☀️ Clean Daylight</option>
+                    </select>
+                </div>
+
+                <div class="deck-actions">
+                    <button id="soundToggleBtn" class="deck-icon-btn" title="Toggle Procedural Audio">
+                        <span id="soundIcon">🔊</span>
+                        <span id="soundLabel">Audio</span>
+                    </button>
+                    <button id="standupDigestBtn" class="deck-icon-btn primary-btn" title="Generate Daily Standup Summary">
+                        <span>📋</span>
+                        <span>Digest</span>
+                    </button>
+                    <button id="shortcutsHelpBtn" class="deck-icon-btn" title="Keyboard Shortcuts (?)">
+                        <span>⌨️</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Container -->
     <div class="app-container">
-        <!-- Header / Navigation (Simulated) -->
+        
+        <!-- Header -->
         <header class="app-header">
-            <div class="logo">PulseStream</div>
-            <div class="user-profile">
+            <div class="logo-wrap">
+                <svg class="logo-icon-svg" viewBox="0 0 32 32">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#6366f1"/>
+                            <stop offset="50%" stop-color="#ec4899"/>
+                            <stop offset="100%" stop-color="#8b5cf6"/>
+                        </linearGradient>
+                    </defs>
+                    <circle cx="16" cy="16" r="14" fill="none" stroke="url(#logoGrad)" stroke-width="2.5" opacity="0.3"/>
+                    <path d="M6 16h4l2.5-6 3.5 12 2.5-6h5.5" fill="none" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="logo-text">PulseStream</div>
+                <span class="logo-badge">v3.0 PRO</span>
+            </div>
+
+            <!-- User Profile & Dynamic Context Mood Ring -->
+            <div class="user-profile" id="userProfileTrigger" title="Click to change your presence &amp; mood">
                 <div class="avatar-container" id="currentUserAvatar">
                     <svg class="mood-ring" viewBox="0 0 100 100">
                         <defs>
-                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color: #ff00cc; stop-opacity: 1" />
-                                <stop offset="100%" style="stop-color: #333399; stop-opacity: 1" />
+                            <linearGradient id="moodGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color: #ec4899; stop-opacity: 1" />
+                                <stop offset="100%" style="stop-color: #8b5cf6; stop-opacity: 1" />
                             </linearGradient>
                         </defs>
-                        <circle cx="50" cy="50" r="46" stroke="url(#gradient)" stroke-width="4" fill="none" class="rotating-border" />
+                        <circle cx="50" cy="50" r="46" stroke="url(#moodGradient)" stroke-width="4.5" fill="none" class="rotating-border" />
                     </svg>
-                    <img src="https://ui-avatars.com/api/?name=Alex+Rivera&background=0D8ABC&color=fff" alt="User Avatar" class="avatar-img">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="Alex Rivera" class="avatar-img">
                 </div>
                 <div class="user-status">
-                    <span class="status-text">Deep Work</span>
-                    <span class="status-indicator"></span>
+                    <span class="status-user-name" id="profileUserName">Alex Rivera</span>
+                    <div class="status-badge-row">
+                        <span class="status-indicator" style="background-color: #a855f7;"></span>
+                        <span class="status-text">🧠 Deep Work</span>
+                    </div>
+                </div>
+
+                <!-- Mood Selector Popover -->
+                <div class="mood-picker-popover hidden" id="moodPickerPopover">
+                    <div class="mood-popover-header">Set Context &amp; Presence</div>
+                    <div class="mood-option-item active" data-mood="deep_work">
+                        <span>🧠</span>
+                        <span>Deep Work (Flow State)</span>
+                    </div>
+                    <div class="mood-option-item" data-mood="shipping">
+                        <span>🚀</span>
+                        <span>Deploying / Shipping</span>
+                    </div>
+                    <div class="mood-option-item" data-mood="available">
+                        <span>🟢</span>
+                        <span>Available to Pair</span>
+                    </div>
+                    <div class="mood-option-item" data-mood="meeting">
+                        <span>👥</span>
+                        <span>In Collaborative Sync</span>
+                    </div>
+                    <div class="mood-option-item" data-mood="brainstorming">
+                        <span>💡</span>
+                        <span>Brainstorming Architecture</span>
+                    </div>
+                    <div class="mood-option-item" data-mood="on_call">
+                        <span>🚨</span>
+                        <span>On-Call Incident</span>
+                    </div>
+                    <div class="mood-option-item" data-mood="async">
+                        <span>⚡</span>
+                        <span>Async Only Mode</span>
+                    </div>
+                    <div class="mood-option-item" data-mood="afk">
+                        <span>☕</span>
+                        <span>Stepped Away (AFK)</span>
+                    </div>
                 </div>
             </div>
         </header>
 
         <!-- Main Content -->
         <main class="main-feed">
-            <!-- Composer Area -->
+
+            <!-- Rich Status Composer -->
             <div class="composer-container" id="composerContainer">
-                <div class="composer-header">
-                    <span class="composer-title">Update Status</span>
+                <div class="composer-top-bar">
+                    <div class="composer-title-wrap">
+                        <span>Broadcast Status Pulse</span>
+                    </div>
+                    <div class="draft-status-badge" id="draftStatusBadge">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline></svg>
+                        <span>Draft saved</span>
+                    </div>
                 </div>
                 
                 <div class="rich-input-wrapper">
-                    <div id="editor" class="rich-input" contenteditable="true" placeholder="What's on your mind? Type '/' for commands..."></div>
-                    <div id="placeholder" class="placeholder-text">What's on your mind? Type '/' for commands...</div>
+                    <div id="editor" class="rich-input" contenteditable="true" role="textbox" aria-multiline="true"></div>
                     
                     <!-- Media Preview Area (Masonry) -->
-                    <div id="mediaGrid" class="media-grid masonry-layout"></div>
+                    <div id="mediaGrid" class="media-grid"></div>
                 </div>
 
+                <!-- AI Co-Pilot Quick Chips Bar -->
+                <div class="ai-quick-actions-bar">
+                    <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600; margin-right:4px;">Pulse AI:</span>
+                    <button class="ai-chip-btn" id="aiPolishBtn" title="Refactor into concise executive summary">
+                        <span>✨</span>
+                        <span>AI Polish</span>
+                    </button>
+                    <button class="ai-chip-btn" id="aiStandupBtn" title="Structure as Yesterday / Today / Blockers">
+                        <span>📋</span>
+                        <span>Standup Format</span>
+                    </button>
+                    <button class="ai-chip-btn" id="aiTldrBtn" title="Generate 1-line key takeaway badge">
+                        <span>💡</span>
+                        <span>Extract TL;DR</span>
+                    </button>
+                </div>
+
+                <!-- Composer Actions -->
                 <div class="composer-actions">
                     <div class="left-actions">
-                        <button class="icon-btn" title="Add Media" id="addMediaBtn">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                        <button class="icon-btn" title="Add Media / Images (WebP auto-compress)" id="addMediaBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
                         </button>
-                        <button class="icon-btn" title="Mention" id="mentionBtn">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
+                        <button class="icon-btn" title="Embed Live Poll (/poll)" id="addPollBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                        </button>
+                        <button class="icon-btn" title="Embed Checklist (/task)" id="addTaskBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                        </button>
+                        <button class="icon-btn" title="Embed Code Snippet (/code)" id="addCodeBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                        </button>
+                        <button class="icon-btn" title="Embed Voice Memo (/voice)" id="addVoiceBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                        </button>
+                        <button class="icon-btn" title="Mention Teammate (@)" id="mentionBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
                         </button>
                     </div>
-                    <button id="postBtn" class="post-btn">Post Update</button>
+                    <button id="postBtn" class="post-btn" title="Post Update (Cmd/Ctrl + Enter)">
+                        <span>Publish Pulse</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
                 </div>
 
                 <!-- Hidden Input for File Upload -->
                 <input type="file" id="fileInput" multiple accept="image/*" style="display: none;">
             </div>
 
+            <!-- Stream Filter & Search Bar -->
+            <section class="stream-filter-section" aria-label="Stream Filter Section">
+                <div class="filter-pills-row" id="filterPillsRow">
+                    <button class="filter-pill active" data-filter="all">All Pulses</button>
+                    <button class="filter-pill" data-filter="tasks">☑️ Action Items</button>
+                    <button class="filter-pill" data-filter="polls">📊 Live Polls</button>
+                    <button class="filter-pill" data-filter="code">💻 Code Snippets</button>
+                    <button class="filter-pill" data-filter="media">🖼️ Media</button>
+                    <button class="filter-pill" data-filter="#architecture">#architecture</button>
+                    <button class="filter-pill" data-filter="#release">#release</button>
+                </div>
+            </section>
+
+            <!-- Unread Live Stream Influx Banner -->
+            <div id="unreadStreamBanner" class="unread-stream-banner hidden" role="button" aria-live="polite">
+                <span>🔔</span>
+                <span id="unreadCountText">1 new team pulse</span>
+                <span>— Click to view</span>
+            </div>
+
             <!-- Feed Stream -->
             <div id="feedStream" class="feed-stream">
-                <!-- Posts will be injected here -->
+                <!-- Posts rendered dynamically -->
             </div>
         </main>
 
-        <!-- Floating Command Menu -->
-        <div id="commandMenu" class="floating-menu hidden">
-            <div class="menu-header">Basic Blocks</div>
-            <div class="menu-item" data-command="task">
-                <div class="icon">☐</div>
-                <div class="content">
-                    <div class="title">Task</div>
-                    <div class="desc">Track a to-do item</div>
+        <!-- Floating Slash Command Menu -->
+        <div id="commandMenu" class="floating-menu hidden" role="menu"></div>
+
+        <!-- Floating Mention Menu -->
+        <div id="mentionMenu" class="floating-menu hidden" role="menu"></div>
+
+        <!-- Standup Digest Modal -->
+        <div id="standupDigestModal" class="app-modal hidden">
+            <div class="modal-backdrop"></div>
+            <div class="modal-dialog">
+                <div class="modal-header">
+                    <div class="modal-title">📋 Daily Standup Summary</div>
+                    <button class="modal-close-btn" id="closeDigestModalBtn">&times;</button>
                 </div>
-            </div>
-            <div class="menu-item" data-command="code">
-                <div class="icon">&lt;&gt;</div>
-                <div class="content">
-                    <div class="title">Code Block</div>
-                    <div class="desc">Capture a code snippet</div>
+                <div class="modal-body">
+                    <pre class="digest-markdown-preview" id="digestMarkdownPreview"></pre>
                 </div>
-            </div>
-            <div class="menu-item" data-command="poll">
-                <div class="icon">📊</div>
-                <div class="content">
-                    <div class="title">Poll</div>
-                    <div class="desc">Ask the community</div>
+                <div class="modal-footer">
+                    <button class="deck-icon-btn" id="copyMarkdownBtn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <span>Copy Markdown</span>
+                    </button>
+                    <button class="deck-icon-btn primary-btn" id="copySlackBtn">
+                        <span>💬 Copy for Slack</span>
+                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- Floating Mention Menu -->
-        <div id="mentionMenu" class="floating-menu hidden">
-            <!-- Populated dynamically -->
+        <!-- Keyboard Shortcuts Modal -->
+        <div id="shortcutsModal" class="app-modal hidden">
+            <div class="modal-backdrop"></div>
+            <div class="modal-dialog">
+                <div class="modal-header">
+                    <div class="modal-title">⌨️ Keyboard Pro Shortcuts</div>
+                    <button class="modal-close-btn" id="closeShortcutsModalBtn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="shortcuts-grid">
+                        <div class="shortcut-row">
+                            <span>Publish Pulse</span>
+                            <span class="kbd-badge">Cmd / Ctrl + Enter</span>
+                        </div>
+                        <div class="shortcut-row">
+                            <span>Slash Menu</span>
+                            <span class="kbd-badge">/</span>
+                        </div>
+                        <div class="shortcut-row">
+                            <span>Mention Teammate</span>
+                            <span class="kbd-badge">@</span>
+                        </div>
+                        <div class="shortcut-row">
+                            <span>Filter by Tag</span>
+                            <span class="kbd-badge">#</span>
+                        </div>
+                        <div class="shortcut-row">
+                            <span>Close Menu / Lightbox</span>
+                            <span class="kbd-badge">Esc</span>
+                        </div>
+                        <div class="shortcut-row">
+                            <span>Shortcuts Cheat Sheet</span>
+                            <span class="kbd-badge">Shift + ?</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!-- Toast Notifications Container -->
+        <div class="toast-container" id="toastContainer"></div>
 
     </div>
 
+    <!-- Application Script -->
     <script type="module" src="app.js"></script>
 </body>
 </html>
